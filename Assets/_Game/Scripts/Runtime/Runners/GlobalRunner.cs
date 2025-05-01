@@ -14,7 +14,7 @@ namespace Runtime._Game.Scripts.Runtime.Runners
         private static readonly ServiceScope _globalScope = ServiceScope.Global;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        static void InstantiateAutoSaveSystem()
+        private static void AutoInstantiate()
         {
             if (!_isRunning)
             {
