@@ -24,7 +24,7 @@ namespace Runtime._Game.Scripts.Runtime.Runners
 
         private async UniTask ShowLogo()
         {
-            await SceneManager.LoadSceneAsync(Const.ScenesConst.GameScene);
+            await SceneManager.LoadSceneAsync(Const.ScenesConst.GameReleaseScene);
         }
     }
 }
