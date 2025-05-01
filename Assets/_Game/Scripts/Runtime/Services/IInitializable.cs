@@ -1,4 +1,4 @@
-﻿namespace Runtime._Game.Scripts.Runtime.Services
+﻿namespace Game.Runtime.Services
 {
     public interface IInitializable
     {

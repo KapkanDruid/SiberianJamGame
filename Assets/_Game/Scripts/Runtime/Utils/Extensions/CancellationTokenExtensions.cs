@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 
-namespace Runtime._Game.Scripts.Runtime.Utils.Extensions
+namespace Game.Runtime.Utils.Extensions
 {
     public static class CancellationTokenExtensions
     {

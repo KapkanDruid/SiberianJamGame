@@ -1,9 +1,8 @@
 ﻿using System;
-using _Game.Scripts.Runtime.Services.Inputs;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Runtime._Game.Scripts.Runtime.Services.Input
+namespace Game.Runtime.Services.Input
 {
     public class InputService : IService, IDisposable
     {

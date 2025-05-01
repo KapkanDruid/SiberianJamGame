@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-namespace Runtime._Game.Scripts.Runtime.Services.Camera
+namespace Game.Runtime.Services.Camera
 {
     public class CameraService : IService
     {

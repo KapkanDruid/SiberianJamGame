@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace Runtime._Game.Scripts.Runtime.Services.Timer
+namespace Game.Runtime.Services.Timer
 {
     public class TimerData
     {

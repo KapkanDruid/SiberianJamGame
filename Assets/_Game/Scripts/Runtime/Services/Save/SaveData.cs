@@ -1,8 +1,8 @@
-namespace Runtime._Game.Scripts.Runtime.Services.Save
+namespace Game.Runtime.Services.Save
 {
     public class SaveData
     {
-        public float VolumeSfx = 0.8f;
-        public float VolumeMusic = 0.8f;
+        public float VolumeSfx = 1f;
+        public float VolumeMusic = 1f;
     }
 }

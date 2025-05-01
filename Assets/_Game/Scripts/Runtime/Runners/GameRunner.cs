@@ -1,16 +1,18 @@
 ﻿using Cysharp.Threading.Tasks;
-using Runtime._Game.Scripts.Runtime.Services;
-using Runtime._Game.Scripts.Runtime.Services.Camera;
-using Runtime._Game.Scripts.Runtime.Services.UI;
+using Game.Runtime.CMS;
+using Game.Runtime.Services;
+using Game.Runtime.Services.Audio;
+using Game.Runtime.Services.Camera;
+using Game.Runtime.Services.UI;
 using UnityEngine;
 
-namespace Runtime._Game.Scripts.Runtime.Runners
+namespace Game.Runtime.Runners
 {
     public class GameRunner : MonoBehaviour
     {
         [SerializeField] private Camera gameCamera;
         
-        private readonly ServiceScope _gameScope = ServiceScope.Game;
+        private readonly Scope _gameScope = Scope.Game;
         
         private void Start()
         {
@@ -21,7 +23,7 @@ namespace Runtime._Game.Scripts.Runtime.Runners
 
         private void RegisterCamera()
         {
-            ServiceLocator.GetService<CameraService>().RegisterCamera(gameCamera);
+            SL.Get<CameraService>().RegisterCamera(gameCamera);
         }
 
         private void RegisterServices()
@@ -31,13 +33,13 @@ namespace Runtime._Game.Scripts.Runtime.Runners
 
         private async UniTask StartGame()
         {
-            ServiceLocator.InitializeServices(_gameScope);
-            await ServiceLocator.GetService<UIFaderService>().FadeOut();
+            SL.InitializeScope(_gameScope);
+            await SL.Get<UIFaderService>().FadeOut();
         }
 
         private void OnDestroy()
         {
-            ServiceLocator.DisposeScope(_gameScope);
+            SL.DisposeScope(_gameScope);
         }
     }
 }

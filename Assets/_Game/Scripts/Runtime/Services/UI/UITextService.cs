@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Runtime._Game.Scripts.Runtime.Utils.Extensions;
-using Runtime._Game.Scripts.Runtime.Utils.Helpers;
+using Game.Runtime.Utils.Extensions;
+using Game.Runtime.Utils.Helpers;
 using TMPro;
 
-namespace Runtime._Game.Scripts.Runtime.Services.UI
+namespace Game.Runtime.Services.UI
 {
     public class UITextService : IService, IDisposable
     {

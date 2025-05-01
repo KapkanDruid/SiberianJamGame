@@ -1,11 +1,13 @@
 ﻿using Cysharp.Threading.Tasks;
-using Runtime._Game.Scripts.Runtime.Services;
-using Runtime._Game.Scripts.Runtime.Services.Camera;
-using Runtime._Game.Scripts.Runtime.Utils.Сonstants;
+using Game.Runtime.CMS;
+using Game.Runtime.Services;
+using Game.Runtime.Services.Audio;
+using Game.Runtime.Services.Camera;
+using Game.Runtime.Utils.Consts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Runtime._Game.Scripts.Runtime.Runners
+namespace Game.Runtime.Runners
 {
     public class LogoRunner : MonoBehaviour
     {
@@ -19,11 +21,13 @@ namespace Runtime._Game.Scripts.Runtime.Runners
 
         private void RegisterCamera()
         {
-            ServiceLocator.GetService<CameraService>().RegisterCamera(logoCamera);
+            SL.Get<CameraService>().RegisterCamera(logoCamera);
         }
 
         private async UniTask ShowLogo()
         {
+            SL.Get<AudioService>().Play(CMs.Audio.AmbientTest);
+            SL.Get<AudioService>().Play(CMs.Audio.SFX.SFXTest);
             await SceneManager.LoadSceneAsync(Const.ScenesConst.GameReleaseScene);
         }
     }

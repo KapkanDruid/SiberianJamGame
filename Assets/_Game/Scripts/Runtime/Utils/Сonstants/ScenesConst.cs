@@ -1,4 +1,4 @@
-﻿namespace Runtime._Game.Scripts.Runtime.Utils.Сonstants
+﻿namespace Game.Runtime.Utils.Consts
 {
     public static partial class Const
     {

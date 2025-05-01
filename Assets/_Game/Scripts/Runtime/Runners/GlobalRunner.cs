@@ -1,17 +1,19 @@
-﻿using Runtime._Game.Scripts.Runtime.Services;
-using Runtime._Game.Scripts.Runtime.Services.Camera;
-using Runtime._Game.Scripts.Runtime.Services.Input;
-using Runtime._Game.Scripts.Runtime.Services.Save;
-using Runtime._Game.Scripts.Runtime.Services.Timer;
-using Runtime._Game.Scripts.Runtime.Services.UI;
+﻿using Game.Runtime.CMS;
+using Game.Runtime.Services;
+using Game.Runtime.Services.Audio;
+using Game.Runtime.Services.Camera;
+using Game.Runtime.Services.Input;
+using Game.Runtime.Services.Save;
+using Game.Runtime.Services.Timer;
+using Game.Runtime.Services.UI;
 using UnityEngine;
 
-namespace Runtime._Game.Scripts.Runtime.Runners
+namespace Game.Runtime.Runners
 {
     public class GlobalRunner : MonoBehaviour
     {
         private static bool _isRunning;
-        private static readonly ServiceScope _globalScope = ServiceScope.Global;
+        private static readonly Scope _globalScope = Scope.Global;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void AutoInstantiate()
@@ -29,23 +31,25 @@ namespace Runtime._Game.Scripts.Runtime.Runners
         private void Awake()
         {
             Debug.Log("[GlobalRunner] Entry point!");
+            CM.Reload();
             RegisterServices();
-            ServiceLocator.InitializeServices(_globalScope);
+            SL.InitializeScope(_globalScope);
         }
 
         private void RegisterServices()
         {
-            ServiceLocator.RegisterService<SaveService>(new SaveService(), _globalScope);
-            ServiceLocator.RegisterService<TimerService>(new TimerService(), _globalScope);
-            ServiceLocator.RegisterService<UITextService>(new UITextService(), _globalScope);
-            ServiceLocator.RegisterService<UIFaderService>(new UIFaderService(), _globalScope);
-            ServiceLocator.RegisterService<CameraService>(new CameraService(), _globalScope);
-            ServiceLocator.RegisterService<InputService>(new InputService(), _globalScope);
+            SL.Register<SaveService>(new SaveService(), _globalScope);
+            SL.Register<AudioService>(new AudioService(), _globalScope);
+            SL.Register<TimerService>(new TimerService(), _globalScope);
+            SL.Register<UITextService>(new UITextService(), _globalScope);
+            SL.Register<UIFaderService>(new UIFaderService(), _globalScope);
+            SL.Register<CameraService>(new CameraService(), _globalScope);
+            SL.Register<InputService>(new InputService(), _globalScope);
         }
 
         private void OnDestroy()
         {
-            ServiceLocator.Clear();
+            SL.Clear();
             _isRunning = false;
         }
     }

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace Runtime._Game.Scripts.Runtime.Utils.Helpers
+namespace Game.Runtime.Utils.Helpers
 {
     public static partial class Helpers
     {

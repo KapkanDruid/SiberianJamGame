@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Runtime._Game.Scripts.Runtime.Utils.Helpers
+namespace Game.Runtime.Utils.Helpers
 {
     public static class ColliderHelper
     {

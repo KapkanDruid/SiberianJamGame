@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Runtime._Game.Scripts.Runtime.Utils.Helpers
+namespace Game.Runtime.Utils.Helpers
 {
     public static partial class Helpers
     {

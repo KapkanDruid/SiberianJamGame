@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Runtime._Game.Scripts.Runtime.Utils.Structs
+namespace Game.Runtime.Utils.Structs
 {
     [Serializable]
     public class RandomRangeFloat

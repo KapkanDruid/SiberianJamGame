@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Editor._Game.Scripts.Editor
+namespace Game.Editor
 {
     public class PlayerPrefsCleanerTool
     {

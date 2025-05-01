@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Runtime._Game.Scripts.Runtime.Utils.Extensions;
+using Game.Runtime.Utils.Extensions;
 
-namespace Runtime._Game.Scripts.Runtime.Services.Timer
+namespace Game.Runtime.Services.Timer
 {
     public class TimerService : IService, IDisposable
     {
