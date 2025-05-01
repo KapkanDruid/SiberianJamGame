@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-namespace Game.Editor
+namespace Game.Runtime.Gameplay.Unit
 {
-    [CreateAssetMenu(fileName = "GridPattern", menuName = "_Game/GridPattern")]
-    public class GridPatternData : ScriptableObject
+    [CreateAssetMenu(fileName = "BrainPattern", menuName = "Unit/BrainPattern")]
+    public class BrainPatternData : ScriptableObject
     {
         [SerializeField] private List<Vector2Int> _gridPattern;
         public List<Vector2Int> GridPattern => _gridPattern;
