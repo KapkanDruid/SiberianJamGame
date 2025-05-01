@@ -31,6 +31,9 @@ namespace Runtime._Game.Scripts.Runtime.Services.Input
         
         private void Unsubscribe()
         {
+            _inputMaps.Player.Move.performed -= HandleMove;
+            _inputMaps.Player.Move.canceled -= HandleMove;
+            
             _inputMaps.Player.Look.performed -= HandleLook;
             _inputMaps.Player.Look.canceled -= HandleLook;
         }
