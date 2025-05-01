@@ -4,17 +4,17 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Game.Runtime.Gameplay.Unit.Editor
+namespace Game.Runtime.Gameplay.Grid.Editor
 {
-    [CustomEditor(typeof(BrainPatternData))]
-    public class BrainDataEditor : UnityEditor.Editor
+    [CustomEditor(typeof(GridPatternData))]
+    public class GridDataEditor : UnityEditor.Editor
     {
         private Dictionary<Vector2Int, bool> _togglePositions;
         private List<Vector2Int> _localGridPattern;
 
         private SerializedProperty _listProperty;
 
-        private BrainPatternData _brainData;
+        private GridPatternData _gridData;
 
         private GUIStyle _localPatternTextStyle;
 
@@ -30,7 +30,7 @@ namespace Game.Runtime.Gameplay.Unit.Editor
 
         private void OnEnable()
         {
-            _brainData = (BrainPatternData)target;
+            _gridData = (GridPatternData)target;
 
             _listProperty = serializedObject.FindProperty("_gridPattern");
 
@@ -85,7 +85,7 @@ namespace Game.Runtime.Gameplay.Unit.Editor
 
         private void ShowPatternText()
         {
-            if (_brainData.GridPattern != null && _brainData.GridPattern.Count > 0)
+            if (_gridData.GridPattern != null && _gridData.GridPattern.Count > 0)
             {
                 GUIStyle textStyle = new();
 
@@ -93,13 +93,13 @@ namespace Game.Runtime.Gameplay.Unit.Editor
                 textStyle.wordWrap = true;
                 textStyle.fontSize = 14;
 
-                EditorGUILayout.LabelField($"Saved pattern: {_brainData.GridPattern.Count} positions", textStyle);
+                EditorGUILayout.LabelField($"Saved pattern: {_gridData.GridPattern.Count} positions", textStyle);
 
                 textStyle.fontSize = 12;
-                EditorGUILayout.LabelField(_brainData.GetPositionsString(), textStyle);
+                EditorGUILayout.LabelField(_gridData.GetPositionsString(), textStyle);
             }
 
-            if (IsCollectionsEqual(_localGridPattern, _brainData.GridPattern))
+            if (IsCollectionsEqual(_localGridPattern, _gridData.GridPattern))
                 _isChangesSaved = true;
             else
                 _isChangesSaved = false;
@@ -135,7 +135,7 @@ namespace Game.Runtime.Gameplay.Unit.Editor
                     }
 
                     serializedObject.ApplyModifiedProperties();
-                    EditorUtility.SetDirty(_brainData);
+                    EditorUtility.SetDirty(_gridData);
                 }
 
                 GUI.backgroundColor = Color.white;
@@ -144,13 +144,13 @@ namespace Game.Runtime.Gameplay.Unit.Editor
 
         private void ClearSavedPattern()
         {
-            if (_brainData.GridPattern != null && _brainData.GridPattern.Count > 0)
+            if (_gridData.GridPattern != null && _gridData.GridPattern.Count > 0)
             {
                 GUI.backgroundColor = Color.red;
 
                 if (GUILayout.Button("Clear saved pattern", GUILayout.Width(200), GUILayout.Height(30)))
                 {
-                    _brainData.ClearPattern();
+                    _gridData.ClearPattern();
                 }
 
                 GUI.backgroundColor = Color.white;
@@ -161,11 +161,11 @@ namespace Game.Runtime.Gameplay.Unit.Editor
         {
             _togglePositions = new();
 
-            if (_brainData.GridPattern != null)
+            if (_gridData.GridPattern != null)
             {
                 _sizeModifiedForced = false;
 
-                foreach (var gridPattern in _brainData.GridPattern)
+                foreach (var gridPattern in _gridData.GridPattern)
                 {
                     int suitablePatternWith = Mathf.Abs(gridPattern.x) * 2 + 1;
                     if (suitablePatternWith > _gridWidth)
@@ -199,9 +199,9 @@ namespace Game.Runtime.Gameplay.Unit.Editor
                 }
             }
 
-            if (_brainData.GridPattern != null)
+            if (_gridData.GridPattern != null)
             {
-                foreach (var gridPattern in _brainData.GridPattern)
+                foreach (var gridPattern in _gridData.GridPattern)
                 {
                     _togglePositions[gridPattern] = true;
                 }
@@ -240,11 +240,10 @@ namespace Game.Runtime.Gameplay.Unit.Editor
 
                 foreach (var togglePosition in _togglePositions)
                 {
-                    if (togglePosition.Key == Vector2Int.zero)
-                        continue;
-
                     if (togglePosition.Value)
+                    {
                         _localGridPattern.Add(togglePosition.Key);
+                    }
                 }
             }
 
@@ -273,8 +272,6 @@ namespace Game.Runtime.Gameplay.Unit.Editor
                     GUILayout.FlexibleSpace();
                     GUILayout.EndHorizontal();
                 }
-
-                _togglePositions[Vector2Int.zero] = true;
             }
         }
         
