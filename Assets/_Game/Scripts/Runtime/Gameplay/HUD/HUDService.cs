@@ -1,6 +1,6 @@
-﻿using Game.Runtime.CMS;
+﻿using System.Collections.Generic;
+using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Commons;
-using Game.Runtime.Gameplay.Grid;
 using Game.Runtime.Services;
 using UnityEngine;
 
@@ -19,9 +19,9 @@ namespace Game.Runtime.Gameplay.HUD
             _hudBehaviour = uiObject.GetComponent<HUDBehaviour>();
         }
 
-        public void SetBrainGrid(GridData gridData)
+        public void SetBrainGrid(CMSEntity defaultGridModel, List<Vector2Int> brainGrid)
         {
-            _hudBehaviour.SetBrainGrid(gridData);
+            _hudBehaviour.SetBrainGrid(defaultGridModel, brainGrid);
         }
     }
 }

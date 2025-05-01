@@ -2,8 +2,8 @@
 
 namespace Game.Runtime.CMS.Components.Gameplay
 {
-    public class UnitComponent : CMSComponent
+    public class DefaultGridComponent : CMSComponent
     {
-        public GridData BrainGrid;
+        public GridPatternData Grid;
     }
 }

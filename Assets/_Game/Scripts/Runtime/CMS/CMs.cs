@@ -20,8 +20,8 @@ namespace Game.Runtime.CMS
         }
         public static class Gameplay
         {
+            public const string DefaultGrid = "CMS/Gameplay/DefaultGrid";
             public const string HUD = "CMS/Gameplay/HUD";
-            public const string TestUnit = "CMS/Gameplay/TestUnit";
         }
     }
 }

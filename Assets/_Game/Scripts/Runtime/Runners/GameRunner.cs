@@ -3,6 +3,7 @@ using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Gameplay;
 using Game.Runtime.Gameplay.HUD;
 using Game.Runtime.Gameplay.Unit;
+using Game.Runtime.Gameplay.Unit.Brain;
 using Game.Runtime.Services;
 using Game.Runtime.Services.Camera;
 using Game.Runtime.Services.UI;
@@ -31,20 +32,20 @@ namespace Game.Runtime.Runners
         private void RegisterServices()
         {
             SL.Register<HUDService>(new HUDService(), _gameScope);
+            SL.Register<BrainService>(new BrainService(), _gameScope);
         }
 
         private async UniTask StartGame()
         {
             SL.InitializeScope(_gameScope);
-            TestBrain();
+            TestShowBrain();
             await SL.Get<UIFaderService>().FadeOut();
         }
 
-        private void TestBrain()
+        private void TestShowBrain()
         {
-            var testBrain = CM.Get(CMs.Gameplay.TestUnit).GetComponent<UnitComponent>();
-            var brainController = new BrainController();
-            brainController.SetBrainGrid(testBrain.BrainGrid);
+            var defaultGrid = CM.Get(CMs.Gameplay.DefaultGrid).GetComponent<DefaultGridComponent>();
+            SL.Get<BrainService>().SetBrainGrid(defaultGrid.Grid.GridPattern);
         }
 
         private void OnDestroy()

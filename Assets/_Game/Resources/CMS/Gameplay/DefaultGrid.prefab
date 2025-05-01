@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &189643518041937695
+--- !u!1 &3488622379283305565
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5244730479608650515}
-  - component: {fileID: 6083237391161677072}
+  - component: {fileID: 1588494562573401900}
+  - component: {fileID: 1280645207150420062}
   m_Layer: 0
-  m_Name: TestUnit
+  m_Name: DefaultGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5244730479608650515
+--- !u!4 &1588494562573401900
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 189643518041937695}
+  m_GameObject: {fileID: 3488622379283305565}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,29 +32,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6083237391161677072
+--- !u!114 &1280645207150420062
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 189643518041937695}
+  m_GameObject: {fileID: 3488622379283305565}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3491bc35dc84132acbda8b4eb9ddf2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityId: CMS/Gameplay/TestUnit
+  entityId: CMS/Gameplay/DefaultGrid
   Components:
-  - rid: 635145019282161963
+  - rid: 635145019282161967
+  - rid: 635145019282161968
+  - rid: 635145019282161974
   references:
     version: 2
     RefIds:
-    - rid: 635145019282161963
-      type: {class: UnitComponent, ns: Game.Runtime.CMS.Components.Gameplay, asm: Runtime}
+    - rid: 635145019282161967
+      type: {class: DefaultGridComponent, ns: Game.Runtime.CMS.Components.Gameplay, asm: Runtime}
       data:
-        BrainGrid:
-          CellSize: 30
-          CellScale: 7
-          CellSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-          gridPatternData: {fileID: 11400000, guid: 94fb4d6e1b48e6047886a834f2f26e5a, type: 2}
+        Grid: {fileID: 11400000, guid: 94fb4d6e1b48e6047886a834f2f26e5a, type: 2}
+    - rid: 635145019282161968
+      type: {class: CellSizeComponent, ns: Game.Runtime.CMS.Components.Gameplay, asm: Runtime}
+      data:
+        CellSize: 20
+    - rid: 635145019282161974
+      type: {class: SpriteComponent, ns: Game.Runtime.CMS.Components.Commons, asm: Runtime}
+      data:
+        Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
