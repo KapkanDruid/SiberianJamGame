@@ -18,5 +18,10 @@ namespace Game.Runtime.CMS
             }
             public const string AmbientTest = "CMS/Audio/AmbientTest";
         }
+        public static class Gameplay
+        {
+            public const string HUD = "CMS/Gameplay/HUD";
+            public const string TestUnit = "CMS/Gameplay/TestUnit";
+        }
     }
 }
