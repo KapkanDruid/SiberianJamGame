@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4935770895398829437}
   - component: {fileID: 8862212721897967724}
   m_Layer: 0
-  m_Name: Implant_7
+  m_Name: Implant_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3491bc35dc84132acbda8b4eb9ddf2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityId: CMS/Gameplay/Inventory/Implant_7
+  entityId: CMS/Gameplay/Inventory/Implants/Implant_3
   Components:
   - rid: 635145038440169587
   - rid: 635145038440169588
@@ -54,10 +54,10 @@ MonoBehaviour:
     - rid: 635145038440169587
       type: {class: SpriteComponent, ns: Game.Runtime.CMS.Components.Commons, asm: Runtime}
       data:
-        Sprite: {fileID: 8894878752313283882, guid: 874a0b8bb6ecdb840873df01c3ad673e, type: 3}
+        Sprite: {fileID: 2915309258922386874, guid: 874a0b8bb6ecdb840873df01c3ad673e, type: 3}
     - rid: 635145038440169588
       type: {class: InventoryItemComponent, ns: Game.Runtime.CMS.Components.Gameplay, asm: Runtime}
       data:
-        SizeDelta: {x: 13, y: 13}
+        SizeDelta: {x: 58, y: 58}
         Pivot: {x: 0.5, y: 0.5}
-        Grid: {fileID: 11400000, guid: 28fdc2d2725f84341b8ecb6883ee0628, type: 2}
+        Grid: {fileID: 11400000, guid: efafa314cf052254b9fef49f5bb560e2, type: 2}
