@@ -8,6 +8,7 @@ namespace Game.Runtime.Gameplay.HUD
         [SerializeField] private RectTransform inventoryRoot;
         [SerializeField] private InventoryItem testSmallItem;
         [SerializeField] private InventoryItem testLargeItem;
+        [SerializeField] private InventoryItem testLargeItem1;
 
         public void ResizeInventoryView(Vector2Int gridSize, int cellSize)
         {
@@ -38,11 +39,14 @@ namespace Game.Runtime.Gameplay.HUD
 
         public void TestItemConfigure()
         {
-            var smallItemModel = CM.Get(CMs.Gameplay.Inventory.TestItem_Small);
+            var smallItemModel = CM.Get(CMs.Gameplay.Inventory.Implant_8);
             testSmallItem.SetupItem(smallItemModel);
 
-            var largeItemModel = CM.Get(CMs.Gameplay.Inventory.TestItem_Large);
+            var largeItemModel = CM.Get(CMs.Gameplay.Inventory.Implant_3);
             testLargeItem.SetupItem(largeItemModel);
+            
+            var testImplant = CM.Get(CMs.Gameplay.Inventory.Implant_7);
+            testLargeItem1.SetupItem(testImplant);
         }
     }
 }
