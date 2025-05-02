@@ -3,7 +3,6 @@ using Game.Runtime.CMS.Components.Configs;
 using Game.Runtime.CMS;
 using Game.Runtime.Services;
 using UnityEngine;
-using System.Threading;
 
 namespace Game.Runtime.Gameplay
 {
@@ -30,6 +29,7 @@ namespace Game.Runtime.Gameplay
         public void Initialize()
         {
             SL.Get<BattleController>().OnTurnEnded += () => SL.Get<WarriorView>().HideArmor().Forget();
+            SL.Get<WarriorView>().SetStartHealth(_maxHealth);
         }
 
         public void SetTurnData(WarriorTurnData turnData)
@@ -54,8 +54,6 @@ namespace Game.Runtime.Gameplay
             {
                 await SL.Get<WarriorView>().BreakArmor(_armor);
 
-                Debug.Log("Break");
-
                 damage -= _armor;
                 _armor = 0;
             }
@@ -69,8 +67,6 @@ namespace Game.Runtime.Gameplay
                 Death();
                 return;
             }
-
-            Debug.Log($"Warrior damaged Current warrior health {_currentHealth} damage {damage}");
         }
 
         public async UniTask AttackAsync()
@@ -80,6 +76,11 @@ namespace Game.Runtime.Gameplay
 
             if (SL.Get<BattleController>().IsBattleEnded)
                 return;
+
+            if (SL.Get<IEnemy>().CurrentHealth > _damage)
+                await SL.Get<WarriorView>().AttackAsync();
+            else
+                await SL.Get<WarriorView>().FinishAttackAsync();
 
             await SL.Get<IEnemy>().TakeDamage(_damage);
         }
@@ -101,8 +102,6 @@ namespace Game.Runtime.Gameplay
 
             if (_currentHealth >= _maxHealth)
                 _currentHealth = _maxHealth;
-
-            Debug.Log("Warrior healed Current warrior health" + _currentHealth);
         }
 
         private void Death()

@@ -17,16 +17,20 @@ namespace Game.Runtime.Gameplay
         [SerializeField] private TextMeshProUGUI _armorText;
 
         [SerializeField] private Animator _animator;
+        [SerializeField] private WarriorAnimationReader _reader;
 
         private void Start()
         {
             _armorIcon.gameObject.SetActive(false);
         }
 
+        public void SetStartHealth(float value)
+        {
+            _healthText.text = value.ToString();
+        }
+
         public async UniTask TakeDamageAsync(float currentHealth, float maxHealth, float damage)
         {
-            //playAnim 
-
             _healthBar.fillAmount = currentHealth / maxHealth;
 
             float startHp = currentHealth;
@@ -50,9 +54,26 @@ namespace Game.Runtime.Gameplay
             await sequence.AsyncWaitForCompletion();
         }
 
+        public async UniTask AttackAsync()
+        {
+            _animator.SetTrigger("SimpleAttack");
+
+            await UniTask.WaitUntil(() => _reader.SimpleAttackPerformed == true);
+
+            _reader.SimpleAttackPerformed = false;
+        }
+
+        public async UniTask FinishAttackAsync()
+        {
+            _animator.SetTrigger("FinishAttack");
+
+            await UniTask.WaitUntil(() => _reader.FinishAttackPerformed);
+
+            _reader.FinishAttackPerformed = false;
+        }
+
         public async UniTask HealAsync(float currentHealth, float maxHealth, float heal)
         {
-
             float startHp = currentHealth;
             float endHp = currentHealth + heal;
 

@@ -39,7 +39,7 @@ namespace Game.Runtime.Gameplay
             var warrior = SL.Get<WarriorController>();
             var enemy = SL.Get<EnemyController>();
 
-            warrior.SetTurnData(new WarriorTurnData(5, 8, 3)); //MOCK
+            warrior.SetTurnData(new WarriorTurnData(5, 9, 3)); //MOCK
             //warrior.SetTurnData(OnTurnStarted.Invoke()); //To replace MOCK
 
 

@@ -55,7 +55,7 @@ MonoBehaviour:
       type: {class: EnemyConfig, ns: Game.Runtime.CMS.Components.Configs, asm: Runtime}
       data:
         _maxHealth: 10
-        _damage: 2
+        _damage: 10
     - rid: 4717638307256991860
       type: {class: EnemyPrefabComponent, ns: Game.Runtime.CMS.Components.Configs, asm: Runtime}
       data:
