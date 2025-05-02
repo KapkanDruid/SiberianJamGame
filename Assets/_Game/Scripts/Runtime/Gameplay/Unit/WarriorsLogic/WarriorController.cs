@@ -1,0 +1,114 @@
+﻿using Cysharp.Threading.Tasks;
+using Game.Runtime.CMS.Components.Configs;
+using Game.Runtime.CMS;
+using Game.Runtime.Services;
+using UnityEngine;
+using System.Threading;
+
+namespace Game.Runtime.Gameplay
+{
+    public class WarriorController : IService, IInitializable
+    {
+        private float _maxHealth;
+        private float _currentHealth;
+
+        private float _heal;
+        private float _armor;
+        private float _damage;
+
+        public WarriorController()
+        {
+            var entity = CM.Get(CMs.Configs.PlayerConfig);
+
+            var config = entity.GetComponent<PlayerConfig>();
+
+            _maxHealth = config.MaxHealth;
+
+            _currentHealth = _maxHealth;
+        }
+
+        public void Initialize()
+        {
+            SL.Get<BattleController>().OnTurnEnded += () => SL.Get<WarriorView>().HideArmor().Forget();
+        }
+
+        public void SetTurnData(WarriorTurnData turnData)
+        {
+            _heal = turnData.Heal;
+            _armor = turnData.Armor;
+            _damage = turnData.Damage;
+
+            if (_armor > 0)
+                SL.Get<WarriorView>().ShowArmor(_armor).Forget();
+        }
+
+        public async UniTask TakeDamage(float damage)
+        {
+            if (_armor > damage)
+            {
+                await SL.Get<WarriorView>().DecreaseArmor(_armor, _armor - damage);
+                _armor -= damage;
+                return;
+            }
+            else if (_armor <= damage && _armor > 0)
+            {
+                await SL.Get<WarriorView>().BreakArmor(_armor);
+
+                Debug.Log("Break");
+
+                damage -= _armor;
+                _armor = 0;
+            }
+
+            await SL.Get<WarriorView>().TakeDamageAsync(_currentHealth, _maxHealth, damage);
+            _currentHealth -= damage;
+
+            if (_currentHealth <= 0)
+            {
+                _currentHealth = 0;
+                Death();
+                return;
+            }
+
+            Debug.Log($"Warrior damaged Current warrior health {_currentHealth} damage {damage}");
+        }
+
+        public async UniTask AttackAsync()
+        {
+            if (_damage <= 0)
+                return;
+
+            if (SL.Get<BattleController>().IsBattleEnded)
+                return;
+
+            await SL.Get<IEnemy>().TakeDamage(_damage);
+        }
+
+        public async UniTask HealAsync()
+        {
+            if (SL.Get<BattleController>().IsBattleEnded)
+                return;
+
+            if (_heal <= 0)
+                return;
+
+            if (_currentHealth >= _maxHealth)
+                return;
+
+            await SL.Get<WarriorView>().HealAsync(_currentHealth, _maxHealth, _heal);
+
+            _currentHealth += _heal;
+
+            if (_currentHealth >= _maxHealth)
+                _currentHealth = _maxHealth;
+
+            Debug.Log("Warrior healed Current warrior health" + _currentHealth);
+        }
+
+        private void Death()
+        {
+            Debug.Log("Loose");
+            SL.Get<BattleController>().Loose();
+        }
+    }
+}

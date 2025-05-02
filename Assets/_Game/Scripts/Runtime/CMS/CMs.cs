@@ -18,5 +18,10 @@ namespace Game.Runtime.CMS
             }
             public const string AmbientTest = "CMS/Audio/AmbientTest";
         }
+        public static class Configs
+        {
+            public const string EnemiesByLevel = "CMS/Configs/EnemiesByLevel";
+            public const string PlayerConfig = "CMS/Configs/PlayerConfig";
+        }
     }
 }
