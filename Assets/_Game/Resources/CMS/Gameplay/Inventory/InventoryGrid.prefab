@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1588494562573401900}
   - component: {fileID: 1280645207150420062}
   m_Layer: 0
-  m_Name: DefaultGrid
+  m_Name: InventoryGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,23 +44,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3491bc35dc84132acbda8b4eb9ddf2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityId: CMS/Gameplay/DefaultGrid
+  entityId: CMS/Gameplay/Inventory/InventoryGrid
   Components:
-  - rid: 635145019282161967
-  - rid: 635145019282161968
-  - rid: 635145019282161974
+  - rid: 635145038440169585
+  - rid: 635145038440169586
   references:
     version: 2
     RefIds:
-    - rid: 635145019282161967
-      type: {class: DefaultGridComponent, ns: Game.Runtime.CMS.Components.Gameplay, asm: Runtime}
-      data:
-        Grid: {fileID: 11400000, guid: 94fb4d6e1b48e6047886a834f2f26e5a, type: 2}
-    - rid: 635145019282161968
-      type: {class: CellSizeComponent, ns: Game.Runtime.CMS.Components.Gameplay, asm: Runtime}
-      data:
-        CellSize: 20
-    - rid: 635145019282161974
+    - rid: 635145038440169585
       type: {class: SpriteComponent, ns: Game.Runtime.CMS.Components.Commons, asm: Runtime}
       data:
-        Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+        Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+    - rid: 635145038440169586
+      type: {class: InventoryComponent, ns: Game.Runtime.CMS.Components.Gameplay, asm: Runtime}
+      data:
+        CellSize: 20
+        Grid: {fileID: 11400000, guid: 94fb4d6e1b48e6047886a834f2f26e5a, type: 2}

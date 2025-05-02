@@ -35,13 +35,8 @@ namespace Game.Runtime.Runners
         private async UniTask StartGame()
         {
             SL.InitializeScope(_gameScope);
-            TestShowBrain();
+            SL.Get<HUDService>().Behaviour.TestItemConfigure();
             await SL.Get<UIFaderService>().FadeOut();
-        }
-
-        private void TestShowBrain()
-        {
-            
         }
 
         private void OnDestroy()

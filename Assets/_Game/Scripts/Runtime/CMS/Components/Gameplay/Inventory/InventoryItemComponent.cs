@@ -1,10 +1,11 @@
 ﻿using Game.Runtime.Gameplay.Grid;
+using UnityEngine;
 
 namespace Game.Runtime.CMS.Components.Gameplay
 {
-    public class DefaultGridComponent : CMSComponent
+    public class InventoryItemComponent : CMSComponent
     {
-        public float CellSize;
+        public Vector2 SizeDelta;
         public GridPatternData Grid;
     }
 }

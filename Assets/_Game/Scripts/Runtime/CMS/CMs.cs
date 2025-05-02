@@ -20,7 +20,12 @@ namespace Game.Runtime.CMS
         }
         public static class Gameplay
         {
-            public const string DefaultGrid = "CMS/Gameplay/DefaultGrid";
+            public static class Inventory
+            {
+                public const string InventoryGrid = "CMS/Gameplay/Inventory/InventoryGrid";
+                public const string TestItem_Large = "CMS/Gameplay/Inventory/TestItem_Large";
+                public const string TestItem_Small = "CMS/Gameplay/Inventory/TestItem_Small";
+            }
             public const string HUD = "CMS/Gameplay/HUD";
         }
     }
