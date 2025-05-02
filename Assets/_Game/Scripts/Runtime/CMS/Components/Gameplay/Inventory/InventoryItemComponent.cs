@@ -6,6 +6,6 @@ namespace Game.Runtime.CMS.Components.Gameplay
     public class InventoryItemComponent : CMSComponent
     {
         public Vector2 SizeDelta;
-        public GridPatternData Grid;
+        public GridConfig Grid;
     }
 }

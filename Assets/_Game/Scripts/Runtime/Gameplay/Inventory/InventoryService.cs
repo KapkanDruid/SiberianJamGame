@@ -8,71 +8,27 @@ using UnityEngine;
 
 namespace Game.Runtime.Gameplay.Inventory
 {
-    public class InventoryService : IInitializable, IService
+    public class InventoryService : IService, IInitializable
     {
-        public int CellSize {get; private set;}
-
-        private readonly Dictionary<Vector2Int, InventoryItem> _occupiedSlots = new();
-        private readonly List<Vector2Int> _availableSlots = new();
-        private readonly Dictionary<InventoryItem, List<Vector2Int>> _itemPositions = new();
         private readonly Dictionary<Vector2Int, InventorySlot> _slots = new();
+        private readonly Dictionary<Vector2Int, InventoryItem> _occupiedSlots = new();
+        private readonly Dictionary<InventoryItem, List<Vector2Int>> _itemPositions = new();
+        
+        private Vector2Int _gridSize;
+        private int _cellSize;
+        
+        private HUDBehaviour _hudService;
 
         public void Initialize()
         {
-            var defaultInventoryGrid = CM.Get(CMs.Gameplay.Inventory.InventoryGrid).GetComponent<InventoryComponent>();
-            foreach (var slotPos in defaultInventoryGrid.Grid.GridPattern)
-                _availableSlots.Add(slotPos);
-            
-            CellSize = defaultInventoryGrid.CellSize;
-            
+            _hudService = SL.Get<HUDService>().Behaviour;
             CreateGrid();
         }
-
-        private void CreateGrid()
-        {
-            SL.Get<HUDService>().Behaviour.CalculateInventorySize(_availableSlots, CellSize);
-            
-            foreach (var slotPos in _availableSlots)
-            {
-                var slotObj = new GameObject($"InventorySlot_{slotPos.x}_{slotPos.y}");
-                var slot = slotObj.AddComponent<InventorySlot>();
-                
-                SL.Get<HUDService>().Behaviour.SetupInventorySlot(slotObj, slotPos, CellSize);
-
-                slot.Initialize(this, slotPos);
-                _slots[slotPos] = slot;
-            }
-        }
-
-        public bool CanPlaceItem(InventoryItem item, Vector2Int gridPosition)
-        {
-            var rotatedSlots = GetRotatedSlots(item, item.CurrentRotation);
-            var targetSlots = rotatedSlots.Select(slot => slot + gridPosition).ToList();
-
-            foreach (var slot in targetSlots)
-            {
-                if (!_availableSlots.Contains(slot) || (_occupiedSlots.TryGetValue(slot, out var itemOccupied) && !itemOccupied.Equals(item)))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        public void SetItemPosition(InventorySlot slot, InventoryItem item)
-        {
-            SL.Get<HUDService>().Behaviour.SetItemInSlots(item, CalculateCenterPosition(slot, item));
-        }
-
+        
         public bool TryPlaceItem(InventoryItem item, Vector2Int gridPosition)
         {
-            if (!CanPlaceItem(item, gridPosition))
-            {
-                return false;
-            }
+            if (!CanPlaceItem(item, gridPosition)) return false;
 
-            Debug.Log($"Item added");
             if (_itemPositions.TryGetValue(item, out var oldPositions))
             {
                 foreach (var pos in oldPositions)
@@ -82,7 +38,7 @@ namespace Game.Runtime.Gameplay.Inventory
                 }
             }
 
-            var rotatedSlots = GetRotatedSlots(item, item.CurrentRotation);
+            var rotatedSlots = GetRotatedSlots(item);
             var newPositions = rotatedSlots.Select(slot => slot + gridPosition).ToList();
 
             foreach (var pos in newPositions)
@@ -95,50 +51,22 @@ namespace Game.Runtime.Gameplay.Inventory
                 
             return true;
         }
-
-        public bool HasItem(InventoryItem item)
+        
+        public bool NeedRemoveItem(InventoryItem item, Vector2 screenPosition)
         {
-            return _itemPositions.GetValueOrDefault(item) != default;
-        }
-
-        public void UpdateSlotHighlight(InventoryItem item, Vector2Int gridPosition)
-        {
-            var rotatedSlots = GetRotatedSlots(item, item.CurrentRotation);
-            var newPositions = rotatedSlots.Select(slot => slot + gridPosition).ToList();
-
-            foreach (var pos in newPositions)
-            {
-                if (_slots.TryGetValue(pos, out var slot))
-                {
-                    slot.SetHighlight(true);
-                }
-            }
+            return _itemPositions.GetValueOrDefault(item) != default && 
+                   _hudService.IsOutsideInventory(screenPosition);
         }
         
-        public bool IsOutsideInventory(Vector2 screenPosition)
+        private bool IsSlotOccupied(Vector2Int slot)
         {
-            RectTransform inventoryRect = SL.Get<HUDService>().Behaviour.InventoryRoot;
-            return !RectTransformUtility.RectangleContainsScreenPoint(inventoryRect, screenPosition);
+            return _occupiedSlots.ContainsKey(slot);
         }
-
-        private Vector2 CalculateCenterPosition(InventorySlot baseSlot, InventoryItem item)
+        
+        public void SetItemPosition(InventorySlot slot, InventoryItem item)
         {
-            // 1. Получаем RectTransform базового слота
-            RectTransform baseSlotRect = baseSlot.GetComponent<RectTransform>();
-    
-            // 2. Рассчитываем относительные смещения
-            Vector2 pivotOffset = new Vector2(
-                (item.SlotPositions.Max(p => p.x) + item.SlotPositions.Min(p => p.x)) * 0.5f,
-                (item.SlotPositions.Max(p => p.y) + item.SlotPositions.Min(p => p.y)) * 0.5f
-            );
-    
-            // 3. Получаем размеры слота
-            float slotWidth = baseSlotRect.rect.width;
-            float slotHeight = baseSlotRect.rect.height;
-    
-            // 4. Рассчитываем итоговую позицию
-            return baseSlotRect.anchoredPosition + 
-                   new Vector2(pivotOffset.x * slotWidth, pivotOffset.y * slotHeight);
+            var itemCenterPosition = Helpers.InventoryHelper.CalculateCenterPosition(slot, item);
+            _hudService.SetItemInInventory(item, itemCenterPosition);
         }
         
         public void RemoveItem(InventoryItem item)
@@ -152,69 +80,97 @@ namespace Game.Runtime.Gameplay.Inventory
                 }
 
                 _itemPositions.Remove(item);
-                Debug.Log($"REmoved");
+            }
+        }
+        
+        public void UpdateSlotHighlight(InventoryItem item, Vector2Int gridPosition, Color color)
+        {
+            var rotatedSlots = GetRotatedSlots(item);
+            var newPositions = rotatedSlots.Select(slot => slot + gridPosition).ToList();
+
+            foreach (var pos in newPositions)
+            {
+                if (_slots.TryGetValue(pos, out var slot))
+                {
+                    if (CanPlaceItem(item, gridPosition))
+                        slot.SetColor(color);
+                }
+            }
+        }
+        
+        public void ResetSlotHighlight(InventoryItem item)
+        {
+            foreach (var slot in _slots)
+            {
+                if (!slot.Value.Occupied || 
+                    _occupiedSlots.TryGetValue(slot.Key, out var itemOccupied) && itemOccupied.Equals(item))
+                    slot.Value.SetColor(Color.white);
             }
         }
 
-        public InventorySlot FindSlotAtPosition(Vector2Int position)
+        private void CreateGrid()
         {
-            return _slots.GetValueOrDefault(position);
-        }
-
-        public List<Vector2Int> GetItemSlots(InventoryItem item)
-        {
-            return _itemPositions.TryGetValue(item, out var positions) ? positions : new List<Vector2Int>();
-        }
-
-        public bool IsSlotOccupied(Vector2Int slot)
-        {
-            return _occupiedSlots.ContainsKey(slot) ;
-        }
-
-        public bool IsSlotAvailable(Vector2Int slot)
-        {
-            return _availableSlots.Contains(slot);
-        }
-
-        public Vector2Int? FindFreePositionForItem(InventoryItem item)
-        {
-            foreach (var slot in _availableSlots)
+            var defaultInventoryGrid = CM.Get(CMs.Gameplay.Inventory.InventoryGrid).GetComponent<InventoryComponent>();
+            _gridSize = defaultInventoryGrid.Grid.GridSize;
+            _cellSize = defaultInventoryGrid.CellSize;
+            
+            _hudService.ResizeInventoryView(_gridSize, _cellSize);
+            
+            foreach (var slotPos in defaultInventoryGrid.Grid.GridPattern)
             {
-                if (CanPlaceItem(item, slot))
+                var slotObj = new GameObject($"InventorySlot_{slotPos.x}_{slotPos.y}");
+                var slot = slotObj.AddComponent<InventorySlot>();
+                
+                _hudService.SetupInventorySlot(slotObj, slotPos, _cellSize);
+
+                slot.Initialize(slotPos);
+                _slots[slotPos] = slot;
+            }
+        }
+
+        private bool CanPlaceItem(InventoryItem item, Vector2Int gridPosition)
+        {
+            var rotatedSlots = GetRotatedSlots(item);
+            var targetSlots = rotatedSlots.Select(slot => slot + gridPosition).ToList();
+
+            foreach (var slot in targetSlots)
+            {
+                if (!IsSlotExist(slot) || 
+                    (_occupiedSlots.TryGetValue(slot, out var itemOccupied) && !itemOccupied.Equals(item)))
                 {
-                    return slot;
+                    return false;
                 }
             }
 
-            return null;
+            return true;
         }
 
-        public bool TryAddItemToInventory(InventoryItem item)
+        private bool IsSlotExist(Vector2Int slotPosition)
         {
-            var freePosition = FindFreePositionForItem(item);
-            if (freePosition.HasValue && _slots.TryGetValue(freePosition.Value, out var slot))
-            {
-                item.transform.SetParent(slot.transform);
-                item.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-                return TryPlaceItem(item, freePosition.Value);
-            }
-
-            return false;
+            return _slots.ContainsKey(slotPosition);
         }
 
-        public void UpdateSlotVisual(Vector2Int slotPosition)
+        private void UpdateSlotVisual(Vector2Int slotPosition)
         {
             if (_slots.TryGetValue(slotPosition, out var slot))
             {
-                slot.UpdateVisual(IsSlotOccupied(slotPosition));
+                slot.SetOccupied(IsSlotOccupied(slotPosition));
+            }
+        }
+        
+        public void UpdateAllSlotVisual()
+        {
+            foreach (var slot in _slots)
+            {
+                slot.Value.SetOccupied(IsSlotOccupied(slot.Key));
             }
         }
 
-        private List<Vector2Int> GetRotatedSlots(InventoryItem item, int rotation)
+        private List<Vector2Int> GetRotatedSlots(InventoryItem item)
         {
             var slots = new List<Vector2Int>(item.SlotPositions);
 
-            for (int i = 0; i < rotation; i++)
+            for (int i = 0; i < item.CurrentRotation; i++)
             {
                 slots = RotateSlotsClockwise(slots);
             }

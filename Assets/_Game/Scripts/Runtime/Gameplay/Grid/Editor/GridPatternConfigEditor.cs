@@ -6,20 +6,19 @@ using System.Linq;
 
 namespace Game.Runtime.Gameplay.Grid.Editor
 {
-    [CustomEditor(typeof(GridPatternData))]
+    [CustomEditor(typeof(GridConfig))]
     public class GridDataEditor : UnityEditor.Editor
     {
+        private GridConfig _gridConfig;
+
         private Dictionary<Vector2Int, bool> _togglePositions;
         private List<Vector2Int> _localGridPattern;
+        private Vector2Int _localGridSize;
 
         private SerializedProperty _listProperty;
-
-        private GridPatternData _gridData;
+        private SerializedProperty _sizeProperty;
 
         private GUIStyle _localPatternTextStyle;
-
-        private int _gridHeight;
-        private int _gridWidth;
 
         private int _maxX;
         private int _maxY;
@@ -30,27 +29,31 @@ namespace Game.Runtime.Gameplay.Grid.Editor
 
         private void OnEnable()
         {
-            _gridData = (GridPatternData)target;
+            _gridConfig = (GridConfig)target;
 
-            _listProperty = serializedObject.FindProperty("_gridPattern");
+            _listProperty = serializedObject.FindProperty("gridPattern");
+            _sizeProperty = serializedObject.FindProperty("gridSize");
 
-            _localPatternTextStyle = new();
-
-            _localPatternTextStyle.fontSize = 14;
-            _localPatternTextStyle.wordWrap = true;
+            _localPatternTextStyle = new()
+            {
+                fontSize = 14,
+                wordWrap = true,
+                normal =
+                {
+                    textColor = Color.green
+                }
+            };
 
             _isChangesSaved = true;
-
-            _localPatternTextStyle.normal.textColor = Color.green;
-
             GenerateGrid(true);
         }
 
         public override void OnInspectorGUI()
         {
             ShowHelpBoxes();
-
             SetGridSize();
+            
+            GUILayout.Space(10);
 
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
@@ -85,25 +88,25 @@ namespace Game.Runtime.Gameplay.Grid.Editor
 
         private void ShowPatternText()
         {
-            if (_gridData.GridPattern != null && _gridData.GridPattern.Count > 0)
+            if (_gridConfig.GridPattern != null && _gridConfig.GridPattern.Count > 0)
             {
-                GUIStyle textStyle = new();
+                GUIStyle textStyle = new()
+                {
+                    normal =
+                    {
+                        textColor = Color.white
+                    },
+                    wordWrap = true,
+                    fontSize = 14
+                };
 
-                textStyle.normal.textColor = Color.white;
-                textStyle.wordWrap = true;
-                textStyle.fontSize = 14;
-
-                EditorGUILayout.LabelField($"Saved pattern: {_gridData.GridPattern.Count} positions", textStyle);
+                EditorGUILayout.LabelField($"Saved pattern: {_gridConfig.GridPattern.Count} positions", textStyle);
 
                 textStyle.fontSize = 12;
-                EditorGUILayout.LabelField(_gridData.GetPositionsString(), textStyle);
+                EditorGUILayout.LabelField(_gridConfig.GetPositionsString(), textStyle);
             }
 
-            if (IsCollectionsEqual(_localGridPattern, _gridData.GridPattern))
-                _isChangesSaved = true;
-            else
-                _isChangesSaved = false;
-
+            _isChangesSaved = IsCollectionsEqual(_localGridPattern, _gridConfig.GridPattern);
             _localPatternTextStyle.normal.textColor = _isChangesSaved ? Color.green : Color.yellow;
 
             GUILayout.Space(4);
@@ -133,9 +136,11 @@ namespace Game.Runtime.Gameplay.Grid.Editor
                         _listProperty.InsertArrayElementAtIndex(i);
                         _listProperty.GetArrayElementAtIndex(i).vector2IntValue = _localGridPattern[i];
                     }
+                    
+                    _sizeProperty.vector2IntValue =_localGridSize;
 
                     serializedObject.ApplyModifiedProperties();
-                    EditorUtility.SetDirty(_gridData);
+                    EditorUtility.SetDirty(_gridConfig);
                 }
 
                 GUI.backgroundColor = Color.white;
@@ -144,13 +149,13 @@ namespace Game.Runtime.Gameplay.Grid.Editor
 
         private void ClearSavedPattern()
         {
-            if (_gridData.GridPattern != null && _gridData.GridPattern.Count > 0)
+            if (_gridConfig.GridPattern != null && _gridConfig.GridPattern.Count > 0)
             {
                 GUI.backgroundColor = Color.red;
 
                 if (GUILayout.Button("Clear saved pattern", GUILayout.Width(200), GUILayout.Height(30)))
                 {
-                    _gridData.ClearPattern();
+                    _gridConfig.ClearPattern();
                 }
 
                 GUI.backgroundColor = Color.white;
@@ -161,25 +166,25 @@ namespace Game.Runtime.Gameplay.Grid.Editor
         {
             _togglePositions = new();
 
-            if (_gridData.GridPattern != null)
+            if (_gridConfig.GridPattern != null)
             {
                 _sizeModifiedForced = false;
 
-                foreach (var gridPattern in _gridData.GridPattern)
+                foreach (var gridPattern in _gridConfig.GridPattern)
                 {
                     int suitablePatternWith = Mathf.Abs(gridPattern.x) * 2 + 1;
-                    if (suitablePatternWith > _gridWidth)
+                    if (suitablePatternWith > _localGridSize.x)
                     {
-                        _gridWidth = suitablePatternWith;
+                        _localGridSize = new Vector2Int(suitablePatternWith, _localGridSize.y);
 
                         if (!firstCall)
                             _sizeModifiedForced = true;
                     }
 
-                    int suitablePatternHeigh = Mathf.Abs(gridPattern.y) * 2 + 1;
-                    if (suitablePatternHeigh > _gridHeight)
+                    int suitablePatternHeight = Mathf.Abs(gridPattern.y) * 2 + 1;
+                    if (suitablePatternHeight > _localGridSize.y)
                     {
-                        _gridHeight = suitablePatternHeigh;
+                        _localGridSize = new Vector2Int(_localGridSize.x, suitablePatternHeight);
 
                         if (!firstCall)
                             _sizeModifiedForced = true;
@@ -187,8 +192,8 @@ namespace Game.Runtime.Gameplay.Grid.Editor
                 }
             }
 
-            _maxX = _gridWidth / 2;
-            _maxY = _gridHeight / 2;
+            _maxX = _localGridSize.x / 2;
+            _maxY = _localGridSize.y / 2;
 
             for (int y = -_maxY; y <= _maxY; y++)
             {
@@ -199,9 +204,9 @@ namespace Game.Runtime.Gameplay.Grid.Editor
                 }
             }
 
-            if (_gridData.GridPattern != null)
+            if (_gridConfig.GridPattern != null)
             {
-                foreach (var gridPattern in _gridData.GridPattern)
+                foreach (var gridPattern in _gridConfig.GridPattern)
                 {
                     _togglePositions[gridPattern] = true;
                 }
@@ -210,8 +215,7 @@ namespace Game.Runtime.Gameplay.Grid.Editor
         
         private void SetGridSize()
         {
-            _gridHeight = EditorGUILayout.IntSlider("Height", _gridHeight, 1, 49);
-            _gridWidth = EditorGUILayout.IntSlider("Width", _gridWidth, 1, 49);
+            _localGridSize = EditorGUILayout.Vector2IntField("Grid Size", _localGridSize);
         }
         
         private void ShowHelpBoxes()

@@ -20,13 +20,11 @@ namespace Game.Runtime.Services.Input
         private void Subscribe()
         {
             _inputMaps.Player.Rotate.performed += HandleRotateItem;
-            _inputMaps.Player.Rotate.canceled += HandleRotateItem;
         }
         
         private void Unsubscribe()
         {
             _inputMaps.Player.Rotate.performed -= HandleRotateItem;
-            _inputMaps.Player.Rotate.canceled -= HandleRotateItem;
         }
 
         private void HandleRotateItem(InputAction.CallbackContext context)

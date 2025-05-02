@@ -5,6 +5,6 @@ namespace Game.Runtime.CMS.Components.Gameplay
     public class InventoryComponent : CMSComponent
     {
         public int CellSize;
-        public GridPatternData Grid;
+        public GridConfig Grid;
     }
 }

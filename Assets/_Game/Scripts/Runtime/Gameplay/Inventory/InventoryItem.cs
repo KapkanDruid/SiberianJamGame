@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
-using Game.Runtime.Gameplay.HUD;
+using Game.Runtime.CMS;
+using Game.Runtime.CMS.Components.Commons;
+using Game.Runtime.CMS.Components.Gameplay;
 using Game.Runtime.Gameplay.Inventory;
 using Game.Runtime.Services;
+using Game.Runtime.Services.Input;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -13,77 +16,71 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     [SerializeField] private RectTransform rectTransform;
     [SerializeField] private CanvasGroup canvasGroup;
 
-    public Vector2Int ItemSize { get; private set; }
+    public List<Vector2Int> SlotPositions { get; private set; }
 
-    private List<Vector2Int> _slotPositions = new List<Vector2Int>();
     private Transform _originalParent;
     private Vector2 _originalPosition;
     private InventoryService _inventoryService;
-    private int _currentRotation = 0;
-    private bool _isDragging = false;
-    private Vector2 _dragOffset;
+    private Canvas _canvas;
+    private bool _isDragging;
+    private int _currentRotation;
+    private int _originalRotation;
 
-    public List<Vector2Int> SlotPositions => _slotPositions;
     public int CurrentRotation => _currentRotation;
-    public Sprite ItemSprite => image.sprite;
 
-    public void Configure(List<Vector2Int> slotPositions, Sprite sprite, Vector2 sizeDelta)
+    public void SetupItem(CMSEntity itemModel)
     {
-        _slotPositions = slotPositions;
-        image.sprite = sprite;
-        rectTransform.sizeDelta = sizeDelta;
         _inventoryService = SL.Get<InventoryService>();
-        ItemSize = CalculateSize();
+        _canvas = GetComponentInParent<Canvas>();
+
+        var itemComponent = itemModel.GetComponent<InventoryItemComponent>();
+        SlotPositions = itemComponent.Grid.GridPattern;
+        rectTransform.sizeDelta = itemComponent.SizeDelta;
+        image.sprite = itemModel.GetComponent<SpriteComponent>().Sprite;
+    }
+
+    private void HandleRotateItem()
+    {
+        if (_isDragging)
+        {
+            RotateItem();
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Right)
-        {
-            // Вращение при начале drag правой кнопкой
-            RotateItem();
-            return;
-        }
-
-        if (eventData.button != PointerEventData.InputButton.Left) return;
-
         _isDragging = true;
+
         _originalParent = transform.parent;
         _originalPosition = rectTransform.anchoredPosition;
+        _originalRotation = _currentRotation;
         canvasGroup.blocksRaycasts = false;
 
         transform.SetParent(GetComponentInParent<Canvas>().transform);
+        
+        SL.Get<InputService>().OnRotateItem += HandleRotateItem;
     }
-
-    private InventorySlot _lastSlotUnderCursor;
     
     public void OnDrag(PointerEventData eventData)
     {
         if (!_isDragging) return;
-
-        rectTransform.anchoredPosition += eventData.delta / GetComponentInParent<Canvas>().scaleFactor;
+        
+        rectTransform.anchoredPosition += eventData.delta / _canvas.scaleFactor;
          
-            var slotUnderCursor = GetSlotUnderCursor();
-            if (slotUnderCursor != null)
-            {
-                if (_lastSlotUnderCursor != null) _lastSlotUnderCursor.SetHighlight(false);
-                _lastSlotUnderCursor = slotUnderCursor;
-                _inventoryService.UpdateSlotHighlight(this, slotUnderCursor.GridPosition);
-            }
-            else
-            {
-                if (_lastSlotUnderCursor != null) _lastSlotUnderCursor.SetHighlight(false);
-            }
+        var slotUnderCursor = GetSlotUnderCursor();
+        if (slotUnderCursor != null)
+        {
+            ResetColorLastSlotUnderCursor();
+            _inventoryService.UpdateSlotHighlight(this, slotUnderCursor.GridPosition, Color.yellow);
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         if (!_isDragging) return;
         _isDragging = false;
-
+        
         canvasGroup.blocksRaycasts = true;
-
-        // Проверяем, был ли предмет помещен в инвентарь
 
         var inventorySlot = GetSlotUnderCursor();
         if (inventorySlot != null && _inventoryService.TryPlaceItem(this, inventorySlot.GridPosition))
@@ -92,10 +89,11 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         }
         else
         {
-            if (_inventoryService.HasItem(this) && _inventoryService.IsOutsideInventory(eventData.position))
+            if (_inventoryService.NeedRemoveItem(this, eventData.position))
             {
+                ResetColorLastSlotUnderCursor();
                 _inventoryService.RemoveItem(this);
-                transform.SetParent(GetComponentInParent<Canvas>().transform);
+                transform.SetParent(_canvas.transform);
                 rectTransform.position = eventData.position;
             }
             else
@@ -103,6 +101,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 ReturnToOriginalPosition();
             }
         }
+        
+        SL.Get<InputService>().OnRotateItem -= HandleRotateItem;
     }
 
     private InventorySlot GetSlotUnderCursor()
@@ -127,50 +127,30 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         return null;
     }
 
+    private void ResetColorLastSlotUnderCursor()
+    {
+        _inventoryService.ResetSlotHighlight(this);
+    }
+    
     private void RotateItem()
     {
         _currentRotation = (_currentRotation + 1) % 4;
         rectTransform.localRotation = Quaternion.Euler(0, 0, -90 * _currentRotation);
-    }
-
-    private Vector2Int CalculateSize()
-    {
-        if (_slotPositions.Count == 0) return Vector2Int.zero;
-
-        int minX = int.MaxValue;
-        int maxX = int.MinValue;
-        int minY = int.MaxValue;
-        int maxY = int.MinValue;
-
-        foreach (var pos in _slotPositions)
+        
+        var slotUnderCursor = GetSlotUnderCursor();
+        if (slotUnderCursor != null)
         {
-            minX = Mathf.Min(minX, pos.x);
-            maxX = Mathf.Max(maxX, pos.x);
-            minY = Mathf.Min(minY, pos.y);
-            maxY = Mathf.Max(maxY, pos.y);
+            ResetColorLastSlotUnderCursor();
+            _inventoryService.UpdateSlotHighlight(this, slotUnderCursor.GridPosition, Color.yellow);
         }
-
-        return new Vector2Int(maxX - minX + 1, maxY - minY + 1);
     }
-
-    // private void PlaceItemInSlot(Transform slotTransform)
-    // {
-    //     transform.SetParent(slotTransform);
-    //     rectTransform.anchoredPosition = Vector2.zero;
-    //     rectTransform.localRotation = Quaternion.identity;
-    //     _currentRotation = 0;
-    // }
 
     private void ReturnToOriginalPosition()
     {
         transform.SetParent(_originalParent);
         rectTransform.anchoredPosition = _originalPosition;
-        rectTransform.localRotation = Quaternion.identity;
-        _currentRotation = 0;
-
-        if (_originalParent != null && _originalParent.TryGetComponent<InventorySlot>(out var slot))
-        {
-            _inventoryService.TryPlaceItem(this, slot.GridPosition);
-        }
+        rectTransform.localRotation = Quaternion.Euler(0, 0, -90 * _originalRotation);;
+        _currentRotation = _originalRotation;
+        _inventoryService.UpdateAllSlotVisual();
     }
 }

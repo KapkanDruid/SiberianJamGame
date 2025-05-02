@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ece0ba93a451af49be1f55f5d0c305c, type: 3}
   m_Name: LargeItemGrid
   m_EditorClassIdentifier: 
-  _gridPattern:
+  gridPattern:
   - {x: 0, y: 0}
   - {x: 1, y: 1}
+  gridSize: {x: 3, y: 3}

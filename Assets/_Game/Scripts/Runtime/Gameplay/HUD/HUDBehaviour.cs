@@ -1,65 +1,48 @@
-﻿using System.Collections.Generic;
-using Game.Runtime.CMS;
-using Game.Runtime.CMS.Components.Commons;
-using Game.Runtime.CMS.Components.Gameplay;
+﻿using Game.Runtime.CMS;
 using UnityEngine;
 
 namespace Game.Runtime.Gameplay.HUD
 {
     public class HUDBehaviour : MonoBehaviour
     {
-        [SerializeField] private GameObject inventoryRoot;
+        [SerializeField] private RectTransform inventoryRoot;
         [SerializeField] private InventoryItem testSmallItem;
         [SerializeField] private InventoryItem testLargeItem;
-        
-        public RectTransform InventoryRoot => inventoryRoot.GetComponent<RectTransform>();
 
-        public void CalculateInventorySize(List<Vector2Int> grid, int cellSize)
+        public void ResizeInventoryView(Vector2Int gridSize, int cellSize)
         {
-            int minX = int.MaxValue;
-            int maxX = int.MinValue;
-            int minY = int.MaxValue;
-            int maxY = int.MinValue;
-
-            foreach (var pos in grid)
-            {
-                minX = Mathf.Min(minX, pos.x);
-                maxX = Mathf.Max(maxX, pos.x);
-                minY = Mathf.Min(minY, pos.y);
-                maxY = Mathf.Max(maxY, pos.y);
-            }
-
-            int width = maxX - minX + 1;
-            int height = maxY - minY + 1;
-            Debug.Log(width + "x" + height);
-            InventoryRoot.sizeDelta = new Vector2Int(width * cellSize, height * cellSize);
-            InventoryRoot.anchoredPosition = Vector2.zero;
+            inventoryRoot.sizeDelta = new Vector2Int(gridSize.x * cellSize, gridSize.y * cellSize);
+            inventoryRoot.anchoredPosition = Vector2.zero;
         }
-        public void SetupInventorySlot(GameObject slotObj, Vector2Int slotPos, float cellSize)
+        
+        public void SetupInventorySlot(GameObject slotObject, Vector2Int slotPosistion, float cellSize)
         {
-            slotObj.transform.SetParent(inventoryRoot.transform);
-            slotObj.transform.localScale = Vector2.one;
-            slotObj.transform.position = Vector2.zero;
-            var rectTransform = slotObj.GetComponent<RectTransform>();
-            rectTransform.anchoredPosition = new Vector2(slotPos.x * cellSize, slotPos.y * cellSize);
+            slotObject.transform.SetParent(inventoryRoot.transform);
+            slotObject.transform.localScale = Vector2.one;
+            
+            var rectTransform = slotObject.GetComponent<RectTransform>();
+            rectTransform.anchoredPosition = new Vector2(slotPosistion.x * cellSize, slotPosistion.y * cellSize);
             rectTransform.sizeDelta = new Vector2(cellSize, cellSize);
+        }
+        
+        public bool IsOutsideInventory(Vector2 screenPosition)
+        {
+            return !RectTransformUtility.RectangleContainsScreenPoint(inventoryRoot, screenPosition);
+        }
+        
+        public void SetItemInInventory(InventoryItem item, Vector2 calculateCenterPosition)
+        {
+            item.transform.SetParent(inventoryRoot.transform);
+            item.GetComponent<RectTransform>().anchoredPosition = calculateCenterPosition;
         }
 
         public void TestItemConfigure()
         {
             var smallItemModel = CM.Get(CMs.Gameplay.Inventory.TestItem_Small);
-            var smallItemComponent = smallItemModel.GetComponent<InventoryItemComponent>();
-            testSmallItem.Configure(smallItemComponent.Grid.GridPattern, smallItemModel.GetComponent<SpriteComponent>().Sprite, smallItemComponent.SizeDelta);
+            testSmallItem.SetupItem(smallItemModel);
 
             var largeItemModel = CM.Get(CMs.Gameplay.Inventory.TestItem_Large);
-            var largeItemComponent = largeItemModel.GetComponent<InventoryItemComponent>();
-            testLargeItem.Configure(largeItemComponent.Grid.GridPattern, largeItemModel.GetComponent<SpriteComponent>().Sprite, largeItemComponent.SizeDelta);
-        }
-
-        public void SetItemInSlots(InventoryItem item, Vector2 calculateCenterPosition)
-        {
-            item.transform.SetParent(inventoryRoot.transform);
-            item.GetComponent<RectTransform>().anchoredPosition = calculateCenterPosition;
+            testLargeItem.SetupItem(largeItemModel);
         }
     }
 }

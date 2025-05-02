@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f1c2cab97840caa2114fc6cf846e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryRoot: {fileID: 1079599994964665193}
+  inventoryRoot: {fileID: 4270748580518604283}
   testSmallItem: {fileID: 6304627334326703416}
   testLargeItem: {fileID: 8865963676925884490}
 --- !u!114 &1671806685062799615
