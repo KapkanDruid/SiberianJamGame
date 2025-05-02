@@ -37,17 +37,5 @@ namespace Game.Runtime.Gameplay.HUD
             item.transform.SetParent(inventoryRoot.transform);
             item.GetComponent<RectTransform>().anchoredPosition = calculateCenterPosition;
         }
-
-        public void TestItemConfigure()
-        {
-            var smallItemModel = CM.Get(CMs.Gameplay.Inventory.Implant_8);
-            testSmallItem.SetupItem(smallItemModel);
-
-            var largeItemModel = CM.Get(CMs.Gameplay.Inventory.Implant_3);
-            testLargeItem.SetupItem(largeItemModel);
-            
-            var testImplant = CM.Get(CMs.Gameplay.Inventory.Implant_7);
-            testLargeItem1.SetupItem(testImplant);
-        }
     }
 }

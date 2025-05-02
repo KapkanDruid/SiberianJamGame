@@ -22,10 +22,12 @@ namespace Game.Runtime.CMS
         {
             public static class Inventory
             {
-                public const string green_2 = "CMS/Gameplay/Inventory/green_2";
-                public const string Implant_3 = "CMS/Gameplay/Inventory/Implant_3";
-                public const string Implant_7 = "CMS/Gameplay/Inventory/Implant_7";
-                public const string Implant_8 = "CMS/Gameplay/Inventory/Implant_8";
+                public static class Implants
+                {
+                    public const string Implant_3 = "CMS/Gameplay/Inventory/Implants/Implant_3";
+                    public const string Implant_7 = "CMS/Gameplay/Inventory/Implants/Implant_7";
+                    public const string Implant_8 = "CMS/Gameplay/Inventory/Implants/Implant_8";
+                }
                 public const string InventoryGrid = "CMS/Gameplay/Inventory/InventoryGrid";
             }
             public const string HUD = "CMS/Gameplay/HUD";
