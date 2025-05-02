@@ -29,6 +29,16 @@ namespace Game.Runtime.Gameplay
             _healthText.text = value.ToString();
         }
 
+        public void Death()
+        {
+            _animator.SetTrigger("Death");
+        }
+
+        public void PlayHitAnimation()
+        {
+            _animator.SetTrigger("Hit");
+        }
+
         public async UniTask TakeDamageAsync(float currentHealth, float maxHealth, float damage)
         {
             _healthBar.fillAmount = currentHealth / maxHealth;

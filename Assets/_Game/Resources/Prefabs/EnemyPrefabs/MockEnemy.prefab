@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9198777365924750502}
   - component: {fileID: 6807456928805598081}
-  - component: {fileID: 6508618795639742903}
   - component: {fileID: 4642285318447051925}
+  - component: {fileID: -7791952286858956461}
+  - component: {fileID: 5567635856647584833}
   m_Layer: 0
   m_Name: MockEnemy
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.4, y: -0.13, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -78,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3274289743846879371, guid: 909941eb92543804c82a134f5a460690, type: 3}
+  m_Sprite: {fileID: 4725754807658695486, guid: c9d58b11ae706fa4f94846f4cec766fc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -89,18 +90,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6508618795639742903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6254650526999703419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6b1de742bea38e46be865240bfa2327, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &4642285318447051925
 Animator:
   serializedVersion: 7
@@ -123,3 +112,30 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-7791952286858956461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6254650526999703419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21cc86476b5aa0d45a1eee3f195ee4dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 4642285318447051925}
+  _reader: {fileID: 5567635856647584833}
+--- !u!114 &5567635856647584833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6254650526999703419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5817c43b75f87ba42962a1db8fee5322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackPerformed: 0

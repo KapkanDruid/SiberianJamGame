@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using Game.Runtime.CMS;
+using Game.Runtime.CMS.Components.Commons;
 using Game.Runtime.CMS.Components.Configs;
 using Game.Runtime.Gameplay;
 using Game.Runtime.Services;
@@ -44,7 +45,7 @@ namespace Game.Runtime.Runners
             SL.Register<WarriorController>(new WarriorController(), _gameScope);
             SL.Register<BattleController>(_battleController, _gameScope);
 
-            var enemy = SpawnEnemy();
+            var enemy = CreateEnemy();
 
             SL.Register<IEnemy>(enemy, _gameScope);
             SL.Register<EnemyController>(enemy, _gameScope);
@@ -57,20 +58,17 @@ namespace Game.Runtime.Runners
             await SL.Get<UIFaderService>().FadeOut();
         }
 
-        private EnemyController SpawnEnemy()
+        private EnemyController CreateEnemy()
         {
             var listConfigEntity = CM.Get(CMs.Configs.EnemiesByLevel);
             var listConfig = listConfigEntity.GetComponent<EnemyPrefabs>().EnemyConfigPrefabs;
 
             var entityByIndex = CM.Get(listConfig[_currentLevelIndex].EntityId);
 
-            var prefabByIndex = entityByIndex.GetComponent<EnemyPrefabComponent>().EnemyController;
+            var prefabByIndex = entityByIndex.GetComponent<EnemyPrefabComponent>().EnemyView;
             var configByIndex = entityByIndex.GetComponent<EnemyConfig>();
 
-            var enemy = GameObject.Instantiate(prefabByIndex);
-            enemy.Configurate(configByIndex, new EnemyViewData(_healthParent, _healthBar, _healthText));
-
-            return enemy;
+            return new EnemyController(configByIndex, new EnemyViewData(_healthParent, _healthBar, _healthText), prefabByIndex);
         }
 
         private void OnDestroy()

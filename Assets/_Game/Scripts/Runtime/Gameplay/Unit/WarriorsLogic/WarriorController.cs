@@ -44,6 +44,7 @@ namespace Game.Runtime.Gameplay
 
         public async UniTask TakeDamage(float damage)
         {
+            SL.Get<WarriorView>().PlayHitAnimation();
             if (_armor > damage)
             {
                 await SL.Get<WarriorView>().DecreaseArmor(_armor, _armor - damage);
@@ -107,6 +108,7 @@ namespace Game.Runtime.Gameplay
         private void Death()
         {
             Debug.Log("Loose");
+            SL.Get<WarriorView>().Death();
             SL.Get<BattleController>().Loose();
         }
     }

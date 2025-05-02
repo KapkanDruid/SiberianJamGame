@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game.Runtime.Gameplay
 {
-    public class EnemyController : MonoBehaviour, IEnemy
+    public class EnemyController : IEnemy
     {
         private EnemyView _view;
         private EnemyConfig _config;
@@ -15,14 +15,18 @@ namespace Game.Runtime.Gameplay
 
         public float CurrentHealth => _health;
 
-        public void Configurate(EnemyConfig config, EnemyViewData viewData)
+        public EnemyController(EnemyConfig config, EnemyViewData viewData, EnemyView enemyView)
         {
             _config = config;
 
             _health = _config.MaxHealth;
             _damage = _config.Damage;
 
-            _view = new EnemyView(viewData);
+            _view = GameObject.Instantiate(enemyView);
+
+            _view.Configurate(viewData);
+
+            _view.transform.position = SL.Get<BattleController>().EnemyPosition.position;
         }
 
         public async UniTask TakeDamage(float damage)
@@ -43,12 +47,14 @@ namespace Game.Runtime.Gameplay
             if (SL.Get<BattleController>().IsBattleEnded)
                 return;
 
+            await _view.AttackAsync();
             await SL.Get<WarriorController>().TakeDamage(_damage);
         }
 
         private void Death()
         {
             Debug.Log("Win");
+            _view.Death();
             SL.Get<BattleController>().Win();
         }
     }

@@ -18,6 +18,8 @@ namespace Game.Runtime.Gameplay
         public event Action OnTurnEnded;
         public bool IsBattleEnded => _isBattleEnded;
 
+        public Transform EnemyPosition => _enemyPosition; 
+
         public void Initialize()
         {
             _endTurnButton.onClick.AddListener(() =>
@@ -25,8 +27,6 @@ namespace Game.Runtime.Gameplay
                 TurnAsync().Forget();
                 _endTurnButton.interactable = false;
             });
-
-            SL.Get<EnemyController>().transform.position = _enemyPosition.transform.position;
         }
 
         private async UniTask TurnAsync()
@@ -39,9 +39,8 @@ namespace Game.Runtime.Gameplay
             var warrior = SL.Get<WarriorController>();
             var enemy = SL.Get<EnemyController>();
 
-            warrior.SetTurnData(new WarriorTurnData(5, 9, 3)); //MOCK
+            warrior.SetTurnData(new WarriorTurnData(5, 1, 3)); //MOCK
             //warrior.SetTurnData(OnTurnStarted.Invoke()); //To replace MOCK
-
 
             var token = this.GetCancellationTokenOnDestroy();
 

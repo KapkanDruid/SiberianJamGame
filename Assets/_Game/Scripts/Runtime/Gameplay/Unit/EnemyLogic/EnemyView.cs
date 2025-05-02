@@ -6,13 +6,16 @@ using UnityEngine.UI;
 
 namespace Game.Runtime.Gameplay
 {
-    public class EnemyView
+    public class EnemyView : MonoBehaviour
     {
+        [SerializeField] private Animator _animator;
+        [SerializeField] private EnemyAnimationReader _reader;
+
         private RectTransform _healthParent;
         private Image _healthBar;
         private TextMeshProUGUI _healthText;
 
-        public EnemyView(EnemyViewData data)
+        public void Configurate(EnemyViewData data)
         {
             _healthParent = data.HealthParent;
             _healthBar = data.HealthBar;
@@ -21,7 +24,7 @@ namespace Game.Runtime.Gameplay
 
         public async UniTask TakeDamageAsync(float currentHealth, float maxHealth, float damage)
         {
-            //playAnim 
+            _animator.SetTrigger("Hit");
 
             _healthBar.fillAmount = currentHealth / maxHealth;
 
@@ -44,6 +47,20 @@ namespace Game.Runtime.Gameplay
                 .Append(_healthParent.DOScale(1f, 0.2f));
 
             await sequence.AsyncWaitForCompletion();
+        }
+
+        public async UniTask AttackAsync()
+        {
+            _animator.SetTrigger("Attack");
+
+            await UniTask.WaitUntil(() => _reader.AttackPerformed == true);
+
+            _reader.AttackPerformed = false;
+        }
+
+        public void Death()
+        {
+            _animator.SetTrigger("Death");
         }
     }
 }
