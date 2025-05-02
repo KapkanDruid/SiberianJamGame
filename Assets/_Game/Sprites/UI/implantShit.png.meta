@@ -5,6 +5,129 @@ TextureImporter:
   - first:
       213: -8081291906208559325
     second: implantShit_0
+  - first:
+      213: 510409819056174508
+    second: implantShit_1
+  - first:
+      213: -7929849104855609108
+    second: implantShit_2
+  - first:
+      213: 2915309258922386874
+    second: implantShit_3
+  - first:
+      213: -842344903441168992
+    second: implantShit_4
+  - first:
+      213: -7323694768462471223
+    second: implantShit_5
+  - first:
+      213: -2080406354904831867
+    second: implantShit_6
+  - first:
+      213: 8894878752313283882
+    second: implantShit_7
+  - first:
+      213: 4045946337858377866
+    second: implantShit_8
+  - first:
+      213: 356223945587882208
+    second: implantShit_9
+  - first:
+      213: 9099888954298684492
+    second: implantShit_10
+  - first:
+      213: -6243128393802220099
+    second: implantShit_11
+  - first:
+      213: -7037222264486025381
+    second: implantShit_12
+  - first:
+      213: 632537322918454407
+    second: implantShit_13
+  - first:
+      213: 486038317141881506
+    second: implantShit_14
+  - first:
+      213: -7087608707956050876
+    second: implantShit_15
+  - first:
+      213: -4817247437339095279
+    second: implantShit_16
+  - first:
+      213: -1709482372554766978
+    second: implantShit_17
+  - first:
+      213: 4800026487485902204
+    second: implantShit_18
+  - first:
+      213: -7344860660199382360
+    second: implantShit_19
+  - first:
+      213: 5300568666029823932
+    second: implantShit_20
+  - first:
+      213: 3103712868715176944
+    second: implantShit_21
+  - first:
+      213: -3578267414302974943
+    second: implantShit_22
+  - first:
+      213: 3288290265326372769
+    second: implantShit_23
+  - first:
+      213: 7114910195492498300
+    second: implantShit_24
+  - first:
+      213: 5404033013685247874
+    second: implantShit_25
+  - first:
+      213: 3531728218464185769
+    second: implantShit_26
+  - first:
+      213: 676617587635167558
+    second: implantShit_27
+  - first:
+      213: -1136478549415043713
+    second: implantShit_28
+  - first:
+      213: 7057021538681131491
+    second: implantShit_29
+  - first:
+      213: 6939736843121202361
+    second: implantShit_30
+  - first:
+      213: 5374418100180392016
+    second: implantShit_31
+  - first:
+      213: -4441568555493495443
+    second: implantShit_32
+  - first:
+      213: -2915300112896447077
+    second: implantShit_33
+  - first:
+      213: 7047949130843281830
+    second: implantShit_34
+  - first:
+      213: -7980762556611299443
+    second: implantShit_35
+  - first:
+      213: -4023417481261782964
+    second: implantShit_36
+  - first:
+      213: 6973120086277462264
+    second: implantShit_37
+  - first:
+      213: -4899855399754482025
+    second: implantShit_38
+  - first:
+      213: 1347279545830272720
+    second: implantShit_39
+  - first:
+      213: 7747297612388059265
+    second: implantShit_40
+  - first:
+      213: -3073814405806174524
+    second: implantShit_41
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -116,10 +239,10 @@ TextureImporter:
       name: implantShit_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 414
-        height: 552
+        x: 11
+        y: 512
+        width: 29
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,6 +253,908 @@ TextureImporter:
       bones: []
       spriteID: 32f033ce3db79df80800000000000000
       internalID: -8081291906208559325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_1
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 497
+        width: 39
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca5f6b2b607551700800000000000000
+      internalID: 510409819056174508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_2
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 508
+        width: 77
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce0d1a6d04483f190800000000000000
+      internalID: -7929849104855609108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_3
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 506
+        width: 122
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab5e9743352457820800000000000000
+      internalID: 2915309258922386874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_4
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 454
+        width: 88
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a54704f5c36f44f0800000000000000
+      internalID: -842344903441168992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_5
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 408
+        width: 41
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cf586229620d5a90800000000000000
+      internalID: -7323694768462471223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_6
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 425
+        width: 115
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 588ae635179e023e0800000000000000
+      internalID: -2080406354904831867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_7
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 462
+        width: 76
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a259dcf1915f07b70800000000000000
+      internalID: 8894878752313283882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_8
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 461
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a88575802c6162830800000000000000
+      internalID: 4045946337858377866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_9
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 379
+        width: 118
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e8f0498acf81f400800000000000000
+      internalID: 356223945587882208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_10
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 370
+        width: 79
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4459786acc494e70800000000000000
+      internalID: 9099888954298684492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_11
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 378
+        width: 69
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbd7348adc3fb59a0800000000000000
+      internalID: -6243128393802220099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_12
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 419
+        width: 37
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5727df92a3c65e90800000000000000
+      internalID: -7037222264486025381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_13
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 369
+        width: 36
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7842bb7085937c800800000000000000
+      internalID: 632537322918454407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_14
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 328
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a278783641ceb600800000000000000
+      internalID: 486038317141881506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_15
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 313
+        width: 39
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 444705f8e61c3ad90800000000000000
+      internalID: -7087608707956050876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_16
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 324
+        width: 77
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11f0e368af2b52db0800000000000000
+      internalID: -4817247437339095279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_17
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 322
+        width: 122
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e75c412e6d2b648e0800000000000000
+      internalID: -1709482372554766978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_18
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 270
+        width: 88
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7d2013a8ae1d9240800000000000000
+      internalID: 4800026487485902204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_19
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 224
+        width: 41
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a22310f420d11a90800000000000000
+      internalID: -7344860660199382360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_20
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 241
+        width: 115
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb7164e3e176f8940800000000000000
+      internalID: 5300568666029823932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_21
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 278
+        width: 76
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f3a390f86a921b20800000000000000
+      internalID: 3103712868715176944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_22
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 277
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12c9d13ceb0775ec0800000000000000
+      internalID: -3578267414302974943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_23
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 195
+        width: 118
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a7472ff29a52ad20800000000000000
+      internalID: 3288290265326372769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_24
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 186
+        width: 79
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7ba22b502d3db260800000000000000
+      internalID: 7114910195492498300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_25
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 194
+        width: 69
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28f5137e46bfefa40800000000000000
+      internalID: 5404033013685247874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_26
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 235
+        width: 37
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ade7c05a18330130800000000000000
+      internalID: 3531728218464185769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_27
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 185
+        width: 36
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 641a6cf6c14d36900800000000000000
+      internalID: 676617587635167558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_28
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 144
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7dd347d7ca6a30f0800000000000000
+      internalID: -1136478549415043713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_29
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 129
+        width: 39
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e19e5123b39fe160800000000000000
+      internalID: 7057021538681131491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_30
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 140
+        width: 77
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b41ee8f3e5ee4060800000000000000
+      internalID: 6939736843121202361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_31
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 138
+        width: 122
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0589ea789c4c59a40800000000000000
+      internalID: 5374418100180392016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_32
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 86
+        width: 88
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6de3446ee06c52c0800000000000000
+      internalID: -4441568555493495443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_33
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 40
+        width: 41
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9da6254ef5ca87d0800000000000000
+      internalID: -2915300112896447077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_34
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 57
+        width: 115
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a9dfe294685fc160800000000000000
+      internalID: 7047949130843281830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_35
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 94
+        width: 76
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d87f1781db2ae3190800000000000000
+      internalID: -7980762556611299443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_36
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 93
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c486b462e13f928c0800000000000000
+      internalID: -4023417481261782964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_37
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 11
+        width: 118
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f895b6f5cf75c060800000000000000
+      internalID: 6973120086277462264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_38
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 2
+        width: 79
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79ebad67977300cb0800000000000000
+      internalID: -4899855399754482025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_39
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 10
+        width: 69
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0deec56db9f72b210800000000000000
+      internalID: 1347279545830272720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_40
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 51
+        width: 37
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1884f9ba12ee38b60800000000000000
+      internalID: 7747297612388059265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: implantShit_41
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 1
+        width: 36
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cec17c651e9755d0800000000000000
+      internalID: -3073814405806174524
       vertices: []
       indices: 
       edges: []
