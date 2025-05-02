@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Game.Runtime.Services.Input
@@ -8,8 +7,7 @@ namespace Game.Runtime.Services.Input
     {
         private readonly InputMaps _inputMaps;
 
-        public event Action<Vector2> OnLook;
-        public event Action<Vector2> OnMove;
+        public event Action OnRotateItem;
 
         public InputService()
         {
@@ -21,30 +19,19 @@ namespace Game.Runtime.Services.Input
         
         private void Subscribe()
         {
-            _inputMaps.Player.Move.performed += HandleMove;
-            _inputMaps.Player.Move.canceled += HandleMove;
-            
-            _inputMaps.Player.Look.performed += HandleLook;
-            _inputMaps.Player.Look.canceled += HandleLook;
+            _inputMaps.Player.Rotate.performed += HandleRotateItem;
+            _inputMaps.Player.Rotate.canceled += HandleRotateItem;
         }
         
         private void Unsubscribe()
         {
-            _inputMaps.Player.Move.performed -= HandleMove;
-            _inputMaps.Player.Move.canceled -= HandleMove;
-            
-            _inputMaps.Player.Look.performed -= HandleLook;
-            _inputMaps.Player.Look.canceled -= HandleLook;
+            _inputMaps.Player.Rotate.performed -= HandleRotateItem;
+            _inputMaps.Player.Rotate.canceled -= HandleRotateItem;
         }
 
-        private void HandleMove(InputAction.CallbackContext context)
+        private void HandleRotateItem(InputAction.CallbackContext context)
         {
-            OnMove?.Invoke(context.ReadValue<Vector2>());
-        }
-        
-        private void HandleLook(InputAction.CallbackContext context)
-        {
-            OnLook?.Invoke(context.ReadValue<Vector2>());
+            OnRotateItem?.Invoke();
         }
 
         public void Dispose()
