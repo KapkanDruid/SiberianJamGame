@@ -6,6 +6,7 @@ namespace Game.Runtime.Gameplay.HUD
     public class HUDBehaviour : MonoBehaviour
     {
         [SerializeField] private RectTransform inventoryRoot;
+        [SerializeField] private RectTransform cellsRoot;
         [SerializeField] private InventoryItem testSmallItem;
         [SerializeField] private InventoryItem testLargeItem;
         [SerializeField] private InventoryItem testLargeItem1;
@@ -18,7 +19,7 @@ namespace Game.Runtime.Gameplay.HUD
         
         public void SetupInventorySlot(GameObject slotObject, Vector2Int slotPosistion, float cellSize)
         {
-            slotObject.transform.SetParent(inventoryRoot.transform);
+            slotObject.transform.SetParent(cellsRoot.transform);
             slotObject.transform.localScale = Vector2.one;
             
             var rectTransform = slotObject.GetComponent<RectTransform>();

@@ -124,7 +124,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             _rectTransform,
             eventData.position,
             eventData.pressEventCamera,
-            out Vector2 localCursor);
+            out Vector2 _);
 
         Vector2 pivotDifference = new Vector2(
             _pivotPoint.x - 0.5f,
