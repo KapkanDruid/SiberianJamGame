@@ -1,13 +1,12 @@
 ﻿using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Commons;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Game.Runtime.Gameplay.Inventory
 {
     [RequireComponent(typeof(Image))]
-    public class InventorySlot : MonoBehaviour, IDropHandler
+    public class InventorySlot : MonoBehaviour
     {
         [SerializeField] private Color _normalColor = Color.white;
         [SerializeField] private Color _occupiedColor = Color.red;
@@ -28,18 +27,6 @@ namespace Game.Runtime.Gameplay.Inventory
             _backgroundImage.sprite = CM.Get(CMs.Gameplay.Inventory.InventoryGrid).GetComponent<SpriteComponent>().Sprite;
             
             UpdateVisual(_inventoryService.IsSlotOccupied(_gridPosition));
-        }
-
-        public void OnDrop(PointerEventData eventData)
-        {
-            if (eventData.pointerDrag != null && eventData.pointerDrag.TryGetComponent<InventoryItem>(out var item))
-            {
-                if (_inventoryService.TryPlaceItem(item, _gridPosition))
-                {
-                    item.transform.SetParent(transform);
-                    item.transform.localPosition = Vector3.zero;
-                }
-            }
         }
 
         public void SetHighlight(bool needHighlight)

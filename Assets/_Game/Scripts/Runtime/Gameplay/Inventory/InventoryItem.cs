@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Game.Runtime.Gameplay.HUD;
 using Game.Runtime.Gameplay.Inventory;
 using Game.Runtime.Services;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     [SerializeField] private Image image;
     [SerializeField] private RectTransform rectTransform;
     [SerializeField] private CanvasGroup canvasGroup;
+
+    public Vector2Int ItemSize { get; private set; }
 
     private List<Vector2Int> _slotPositions = new List<Vector2Int>();
     private Transform _originalParent;
@@ -30,7 +33,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         image.sprite = sprite;
         rectTransform.sizeDelta = sizeDelta;
         _inventoryService = SL.Get<InventoryService>();
-        UpdateItemSize();
+        ItemSize = CalculateSize();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -49,38 +52,28 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         _originalPosition = rectTransform.anchoredPosition;
         canvasGroup.blocksRaycasts = false;
 
-        // Вычисляем offset между позицией курсора и центром предмета
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            rectTransform.parent as RectTransform,
-            eventData.position,
-            eventData.pressEventCamera,
-            out Vector2 localPoint);
-        _dragOffset = rectTransform.anchoredPosition - localPoint;
-
-        _inventoryService.RemoveItem(this);
         transform.SetParent(GetComponentInParent<Canvas>().transform);
     }
 
+    private InventorySlot _lastSlotUnderCursor;
+    
     public void OnDrag(PointerEventData eventData)
     {
         if (!_isDragging) return;
 
-        if (eventData.button == PointerEventData.InputButton.Right)
-        {
-            // Вращение при drag правой кнопкой
-            RotateItem();
-        }
-
-        // Перемещение при drag левой кнопкой
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                rectTransform.parent as RectTransform,
-                eventData.position,
-                eventData.pressEventCamera,
-                out Vector2 localPoint))
-        {
-            rectTransform.anchoredPosition = localPoint + _dragOffset;
-            UpdateSlotHighlight(eventData);
-        }
+        rectTransform.anchoredPosition += eventData.delta / GetComponentInParent<Canvas>().scaleFactor;
+         
+            var slotUnderCursor = GetSlotUnderCursor();
+            if (slotUnderCursor != null)
+            {
+                if (_lastSlotUnderCursor != null) _lastSlotUnderCursor.SetHighlight(false);
+                _lastSlotUnderCursor = slotUnderCursor;
+                _inventoryService.UpdateSlotHighlight(this, slotUnderCursor.GridPosition);
+            }
+            else
+            {
+                if (_lastSlotUnderCursor != null) _lastSlotUnderCursor.SetHighlight(false);
+            }
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -91,109 +84,63 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         canvasGroup.blocksRaycasts = true;
 
         // Проверяем, был ли предмет помещен в инвентарь
-        var inventorySlot = eventData.pointerCurrentRaycast.gameObject?.GetComponent<InventorySlot>();
+
+        var inventorySlot = GetSlotUnderCursor();
         if (inventorySlot != null && _inventoryService.TryPlaceItem(this, inventorySlot.GridPosition))
         {
-            PlaceItemInSlot(inventorySlot.transform);
+            _inventoryService.SetItemPosition(inventorySlot, this);
         }
         else
         {
-            ReturnToOriginalPosition();
+            if (_inventoryService.HasItem(this) && _inventoryService.IsOutsideInventory(eventData.position))
+            {
+                _inventoryService.RemoveItem(this);
+                transform.SetParent(GetComponentInParent<Canvas>().transform);
+                rectTransform.position = eventData.position;
+            }
+            else
+            {
+                ReturnToOriginalPosition();
+            }
         }
     }
 
-    private void UpdateSlotHighlight(PointerEventData eventData)
+    private InventorySlot GetSlotUnderCursor()
     {
-        // Получаем все слоты инвентаря
-        InventorySlot[] allSlots = FindObjectsOfType<InventorySlot>();
-
-        // Получаем позицию нашего предмета в пространстве UI
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                rectTransform.parent as RectTransform,
-                eventData.position,
-                eventData.pressEventCamera,
-                out Vector2 localPoint);
-
-        // Находим ближайший слот к позиции курсора
-        InventorySlot closestSlot = null;
-        float closestDistance = float.MaxValue;
-
-        foreach (var slot in allSlots)
+        PointerEventData pointerData = new PointerEventData(EventSystem.current)
         {
-            // Преобразуем позицию слота в локальные координаты того же родителя
-            Vector2 slotScreenPos = RectTransformUtility.WorldToScreenPoint(null, slot.transform.position);
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                rectTransform.parent as RectTransform,
-                slotScreenPos,
-                null,
-                out Vector2 slotLocalPos
-            );
-
-            // Рассчитываем расстояние
-            float distance = Vector2.Distance(localPoint, slotLocalPos);
-            if (distance < closestDistance)
+            position = Input.mousePosition
+        };
+    
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
+    
+        foreach (var result in results)
+        {
+            InventorySlot slot = result.gameObject.GetComponent<InventorySlot>();
+            if (slot != null)
             {
-                closestDistance = distance;
-                closestSlot = slot;
+                return slot;
             }
         }
 
-        // Сбрасываем подсветку всех слотов
-        foreach (var slot in allSlots)
-        {
-            slot.SetHighlight(false);
-        }
-
-        // Если нашли ближайший слот, подсвечиваем все слоты, которые займет предмет
-        if (closestSlot != null)
-        {
-            Vector2Int gridPos = closestSlot.GridPosition;
-
-            // Проверяем, можно ли разместить предмет в этой позиции
-            bool canPlace = _inventoryService.CanPlaceItem(this, gridPos);
-
-            // Подсвечиваем все слоты, которые займет предмет
-            for (int x = 0; x < CalculateSize().x; x++)
-            {
-                for (int y = 0; y < CalculateSize().y; y++)
-                {
-                    int checkX = gridPos.x + x;
-                    int checkY = gridPos.y + y;
-
-                    // Находим соответствующий слот
-                    InventorySlot targetSlot = _inventoryService.FindSlotAtPosition(new Vector2Int(checkX, checkY));
-                    if (targetSlot != null)
-                    {
-                        // Подсвечиваем красным, если нельзя разместить, желтым - если можно
-                        targetSlot.SetHighlight(canPlace);
-                    }
-                }
-            }
-        }
+        return null;
     }
-
 
     private void RotateItem()
     {
         _currentRotation = (_currentRotation + 1) % 4;
         rectTransform.localRotation = Quaternion.Euler(0, 0, -90 * _currentRotation);
-        UpdateItemSize();
     }
 
-    private void UpdateItemSize()
-    {
-        var size = CalculateSize();
-        rectTransform.sizeDelta = size * _inventoryService.CellSize;
-    }
-
-    public Vector2Int CalculateSize()
+    private Vector2Int CalculateSize()
     {
         if (_slotPositions.Count == 0) return Vector2Int.zero;
 
-        int minX = _slotPositions[0].x;
-        int maxX = _slotPositions[0].x;
-        int minY = _slotPositions[0].y;
-        int maxY = _slotPositions[0].y;
+        int minX = int.MaxValue;
+        int maxX = int.MinValue;
+        int minY = int.MaxValue;
+        int maxY = int.MinValue;
 
         foreach (var pos in _slotPositions)
         {
@@ -206,13 +153,13 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         return new Vector2Int(maxX - minX + 1, maxY - minY + 1);
     }
 
-    private void PlaceItemInSlot(Transform slotTransform)
-    {
-        transform.SetParent(slotTransform);
-        rectTransform.anchoredPosition = Vector2.zero;
-        rectTransform.localRotation = Quaternion.identity;
-        _currentRotation = 0;
-    }
+    // private void PlaceItemInSlot(Transform slotTransform)
+    // {
+    //     transform.SetParent(slotTransform);
+    //     rectTransform.anchoredPosition = Vector2.zero;
+    //     rectTransform.localRotation = Quaternion.identity;
+    //     _currentRotation = 0;
+    // }
 
     private void ReturnToOriginalPosition()
     {

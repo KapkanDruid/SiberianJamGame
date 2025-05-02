@@ -13,7 +13,7 @@ namespace Game.Runtime.Gameplay.Inventory
         public int CellSize {get; private set;}
 
         private readonly Dictionary<Vector2Int, InventoryItem> _occupiedSlots = new();
-        private readonly HashSet<Vector2Int> _availableSlots = new();
+        private readonly List<Vector2Int> _availableSlots = new();
         private readonly Dictionary<InventoryItem, List<Vector2Int>> _itemPositions = new();
         private readonly Dictionary<Vector2Int, InventorySlot> _slots = new();
 
@@ -30,6 +30,8 @@ namespace Game.Runtime.Gameplay.Inventory
 
         private void CreateGrid()
         {
+            SL.Get<HUDService>().Behaviour.CalculateInventorySize(_availableSlots, CellSize);
+            
             foreach (var slotPos in _availableSlots)
             {
                 var slotObj = new GameObject($"InventorySlot_{slotPos.x}_{slotPos.y}");
@@ -49,8 +51,7 @@ namespace Game.Runtime.Gameplay.Inventory
 
             foreach (var slot in targetSlots)
             {
-                if (!_availableSlots.Contains(slot) &&
-                    (!_occupiedSlots.TryGetValue(slot, out var occupyingItem) || occupyingItem != item))
+                if (!_availableSlots.Contains(slot) || (_occupiedSlots.TryGetValue(slot, out var itemOccupied) && !itemOccupied.Equals(item)))
                 {
                     return false;
                 }
@@ -59,10 +60,19 @@ namespace Game.Runtime.Gameplay.Inventory
             return true;
         }
 
+        public void SetItemPosition(InventorySlot slot, InventoryItem item)
+        {
+            SL.Get<HUDService>().Behaviour.SetItemInSlots(item, CalculateCenterPosition(slot, item));
+        }
+
         public bool TryPlaceItem(InventoryItem item, Vector2Int gridPosition)
         {
-            if (!CanPlaceItem(item, gridPosition)) return false;
+            if (!CanPlaceItem(item, gridPosition))
+            {
+                return false;
+            }
 
+            Debug.Log($"Item added");
             if (_itemPositions.TryGetValue(item, out var oldPositions))
             {
                 foreach (var pos in oldPositions)
@@ -82,9 +92,55 @@ namespace Game.Runtime.Gameplay.Inventory
             }
 
             _itemPositions[item] = newPositions;
+                
             return true;
         }
 
+        public bool HasItem(InventoryItem item)
+        {
+            return _itemPositions.GetValueOrDefault(item) != default;
+        }
+
+        public void UpdateSlotHighlight(InventoryItem item, Vector2Int gridPosition)
+        {
+            var rotatedSlots = GetRotatedSlots(item, item.CurrentRotation);
+            var newPositions = rotatedSlots.Select(slot => slot + gridPosition).ToList();
+
+            foreach (var pos in newPositions)
+            {
+                if (_slots.TryGetValue(pos, out var slot))
+                {
+                    slot.SetHighlight(true);
+                }
+            }
+        }
+        
+        public bool IsOutsideInventory(Vector2 screenPosition)
+        {
+            RectTransform inventoryRect = SL.Get<HUDService>().Behaviour.InventoryRoot;
+            return !RectTransformUtility.RectangleContainsScreenPoint(inventoryRect, screenPosition);
+        }
+
+        private Vector2 CalculateCenterPosition(InventorySlot baseSlot, InventoryItem item)
+        {
+            // 1. Получаем RectTransform базового слота
+            RectTransform baseSlotRect = baseSlot.GetComponent<RectTransform>();
+    
+            // 2. Рассчитываем относительные смещения
+            Vector2 pivotOffset = new Vector2(
+                (item.SlotPositions.Max(p => p.x) + item.SlotPositions.Min(p => p.x)) * 0.5f,
+                (item.SlotPositions.Max(p => p.y) + item.SlotPositions.Min(p => p.y)) * 0.5f
+            );
+    
+            // 3. Получаем размеры слота
+            float slotWidth = baseSlotRect.rect.width;
+            float slotHeight = baseSlotRect.rect.height;
+    
+            // 4. Рассчитываем итоговую позицию
+            return baseSlotRect.anchoredPosition + 
+                   new Vector2(pivotOffset.x * slotWidth, pivotOffset.y * slotHeight);
+        }
+        
         public void RemoveItem(InventoryItem item)
         {
             if (_itemPositions.TryGetValue(item, out var positions))
@@ -96,6 +152,7 @@ namespace Game.Runtime.Gameplay.Inventory
                 }
 
                 _itemPositions.Remove(item);
+                Debug.Log($"REmoved");
             }
         }
 
@@ -111,7 +168,7 @@ namespace Game.Runtime.Gameplay.Inventory
 
         public bool IsSlotOccupied(Vector2Int slot)
         {
-            return _occupiedSlots.ContainsKey(slot);
+            return _occupiedSlots.ContainsKey(slot) ;
         }
 
         public bool IsSlotAvailable(Vector2Int slot)
@@ -151,26 +208,6 @@ namespace Game.Runtime.Gameplay.Inventory
             {
                 slot.UpdateVisual(IsSlotOccupied(slotPosition));
             }
-        }
-
-        private Vector2Int CalculateItemSize(List<Vector2Int> slots)
-        {
-            if (slots.Count == 0) return Vector2Int.zero;
-
-            int minX = slots[0].x;
-            int maxX = slots[0].x;
-            int minY = slots[0].y;
-            int maxY = slots[0].y;
-
-            foreach (var pos in slots)
-            {
-                minX = Mathf.Min(minX, pos.x);
-                maxX = Mathf.Max(maxX, pos.x);
-                minY = Mathf.Min(minY, pos.y);
-                maxY = Mathf.Max(maxY, pos.y);
-            }
-
-            return new Vector2Int(maxX - minX + 1, maxY - minY + 1);
         }
 
         private List<Vector2Int> GetRotatedSlots(InventoryItem item, int rotation)

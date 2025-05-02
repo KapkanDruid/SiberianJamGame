@@ -212,12 +212,6 @@ namespace Game.Runtime.Gameplay.Grid.Editor
         {
             _gridHeight = EditorGUILayout.IntSlider("Height", _gridHeight, 1, 49);
             _gridWidth = EditorGUILayout.IntSlider("Width", _gridWidth, 1, 49);
-
-            if (_gridHeight % 2 == 0)
-                _gridHeight++;
-
-            if (_gridWidth % 2 == 0)
-                _gridWidth++;
         }
         
         private void ShowHelpBoxes()
