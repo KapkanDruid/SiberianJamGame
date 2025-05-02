@@ -58,5 +58,5 @@ MonoBehaviour:
     - rid: 635145038440169586
       type: {class: InventoryComponent, ns: Game.Runtime.CMS.Components.Gameplay, asm: Runtime}
       data:
-        CellSize: 46
+        CellSize: 23
         Grid: {fileID: 11400000, guid: 94fb4d6e1b48e6047886a834f2f26e5a, type: 2}

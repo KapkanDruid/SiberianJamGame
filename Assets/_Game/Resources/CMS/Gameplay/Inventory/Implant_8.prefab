@@ -58,6 +58,6 @@ MonoBehaviour:
     - rid: 635145038440169590
       type: {class: InventoryItemComponent, ns: Game.Runtime.CMS.Components.Gameplay, asm: Runtime}
       data:
-        SizeDelta: {x: 77, y: 82}
+        SizeDelta: {x: 41, y: 41}
         Pivot: {x: 0.2, y: 0.2}
         Grid: {fileID: 11400000, guid: 73c5cd04e036c3a4d995cbd77a2825c7, type: 2}
