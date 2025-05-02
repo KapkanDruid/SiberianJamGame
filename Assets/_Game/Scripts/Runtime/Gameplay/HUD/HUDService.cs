@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Game.Runtime.CMS;
+﻿using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Commons;
 using Game.Runtime.Services;
 using UnityEngine;
@@ -8,7 +7,7 @@ namespace Game.Runtime.Gameplay.HUD
 {
     public class HUDService : IService
     {
-        private readonly HUDBehaviour _hudBehaviour;
+        public readonly HUDBehaviour Behaviour;
 
         public HUDService()
         {
@@ -16,12 +15,7 @@ namespace Game.Runtime.Gameplay.HUD
             var uiObject = Object.Instantiate(uiPrefab);
             uiObject.name = nameof(HUDService);
             
-            _hudBehaviour = uiObject.GetComponent<HUDBehaviour>();
-        }
-
-        public void SetBrainGrid(CMSEntity defaultGridModel, List<Vector2Int> brainGrid)
-        {
-            _hudBehaviour.SetBrainGrid(defaultGridModel, brainGrid);
+            Behaviour = uiObject.GetComponent<HUDBehaviour>();
         }
     }
 }

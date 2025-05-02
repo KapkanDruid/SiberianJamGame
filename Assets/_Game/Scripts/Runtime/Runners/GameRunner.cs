@@ -1,9 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
-using Game.Runtime.CMS;
-using Game.Runtime.CMS.Components.Gameplay;
 using Game.Runtime.Gameplay.HUD;
-using Game.Runtime.Gameplay.Unit;
-using Game.Runtime.Gameplay.Unit.Brain;
+using Game.Runtime.Gameplay.Inventory;
 using Game.Runtime.Services;
 using Game.Runtime.Services.Camera;
 using Game.Runtime.Services.UI;
@@ -32,7 +29,7 @@ namespace Game.Runtime.Runners
         private void RegisterServices()
         {
             SL.Register<HUDService>(new HUDService(), _gameScope);
-            SL.Register<BrainService>(new BrainService(), _gameScope);
+            SL.Register<InventoryService>(new InventoryService(), _gameScope);
         }
 
         private async UniTask StartGame()
@@ -44,8 +41,7 @@ namespace Game.Runtime.Runners
 
         private void TestShowBrain()
         {
-            var defaultGrid = CM.Get(CMs.Gameplay.DefaultGrid).GetComponent<DefaultGridComponent>();
-            SL.Get<BrainService>().SetBrainGrid(defaultGrid.Grid.GridPattern);
+            
         }
 
         private void OnDestroy()
