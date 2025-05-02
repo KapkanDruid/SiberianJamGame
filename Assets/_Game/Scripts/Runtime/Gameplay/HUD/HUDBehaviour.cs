@@ -1,5 +1,4 @@
-﻿using Game.Runtime.CMS;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.Runtime.Gameplay.HUD
 {
@@ -7,9 +6,6 @@ namespace Game.Runtime.Gameplay.HUD
     {
         [SerializeField] private RectTransform inventoryRoot;
         [SerializeField] private RectTransform cellsRoot;
-        [SerializeField] private InventoryItem testSmallItem;
-        [SerializeField] private InventoryItem testLargeItem;
-        [SerializeField] private InventoryItem testLargeItem1;
 
         public void ResizeInventoryView(Vector2Int gridSize, int cellSize)
         {
