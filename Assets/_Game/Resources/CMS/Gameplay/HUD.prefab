@@ -136,9 +136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38d8f19bc6074795b8fdef75d06934f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 2127926879563259974}
-  rectTransform: {fileID: 5880004440811348183}
-  canvasGroup: {fileID: 6945228589641946569}
+  _image: {fileID: 2127926879563259974}
+  _rectTransform: {fileID: 5880004440811348183}
+  _canvasGroup: {fileID: 6945228589641946569}
 --- !u!1 &4714629545038962687
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,6 +383,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38d8f19bc6074795b8fdef75d06934f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 1272146460097441846}
-  rectTransform: {fileID: 8486790347828072163}
-  canvasGroup: {fileID: 4504774976792233034}
+  _image: {fileID: 1272146460097441846}
+  _rectTransform: {fileID: 8486790347828072163}
+  _canvasGroup: {fileID: 4504774976792233034}

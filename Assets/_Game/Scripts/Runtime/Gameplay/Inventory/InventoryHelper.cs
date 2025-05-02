@@ -19,32 +19,22 @@ namespace Game.Runtime.Gameplay.Inventory
                 float slotWidth = baseSlotRect.rect.width;
                 float slotHeight = baseSlotRect.rect.height;
                 
-                Vector2 itemOffset;
-                switch (item.CurrentRotation)
+                return baseSlotRect.anchoredPosition + ApplyRotationToOffset(new Vector2(pivotOffset.x * slotWidth, pivotOffset.y * slotHeight), item.CurrentRotation);
+            }
+            
+            public static Vector2 ApplyRotationToOffset(Vector2 offset, int rotation)
+            {
+                switch (rotation)
                 {
                     case 1:
-                    {
-                        itemOffset = new Vector2(pivotOffset.y * slotHeight, -pivotOffset.x * slotWidth);
-                        break;
-                    }
+                        return new Vector2(offset.y, -offset.x);
                     case 2:
-                    {
-                        itemOffset = new Vector2(-pivotOffset.x * slotWidth, -pivotOffset.y * slotHeight);
-                        break;
-                    }
+                        return new Vector2(-offset.x, -offset.y);
                     case 3:
-                    {
-                        itemOffset = new Vector2(-pivotOffset.y * slotHeight, pivotOffset.x * slotWidth);
-                        break;
-                    }
+                        return new Vector2(-offset.y, offset.x);
                     default:
-                    {
-                        itemOffset = new Vector2(pivotOffset.x * slotWidth, pivotOffset.y * slotHeight);
-                        break;
-                    }
+                        return offset;
                 }
-
-                return baseSlotRect.anchoredPosition + itemOffset;
             }
         }
     }
