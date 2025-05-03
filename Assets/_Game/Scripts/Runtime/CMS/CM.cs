@@ -51,27 +51,14 @@ namespace Game.Runtime.CMS
             return entity;
         }
 
-        public static List<T> GetAll<T>() where T : CMSEntity
+        public static List<CMSEntity> GetAll<T>() where T : CMSComponent, new()
         {
-            var allSearch = new List<T>();
-
-            foreach (var cmsEntity in _entitiesDatabase.GetAll())
-            {
-                if (cmsEntity is T entity)
-                    allSearch.Add(entity);
-            }
-
-            return allSearch;
-        }
-
-        public static List<(CMSEntity entity, T component)> GetAllData<T>() where T : CMSComponent, new()
-        {
-            var filteredEntities = new List<(CMSEntity, T)>();
+            var filteredEntities = new List<CMSEntity>();
 
             foreach (var entity in _entitiesDatabase.GetAll())
             {
                 if (entity.Is<T>(out var component))
-                    filteredEntities.Add((entity, component));
+                    filteredEntities.Add(entity);
             }
 
             return filteredEntities;

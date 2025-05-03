@@ -5,6 +5,7 @@ using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Gameplay;
 using Game.Runtime.CMS.Components.Implants;
 using Game.Runtime.Gameplay.HUD;
+using Game.Runtime.Gameplay.Level;
 using Game.Runtime.Gameplay.Warrior;
 using Game.Runtime.Services;
 using UnityEngine;
@@ -115,7 +116,7 @@ namespace Game.Runtime.Gameplay.Inventory
         
         public void SetItemPosition(InventorySlot slot, InventoryItem item)
         {
-            var itemCenterPosition = Helpers.InventoryHelper.CalculateCenterPosition(slot, item);
+            var itemCenterPosition = InventoryHelper.CalculateCenterPosition(slot, item);
             _inventoryView.SetItemInInventory(item, itemCenterPosition);
         }
         
@@ -160,7 +161,7 @@ namespace Game.Runtime.Gameplay.Inventory
 
         private void CreateGrid()
         {
-            var defaultInventoryGrid = CM.Get(CMs.Gameplay.Inventory.InventoryGrid).GetComponent<InventoryComponent>();
+            var defaultInventoryGrid = CM.Get(CMs.Gameplay.Inventory).GetComponent<InventoryComponent>();
             _gridSize = defaultInventoryGrid.Grid.GridSize;
             _cellSize = defaultInventoryGrid.CellSize;
             
