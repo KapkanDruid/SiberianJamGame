@@ -79,12 +79,12 @@ namespace Game.Runtime.Gameplay.Warrior
             if (SL.Get<BattleController>().IsBattleEnded)
                 return;
 
-            if (SL.Get<EnemyController>().CurrentHealth > _damage)
+            if (SL.Get<IEnemy>().CurrentHealth + SL.Get<IEnemy>().CurrentArmor > _damage)
                 await SL.Get<WarriorView>().AttackAsync();
             else
                 await SL.Get<WarriorView>().FinishAttackAsync();
 
-            await SL.Get<EnemyController>().TakeDamage(_damage);
+            await SL.Get<IEnemy>().TakeDamage(_damage);
         }
 
         public async UniTask HealAsync()

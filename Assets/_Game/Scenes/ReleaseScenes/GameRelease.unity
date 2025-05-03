@@ -373,6 +373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPosition: {fileID: 1318406733}
   _debugLevelIndex: 0
+  CurrentBattleType: 0
 --- !u!4 &1304696854
 Transform:
   m_ObjectHideFlags: 0
@@ -414,7 +415,7 @@ Transform:
   m_GameObject: {fileID: 1318406732}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.93, y: 1.83, z: 0}
+  m_LocalPosition: {x: 12.12, y: 2.82, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

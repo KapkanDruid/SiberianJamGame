@@ -24,7 +24,7 @@ namespace Game.Runtime.Runners
 
 
         private readonly Scope _gameScope = Scope.Game;
-        
+
         private void Start()
         {
             RegisterCamera();
@@ -44,7 +44,7 @@ namespace Game.Runtime.Runners
             SL.Register<InventoryService>(new InventoryService(), _gameScope);
             SL.Register<WarriorController>(new WarriorController(), _gameScope);
             SL.Register<BattleController>(_battleController, _gameScope);
-            
+
             ConfigureLevel();
         }
 
@@ -67,13 +67,28 @@ namespace Game.Runtime.Runners
                 levelModel = LevelHelper.GetLevelModel(currentLevelIndex - 1);
                 SL.Get<SaveService>().SaveData.LevelIndex--;
             }
-            
+
             var levelComponent = levelModel.GetComponent<LevelComponent>();
             _backgroundRenderer.sprite = levelComponent.BackgroundSprite;
-
             _battleController.LevelConfig = levelComponent;
 
-            SL.Register<EnemyController>( new EnemyController(CM.Get(levelComponent.EnemyPrefab.EntityId)), _gameScope);
+            if (levelModel.Is<BossLevelComponent>(out var bossComponent))
+            {
+                var boss = new BossController(bossComponent.Health, bossComponent.Heal, bossComponent.BossViewPrefab);
+                SL.Register<IEnemy>(boss, _gameScope);
+                SL.Register<BossController>(boss, _gameScope);
+                _battleController.CurrentBattleType = BattleController.BattleType.Boss;
+                _battleController.BossConfig = bossComponent;
+            }
+            else
+            {
+                var enemy = new EnemyController(CM.Get(levelComponent.EnemyPrefab.EntityId));
+
+                SL.Register<IEnemy>(enemy, _gameScope);
+                SL.Register<EnemyController>(enemy, _gameScope);
+                _battleController.CurrentBattleType = BattleController.BattleType.Common;
+            }
+
             SL.Register<WarriorView>(_warriorView, _gameScope);
 
             if (levelModel.Is<AddImplantsToPoolAtStartComponent>(out var component))
@@ -88,7 +103,7 @@ namespace Game.Runtime.Runners
             
             Debug.Log($"[GameRunner] Level loaded!");
         }
-        
+
         private void OnDestroy()
         {
             SL.DisposeScope(_gameScope);
