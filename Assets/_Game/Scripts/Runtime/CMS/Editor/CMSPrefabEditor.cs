@@ -8,6 +8,7 @@ namespace Game.Runtime.CMS.Editor
     [CustomEditor(typeof(CMSPrefab))]
     public class CMSPrefabEditor : UnityEditor.Editor
     {
+        private CMSPrefab _cmsPrefab;
         private SerializedProperty _componentsProperty;
         private string _searchString = "";
         private Vector2 _scrollPos;
@@ -31,20 +32,20 @@ namespace Game.Runtime.CMS.Editor
         {
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
 
-            var entity = (CMSPrefab)target;
+            _cmsPrefab = (CMSPrefab)target;
 
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Entity ID", EditorStyles.boldLabel,
                 GUILayout.Width(EditorGUIUtility.labelWidth - 4));
 
             EditorGUI.BeginDisabledGroup(true);
-            EditorGUILayout.TextField(entity.EntityId, EditorStyles.textField, GUILayout.ExpandWidth(true));
+            EditorGUILayout.TextField(_cmsPrefab.EntityId, EditorStyles.textField, GUILayout.ExpandWidth(true));
             EditorGUI.EndDisabledGroup();
 
             if (GUILayout.Button("Ping", EditorStyles.miniButton, GUILayout.Width(50)))
             {
-                entity.PingEntity();
-                EditorUtility.SetDirty(entity);
+                _cmsPrefab.PingEntity();
+                EditorUtility.SetDirty(_cmsPrefab);
             }
 
             EditorGUILayout.EndHorizontal();
@@ -99,6 +100,19 @@ namespace Game.Runtime.CMS.Editor
                 );
                 element.isExpanded = isExpanded;
 
+                GUI.enabled = i > 0;
+                if (GUILayout.Button("↑", GUILayout.Width(20)))
+                {
+                    SwapComponents(_cmsPrefab, i, i - 1);
+                }
+                
+                GUI.enabled = i < _cmsPrefab.Components.Count - 1;
+                if (GUILayout.Button("↓", GUILayout.Width(20)))
+                {
+                    SwapComponents(_cmsPrefab, i, i + 1);
+                }
+
+                GUI.enabled = true;
                 if (GUILayout.Button("×", EditorStyles.miniButtonRight, GUILayout.Width(20), GUILayout.Height(18)))
                 {
                     _componentsProperty.DeleteArrayElementAtIndex(i);
@@ -112,7 +126,6 @@ namespace Game.Runtime.CMS.Editor
 
                 if (isExpanded)
                 {
-                    // Свойства компонента
                     EditorGUILayout.Space(2);
                     EditorGUI.indentLevel++;
                     DrawAllProperties(element);
@@ -135,6 +148,13 @@ namespace Game.Runtime.CMS.Editor
             }
 
             EditorGUILayout.EndVertical();
+        }
+        
+        private void SwapComponents(CMSPrefab cmsPrefab, int indexA, int indexB)
+        {
+            Undo.RecordObject(cmsPrefab, "Reorder Components");
+            (cmsPrefab.Components[indexA], cmsPrefab.Components[indexB]) = (cmsPrefab.Components[indexB], cmsPrefab.Components[indexA]);
+            EditorUtility.SetDirty(cmsPrefab);
         }
 
         private void ShowAddComponentMenu()

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 namespace Game.Runtime.CMS
@@ -13,6 +14,23 @@ namespace Game.Runtime.CMS
 #if UNITY_EDITOR
         public void PingEntity()
         {
+            var stringBuilder = new StringBuilder();
+            stringBuilder.Append($"[{nameof(CMSPrefab)}] ");
+            if (Components == null)
+            {
+                stringBuilder.Append("Entity doesnt has components");
+            }
+            else
+            {
+                for (int i = 0; i < Components.Count; i++)
+                {
+                    stringBuilder.Append($"{i}.{Components[i].GetType().Name}");
+                    stringBuilder.Append(i < Components.Count - 1 ? ", " : ".");
+                }
+            }
+            
+            Debug.Log(stringBuilder.ToString());
+            
             string path = UnityEditor.AssetDatabase.GetAssetPath(gameObject);
 
             if (path.StartsWith("Assets/_Game/Resources/CMS/") && path.EndsWith(".prefab"))
