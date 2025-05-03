@@ -1,9 +1,10 @@
 using Cysharp.Threading.Tasks;
 using Game.Runtime.CMS.Components.Configs;
+using Game.Runtime.Gameplay.Warrior;
 using Game.Runtime.Services;
 using UnityEngine;
 
-namespace Game.Runtime.Gameplay
+namespace Game.Runtime.Gameplay.Enemy
 {
     public class EnemyController : IEnemy
     {
@@ -15,7 +16,7 @@ namespace Game.Runtime.Gameplay
 
         public float CurrentHealth => _health;
 
-        public EnemyController(EnemyConfig config, EnemyViewData viewData, EnemyView enemyView)
+        public EnemyController(EnemyConfig config, EnemyView enemyView)
         {
             _config = config;
 
@@ -23,8 +24,6 @@ namespace Game.Runtime.Gameplay
             _damage = _config.Damage;
 
             _view = GameObject.Instantiate(enemyView);
-
-            _view.Configurate(viewData);
 
             _view.transform.position = SL.Get<BattleController>().EnemyPosition.position;
         }
@@ -38,7 +37,6 @@ namespace Game.Runtime.Gameplay
             {
                 _health = 0;
                 Death();
-                return;
             }
         }
 

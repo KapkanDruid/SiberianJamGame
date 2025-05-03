@@ -17,11 +17,11 @@ namespace Game.Runtime.Gameplay.Inventory
         private Vector2Int _gridSize;
         private int _cellSize;
         
-        private HUDBehaviour _hudService;
+        private InventoryView _inventoryView;
 
         public void Initialize()
         {
-            _hudService = SL.Get<HUDService>().Behaviour;
+            _inventoryView = SL.Get<HUDService>().Behaviour.InventoryView;
             CreateGrid();
         }
         
@@ -55,7 +55,7 @@ namespace Game.Runtime.Gameplay.Inventory
         public bool NeedRemoveItem(InventoryItem item, Vector2 screenPosition)
         {
             return _itemPositions.GetValueOrDefault(item) != default && 
-                   _hudService.IsOutsideInventory(screenPosition);
+                   _inventoryView.IsOutsideInventory(screenPosition);
         }
         
         private bool IsSlotOccupied(Vector2Int slot)
@@ -66,7 +66,7 @@ namespace Game.Runtime.Gameplay.Inventory
         public void SetItemPosition(InventorySlot slot, InventoryItem item)
         {
             var itemCenterPosition = Helpers.InventoryHelper.CalculateCenterPosition(slot, item);
-            _hudService.SetItemInInventory(item, itemCenterPosition);
+            _inventoryView.SetItemInInventory(item, itemCenterPosition);
         }
         
         public void RemoveItem(InventoryItem item)
@@ -114,14 +114,14 @@ namespace Game.Runtime.Gameplay.Inventory
             _gridSize = defaultInventoryGrid.Grid.GridSize;
             _cellSize = defaultInventoryGrid.CellSize;
             
-            _hudService.ResizeInventoryView(_gridSize, _cellSize);
+            _inventoryView.ResizeInventoryView(_gridSize, _cellSize);
             
             foreach (var slotPos in defaultInventoryGrid.Grid.GridPattern)
             {
                 var slotObj = new GameObject($"InventorySlot_{slotPos.x}_{slotPos.y}");
                 var slot = slotObj.AddComponent<InventorySlot>();
                 
-                _hudService.SetupInventorySlot(slotObj, slotPos, _cellSize);
+                _inventoryView.SetupInventorySlot(slotObj, slotPos, _cellSize);
 
                 slot.Initialize(slotPos);
                 _slots[slotPos] = slot;

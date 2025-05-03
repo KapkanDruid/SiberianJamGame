@@ -1,37 +1,18 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game.Runtime.Gameplay.HUD
 {
     public class HUDBehaviour : MonoBehaviour
     {
-        [SerializeField] private RectTransform inventoryRoot;
-        [SerializeField] private RectTransform cellsRoot;
-
-        public void ResizeInventoryView(Vector2Int gridSize, int cellSize)
-        {
-            inventoryRoot.sizeDelta = new Vector2Int(gridSize.x * cellSize, gridSize.y * cellSize);
-            inventoryRoot.anchoredPosition = Vector2.zero;
-        }
+        [SerializeField] private InventoryView inventoryView;
+        [SerializeField] private WarriorUI warriorUI;
+        [SerializeField] private EnemyUI enemyUI;
+        [SerializeField] private Button endTurnButton;
         
-        public void SetupInventorySlot(GameObject slotObject, Vector2Int slotPosistion, float cellSize)
-        {
-            slotObject.transform.SetParent(cellsRoot.transform);
-            slotObject.transform.localScale = Vector2.one;
-            
-            var rectTransform = slotObject.GetComponent<RectTransform>();
-            rectTransform.anchoredPosition = new Vector2(slotPosistion.x * cellSize, slotPosistion.y * cellSize);
-            rectTransform.sizeDelta = new Vector2(cellSize, cellSize);
-        }
-        
-        public bool IsOutsideInventory(Vector2 screenPosition)
-        {
-            return !RectTransformUtility.RectangleContainsScreenPoint(inventoryRoot, screenPosition);
-        }
-        
-        public void SetItemInInventory(InventoryItem item, Vector2 calculateCenterPosition)
-        {
-            item.transform.SetParent(inventoryRoot.transform);
-            item.GetComponent<RectTransform>().anchoredPosition = calculateCenterPosition;
-        }
+        public InventoryView InventoryView => inventoryView;
+        public WarriorUI WarriorUI => warriorUI;
+        public EnemyUI EnemyUI => enemyUI;
+        public Button EndTurnButton => endTurnButton;
     }
 }

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.Runtime.Gameplay
+namespace Game.Runtime.Gameplay.Enemy
 {
     public class EnemyViewData
     {
