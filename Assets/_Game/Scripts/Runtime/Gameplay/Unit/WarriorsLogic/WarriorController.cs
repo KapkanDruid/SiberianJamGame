@@ -66,7 +66,7 @@ namespace Game.Runtime.Gameplay.Warrior
             if (_currentHealth <= 0)
             {
                 _currentHealth = 0;
-                Death();
+                Death().Forget();
                 return;
             }
         }
@@ -106,10 +106,10 @@ namespace Game.Runtime.Gameplay.Warrior
                 _currentHealth = _maxHealth;
         }
 
-        private void Death()
+        private async UniTask Death()
         {
             Debug.Log("Loose");
-            SL.Get<WarriorView>().Death();
+            await SL.Get<WarriorView>().DeathAsync();
             SL.Get<BattleController>().Loose();
         }
     }

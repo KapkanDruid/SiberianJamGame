@@ -15,9 +15,13 @@ namespace Game.Runtime.Gameplay.Warrior
             SL.Get<HUDService>().Behaviour.WarriorUI.SetArmorIconActive(false);
         }
 
-        public void Death()
+        public async UniTask DeathAsync()
         {
             _animator.SetTrigger("Death");
+
+            await UniTask.WaitUntil(() => _reader.DeathEnded);
+
+            _reader.DeathEnded = false;
         }
 
         public void PlayHitAnimation()

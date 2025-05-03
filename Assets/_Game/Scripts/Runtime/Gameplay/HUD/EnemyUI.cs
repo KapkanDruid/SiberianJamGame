@@ -18,6 +18,11 @@ namespace Game.Runtime.Gameplay.HUD
         {
             _healthBar.fillAmount = currentHealth / maxHealth;
         }
+
+        public void UpdateText(string text)
+        {
+            _healthText.text = text;
+        }
         
         public async UniTask TakeDamageSequenceAsync(float maxHealth, float startHp, float endHp)
         {

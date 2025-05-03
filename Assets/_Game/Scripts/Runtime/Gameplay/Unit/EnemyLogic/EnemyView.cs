@@ -10,6 +10,11 @@ namespace Game.Runtime.Gameplay.Enemy
         [SerializeField] private Animator _animator;
         [SerializeField] private EnemyAnimationReader _reader;
 
+        public void Configurate(float startHealth)
+        {
+            SL.Get<HUDService>().Behaviour.EnemyUI.UpdateText(startHealth.ToString());
+        }
+
         public async UniTask TakeDamageAsync(float currentHealth, float maxHealth, float damage)
         {
             _animator.SetTrigger("Hit");

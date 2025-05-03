@@ -21,7 +21,11 @@ namespace Game.Runtime.CMS
         }
         public static class CommandBlocks
         {
-            public const string Block1 = "CMS/CommandBlocks/Block1";
+            public const string TestDeathDialog = "CMS/CommandBlocks/TestDeathDialog";
+            public const string TestDialog = "CMS/CommandBlocks/TestDialog";
+            public const string TestDialog2 = "CMS/CommandBlocks/TestDialog2";
+            public const string TestSplittedDialog = "CMS/CommandBlocks/TestSplittedDialog";
+            public const string TestSplittedDialog2 = "CMS/CommandBlocks/TestSplittedDialog2";
         }
         public static class Configs
         {

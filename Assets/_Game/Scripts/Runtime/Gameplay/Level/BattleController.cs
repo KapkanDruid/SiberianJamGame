@@ -9,12 +9,17 @@ using Game.Runtime.Gameplay.Implants;
 using Game.Runtime.Gameplay.Warrior;
 using Game.Runtime.Services.Save;
 using UnityEngine;
+using Game.Runtime.CMS.Components.Level;
+using Game.Runtime.Services.UI;
+using UnityEngine.SceneManagement;
+using Game.Runtime.Utils.Consts;
 
 namespace Game.Runtime.Gameplay.Level
 {
     public class BattleController : MonoBehaviour, IInitializable, IService
     {
         [SerializeField] private Transform _enemyPosition;
+        [SerializeField] private int _debugLevelIndex;
 
         private bool _isTurnStarted;
         private bool _isBattleEnded;
@@ -23,7 +28,8 @@ namespace Game.Runtime.Gameplay.Level
         public event Action OnTurnEnded;
         public bool IsBattleEnded => _isBattleEnded;
 
-        public Transform EnemyPosition => _enemyPosition; 
+        public Transform EnemyPosition => _enemyPosition;
+        public LevelComponent LevelConfig;
 
         public void Initialize()
         {
@@ -50,9 +56,9 @@ namespace Game.Runtime.Gameplay.Level
 
             var token = this.GetCancellationTokenOnDestroy();
 
+            await warrior.HealAsync();
             await warrior.AttackAsync();
             await enemy.AttackAsync();
-            await warrior.HealAsync();
 
             OnTurnEnded?.Invoke();
             SL.Get<HUDService>().Behaviour.EndTurnButton.interactable = true;
@@ -63,16 +69,31 @@ namespace Game.Runtime.Gameplay.Level
         {
             _isBattleEnded = true;
 
-            SL.Get<Invoker>().Play(CM.Get(CMs.CommandBlocks.Block1));
+            SL.Get<Invoker>().Play(CM.Get(LevelConfig.DeathDialog.EntityId));
         }
 
         public void Win()
         {
             _isBattleEnded = true;
-            
+
+#if UNITY_EDITOR
+            if (_debugLevelIndex > 0)
+                SL.Get<SaveService>().SaveData.LevelIndex = _debugLevelIndex--;
+#endif
             SL.Get<SaveService>().SaveData.LevelIndex++;
+            SL.Get<SaveService>().SaveData.DialogBlockID = LevelConfig.NextSceneDialog.EntityId;
             SL.Get<SaveService>().Save();
             Debug.Log($"[BattleController] You win! {SL.Get<SaveService>().SaveData.LevelIndex}");
+
+            EndGameAsync().Forget();
+        }
+
+        public async UniTask EndGameAsync()
+        {
+            //TODO: Подождать получение имплантов 
+
+            await SL.Get<UIFaderService>().FadeIn();
+            await SceneManager.LoadSceneAsync(Const.ScenesConst.DialogReleaseScene);
         }
     }
 }

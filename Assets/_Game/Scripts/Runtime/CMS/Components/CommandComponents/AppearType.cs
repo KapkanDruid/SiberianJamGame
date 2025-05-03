@@ -2,7 +2,6 @@
 {
     public enum AppearType
     {
-        None,
         Show,
         Hide,
     }

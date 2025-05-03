@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8580703209838085485
+--- !u!1 &1209861370004862306
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4915889194356974790}
-  - component: {fileID: 1283922645304695021}
+  - component: {fileID: 3405359809594700275}
+  - component: {fileID: 1554981954346889324}
   m_Layer: 0
-  m_Name: Level_0
+  m_Name: TestSplittedDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4915889194356974790
+--- !u!4 &3405359809594700275
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8580703209838085485}
+  m_GameObject: {fileID: 1209861370004862306}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,29 +32,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1283922645304695021
+--- !u!114 &1554981954346889324
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8580703209838085485}
+  m_GameObject: {fileID: 1209861370004862306}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3491bc35dc84132acbda8b4eb9ddf2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityId: CMS/Gameplay/Levels/Level_0
+  entityId: CMS/CommandBlocks/TestSplittedDialog
   Components:
-  - rid: 635145064486535254
+  - rid: 4717638325419638861
+  - rid: 4717638325419638867
+  - rid: 4717638325419638918
   references:
     version: 2
     RefIds:
-    - rid: 635145064486535254
-      type: {class: LevelComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
+    - rid: 4717638325419638861
+      type: {class: DialogAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        LevelIndex: 0
-        BackgroundSprite: {fileID: 3524656785333674846, guid: 65de4c3f51dd8f6469dd9fee71784dac, type: 3}
-        EnemyPrefab: {fileID: 8389933710043619156, guid: 96e430034889d6048a276e071eb4af90, type: 3}
-        DeathDialog: {fileID: 1554981954346889324, guid: bacaac77714b3a44e938ea5787dc7caf, type: 3}
-        NextSceneDialog: {fileID: 1554981954346889324, guid: 95f7c24d1cd3bdd47bd657e03e1d9466, type: 3}
+        _appearType: 0
+        _duration: 0.2
+    - rid: 4717638325419638867
+      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _delay: 0.035
+        _name: SomeName
+        _text: Some place holder text
+    - rid: 4717638325419638918
+      type: {class: GoToBlockCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _blockPrefab: {fileID: 1554981954346889324, guid: 02a1120d16d9d094b95efae529d100f7, type: 3}

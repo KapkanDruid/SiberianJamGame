@@ -16,12 +16,24 @@ namespace Game.Runtime.Services
 
         [SerializeField] private TextMeshProUGUI _name;
         [SerializeField] private Image _dialogPanel;
-        [SerializeField] private Image _iconImage;
+
+        [SerializeField] private Image _rightImage;
+        [SerializeField] private Image _leftImage;
+
+        [SerializeField] private Image _background;
+        public Image Background => _background;
+
+        public enum PositionType
+        {
+            Right,
+            Left
+        }
 
         private bool _isSkipped;
         private bool _isPrintEnded;
 
-        public Image IconImage => _iconImage; 
+        private Color _panelColor;
+
         public Image DialogPanel => _dialogPanel; 
         public TextMeshProUGUI Name => _name; 
         public TMPWriter DialogWriter => _dialogWriter; 
@@ -29,11 +41,15 @@ namespace Game.Runtime.Services
 
         public bool IsPrintEnded { get => _isPrintEnded; set => _isPrintEnded = value; }
         public bool IsSkipped { get => _isSkipped; set => _isSkipped = value; }
+        public Color PanelColor { get => _panelColor; set => _panelColor = value; }
 
         public void Initialize()
         {
             gameObject.SetActive(false);
-            _iconImage.gameObject.SetActive(false);
+            _leftImage.gameObject.SetActive(false);
+            _rightImage.gameObject.SetActive(false);
+            Background.gameObject.SetActive(false);
+            _panelColor = _dialogPanel.color;
 
             SL.Get<InputService>().OnDialogSkip += OnSkipText;
         }
@@ -48,24 +64,68 @@ namespace Game.Runtime.Services
 
             await UniTask.WaitUntil(() => _isPrintEnded && _isSkipped);
 
-            Debug.Log($"Await dialog ended _isPrintEnded {_isPrintEnded}  _isSkipped  {_isSkipped}");
-
             _isSkipped = false;
             _isPrintEnded = false;
         }
 
+        public async UniTask ShowIcon(PositionType positionType, Sprite sprite, Vector2 offset, float duration)
+        {
+            Image image = null;
+
+            if (positionType == PositionType.Left)
+                image = _leftImage;
+            else if (positionType == PositionType.Right)
+                image = _rightImage;
+
+            image.sprite = sprite;
+            image.rectTransform.anchoredPosition = offset;
+            image.SetNativeSize();
+            image.rectTransform.localScale = Vector3.one * 0.6f;
+
+            var color = image.color;
+            color.a = 0;
+            image.color = color;
+            image.gameObject.SetActive(true);
+
+            await image.DOFade(1, duration).AsyncWaitForCompletion();
+        }
+
         public void HideAll(float duration, Action onCompleted)
         {
+            var textColor = _dialogText.color;
+            var nameColor = _name.color;
+
             DOTween.Sequence()
                 .Append(_dialogPanel.DOFade(0, duration))
-                .Join(_iconImage.DOFade(0,duration))
+                .Join(_rightImage.DOFade(0,duration))
+                .Join(_leftImage.DOFade(0, duration))
                 .Join(_name.DOFade(0, duration))
                 .Join(_dialogText.DOFade(0, duration))
                 .OnComplete(() => 
                 {
                     onCompleted?.Invoke();
                     gameObject.SetActive(false);
+                    _leftImage.gameObject.SetActive(false);
+                    _rightImage.gameObject.SetActive(false);
+
+                    _dialogText.color = textColor;
+                    _dialogText.text = " ";
+
+                    _name.color = nameColor;
+                    _name.text = " ";
                 });
+        }
+
+        public void HideIcon(PositionType positionType, float duration)
+        {
+            Image image = null;
+
+            if (positionType == PositionType.Left)
+                image = _leftImage;
+            else if (positionType == PositionType.Right)
+                image = _rightImage;
+
+            image.DOFade(0, duration);
         }
 
         private void OnSkipText()
