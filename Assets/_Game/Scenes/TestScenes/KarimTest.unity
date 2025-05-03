@@ -238,6 +238,7 @@ MonoBehaviour:
   gameCamera: {fileID: 2097831468}
   _battleController: {fileID: 1304696853}
   _warriorView: {fileID: 392571451}
+  _backgroundRenderer: {fileID: 1453915475}
 --- !u!4 &460449080
 Transform:
   m_ObjectHideFlags: 0

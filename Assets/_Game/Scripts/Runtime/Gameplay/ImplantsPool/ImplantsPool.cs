@@ -20,9 +20,12 @@ namespace Game.Runtime.Gameplay.ImplantsPool
 
         public void InitializePool()
         {
+            _implantPool.Add(new ImplantPoolState(CMs.Gameplay.Implants.basic_blue));
+            _implantPool.Add(new ImplantPoolState(CMs.Gameplay.Implants.basic_green));
+            _implantPool.Add(new ImplantPoolState(CMs.Gameplay.Implants.basic_red));
         }
         
-        public bool HasDice(string implantId)
+        public bool HasImplant(string implantId)
         {
             foreach (var implant in _implantPool)
             {
