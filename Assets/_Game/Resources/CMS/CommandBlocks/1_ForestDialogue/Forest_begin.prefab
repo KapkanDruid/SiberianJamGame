@@ -1,0 +1,160 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7135597508028706366
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5902826426298403014}
+  - component: {fileID: 6989399238491455724}
+  m_Layer: 0
+  m_Name: Forest_begin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5902826426298403014
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7135597508028706366}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6989399238491455724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7135597508028706366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3491bc35dc84132acbda8b4eb9ddf2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityId: CMS/CommandBlocks/1_ForestDialogue/Forest_begin
+  Components:
+  - rid: 6583048880660676614
+  - rid: 6583048880660676619
+  - rid: 6583048880660676620
+  - rid: 6583048880660676621
+  - rid: 6583048880660676622
+  - rid: 6583048880660676693
+  - rid: 6583048880660676623
+  - rid: 6583048880660676624
+  - rid: 6583048880660676625
+  - rid: 6583048880660676694
+  - rid: 6583048880660676630
+  - rid: 6583048880660676631
+  - rid: 6583048880660676632
+  - rid: 6583048880660676695
+  - rid: 6583048880660676626
+  - rid: 6583048880660676627
+  references:
+    version: 2
+    RefIds:
+    - rid: 6583048880660676614
+      type: {class: BackgroundSetCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        BackgroundSprite: {fileID: 21300000, guid: cde3d42df50d8734a834947e1cc30978, type: 3}
+    - rid: 6583048880660676619
+      type: {class: DialogAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _appearType: 0
+        _duration: 0.3
+    - rid: 6583048880660676620
+      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 0
+        _offset: {x: 0, y: 0, z: 0}
+        _duration: 0.3
+        _sprite: {fileID: 0}
+    - rid: 6583048880660676621
+      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _delay: 0.035
+        _name: "\u0420\u0430\u0441\u0441\u043A\u0430\u0437\u0447\u0438\u043A"
+        _text: "\u0421 \u0445\u043B\u044E\u043F\u0430\u043D\u044C\u0435\u043C \u041A\u0440\u0430\u0441\u043D\u0430\u044F
+          \u0428\u0430\u043F\u043E\u0447\u043A\u0430 \u0434\u043E\u0441\u0442\u0430\u043B\u0430
+          \u0438\u043C\u043F\u043B\u0430\u043D\u0442\u044B \u0438\u0437 \u0433\u043E\u043B\u043E\u0432\u044B
+          \u0442\u0432\u0430\u0440\u0438. \u041D\u043E \u0442\u0443\u0442 \u0447\u0435\u0440\u0435\u0437
+          \u0437\u0430\u0431\u043E\u0440 \u043F\u0435\u0440\u0435\u043F\u0440\u044B\u0433\u043D\u0443\u043B\u043E
+          \u0435\u0449\u0435 \u043D\u0435\u0441\u043A\u043E\u043B\u044C\u043A\u043E
+          \u0442\u0432\u0430\u0440\u0435\u0439. \u0421\u043C\u043E\u0436\u0435\u0442
+          \u043B\u0438."
+    - rid: 6583048880660676622
+      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _soundConfigs:
+        - {fileID: 8168405603981787170, guid: 0eb6fa1273a9ba147a021aa817d530d3, type: 3}
+    - rid: 6583048880660676623
+      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 1
+        _offset: {x: -50, y: 0, z: 0}
+        _duration: 0.3
+        _sprite: {fileID: 5623948624648158621, guid: d59ae9eed7a510d40b0e17e9cc37aebc, type: 3}
+    - rid: 6583048880660676624
+      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _delay: 0.035
+        _name: "\u0410\u043B\u044C\u0442\u0430"
+        _text: "\u0417\u0430\u0442\u043A\u043D\u0438\u0441\u044C!!!"
+    - rid: 6583048880660676625
+      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _soundConfigs: []
+    - rid: 6583048880660676626
+      type: {class: DialogAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _appearType: 1
+        _duration: 0.3
+    - rid: 6583048880660676627
+      type: {class: EndDialogSceneCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data: 
+    - rid: 6583048880660676630
+      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 1
+        _offset: {x: -50, y: 0, z: 0}
+        _duration: 0.3
+        _sprite: {fileID: 5623948624648158621, guid: d59ae9eed7a510d40b0e17e9cc37aebc, type: 3}
+    - rid: 6583048880660676631
+      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _delay: 0.035
+        _name: "\u0410\u043B\u044C\u0442\u0430"
+        _text: "\u0421\u0435\u0441\u0442\u0440\u0438\u0446\u0430! \u0415\u0449\u0435
+          \u0438\u043C\u043F\u043B\u0430\u043D\u0442\u0438\u043A\u0438! \u0412\u0430\u043B\u0438
+          \u0438\u0445!"
+    - rid: 6583048880660676632
+      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _soundConfigs: []
+    - rid: 6583048880660676693
+      type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 0
+        _duration: 0.3
+    - rid: 6583048880660676694
+      type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 1
+        _duration: 0.3
+    - rid: 6583048880660676695
+      type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 1
+        _duration: 0.3
