@@ -23,6 +23,7 @@ namespace Game.Runtime.Gameplay.Level
 
         private bool _isTurnStarted;
         private bool _isBattleEnded;
+        private int _currentTurnIndex;
 
         public event Func<WarriorTurnData> OnTurnStarted;
         public event Action OnTurnEnded;
@@ -30,6 +31,14 @@ namespace Game.Runtime.Gameplay.Level
 
         public Transform EnemyPosition => _enemyPosition;
         public LevelComponent LevelConfig;
+        public BossLevelComponent BossConfig;
+        public BattleType CurrentBattleType;
+
+        public enum BattleType
+        {
+            Common,
+            Boss,
+        }
 
         public void Initialize()
         {
@@ -47,22 +56,71 @@ namespace Game.Runtime.Gameplay.Level
 
             _isTurnStarted = true;
 
-            var warrior = SL.Get<WarriorController>();
-            var enemy = SL.Get<EnemyController>();
-            
             //TODO: Это просто тест, потом удалить
-            warrior.SetTurnData( SL.Get<InventoryService>().CalculateTurnData()); //MOCK
-            //warrior.SetTurnData(OnTurnStarted.Invoke()); //To replace MOCK
+            SL.Get<WarriorController>().SetTurnData( SL.Get<InventoryService>().CalculateTurnData()); //MOCK
+            //SL.Get<WarriorController>().SetTurnData(OnTurnStarted.Invoke()); //To replace MOCK
 
             var token = this.GetCancellationTokenOnDestroy();
 
-            await warrior.HealAsync();
-            await warrior.AttackAsync();
-            await enemy.AttackAsync();
+            if (CurrentBattleType == BattleType.Common)
+                await CommonTurn();
+            else if (CurrentBattleType == BattleType.Boss)
+                await BossTurn();
 
             OnTurnEnded?.Invoke();
             SL.Get<HUDService>().Behaviour.EndTurnButton.interactable = true;
             _isTurnStarted = false;
+        }
+
+        private async UniTask CommonTurn()
+        {
+            var warrior = SL.Get<WarriorController>();
+            var enemy = SL.Get<EnemyController>();
+
+            await warrior.HealAsync();
+            await warrior.AttackAsync();
+            await enemy.AttackAsync();
+        }
+
+        private async UniTask BossTurn()
+        {
+            var warrior = SL.Get<WarriorController>();
+            var boss = SL.Get<BossController>();
+
+            switch (_currentTurnIndex)
+            {
+                case 0:
+                    await warrior.HealAsync();
+                    await warrior.AttackAsync();
+                    await boss.Attack(BossConfig.FirstHitDamage);
+                    _currentTurnIndex++;
+                    break;
+                case 1:
+                    await warrior.HealAsync();
+                    await boss.ActivateArmor(BossConfig.Armor);
+                    await warrior.AttackAsync();
+                    await boss.DeactivateArmor();
+                    _currentTurnIndex++;
+                    break;
+                case 2:
+                    await warrior.HealAsync();
+                    await boss.Heal();
+                    await warrior.AttackAsync();
+                    _currentTurnIndex++;
+                    break;
+                case 3:
+                    await warrior.HealAsync();
+                    await warrior.AttackAsync();
+                    await boss.Attack(BossConfig.SecondHitDamage);
+
+                    //TODO: показывают импланты
+                    
+                    _currentTurnIndex++;
+                    break;
+            }
+
+            if (_currentTurnIndex >= 4)
+                _currentTurnIndex = 0;
         }
 
         public void Loose()
@@ -92,6 +150,7 @@ namespace Game.Runtime.Gameplay.Level
         {
             //TODO: Подождать получение имплантов 
 
+            await UniTask.WaitForSeconds(1.2f);
             await SL.Get<UIFaderService>().FadeIn();
             await SceneManager.LoadSceneAsync(Const.ScenesConst.DialogReleaseScene);
         }
