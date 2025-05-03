@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using UnityEngine;
 
-namespace Game.Runtime.Gameplay.Inventory
+namespace Game.Runtime.Gameplay.Implants
 {
     public static class InventoryHelper
     {
-        public static Vector2 CalculateCenterPosition(InventorySlot slot, InventoryItem item)
+        public static Vector2 CalculateCenterPosition(InventorySlot slot, ImplantBehaviour item)
         {
             RectTransform baseSlotRect = slot.GetComponent<RectTransform>();
 

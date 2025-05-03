@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Runtime.Gameplay.Implants;
 using UnityEngine;
 
 namespace Game.Runtime.Gameplay.HUD
@@ -25,7 +26,7 @@ namespace Game.Runtime.Gameplay.HUD
             rectTransform.sizeDelta = new Vector2(cellSize, cellSize);
         }
         
-        public void SetItemInInventory(InventoryItem item, Vector2 calculateCenterPosition)
+        public void SetItemInInventory(ImplantBehaviour item, Vector2 calculateCenterPosition)
         {
             item.transform.SetParent(inventoryRoot.transform);
             item.GetComponent<RectTransform>().anchoredPosition = calculateCenterPosition;

@@ -1,0 +1,214 @@
+﻿using System.Collections.Generic;
+using Game.Runtime.CMS;
+using Game.Runtime.CMS.Components.Commons;
+using Game.Runtime.CMS.Components.Gameplay;
+using Game.Runtime.Gameplay.HUD;
+using Game.Runtime.Services;
+using Game.Runtime.Services.Input;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+namespace Game.Runtime.Gameplay.Implants
+{
+    [RequireComponent(typeof(RectTransform), typeof(Image), typeof(CanvasGroup))]
+    public class ImplantBehaviour : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    {
+        [SerializeField] private Image _image;
+        [SerializeField] private RectTransform _rectTransform;
+        [SerializeField] private CanvasGroup _canvasGroup;
+
+        public List<Vector2Int> SlotPositions { get; private set; }
+        public CMSEntity Model { get; private set; }
+        public int CurrentRotation { get; private set; }
+
+        private Transform _originalParent;
+        private Vector2 _originalPosition;
+        private InventoryService _inventoryService;
+        private ImplantsHolderService _holderService;
+        private RectTransform _root;
+        private bool _isDragging;
+        private int _originalRotation;
+        private Vector2 _pivotPoint;
+
+        public void SetupItem(CMSEntity itemModel, RectTransform root)
+        {
+            Model = itemModel;
+            _root = root;
+            
+            _inventoryService = SL.Get<InventoryService>();
+            _holderService = SL.Get<ImplantsHolderService>();
+
+            var itemComponent = itemModel.GetComponent<InventoryItemComponent>();
+            _pivotPoint = itemComponent.Pivot;
+            SlotPositions = itemComponent.Grid.GridPattern;
+            _rectTransform.sizeDelta = itemComponent.SizeDelta;
+            _image.sprite = itemModel.GetComponent<SpriteComponent>().Sprite;
+        }
+
+        public void OnBeginDrag(PointerEventData eventData)
+        {
+            if (eventData.button != PointerEventData.InputButton.Left) return;
+            
+            StartDragging();
+            SL.Get<InputService>().OnRotateItem += HandleRotation;
+        }
+
+        public void OnDrag(PointerEventData eventData)
+        {
+            if (!_isDragging) return;
+
+            UpdateDragPosition(eventData);
+            UpdateSlotHighlight();
+        }
+
+        public void OnEndDrag(PointerEventData eventData)
+        {
+            if (!_isDragging) return;
+
+            StopDragging();
+
+            if (TryPlaceItem()) return;
+            if (TryReturnToHolder(eventData.position)) return;
+
+            ReturnToOriginalPosition();
+        }
+
+        private void StartDragging()
+        {
+            _isDragging = true;
+            _originalParent = transform.parent;
+            _originalPosition = _rectTransform.anchoredPosition;
+            _originalRotation = CurrentRotation;
+            _canvasGroup.blocksRaycasts = false;
+
+            transform.SetParent(_root);
+        }
+
+        private void StopDragging()
+        {
+            _isDragging = false;
+            _canvasGroup.blocksRaycasts = true;
+            SL.Get<InputService>().OnRotateItem -= HandleRotation;
+            ResetHighlight();
+        }
+
+        private void UpdateDragPosition(PointerEventData eventData)
+        {
+            if (TryGetLocalPoint(eventData, out Vector2 localPoint))
+            {
+                _rectTransform.anchoredPosition = localPoint - CalculatePivotOffset(eventData);
+            }
+        }
+
+        private bool TryGetLocalPoint(PointerEventData eventData, out Vector2 localPoint)
+        {
+            return RectTransformUtility.ScreenPointToLocalPointInRectangle(_root, eventData.position, eventData.pressEventCamera, out localPoint);
+        }
+
+        private Vector2 CalculatePivotOffset(PointerEventData eventData)
+        {
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                _rectTransform,
+                eventData.position,
+                eventData.pressEventCamera,
+                out Vector2 _);
+
+            Vector2 pivotDifference = new Vector2(
+                _pivotPoint.x - 0.5f,
+                _pivotPoint.y - 0.5f);
+
+            return InventoryHelper.ApplyRotationToOffset(
+                new Vector2(
+                    pivotDifference.x * _rectTransform.rect.width,
+                    pivotDifference.y * _rectTransform.rect.height),
+                CurrentRotation);
+        }
+
+        private void UpdateSlotHighlight()
+        {
+            var newSlot = GetSlotUnderCursor();
+            if (newSlot != null)
+            {
+                ResetHighlight();
+                _inventoryService.UpdateSlotHighlight(this, newSlot.GridPosition, Color.yellow);
+            }
+        }
+
+        private InventorySlot GetSlotUnderCursor()
+        {
+            var pointerData = new PointerEventData(EventSystem.current)
+            {
+                position = Input.mousePosition
+            };
+
+            var results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointerData, results);
+
+            foreach (var result in results)
+            {
+                if (result.gameObject.TryGetComponent(out InventorySlot slot))
+                {
+                    return slot;
+                }
+            }
+
+            return null;
+        }
+
+        private void ResetHighlight()
+        {
+            _inventoryService.ResetSlotHighlight(this);
+        }
+
+        private bool TryPlaceItem()
+        {
+            var slot = GetSlotUnderCursor();
+            if (slot == null || !_inventoryService.TryPlaceItem(this, slot.GridPosition))
+                return false;
+
+            if (_holderService.HasItem(this))
+                _holderService.RemoveItem(this);
+            
+            _inventoryService.SetItemPosition(slot, this);
+            return true;
+        }
+
+        private bool TryReturnToHolder(Vector2 position)
+        {
+            var result = _holderService.TryReturnToHolder(this, position);
+            if (!result) return false;
+            
+            if (_inventoryService.HasItem(this))
+                _inventoryService.RemoveItem(this);
+            
+            return true;
+        }
+        
+        private void HandleRotation()
+        {
+            if (!_isDragging) return;
+
+            RotateItem();
+        }
+
+        private void RotateItem()
+        {
+            CurrentRotation = (CurrentRotation + 1) % 4;
+            float[] presetAngles = { 0f, -90f, -180f, -270f };
+            _rectTransform.localRotation = Quaternion.Euler(0, 0, presetAngles[CurrentRotation]);
+
+            UpdateDragPosition(new PointerEventData(EventSystem.current) { position = Input.mousePosition });
+            UpdateSlotHighlight();
+        }
+
+        private void ReturnToOriginalPosition()
+        {
+            transform.SetParent(_originalParent);
+            _rectTransform.anchoredPosition = _originalPosition;
+            _rectTransform.localRotation = Quaternion.Euler(0, 0, -90 * _originalRotation);
+            CurrentRotation = _originalRotation;
+            _inventoryService.UpdateAllSlotVisual();
+        }
+    }
+}

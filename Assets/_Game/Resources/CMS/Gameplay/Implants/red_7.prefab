@@ -49,6 +49,7 @@ MonoBehaviour:
   - rid: 635145038440169587
   - rid: 635145038440169588
   - rid: 5361599205655707738
+  - rid: 635145064486535294
   references:
     version: 2
     RefIds:
@@ -62,6 +63,10 @@ MonoBehaviour:
         SizeDelta: {x: 58, y: 58}
         Pivot: {x: 0.5, y: 0.5}
         Grid: {fileID: 11400000, guid: efafa314cf052254b9fef49f5bb560e2, type: 2}
+    - rid: 635145064486535294
+      type: {class: ImplantLevelRequiredComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
+      data:
+        RequiredLevelIndex: 1
     - rid: 5361599205655707738
       type: {class: DamageImplantComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
       data:

@@ -33,6 +33,7 @@ namespace Game.Runtime.CMS
         {
             public static class Implants
             {
+                public const string BaseImplantBehaviour = "CMS/Gameplay/Implants/BaseImplantBehaviour";
                 public const string basic_blue = "CMS/Gameplay/Implants/basic_blue";
                 public const string basic_green = "CMS/Gameplay/Implants/basic_green";
                 public const string basic_red = "CMS/Gameplay/Implants/basic_red";

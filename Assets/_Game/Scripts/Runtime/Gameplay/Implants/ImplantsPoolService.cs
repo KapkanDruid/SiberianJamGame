@@ -5,7 +5,7 @@ using Game.Runtime.CMS.Components.Implants;
 using Game.Runtime.Services;
 using Game.Runtime.Utils.Extensions;
 
-namespace Game.Runtime.Gameplay.ImplantsPool
+namespace Game.Runtime.Gameplay.Implants
 {
     public class ImplantPoolState
     {
@@ -17,13 +17,13 @@ namespace Game.Runtime.Gameplay.ImplantsPool
         }
     }
     
-    public class ImplantsPool : IService
+    public class ImplantsPoolService : IService
     {
         private readonly ImplantsPoolConfig _config;
         private readonly List<CMSEntity> _basicImplantModels;
         private readonly List<ImplantPoolState> _implantPool;
 
-        public ImplantsPool()
+        public ImplantsPoolService()
         {
             _implantPool = new List<ImplantPoolState>();
             _config = CM.Get(CMs.Gameplay.ImplantsPoolConfig).GetComponent<ImplantsPoolConfig>();

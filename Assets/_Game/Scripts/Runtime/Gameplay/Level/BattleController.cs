@@ -5,7 +5,7 @@ using Game.Runtime.Services.Audio;
 using System;
 using Game.Runtime.Gameplay.Enemy;
 using Game.Runtime.Gameplay.HUD;
-using Game.Runtime.Gameplay.Inventory;
+using Game.Runtime.Gameplay.Implants;
 using Game.Runtime.Gameplay.Warrior;
 using Game.Runtime.Services.Save;
 using UnityEngine;
