@@ -18,8 +18,13 @@ namespace Game.Runtime.CMS
             }
             public const string AmbientTest = "CMS/Audio/AmbientTest";
         }
+        public static class CommandBlocks
+        {
+            public const string Block1 = "CMS/CommandBlocks/Block1";
+        }
         public static class Configs
         {
+            public const string DialogReference = "CMS/Configs/DialogReference";
             public const string EnemiesByLevel = "CMS/Configs/EnemiesByLevel";
             public const string MockEnemyConfig = "CMS/Configs/MockEnemyConfig";
             public const string PlayerConfig = "CMS/Configs/PlayerConfig";

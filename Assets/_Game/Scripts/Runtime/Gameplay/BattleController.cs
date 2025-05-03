@@ -1,5 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
+using Game.Runtime.CMS;
 using Game.Runtime.Services;
+using Game.Runtime.Services.Audio;
 using System;
 using Game.Runtime.Gameplay.Enemy;
 using Game.Runtime.Gameplay.HUD;
@@ -60,6 +62,8 @@ namespace Game.Runtime.Gameplay
         public void Loose()
         {
             _isBattleEnded = true;
+
+            SL.Get<Invoker>().Play(CM.Get(CMs.CommandBlocks.Block1));
         }
 
         public void Win()

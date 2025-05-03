@@ -37,6 +37,15 @@ namespace Game.Runtime.Services.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Skip"",
+                    ""type"": ""Button"",
+                    ""id"": ""4ccccf19-b3b8-41d9-ae8c-c83bd473a0ca"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -48,6 +57,17 @@ namespace Game.Runtime.Services.Input
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4b10bd29-b240-431c-a512-546c7f1b8bde"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skip"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -120,6 +140,7 @@ namespace Game.Runtime.Services.Input
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
+            m_Player_Skip = m_Player.FindAction("Skip", throwIfNotFound: true);
         }
 
         ~@InputMaps()
@@ -187,11 +208,13 @@ namespace Game.Runtime.Services.Input
         private readonly InputActionMap m_Player;
         private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
         private readonly InputAction m_Player_Rotate;
+        private readonly InputAction m_Player_Skip;
         public struct PlayerActions
         {
             private @InputMaps m_Wrapper;
             public PlayerActions(@InputMaps wrapper) { m_Wrapper = wrapper; }
             public InputAction @Rotate => m_Wrapper.m_Player_Rotate;
+            public InputAction @Skip => m_Wrapper.m_Player_Skip;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -204,6 +227,9 @@ namespace Game.Runtime.Services.Input
                 @Rotate.started += instance.OnRotate;
                 @Rotate.performed += instance.OnRotate;
                 @Rotate.canceled += instance.OnRotate;
+                @Skip.started += instance.OnSkip;
+                @Skip.performed += instance.OnSkip;
+                @Skip.canceled += instance.OnSkip;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -211,6 +237,9 @@ namespace Game.Runtime.Services.Input
                 @Rotate.started -= instance.OnRotate;
                 @Rotate.performed -= instance.OnRotate;
                 @Rotate.canceled -= instance.OnRotate;
+                @Skip.started -= instance.OnSkip;
+                @Skip.performed -= instance.OnSkip;
+                @Skip.canceled -= instance.OnSkip;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -276,6 +305,7 @@ namespace Game.Runtime.Services.Input
         public interface IPlayerActions
         {
             void OnRotate(InputAction.CallbackContext context);
+            void OnSkip(InputAction.CallbackContext context);
         }
     }
 }
