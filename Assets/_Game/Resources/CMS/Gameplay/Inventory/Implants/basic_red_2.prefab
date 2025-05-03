@@ -55,7 +55,7 @@ MonoBehaviour:
     - rid: 635145038440169682
       type: {class: DamageImplantComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
       data:
-        Damage: 6
+        Damage: 2
     - rid: 5361599194504888397
       type: {class: SpriteComponent, ns: Game.Runtime.CMS.Components.Commons, asm: Runtime}
       data:
