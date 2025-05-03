@@ -48,6 +48,7 @@ MonoBehaviour:
   Components:
   - rid: 635145064486535254
   - rid: 4717638325419638959
+  - rid: 635145064486535330
   references:
     version: 2
     RefIds:
@@ -59,6 +60,14 @@ MonoBehaviour:
         EnemyPrefab: {fileID: 8389933710043619156, guid: 96e430034889d6048a276e071eb4af90, type: 3}
         DeathDialog: {fileID: 1554981954346889324, guid: bacaac77714b3a44e938ea5787dc7caf, type: 3}
         NextSceneDialog: {fileID: 1554981954346889324, guid: 95f7c24d1cd3bdd47bd657e03e1d9466, type: 3}
+    - rid: 635145064486535330
+      type: {class: AddImplantsToPoolAtStartComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
+      data:
+        ImplantsPrefabs:
+        - {fileID: 4443999720199238786, guid: b5f73cdd811d7ed40a5d62c1ad9d8660, type: 3}
+        - {fileID: 4443999720199238786, guid: b5f73cdd811d7ed40a5d62c1ad9d8660, type: 3}
+        - {fileID: 4443999720199238786, guid: b5f73cdd811d7ed40a5d62c1ad9d8660, type: 3}
+        - {fileID: 4443999720199238786, guid: b5f73cdd811d7ed40a5d62c1ad9d8660, type: 3}
     - rid: 4717638325419638959
       type: {class: BossLevelComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
       data:
