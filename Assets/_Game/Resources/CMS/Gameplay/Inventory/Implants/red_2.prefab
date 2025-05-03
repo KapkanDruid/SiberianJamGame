@@ -48,6 +48,7 @@ MonoBehaviour:
   Components:
   - rid: 5361599194504888397
   - rid: 5361599194504888398
+  - rid: 5361599205655707734
   references:
     version: 2
     RefIds:
@@ -61,3 +62,7 @@ MonoBehaviour:
         SizeDelta: {x: 38, y: 20}
         Pivot: {x: 0.75, y: 0.6}
         Grid: {fileID: 11400000, guid: 4ca3e5ae71384994b80b15fb6cb66df6, type: 2}
+    - rid: 5361599205655707734
+      type: {class: DamageImplantComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
+      data:
+        Damage: 2

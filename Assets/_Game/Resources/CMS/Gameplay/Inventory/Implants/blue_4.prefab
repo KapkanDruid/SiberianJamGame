@@ -48,6 +48,7 @@ MonoBehaviour:
   Components:
   - rid: 5361599194504888399
   - rid: 5361599194504888400
+  - rid: 5361599205655707722
   references:
     version: 2
     RefIds:
@@ -61,3 +62,7 @@ MonoBehaviour:
         SizeDelta: {x: 60, y: 20}
         Pivot: {x: 0.5, y: 0.5}
         Grid: {fileID: 11400000, guid: a11675c96d226314aab9e8fe7cc4a9fe, type: 2}
+    - rid: 5361599205655707722
+      type: {class: ArmorImplantComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
+      data:
+        Armor: 3
