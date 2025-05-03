@@ -49,8 +49,9 @@ MonoBehaviour:
   - rid: 4717638325419638861
   - rid: 4717638325419638867
   - rid: 4717638325419638869
-  - rid: 4717638325419638871
-  - rid: 4717638325419638872
+  - rid: 4717638325419638891
+  - rid: 4717638325419638892
+  - rid: 4717638325419638893
   references:
     version: 2
     RefIds:
@@ -62,30 +63,29 @@ MonoBehaviour:
     - rid: 4717638325419638867
       type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
+        _delay: 0.035
         _name: SomeName
-        _text: 'One of TMPAnimator''s settings is a toggle that decides whether animations
-          should be scaled or not (see TMPAnimator Settings).
-
-          In some
-          cases, you will want to ignore this scaling in your animation though. For
-          example, the built-in spread animation sets the individual vertices of
-          the character to the center point of the character, to make it invisible
-          at first and then over time spread out from the center point to the original'
+        _text: "\u041E\u0445 \u043A\u0430\u043A \u0431\u043E\u043B\u044C\u043D\u0430..."
     - rid: 4717638325419638869
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         _appearType: 1
-        _duration: 2.62
-    - rid: 4717638325419638871
+        _duration: 0.4
+    - rid: 4717638325419638891
+      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _soundConfigs:
+        - {fileID: 8065732582307256877, guid: eb8d0bf4ee5d98a4f921c81da41d7f69, type: 3}
+    - rid: 4717638325419638892
       type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _name: 
-        _text: 'One of TMPAnimator''s settings is a toggle that decides whether animations
-          should be scaled or not (see TMPAnimator Settings).
-
-          In some
-          cases, you will w'
-    - rid: 4717638325419638872
+        _delay: 0.035
+        _name: "\u0420\u043E\u0431\u043E\u0434\u0435\u0432\u043A\u0430"
+        _text: "\u041E\u0441\u0442\u043E\u0440\u043E\u0436\u043D\u043E, <!wait=1>
+          \u044D\u0442\u043E <!delay=0.1><shake>\u043A\u0440\u0430\u0439\u043D\u0435
+          \u0431\u0435\u0441\u0442\u0430\u043A\u0442\u043D\u043E</shake>.<!wait=1><!delay=0.035>
+          - 20 \u043E\u0447\u043A\u043E\u0432"
+    - rid: 4717638325419638893
       type: {class: DialogAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         _appearType: 2
