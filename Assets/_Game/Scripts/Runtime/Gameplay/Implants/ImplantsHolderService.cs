@@ -27,7 +27,7 @@ namespace Game.Runtime.Gameplay.Implants
                 var implantBehaviour = Object.Instantiate(implantPrefab).GetComponent<ImplantBehaviour>();
                 implantBehaviour.SetupItem(implantModel, SL.Get<HUDService>().Behaviour.GetComponent<RectTransform>());
                 
-                TryReturnToHolder(implantBehaviour, SL.Get<HUDService>().Behaviour.ImplantsHolder.GetRandomPosition());
+                TryReturnToHolder(implantBehaviour, Vector2.zero);
             }
         }
         
