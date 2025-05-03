@@ -6,11 +6,13 @@ namespace Game.Runtime.Gameplay.HUD
     public class HUDBehaviour : MonoBehaviour
     {
         [SerializeField] private InventoryView inventoryView;
+        [SerializeField] private ImplantsHolder implantsHolder;
         [SerializeField] private WarriorUI warriorUI;
         [SerializeField] private EnemyUI enemyUI;
         [SerializeField] private Button endTurnButton;
         
         public InventoryView InventoryView => inventoryView;
+        public ImplantsHolder ImplantsHolder => implantsHolder;
         public WarriorUI WarriorUI => warriorUI;
         public EnemyUI EnemyUI => enemyUI;
         public Button EndTurnButton => endTurnButton;

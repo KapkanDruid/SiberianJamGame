@@ -1,14 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Gameplay;
+using Game.Runtime.CMS.Components.Implants;
 using Game.Runtime.Gameplay.HUD;
+using Game.Runtime.Gameplay.Warrior;
 using Game.Runtime.Services;
 using UnityEngine;
 
 namespace Game.Runtime.Gameplay.Inventory
 {
-    public class InventoryService : IService, IInitializable
+    public class InventoryService : IService, IInitializable, IDisposable
     {
         private readonly Dictionary<Vector2Int, InventorySlot> _slots = new();
         private readonly Dictionary<Vector2Int, InventoryItem> _occupiedSlots = new();
@@ -18,11 +21,58 @@ namespace Game.Runtime.Gameplay.Inventory
         private int _cellSize;
         
         private InventoryView _inventoryView;
+        private ImplantsHolder _implantsHolder;
 
         public void Initialize()
         {
             _inventoryView = SL.Get<HUDService>().Behaviour.InventoryView;
+            _implantsHolder = SL.Get<HUDService>().Behaviour.ImplantsHolder;
+
+            SL.Get<BattleController>().OnTurnEnded += OnTurnEnded;
+            
             CreateGrid();
+        }
+
+        //TODO: Это просто тест, потом удалить
+        private void OnTurnEnded()
+        {
+            foreach (var item in _itemPositions)
+            {
+                item.Key.SetItemPosition(SL.Get<HUDService>().Behaviour.ImplantsHolder.GetRandomPosition());
+            }
+            
+            _occupiedSlots.Clear();
+            _itemPositions.Clear();
+            
+            UpdateAllSlotVisual();
+        }
+
+        public List<InventoryItem> GetAllItems()
+        {
+            var inventoryItems = new List<InventoryItem>();
+            foreach (var item in _itemPositions.Keys)
+                inventoryItems.Add(item);
+
+            return inventoryItems;
+        }
+
+        public WarriorTurnData CalculateTurnData()
+        {
+            var health = 0f;
+            var damage = 0f;
+            var armor = 0f;
+
+            foreach (var item in _itemPositions.Keys)
+            {
+                if (item.Model.Is<HealthImplantComponent>(out var healthImplant))
+                    health += healthImplant.Health;
+                else if (item.Model.Is<DamageImplantComponent>(out var damageImplant))
+                    damage += damageImplant.Damage;
+                else if (item.Model.Is<ArmorImplantComponent>(out var armorImplant))
+                    armor += armorImplant.Armor;
+            }
+
+            return new WarriorTurnData(health, damage, armor);
         }
         
         public bool TryPlaceItem(InventoryItem item, Vector2Int gridPosition)
@@ -55,7 +105,7 @@ namespace Game.Runtime.Gameplay.Inventory
         public bool NeedRemoveItem(InventoryItem item, Vector2 screenPosition)
         {
             return _itemPositions.GetValueOrDefault(item) != default && 
-                   _inventoryView.IsOutsideInventory(screenPosition);
+                   _implantsHolder.IsInsideHolder(screenPosition);
         }
         
         private bool IsSlotOccupied(Vector2Int slot)
@@ -181,6 +231,11 @@ namespace Game.Runtime.Gameplay.Inventory
         private List<Vector2Int> RotateSlotsClockwise(List<Vector2Int> slots)
         {
             return slots.Select(slot => new Vector2Int(slot.y, -slot.x)).ToList();
+        }
+
+        public void Dispose()
+        {
+            SL.Get<BattleController>().OnTurnEnded -= OnTurnEnded;
         }
     }
 }

@@ -2,8 +2,10 @@
 using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Commons;
 using Game.Runtime.CMS.Components.Gameplay;
+using Game.Runtime.Gameplay.HUD;
 using Game.Runtime.Gameplay.Inventory;
 using Game.Runtime.Services;
+using Game.Runtime.Services.Camera;
 using Game.Runtime.Services.Input;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -17,6 +19,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     [SerializeField] private CanvasGroup _canvasGroup;
 
     public List<Vector2Int> SlotPositions { get; private set; }
+    public CMSEntity Model { get; private set; }
     public int CurrentRotation { get; private set; }
 
     private Transform _originalParent;
@@ -31,6 +34,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void SetupItem(CMSEntity itemModel)
     {
+        Model = itemModel;
+        
         _inventoryService = SL.Get<InventoryService>();
         _canvas = GetComponentInParent<Canvas>();
 
@@ -39,6 +44,12 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         SlotPositions = itemComponent.Grid.GridPattern;
         _rectTransform.sizeDelta = itemComponent.SizeDelta;
         _image.sprite = itemModel.GetComponent<SpriteComponent>().Sprite;
+    }
+
+    public void SetItemPosition(Vector2 position)
+    {
+        transform.SetParent(_canvas.transform);
+        _rectTransform.position = position;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -189,8 +200,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             return false;
 
         _inventoryService.RemoveItem(this);
-        transform.SetParent(_canvas.transform);
-        _rectTransform.position = position;
+        SetItemPosition(position);
         return true;
     }
 

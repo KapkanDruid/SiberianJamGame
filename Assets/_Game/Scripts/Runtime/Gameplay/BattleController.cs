@@ -3,6 +3,7 @@ using Game.Runtime.Services;
 using System;
 using Game.Runtime.Gameplay.Enemy;
 using Game.Runtime.Gameplay.HUD;
+using Game.Runtime.Gameplay.Inventory;
 using Game.Runtime.Gameplay.Warrior;
 using UnityEngine;
 
@@ -39,8 +40,9 @@ namespace Game.Runtime.Gameplay
 
             var warrior = SL.Get<WarriorController>();
             var enemy = SL.Get<EnemyController>();
-
-            warrior.SetTurnData(new WarriorTurnData(5, 1, 3)); //MOCK
+            
+            //TODO: Это просто тест, потом удалить
+            warrior.SetTurnData( SL.Get<InventoryService>().CalculateTurnData()); //MOCK
             //warrior.SetTurnData(OnTurnStarted.Invoke()); //To replace MOCK
 
             var token = this.GetCancellationTokenOnDestroy();
