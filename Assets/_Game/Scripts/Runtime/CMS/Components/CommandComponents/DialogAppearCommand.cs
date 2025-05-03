@@ -15,7 +15,7 @@ namespace Game.Runtime.CMS.Components.Commands
             if (_appearType == AppearType.Show)
             {
                 controller.gameObject.SetActive(true);
-                controller.DialogPanel.DOFade(1, _duration).OnComplete(() => onCompleted?.Invoke());
+                controller.DialogPanel.DOFade(controller.PanelColor.a, _duration).OnComplete(() => onCompleted?.Invoke());
             }
             if (_appearType == AppearType.Hide)
             {

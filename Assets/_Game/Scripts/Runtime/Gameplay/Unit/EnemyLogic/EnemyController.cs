@@ -31,6 +31,7 @@ namespace Game.Runtime.Gameplay.Enemy
         public void Initialize()
         {
             _view = Object.Instantiate(_enemyModel.GetComponent<EnemyPrefabComponent>().EnemyView);
+            _view.Configurate(_config.MaxHealth);
             _view.transform.position = SL.Get<BattleController>().EnemyPosition.position;
         }
 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3405359809594700275}
   - component: {fileID: 1554981954346889324}
   m_Layer: 0
-  m_Name: Block4
+  m_Name: TestSplittedDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,16 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3491bc35dc84132acbda8b4eb9ddf2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityId: CMS/CommandBlocks/Block4
+  entityId: CMS/CommandBlocks/TestSplittedDialog
   Components:
   - rid: 4717638325419638861
-  - rid: 4717638325419638910
-  - rid: 4717638325419638892
-  - rid: 4717638325419638914
-  - rid: 4717638325419638912
   - rid: 4717638325419638867
-  - rid: 4717638325419638893
-  - rid: 4717638325419638917
+  - rid: 4717638325419638918
   references:
     version: 2
     RefIds:
@@ -68,40 +63,7 @@ MonoBehaviour:
         _delay: 0.035
         _name: SomeName
         _text: Some place holder text
-    - rid: 4717638325419638892
-      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
-      data:
-        _delay: 0.035
-        _name: "\u0420\u043E\u0431\u043E\u0434\u0435\u0432\u043A\u0430"
-        _text: "\u041E\u0441\u0442\u043E\u0440\u043E\u0436\u043D\u043E, <!wait=1>
-          \u044D\u0442\u043E <!delay=0.1><shake>\u043A\u0440\u0430\u0439\u043D\u0435
-          \u0431\u0435\u0441\u0442\u0430\u043A\u0442\u043D\u043E</shake>.<!wait=1><!delay=0.035>
-          - 20 \u043E\u0447\u043A\u043E\u0432"
-    - rid: 4717638325419638893
-      type: {class: DialogAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
-      data:
-        _appearType: 1
-        _duration: 0.3
-    - rid: 4717638325419638910
-      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
-      data:
-        _positionType: 1
-        _offset: {x: 0, y: 0, z: 0}
-        _duration: 0.3
-        _sprite: {fileID: 21300000, guid: 15a058998a552794babcb158fd07e4c7, type: 3}
-    - rid: 4717638325419638912
-      type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
-      data:
-        _positionType: 1
-        _duration: 0.3
-    - rid: 4717638325419638914
-      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
-      data:
-        _positionType: 0
-        _offset: {x: 70, y: 0, z: 0}
-        _duration: 0.3
-        _sprite: {fileID: 21300000, guid: be87cbd21ffc04b409cc985152181445, type: 3}
-    - rid: 4717638325419638917
+    - rid: 4717638325419638918
       type: {class: GoToBlockCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _blockPrefab: {fileID: 1554981954346889324, guid: 6be652bd9681d494c82498aa5690a5de, type: 3}
+        _blockPrefab: {fileID: 1554981954346889324, guid: 02a1120d16d9d094b95efae529d100f7, type: 3}

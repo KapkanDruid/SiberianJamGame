@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3405359809594700275}
   - component: {fileID: 1554981954346889324}
   m_Layer: 0
-  m_Name: Block3
+  m_Name: TestSplittedDialog2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3491bc35dc84132acbda8b4eb9ddf2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityId: CMS/CommandBlocks/Block3
+  entityId: CMS/CommandBlocks/TestSplittedDialog2
   Components:
   - rid: 4717638325419638867
   - rid: 4717638325419638893

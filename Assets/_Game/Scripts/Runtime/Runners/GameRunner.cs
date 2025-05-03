@@ -22,6 +22,7 @@ namespace Game.Runtime.Runners
         [SerializeField] private WarriorView _warriorView;
         [SerializeField] private SpriteRenderer _backgroundRenderer;
 
+
         private readonly Scope _gameScope = Scope.Game;
         
         private void Start()
@@ -50,6 +51,7 @@ namespace Game.Runtime.Runners
         private async UniTask StartGame()
         {
             SL.InitializeScope(_gameScope);
+            SL.Get<DialogController>().Background.gameObject.SetActive(false);
             await SL.Get<UIFaderService>().FadeOut();
         }
 
@@ -60,12 +62,15 @@ namespace Game.Runtime.Runners
 
             if (levelModel == null)
             {
-                Debug.LogError($"Level {currentLevelIndex} not found");
-                return;
+                Debug.LogError($"Level {currentLevelIndex} not found, loading previous level");
+                levelModel = LevelHelper.GetLevelModel(currentLevelIndex - 1);
+                SL.Get<SaveService>().SaveData.LevelIndex--;
             }
             
             var levelComponent = levelModel.GetComponent<LevelComponent>();
             _backgroundRenderer.sprite = levelComponent.BackgroundSprite;
+
+            _battleController.LevelConfig = levelComponent;
 
             SL.Register<EnemyController>( new EnemyController(CM.Get(levelComponent.EnemyPrefab.EntityId)), _gameScope);
             SL.Register<WarriorView>(_warriorView, _gameScope);

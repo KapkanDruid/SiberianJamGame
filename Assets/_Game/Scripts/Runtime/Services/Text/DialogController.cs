@@ -20,6 +20,9 @@ namespace Game.Runtime.Services
         [SerializeField] private Image _rightImage;
         [SerializeField] private Image _leftImage;
 
+        [SerializeField] private Image _background;
+        public Image Background => _background;
+
         public enum PositionType
         {
             Right,
@@ -29,6 +32,8 @@ namespace Game.Runtime.Services
         private bool _isSkipped;
         private bool _isPrintEnded;
 
+        private Color _panelColor;
+
         public Image DialogPanel => _dialogPanel; 
         public TextMeshProUGUI Name => _name; 
         public TMPWriter DialogWriter => _dialogWriter; 
@@ -36,12 +41,15 @@ namespace Game.Runtime.Services
 
         public bool IsPrintEnded { get => _isPrintEnded; set => _isPrintEnded = value; }
         public bool IsSkipped { get => _isSkipped; set => _isSkipped = value; }
+        public Color PanelColor { get => _panelColor; set => _panelColor = value; }
 
         public void Initialize()
         {
             gameObject.SetActive(false);
             _leftImage.gameObject.SetActive(false);
             _rightImage.gameObject.SetActive(false);
+            Background.gameObject.SetActive(false);
+            _panelColor = _dialogPanel.color;
 
             SL.Get<InputService>().OnDialogSkip += OnSkipText;
         }

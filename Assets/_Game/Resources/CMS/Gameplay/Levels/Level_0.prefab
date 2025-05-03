@@ -56,3 +56,5 @@ MonoBehaviour:
         LevelIndex: 0
         BackgroundSprite: {fileID: 3524656785333674846, guid: 65de4c3f51dd8f6469dd9fee71784dac, type: 3}
         EnemyPrefab: {fileID: 8389933710043619156, guid: 96e430034889d6048a276e071eb4af90, type: 3}
+        DeathDialog: {fileID: 1554981954346889324, guid: bacaac77714b3a44e938ea5787dc7caf, type: 3}
+        NextSceneDialog: {fileID: 1554981954346889324, guid: 95f7c24d1cd3bdd47bd657e03e1d9466, type: 3}
