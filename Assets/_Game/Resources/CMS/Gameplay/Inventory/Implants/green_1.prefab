@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4935770895398829437}
   - component: {fileID: 8862212721897967724}
   m_Layer: 0
-  m_Name: Implant_7
+  m_Name: green_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3491bc35dc84132acbda8b4eb9ddf2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityId: CMS/Gameplay/Inventory/Implants/Implant_7
+  entityId: CMS/Gameplay/Inventory/Implants/green_1
   Components:
   - rid: 635145038440169587
   - rid: 635145038440169588
