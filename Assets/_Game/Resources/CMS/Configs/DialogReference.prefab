@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5467439354730262479
+--- !u!1 &6510303756584100978
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1818943205228161433}
-  - component: {fileID: 8389933710043619156}
+  - component: {fileID: 3254300467795844047}
+  - component: {fileID: 2082752014749858230}
   m_Layer: 0
-  m_Name: MockEnemyConfig
+  m_Name: DialogReference
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1818943205228161433
+--- !u!4 &3254300467795844047
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5467439354730262479}
+  m_GameObject: {fileID: 6510303756584100978}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,31 +32,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8389933710043619156
+--- !u!114 &2082752014749858230
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5467439354730262479}
+  m_GameObject: {fileID: 6510303756584100978}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3491bc35dc84132acbda8b4eb9ddf2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityId: 
+  entityId: CMS/Configs/DialogReference
   Components:
-  - rid: 4717638307256991856
-  - rid: 4717638307256991919
+  - rid: 4717638307256992113
   references:
     version: 2
     RefIds:
-    - rid: 4717638307256991856
-      type: {class: EnemyConfig, ns: Game.Runtime.CMS.Components.Configs, asm: Runtime}
+    - rid: 4717638307256992113
+      type: {class: PrefabComponent, ns: Game.Runtime.CMS.Components.Commons, asm: Runtime}
       data:
-        _maxHealth: 8
-        _damage: 18
-    - rid: 4717638307256991919
-      type: {class: EnemyPrefabComponent, ns: Game.Runtime.CMS.Components.Configs, asm: Runtime}
-      data:
-        _enemyView: {fileID: -7791952286858956461, guid: d28e4208433923e4ca652daab649728f, type: 3}
+        Prefab: {fileID: 6711457898026214090, guid: 5be24966c7285b2478172d901b943d8f, type: 3}

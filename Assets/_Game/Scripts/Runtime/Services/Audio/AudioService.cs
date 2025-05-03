@@ -10,21 +10,25 @@ namespace Game.Runtime.Services.Audio
         private bool _muteSFX;
         private bool _muteAmbient;
         private bool _muteMusic;
+        private bool _muteVoice;
 
         private float _sfxVolume = 1.0f;
         private float _ambientVolume = 1.0f;
         private float _musicVolume = 1.0f;
+        private float _voiceVolume = 1.0f;
 
         private readonly AudioSource _ambientSource;
         private readonly AudioSource _musicSource;
         private readonly AudioSource _sfxSource;
-        
+        private readonly AudioSource _voiceSource;
+
         public AudioService()
         {
             var audioObject = new GameObject(nameof(AudioService));
             _ambientSource = audioObject.AddComponent<AudioSource>();
             _musicSource = audioObject.AddComponent<AudioSource>();
             _sfxSource = audioObject.AddComponent<AudioSource>();
+            _voiceSource = audioObject.AddComponent<AudioSource>();
 
             Object.DontDestroyOnLoad(audioObject);
         }
@@ -42,6 +46,8 @@ namespace Game.Runtime.Services.Audio
                 PlayAmbient(ambientComponent);
             else if (entity.Is(out MusicComponent musicComponent))
                 PlayMusic(musicComponent);
+            else if (entity.Is(out VoiceComponent voiceComponent))
+                PlayVoice(voiceComponent);
         }
         
         public void SetVolume(AudioType type, float volume)
@@ -109,6 +115,17 @@ namespace Game.Runtime.Services.Audio
             _musicSource.volume = _musicVolume;
             
             _musicSource.Play();
+        }
+
+        private void PlayVoice(VoiceComponent voice)
+        {
+            if (_muteVoice) return;
+
+            _voiceSource.clip = voice.Clip;
+            _voiceSource.loop = false;
+            _voiceSource.volume = _voiceVolume * voice.Volume;
+
+            _voiceSource.Play();
         }
     }
 }
