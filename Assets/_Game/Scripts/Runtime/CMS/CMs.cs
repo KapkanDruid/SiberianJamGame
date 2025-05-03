@@ -18,5 +18,26 @@ namespace Game.Runtime.CMS
             }
             public const string AmbientTest = "CMS/Audio/AmbientTest";
         }
+        public static class Configs
+        {
+            public const string EnemiesByLevel = "CMS/Configs/EnemiesByLevel";
+            public const string MockEnemyConfig = "CMS/Configs/MockEnemyConfig";
+            public const string PlayerConfig = "CMS/Configs/PlayerConfig";
+        }
+        public static class Gameplay
+        {
+            public static class Inventory
+            {
+                public static class Implants
+                {
+                    public const string Implant_3 = "CMS/Gameplay/Inventory/Implants/Implant_3";
+                    public const string Implant_7 = "CMS/Gameplay/Inventory/Implants/Implant_7";
+                    public const string Implant_8 = "CMS/Gameplay/Inventory/Implants/Implant_8";
+                }
+                public const string green_2 = "CMS/Gameplay/Inventory/green_2";
+                public const string InventoryGrid = "CMS/Gameplay/Inventory/InventoryGrid";
+            }
+            public const string HUD = "CMS/Gameplay/HUD";
+        }
     }
 }
