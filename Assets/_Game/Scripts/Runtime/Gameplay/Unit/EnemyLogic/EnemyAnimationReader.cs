@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game.Runtime.Gameplay
+namespace Game.Runtime.Gameplay.Enemy
 {
     public class EnemyAnimationReader : MonoBehaviour
     {

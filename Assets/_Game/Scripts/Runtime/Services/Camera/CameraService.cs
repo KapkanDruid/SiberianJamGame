@@ -5,17 +5,17 @@ namespace Game.Runtime.Services.Camera
 {
     public class CameraService : IService
     {
-        private UnityEngine.Camera _camera;
+        public UnityEngine.Camera Camera { get; private set; }
 
         public void RegisterCamera(UnityEngine.Camera camera)
         {
-            _camera = camera;
-            Debug.Log($"[Service Locator] Set camera: {_camera}");
+            Camera = camera;
+            Debug.Log($"[Service Locator] Set camera: {Camera}");
         }
 
         public void Shake(float duration, float strength)
         {
-            _camera.DOShakePosition(duration, strength, 10, 45f);
+            Camera.DOShakePosition(duration, strength, 10, 45f);
         }
 
         public void UIShake()
