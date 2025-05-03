@@ -21,7 +21,7 @@ namespace Game.Runtime.Runners
         [SerializeField] private BattleController _battleController;
         [SerializeField] private WarriorView _warriorView;
         [SerializeField] private SpriteRenderer _backgroundRenderer;
-
+        [SerializeField] private int _debugLevelIndex = -1;
 
         private readonly Scope _gameScope = Scope.Game;
 
@@ -58,7 +58,7 @@ namespace Game.Runtime.Runners
 
         private void ConfigureLevel()
         {
-            var currentLevelIndex = SL.Get<SaveService>().SaveData.LevelIndex;
+            var currentLevelIndex = _debugLevelIndex >= 0 ? _debugLevelIndex : SL.Get<SaveService>().SaveData.LevelIndex;
             var levelModel = LevelHelper.GetCurrentLevelModel();
 
             if (levelModel == null)
@@ -101,7 +101,7 @@ namespace Game.Runtime.Runners
             }
             else if (currentLevelIndex == 0) Debug.LogWarning($"[GameRunner] Implants pool is empty!");
             
-            Debug.Log($"[GameRunner] Level loaded!");
+            Debug.Log($"[GameRunner] Level {currentLevelIndex} loaded!");
         }
 
         private void OnDestroy()

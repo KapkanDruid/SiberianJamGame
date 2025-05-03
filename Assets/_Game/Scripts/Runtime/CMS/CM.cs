@@ -89,6 +89,9 @@ namespace Game.Runtime.CMS
             {
                 try
                 {
+#if UNITY_EDITOR
+                    entityPrefab.PingEntity();
+#endif
                     Debug.Log("[CMS] Load entity " + entityPrefab.EntityId);
 
                     var entity = new CMSEntity(entityPrefab.EntityId, entityPrefab.Components);

@@ -19,7 +19,6 @@ namespace Game.Runtime.Gameplay.Level
     public class BattleController : MonoBehaviour, IInitializable, IService
     {
         [SerializeField] private Transform _enemyPosition;
-        [SerializeField] private int _debugLevelIndex;
 
         private bool _isTurnStarted;
         private bool _isBattleEnded;
@@ -133,11 +132,6 @@ namespace Game.Runtime.Gameplay.Level
         public void Win()
         {
             _isBattleEnded = true;
-
-#if UNITY_EDITOR
-            if (_debugLevelIndex > 0)
-                SL.Get<SaveService>().SaveData.LevelIndex = _debugLevelIndex--;
-#endif
             SL.Get<SaveService>().SaveData.LevelIndex++;
             SL.Get<SaveService>().SaveData.DialogBlockID = LevelConfig.NextSceneDialog.EntityId;
             SL.Get<SaveService>().Save();
