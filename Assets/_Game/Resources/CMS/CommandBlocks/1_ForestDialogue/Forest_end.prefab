@@ -1,0 +1,536 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7135597508028706366
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5902826426298403014}
+  - component: {fileID: 6989399238491455724}
+  m_Layer: 0
+  m_Name: Forest_end
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5902826426298403014
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7135597508028706366}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6989399238491455724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7135597508028706366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3491bc35dc84132acbda8b4eb9ddf2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityId: CMS/CommandBlocks/1_ForestDialogue/Forest_end
+  Components:
+  - rid: 6583048880660676614
+  - rid: 6583048880660676619
+  - rid: 6583048880660676620
+  - rid: 6583048880660676621
+  - rid: 6583048880660676622
+  - rid: 6583048880660676677
+  - rid: 6583048880660676623
+  - rid: 6583048880660676624
+  - rid: 6583048880660676625
+  - rid: 6583048880660676679
+  - rid: 6583048880660676634
+  - rid: 6583048880660676635
+  - rid: 6583048880660676636
+  - rid: 6583048880660676678
+  - rid: 6583048880660676637
+  - rid: 6583048880660676638
+  - rid: 6583048880660676639
+  - rid: 6583048880660676680
+  - rid: 6583048880660676640
+  - rid: 6583048880660676641
+  - rid: 6583048880660676642
+  - rid: 6583048880660676681
+  - rid: 6583048880660676644
+  - rid: 6583048880660676645
+  - rid: 6583048880660676646
+  - rid: 6583048880660676682
+  - rid: 6583048880660676647
+  - rid: 6583048880660676648
+  - rid: 6583048880660676649
+  - rid: 6583048880660676683
+  - rid: 6583048880660676650
+  - rid: 6583048880660676651
+  - rid: 6583048880660676652
+  - rid: 6583048880660676684
+  - rid: 6583048880660676653
+  - rid: 6583048880660676654
+  - rid: 6583048880660676655
+  - rid: 6583048880660676685
+  - rid: 6583048880660676656
+  - rid: 6583048880660676657
+  - rid: 6583048880660676658
+  - rid: 6583048880660676686
+  - rid: 6583048880660676659
+  - rid: 6583048880660676660
+  - rid: 6583048880660676661
+  - rid: 6583048880660676687
+  - rid: 6583048880660676662
+  - rid: 6583048880660676663
+  - rid: 6583048880660676664
+  - rid: 6583048880660676688
+  - rid: 6583048880660676665
+  - rid: 6583048880660676666
+  - rid: 6583048880660676667
+  - rid: 6583048880660676689
+  - rid: 6583048880660676668
+  - rid: 6583048880660676669
+  - rid: 6583048880660676670
+  - rid: 6583048880660676690
+  - rid: 6583048880660676671
+  - rid: 6583048880660676672
+  - rid: 6583048880660676673
+  - rid: 6583048880660676691
+  - rid: 6583048880660676674
+  - rid: 6583048880660676675
+  - rid: 6583048880660676676
+  - rid: 6583048880660676692
+  - rid: 6583048880660676626
+  - rid: 6583048880660676627
+  references:
+    version: 2
+    RefIds:
+    - rid: 6583048880660676614
+      type: {class: BackgroundSetCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        BackgroundSprite: {fileID: 21300000, guid: cde3d42df50d8734a834947e1cc30978, type: 3}
+    - rid: 6583048880660676619
+      type: {class: DialogAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _appearType: 0
+        _duration: 0.3
+    - rid: 6583048880660676620
+      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 0
+        _offset: {x: 0, y: 0, z: 0}
+        _duration: 0.3
+        _sprite: {fileID: 0}
+    - rid: 6583048880660676621
+      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _delay: 0.035
+        _name: "\u0420\u0430\u0441\u0441\u043A\u0430\u0437\u0447\u0438\u043A"
+        _text: "\u041A\u0440\u0430\u0441\u043D\u0430\u044F \u0428\u0430\u043F\u043E\u0447\u043A\u0430
+          \u043B\u0435\u0433\u043A\u043E \u0440\u0430\u0441\u043F\u0440\u0430\u0432\u0438\u043B\u0430\u0441\u044C
+          \u0441\u043E \u0432\u0441\u0435\u043C\u0438 \u043D\u0430\u043F\u0430\u0432\u0448\u0438\u043C\u0438
+          \u043D\u0430 \u043D\u0435\u0435. \u0418 \u0442\u043E\u043B\u044C\u043A\u043E
+          \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u044F\u044F \u0442\u0432\u0430\u0440\u044C
+          \u043D\u0438\u043A\u0430\u043A \u043D\u0435 \u0445\u043E\u0442\u0435\u043B\u0430
+          \u0443\u043C\u0438\u0440\u0430\u0442\u044C."
+    - rid: 6583048880660676622
+      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _soundConfigs: []
+    - rid: 6583048880660676623
+      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 0
+        _offset: {x: 0, y: 0, z: 0}
+        _duration: 0.3
+        _sprite: {fileID: 21300000, guid: be87cbd21ffc04b409cc985152181445, type: 3}
+    - rid: 6583048880660676624
+      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _delay: 0.035
+        _name: "\u041C\u0430\u043C\u043E\u0447\u043A\u0430"
+        _text: "\u0428\u0430\u043F\u043E\u0447\u043A\u0430. \u0414\u043E\u0447\u0435\u043D\u044C\u043A\u0430.
+          \u041D\u0435 \u0443\u0431\u0438\u0432\u0430\u0439. \u042D\u0442\u043E \u0436\u0435
+          \u044F. \r\n\u0422\u0432\u043E\u044F \u043C\u0430\u043C\u0430."
+    - rid: 6583048880660676625
+      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _soundConfigs: []
+    - rid: 6583048880660676626
+      type: {class: DialogAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _appearType: 1
+        _duration: 0.3
+    - rid: 6583048880660676627
+      type: {class: EndDialogSceneCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data: 
+    - rid: 6583048880660676634
+      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 1
+        _offset: {x: 0, y: 0, z: 0}
+        _duration: 0.3
+        _sprite: {fileID: 21300000, guid: 15a058998a552794babcb158fd07e4c7, type: 3}
+    - rid: 6583048880660676635
+      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _delay: 0.035
+        _name: "\u041A\u0440\u0430\u0441\u043D\u0430\u044F \u0428\u0430\u043F\u043E\u0447\u043A\u0430"
+        _text: "\u041C\u0430\u043C\u0430? \u042D\u0442\u043E \u043F\u0440\u0430\u0432\u0434\u0430
+          \u0442\u044B? \u0427\u0442\u043E \u0441 \u0442\u043E\u0431\u043E\u0439
+          \u0441\u043B\u0443\u0447\u0438\u043B\u043E\u0441\u044C?"
+    - rid: 6583048880660676636
+      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _soundConfigs: []
+    - rid: 6583048880660676637
+      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 0
+        _offset: {x: 0, y: 0, z: 0}
+        _duration: 0.3
+        _sprite: {fileID: 21300000, guid: be87cbd21ffc04b409cc985152181445, type: 3}
+    - rid: 6583048880660676638
+      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _delay: 0.035
+        _name: "\u041C\u0430\u043C\u043E\u0447\u043A\u0430"
+        _text: "\u042F. \u042D\u0442\u043E. \u042F. \u042D\u0442\u043E \u041A\u0438\u041C\u0427\u0438.
+          \u041F\u043E\u0449\u0430\u0434\u0438. \u042D\u0442\u043E \u0436\u0435 \u0431\u043B\u0430\u0433\u043E\u0434\u0430\u0440\u044F
+          \u043C\u043D\u0435 \u0442\u044B \u0442\u0430\u043A\u0430\u044F."
+    - rid: 6583048880660676639
+      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _soundConfigs: []
+    - rid: 6583048880660676640
+      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 1
+        _offset: {x: 0, y: 0, z: 0}
+        _duration: 0.3
+        _sprite: {fileID: 5623948624648158621, guid: d59ae9eed7a510d40b0e17e9cc37aebc, type: 3}
+    - rid: 6583048880660676641
+      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _delay: 0.035
+        _name: "\u0410\u043B\u044C\u0442\u0430"
+        _text: "\u041D\u0435 \u0441\u043B\u0443\u0448\u0430\u0439 \u0435\u0435! \u042D\u0442\u043E
+          \u0438\u0437-\u0437\u0430 \u043D\u0435\u0435 \u043C\u044B \u0422\u0430\u043A\u043E\u0439
+          \u0443\u0440\u043E\u0434! \u0423\u0431\u0435\u0439 \u0435\u0435! \u0423\u0431\u0435\u0439
+          \u0435\u0435!"
+    - rid: 6583048880660676642
+      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _soundConfigs: []
+    - rid: 6583048880660676644
+      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 0
+        _offset: {x: 0, y: 0, z: 0}
+        _duration: 0.3
+        _sprite: {fileID: 0}
+    - rid: 6583048880660676645
+      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _delay: 0.035
+        _name: "\u0420\u0430\u0441\u0441\u043A\u0430\u0437\u0447\u0438\u043A"
+        _text: "\u0418 \u0447\u0442\u043E \u0436\u0435 \u0441\u0434\u0435\u043B\u0430\u0435\u0442
+          \u041A\u0440\u0430\u0441\u043D\u0430\u044F \u0428\u0430\u043F\u043E\u0447\u043A\u0430?
+          \u0421\u043C\u043E\u0436\u0435\u0442 \u043B\u0438 \u043E\u043D\u0430 \u043F\u0440\u043E\u0441\u0442\u0438\u0442\u044C
+          \u0441\u0432\u043E\u044E \u043C\u0430\u0442\u044C \u0437\u0430 \u0442\u043E,
+          \u0447\u0442\u043E \u043E\u043D\u0430 \u0440\u043E\u0434\u0438\u043B\u0430\u0441\u044C
+          \u0438\u043D\u0432\u0430\u043B\u0438..."
+    - rid: 6583048880660676646
+      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _soundConfigs: []
+    - rid: 6583048880660676647
+      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 1
+        _offset: {x: 0, y: 0, z: 0}
+        _duration: 0.3
+        _sprite: {fileID: 5623948624648158621, guid: d59ae9eed7a510d40b0e17e9cc37aebc, type: 3}
+    - rid: 6583048880660676648
+      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _delay: 0.035
+        _name: "\u0410\u043B\u044C\u0442\u0430"
+        _text: "\u0417\u0430\u0442\u043A\u043D\u0438\u0441\u044C! \u0417\u0430\u0442\u043A\u043D\u0438\u0441\u044C!
+          \u0417\u0430\u0442\u043A\u043D\u0438\u0441\u044C! \u0423\u0431\u0435\u0439!
+          \u0423\u0431\u0435\u0439! \u0423\u0431\u0435\u0439!"
+    - rid: 6583048880660676649
+      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _soundConfigs: []
+    - rid: 6583048880660676650
+      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 1
+        _offset: {x: 0, y: 0, z: 0}
+        _duration: 0.3
+        _sprite: {fileID: 21300000, guid: 15a058998a552794babcb158fd07e4c7, type: 3}
+    - rid: 6583048880660676651
+      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _delay: 0.035
+        _name: "\u041A\u0440\u0430\u0441\u043D\u0430\u044F \u0428\u0430\u043F\u043E\u0447\u043A\u0430"
+        _text: "\u0422\u044B \u043F\u043B\u043E\u0445\u0430\u044F \u043C\u0430\u0442\u044C.
+          \u0415\u0441\u043B\u0438 \u0431\u044B \u0442\u044B \u043D\u0435 \u0437\u0430\u043D\u0438\u043C\u0430\u043B\u0430\u0441\u044C
+          \u0431\u0438\u043E-\u0445\u0430\u043A\u0438\u043D\u0433\u043E\u043C \u043D\u0430\u0434
+          \u0441\u043E\u0431\u043E\u0439. \u042F \u0431\u044B \u0440\u043E\u0434\u0438\u043B\u0430\u0441\u044C
+          \u043D\u043E\u0440\u043C\u0430\u043B\u044C\u043D\u044B\u043C \u0440\u0435\u0431\u0435\u043D\u043A\u043E\u043C,
+          \u043A\u0430\u043A \u0432\u0441\u0435."
+    - rid: 6583048880660676652
+      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _soundConfigs: []
+    - rid: 6583048880660676653
+      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 0
+        _offset: {x: 0, y: 0, z: 0}
+        _duration: 0.3
+        _sprite: {fileID: 0}
+    - rid: 6583048880660676654
+      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _delay: 0.035
+        _name: "\u0420\u0430\u0441\u0441\u043A\u0430\u0437\u0447\u0438\u043A"
+        _text: "\u041E\u0442 \u0432\u044B\u0441\u0442\u0440\u0435\u043B\u0430 \u0432
+          \u0443\u043F\u043E\u0440 \u0432\u043E \u0432\u0441\u0435 \u0441\u0442\u043E\u0440\u043E\u043D\u044B
+          \u043F\u043E\u043B\u0435\u0442\u0435\u043B\u0438 \u043E\u0448\u043C\u0435\u0442\u043A\u0438
+          \u043C\u044F\u0441\u0430 \u0438 \u0431\u0440\u044B\u0437\u0433\u0438 \u043A\u0440\u043E\u0432\u0438.
+          \u0418 \u043C\u043E\u0437..."
+    - rid: 6583048880660676655
+      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _soundConfigs: []
+    - rid: 6583048880660676656
+      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 0
+        _offset: {x: 0, y: 0, z: 0}
+        _duration: 0.3
+        _sprite: {fileID: 0}
+    - rid: 6583048880660676657
+      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _delay: 0.035
+        _name: "\u0420\u0430\u0441\u0441\u043A\u0430\u0437\u0447\u0438\u043A"
+        _text: "\u041F\u0440\u043E\u0441\u0442\u0438\u0442\u0435. \u041D\u0435 \u0437\u043D\u0430\u044E,
+          \u0447\u0442\u043E \u043D\u0430 \u043C\u0435\u043D\u044F \u043D\u0430\u0448\u043B\u043E.
+          \u041E\u0434\u0438\u043D\u043E\u0447\u043D\u044B\u0439 \u0432\u044B\u0441\u0442\u0440\u0435\u043B
+          \u043E\u043A\u043E\u043D\u0447\u0430\u0442\u0435\u043B\u044C\u043D\u043E
+          \u043E\u0431\u043E\u0440\u0432\u0430\u043B \u0436\u0438\u0437\u043D\u044C
+          \u0442\u0432\u0430\u0440\u0438, \u043D\u0430\u0437\u044B\u0432\u0430\u044E\u0449\u0435\u0439
+          \u0441\u0435\u0431\u044F \u041C\u0430\u0442\u0435\u0440\u044C\u044E \u041A\u0440\u0430\u0441\u043D\u043E\u0439
+          \u0428\u0430\u043F\u043E\u0447\u043A\u0438 \u0438..."
+    - rid: 6583048880660676658
+      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _soundConfigs: []
+    - rid: 6583048880660676659
+      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 1
+        _offset: {x: 0, y: 0, z: 0}
+        _duration: 0.3
+        _sprite: {fileID: 5623948624648158621, guid: d59ae9eed7a510d40b0e17e9cc37aebc, type: 3}
+    - rid: 6583048880660676660
+      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _delay: 0.035
+        _name: "\u0410\u043B\u044C\u0442\u0430"
+        _text: "\u0422\u0443\u0434\u0430 \u0435\u0439 \u0438 \u0434\u043E\u0440\u043E\u0433\u0430!"
+    - rid: 6583048880660676661
+      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _soundConfigs: []
+    - rid: 6583048880660676662
+      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 1
+        _offset: {x: 0, y: 0, z: 0}
+        _duration: 0.3
+        _sprite: {fileID: 5623948624648158621, guid: d59ae9eed7a510d40b0e17e9cc37aebc, type: 3}
+    - rid: 6583048880660676663
+      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _delay: 0.035
+        _name: "\u0410\u043B\u044C\u0442\u0430"
+        _text: "\u0421\u043B\u044B\u0448\u044C, \u0413\u0443\u043D\u0434\u0438\u043D\u0438.
+          \u0427\u0442\u043E \u0437\u0430 \u041A\u0438\u041C\u0427\u0438 \u0442\u0430\u043A\u043E\u0435?"
+    - rid: 6583048880660676664
+      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _soundConfigs: []
+    - rid: 6583048880660676665
+      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 0
+        _offset: {x: 0, y: 0, z: 0}
+        _duration: 0.3
+        _sprite: {fileID: 0}
+    - rid: 6583048880660676666
+      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _delay: 0.035
+        _name: "\u0420\u0430\u0441\u0441\u043A\u0430\u0437\u0447\u0438\u043A"
+        _text: "\u041A\u0438\u043C\u0447\u0438? \u042D\u0442\u043E \u043F\u0440\u043E\u0435\u043A\u0442
+          \u043A\u043E\u043C\u043F\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u0446\u0438\u0438
+          \u0447\u0435\u043B\u043E\u0432\u0435\u0447\u0435\u0441\u0442\u0432\u0430."
+    - rid: 6583048880660676667
+      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _soundConfigs: []
+    - rid: 6583048880660676668
+      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 1
+        _offset: {x: 0, y: 0, z: 0}
+        _duration: 0.3
+        _sprite: {fileID: 5623948624648158621, guid: d59ae9eed7a510d40b0e17e9cc37aebc, type: 3}
+    - rid: 6583048880660676669
+      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _delay: 0.035
+        _name: "\u0410\u043B\u044C\u0442\u0430"
+        _text: "\u0410 \u0442\u0435\u043F\u0435\u0440\u044C \u043F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435
+          \u0438 \u043F\u0440\u043E\u0449\u0435. \u0414\u043B\u044F \u043C\u0430\u043B\u0435\u043D\u044C\u043A\u0438\u0445
+          \u0438 \u0442\u0443\u043F\u044B\u0445."
+    - rid: 6583048880660676670
+      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _soundConfigs: []
+    - rid: 6583048880660676671
+      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 0
+        _offset: {x: 0, y: 0, z: 0}
+        _duration: 0.3
+        _sprite: {fileID: 0}
+    - rid: 6583048880660676672
+      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _delay: 0.035
+        _name: "\u0420\u0430\u0441\u0441\u043A\u0430\u0437\u0447\u0438\u043A"
+        _text: "\u041D\u0443, \u044F \u043D\u0430 \u0441\u0430\u043C\u043E\u043C
+          \u0434\u0435\u043B\u0435 \u0438 \u0441\u0430\u043C \u043D\u0435 \u0437\u043D\u0430\u044E,
+          \u0447\u0442\u043E \u044D\u0442\u043E. \u042D\u0442\u043E \u0437\u043D\u0430\u0435\u0442
+          \u0442\u043E\u043B\u044C\u043A\u043E \u0411\u0410\u0411\u0443\u0448\u043A\u0430."
+    - rid: 6583048880660676673
+      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _soundConfigs: []
+    - rid: 6583048880660676674
+      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 1
+        _offset: {x: 0, y: 0, z: 0}
+        _duration: 0.3
+        _sprite: {fileID: 5623948624648158621, guid: d59ae9eed7a510d40b0e17e9cc37aebc, type: 3}
+    - rid: 6583048880660676675
+      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _delay: 0.035
+        _name: "\u0410\u043B\u044C\u0442\u0430"
+        _text: "\u041D\u0443, \u0442\u043E\u0433\u0434\u0430 \u043F\u043E\u0439\u0434\u0435\u043C
+          \u043A\u0430 \u0438 \u0441\u043F\u0440\u043E\u0441\u0438\u043C \u0443 \u043D\u0435\u0435,
+          \u0447\u0442\u043E \u044D\u0442\u043E."
+    - rid: 6583048880660676676
+      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _soundConfigs: []
+    - rid: 6583048880660676677
+      type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 0
+        _duration: 0.3
+    - rid: 6583048880660676678
+      type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 1
+        _duration: 0.3
+    - rid: 6583048880660676679
+      type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 0
+        _duration: 0.3
+    - rid: 6583048880660676680
+      type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 0
+        _duration: 0.3
+    - rid: 6583048880660676681
+      type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 1
+        _duration: 0.3
+    - rid: 6583048880660676682
+      type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 0
+        _duration: 0.3
+    - rid: 6583048880660676683
+      type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 1
+        _duration: 0.3
+    - rid: 6583048880660676684
+      type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 1
+        _duration: 0.3
+    - rid: 6583048880660676685
+      type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 0
+        _duration: 0.3
+    - rid: 6583048880660676686
+      type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 0
+        _duration: 0.3
+    - rid: 6583048880660676687
+      type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 1
+        _duration: 0.3
+    - rid: 6583048880660676688
+      type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 1
+        _duration: 0.3
+    - rid: 6583048880660676689
+      type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 0
+        _duration: 0.3
+    - rid: 6583048880660676690
+      type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 1
+        _duration: 0.3
+    - rid: 6583048880660676691
+      type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 0
+        _duration: 0.3
+    - rid: 6583048880660676692
+      type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 1
+        _duration: 0.3
