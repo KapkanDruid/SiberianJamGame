@@ -49,9 +49,14 @@ MonoBehaviour:
   - rid: 5361599194504888397
   - rid: 5361599194504888398
   - rid: 5361599205655707720
+  - rid: 635145064486535273
   references:
     version: 2
     RefIds:
+    - rid: 635145064486535273
+      type: {class: ImplantLevelRequiredComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
+      data:
+        RequiredLevelIndex: 1
     - rid: 5361599194504888397
       type: {class: SpriteComponent, ns: Game.Runtime.CMS.Components.Commons, asm: Runtime}
       data:

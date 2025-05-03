@@ -49,6 +49,7 @@ MonoBehaviour:
   - rid: 5361599194504888397
   - rid: 5361599194504888398
   - rid: 635145038440169681
+  - rid: 635145064486535270
   references:
     version: 2
     RefIds:
@@ -56,6 +57,10 @@ MonoBehaviour:
       type: {class: HealthImplantComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
       data:
         Health: 1
+    - rid: 635145064486535270
+      type: {class: ImplantLevelRequiredComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
+      data:
+        RequiredLevelIndex: 0
     - rid: 5361599194504888397
       type: {class: SpriteComponent, ns: Game.Runtime.CMS.Components.Commons, asm: Runtime}
       data:

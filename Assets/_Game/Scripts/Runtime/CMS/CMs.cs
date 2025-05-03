@@ -37,6 +37,7 @@ namespace Game.Runtime.CMS
         {
             public static class Implants
             {
+                public const string BaseImplantBehaviour = "CMS/Gameplay/Implants/BaseImplantBehaviour";
                 public const string basic_blue = "CMS/Gameplay/Implants/basic_blue";
                 public const string basic_green = "CMS/Gameplay/Implants/basic_green";
                 public const string basic_red = "CMS/Gameplay/Implants/basic_red";
@@ -70,6 +71,7 @@ namespace Game.Runtime.CMS
                 public const string Level_0 = "CMS/Gameplay/Levels/Level_0";
             }
             public const string HUD = "CMS/Gameplay/HUD";
+            public const string ImplantsPoolConfig = "CMS/Gameplay/ImplantsPoolConfig";
             public const string Inventory = "CMS/Gameplay/Inventory";
         }
     }

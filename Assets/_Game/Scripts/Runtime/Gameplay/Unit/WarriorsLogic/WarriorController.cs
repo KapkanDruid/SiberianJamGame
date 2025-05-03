@@ -25,7 +25,7 @@ namespace Game.Runtime.Gameplay.Warrior
 
             _maxHealth = config.MaxHealth;
             _currentHealth = _maxHealth;
-        }
+        }   
 
         public void Initialize()
         {

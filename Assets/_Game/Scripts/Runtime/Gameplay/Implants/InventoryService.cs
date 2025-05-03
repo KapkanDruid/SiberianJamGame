@@ -9,37 +9,34 @@ using Game.Runtime.Gameplay.Level;
 using Game.Runtime.Gameplay.Warrior;
 using Game.Runtime.Services;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
-namespace Game.Runtime.Gameplay.Inventory
+namespace Game.Runtime.Gameplay.Implants
 {
     public class InventoryService : IService, IInitializable, IDisposable
     {
         private readonly Dictionary<Vector2Int, InventorySlot> _slots = new();
-        private readonly Dictionary<Vector2Int, InventoryItem> _occupiedSlots = new();
-        private readonly Dictionary<InventoryItem, List<Vector2Int>> _itemPositions = new();
+        private readonly Dictionary<Vector2Int, ImplantBehaviour> _occupiedSlots = new();
+        private readonly Dictionary<ImplantBehaviour, List<Vector2Int>> _itemPositions = new();
         
         private Vector2Int _gridSize;
         private int _cellSize;
         
         private InventoryView _inventoryView;
-        private ImplantsHolder _implantsHolder;
 
         public void Initialize()
         {
             _inventoryView = SL.Get<HUDService>().Behaviour.InventoryView;
-            _implantsHolder = SL.Get<HUDService>().Behaviour.ImplantsHolder;
-
             SL.Get<BattleController>().OnTurnEnded += OnTurnEnded;
             
             CreateGrid();
         }
 
-        //TODO: Это просто тест, потом удалить
         private void OnTurnEnded()
         {
             foreach (var item in _itemPositions)
             {
-                item.Key.SetItemPosition(SL.Get<HUDService>().Behaviour.ImplantsHolder.GetRandomPosition());
+                Object.Destroy(item.Key.gameObject);
             }
             
             _occupiedSlots.Clear();
@@ -47,16 +44,7 @@ namespace Game.Runtime.Gameplay.Inventory
             
             UpdateAllSlotVisual();
         }
-
-        public List<InventoryItem> GetAllItems()
-        {
-            var inventoryItems = new List<InventoryItem>();
-            foreach (var item in _itemPositions.Keys)
-                inventoryItems.Add(item);
-
-            return inventoryItems;
-        }
-
+        
         public WarriorTurnData CalculateTurnData()
         {
             var health = 0f;
@@ -76,7 +64,7 @@ namespace Game.Runtime.Gameplay.Inventory
             return new WarriorTurnData(health, damage, armor);
         }
         
-        public bool TryPlaceItem(InventoryItem item, Vector2Int gridPosition)
+        public bool TryPlaceItem(ImplantBehaviour item, Vector2Int gridPosition)
         {
             if (!CanPlaceItem(item, gridPosition)) return false;
 
@@ -102,11 +90,10 @@ namespace Game.Runtime.Gameplay.Inventory
                 
             return true;
         }
-        
-        public bool NeedRemoveItem(InventoryItem item, Vector2 screenPosition)
+
+        public bool HasItem(ImplantBehaviour item)
         {
-            return _itemPositions.GetValueOrDefault(item) != default && 
-                   _implantsHolder.IsInsideHolder(screenPosition);
+            return _itemPositions.GetValueOrDefault(item) != default;
         }
         
         private bool IsSlotOccupied(Vector2Int slot)
@@ -114,13 +101,13 @@ namespace Game.Runtime.Gameplay.Inventory
             return _occupiedSlots.ContainsKey(slot);
         }
         
-        public void SetItemPosition(InventorySlot slot, InventoryItem item)
+        public void SetItemPosition(InventorySlot slot, ImplantBehaviour item)
         {
             var itemCenterPosition = InventoryHelper.CalculateCenterPosition(slot, item);
             _inventoryView.SetItemInInventory(item, itemCenterPosition);
         }
         
-        public void RemoveItem(InventoryItem item)
+        public void RemoveItem(ImplantBehaviour item)
         {
             if (_itemPositions.TryGetValue(item, out var positions))
             {
@@ -134,7 +121,7 @@ namespace Game.Runtime.Gameplay.Inventory
             }
         }
         
-        public void UpdateSlotHighlight(InventoryItem item, Vector2Int gridPosition, Color color)
+        public void UpdateSlotHighlight(ImplantBehaviour item, Vector2Int gridPosition, Color color)
         {
             var rotatedSlots = GetRotatedSlots(item);
             var newPositions = rotatedSlots.Select(slot => slot + gridPosition).ToList();
@@ -149,7 +136,7 @@ namespace Game.Runtime.Gameplay.Inventory
             }
         }
         
-        public void ResetSlotHighlight(InventoryItem item)
+        public void ResetSlotHighlight(ImplantBehaviour item)
         {
             foreach (var slot in _slots)
             {
@@ -179,7 +166,7 @@ namespace Game.Runtime.Gameplay.Inventory
             }
         }
 
-        private bool CanPlaceItem(InventoryItem item, Vector2Int gridPosition)
+        public bool CanPlaceItem(ImplantBehaviour item, Vector2Int gridPosition)
         {
             var rotatedSlots = GetRotatedSlots(item);
             var targetSlots = rotatedSlots.Select(slot => slot + gridPosition).ToList();
@@ -217,7 +204,7 @@ namespace Game.Runtime.Gameplay.Inventory
             }
         }
 
-        private List<Vector2Int> GetRotatedSlots(InventoryItem item)
+        private List<Vector2Int> GetRotatedSlots(ImplantBehaviour item)
         {
             var slots = new List<Vector2Int>(item.SlotPositions);
 

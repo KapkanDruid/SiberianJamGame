@@ -3,7 +3,7 @@ using Game.Runtime.CMS.Components.Commons;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.Runtime.Gameplay.Inventory
+namespace Game.Runtime.Gameplay.Implants
 {
     [RequireComponent(typeof(Image))]
     public class InventorySlot : MonoBehaviour

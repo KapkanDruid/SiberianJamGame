@@ -1,5 +1,7 @@
 ﻿using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Level;
+using Game.Runtime.Services;
+using Game.Runtime.Services.Save;
 
 namespace Game.Runtime.Gameplay.Level
 {
@@ -9,6 +11,12 @@ namespace Game.Runtime.Gameplay.Level
         {
             var allLevels = CM.GetAll<LevelComponent>();
             return allLevels.Find(level => level.GetComponent<LevelComponent>().LevelIndex == levelIndex);
+        }
+        
+        public static CMSEntity GetCurrentLevelModel()
+        {
+            var currentLevelIndex = SL.Get<SaveService>().SaveData.LevelIndex;
+            return GetLevelModel(currentLevelIndex);
         }
     }
 }

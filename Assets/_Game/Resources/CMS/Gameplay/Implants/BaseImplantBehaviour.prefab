@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3282177257811848493
+--- !u!1 &3256100500880327681
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,25 +8,26 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5980545903215569249}
-  - component: {fileID: 6499103229812671997}
-  - component: {fileID: 2225121313680058864}
-  - component: {fileID: 7135032942277794943}
-  - component: {fileID: 1787775508345074346}
+  - component: {fileID: 6286546035229939487}
+  - component: {fileID: 7784850456533993522}
+  - component: {fileID: 3334477017477248598}
+  - component: {fileID: 2053942204217226423}
+  - component: {fileID: 8277114092272104098}
+  - component: {fileID: 2835948620522070318}
   m_Layer: 5
-  m_Name: TestImplantBehaviour
+  m_Name: BaseImplantBehaviour
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &5980545903215569249
+--- !u!224 &6286546035229939487
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3282177257811848493}
+  m_GameObject: {fileID: 3256100500880327681}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -39,21 +40,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 16, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &6499103229812671997
+--- !u!222 &7784850456533993522
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3282177257811848493}
+  m_GameObject: {fileID: 3256100500880327681}
   m_CullTransparentMesh: 1
---- !u!114 &2225121313680058864
+--- !u!114 &3334477017477248598
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3282177257811848493}
+  m_GameObject: {fileID: 3256100500880327681}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -77,31 +78,52 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!225 &7135032942277794943
+--- !u!225 &2053942204217226423
 CanvasGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3282177257811848493}
+  m_GameObject: {fileID: 3256100500880327681}
   m_Enabled: 1
   m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &1787775508345074346
+--- !u!114 &8277114092272104098
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3282177257811848493}
+  m_GameObject: {fileID: 3256100500880327681}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8548f344b6844831a0c5bdd78b12b9a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 38d8f19bc6074795b8fdef75d06934f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _image: {fileID: 2225121313680058864}
-  _rectTransform: {fileID: 5980545903215569249}
-  _canvasGroup: {fileID: 7135032942277794943}
-  ImplantModel: {fileID: 8862212721897967724, guid: 9f5b8784043a72b40bef885328d31e1b, type: 3}
+  _image: {fileID: 3334477017477248598}
+  _rectTransform: {fileID: 6286546035229939487}
+  _canvasGroup: {fileID: 2053942204217226423}
+--- !u!114 &2835948620522070318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3256100500880327681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3491bc35dc84132acbda8b4eb9ddf2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityId: CMS/Gameplay/Implants/BaseImplantBehaviour
+  Components:
+  - rid: 635145064486535298
+  references:
+    version: 2
+    RefIds:
+    - rid: 635145064486535298
+      type: {class: PrefabComponent, ns: Game.Runtime.CMS.Components.Commons, asm: Runtime}
+      data:
+        Prefab: {fileID: 3256100500880327681}

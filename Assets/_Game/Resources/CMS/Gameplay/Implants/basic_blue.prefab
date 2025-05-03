@@ -49,6 +49,7 @@ MonoBehaviour:
   - rid: 635145038440169587
   - rid: 635145038440169588
   - rid: 635145038440169680
+  - rid: 635145064486535269
   references:
     version: 2
     RefIds:
@@ -66,3 +67,7 @@ MonoBehaviour:
       type: {class: ArmorImplantComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
       data:
         Armor: 1
+    - rid: 635145064486535269
+      type: {class: ImplantLevelRequiredComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
+      data:
+        RequiredLevelIndex: 0

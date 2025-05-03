@@ -1,10 +1,10 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Level;
 using Game.Runtime.Gameplay.Enemy;
 using Game.Runtime.Gameplay.HUD;
-using Game.Runtime.Gameplay.ImplantsPool;
-using Game.Runtime.Gameplay.Inventory;
+using Game.Runtime.Gameplay.Implants;
 using Game.Runtime.Gameplay.Level;
 using Game.Runtime.Gameplay.Warrior;
 using Game.Runtime.Services;
@@ -40,7 +40,7 @@ namespace Game.Runtime.Runners
         private void RegisterServices()
         {
             SL.Register<HUDService>(new HUDService(), _gameScope);
-            SL.Register<ImplantsPool>(new ImplantsPool(), _gameScope);
+            SL.Register<ImplantsHolderService>(new ImplantsHolderService(), _gameScope);
             SL.Register<InventoryService>(new InventoryService(), _gameScope);
             SL.Register<WarriorController>(new WarriorController(), _gameScope);
             SL.Register<BattleController>(_battleController, _gameScope);
@@ -52,13 +52,14 @@ namespace Game.Runtime.Runners
         {
             SL.InitializeScope(_gameScope);
             SL.Get<DialogController>().Background.gameObject.SetActive(false);
+            SL.Get<ImplantsHolderService>().SpawnImplants();
             await SL.Get<UIFaderService>().FadeOut();
         }
 
         private void ConfigureLevel()
         {
             var currentLevelIndex = SL.Get<SaveService>().SaveData.LevelIndex;
-            var levelModel = LevelHelper.GetLevelModel(currentLevelIndex);
+            var levelModel = LevelHelper.GetCurrentLevelModel();
 
             if (levelModel == null)
             {
@@ -74,6 +75,16 @@ namespace Game.Runtime.Runners
 
             SL.Register<EnemyController>( new EnemyController(CM.Get(levelComponent.EnemyPrefab.EntityId)), _gameScope);
             SL.Register<WarriorView>(_warriorView, _gameScope);
+
+            if (levelModel.Is<AddImplantsToPoolAtStartComponent>(out var component))
+            {
+                var implantIds = new List<string>();
+                foreach (var implant in component.ImplantsPrefabs)
+                    implantIds.Add(implant.EntityId);
+                
+                SL.Get<ImplantsPoolService>().AddImplants(implantIds);
+            }
+            else if (currentLevelIndex == 0) Debug.LogWarning($"[GameRunner] Implants pool is empty!");
             
             Debug.Log($"[GameRunner] Level loaded!");
         }
