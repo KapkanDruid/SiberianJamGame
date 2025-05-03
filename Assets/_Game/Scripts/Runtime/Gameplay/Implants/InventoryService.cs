@@ -18,17 +18,17 @@ namespace Game.Runtime.Gameplay.Implants
         private readonly Dictionary<Vector2Int, InventorySlot> _slots = new();
         private readonly Dictionary<Vector2Int, ImplantBehaviour> _occupiedSlots = new();
         private readonly Dictionary<ImplantBehaviour, List<Vector2Int>> _itemPositions = new();
-        
+
         private Vector2Int _gridSize;
         private int _cellSize;
-        
+
         private InventoryView _inventoryView;
 
         public void Initialize()
         {
             _inventoryView = SL.Get<HUDService>().Behaviour.InventoryView;
             SL.Get<BattleController>().OnTurnEnded += OnTurnEnded;
-            
+
             CreateGrid();
         }
 
@@ -38,32 +38,96 @@ namespace Game.Runtime.Gameplay.Implants
             {
                 Object.Destroy(item.Key.gameObject);
             }
-            
+
             _occupiedSlots.Clear();
             _itemPositions.Clear();
-            
+
             UpdateAllSlotVisual();
         }
-        
+
         public WarriorTurnData CalculateTurnData()
         {
-            var health = 0f;
-            var damage = 0f;
-            var armor = 0f;
+            float health = 0f;
+            float damage = 0f;
+            float armor = 0f;
+            int healthSynergy = 0;
+            int damageSynergy = 0;
+            int armorSynergy = 0;
 
-            foreach (var item in _itemPositions.Keys)
+            Vector2Int[] neighborOffsets = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
+            HashSet<ImplantBehaviour> processedBehaviour = new();
+
+            foreach (var itemPair in _itemPositions)
             {
+                var item = itemPair.Key;
+                var implantType = item.GetImplantType();
+
                 if (item.Model.Is<HealthImplantComponent>(out var healthImplant))
+                {
                     health += healthImplant.Health;
+                }
                 else if (item.Model.Is<DamageImplantComponent>(out var damageImplant))
+                {
                     damage += damageImplant.Damage;
+                }
                 else if (item.Model.Is<ArmorImplantComponent>(out var armorImplant))
+                {
                     armor += armorImplant.Armor;
+                }
+                
+                foreach (var pos in itemPair.Value)
+                {
+                    foreach (var offset in neighborOffsets)
+                    {
+                        var neighborPos = pos + offset;
+
+                        if (_occupiedSlots.TryGetValue(neighborPos, out var neighborItem))
+                        {
+                            if (processedBehaviour.Contains(neighborItem) || neighborItem.Equals(item))
+                                continue;
+                            
+                            var isBroken = neighborItem.Model.Is<BrokenImplantCellsComponent>(out var neighborBroken) && 
+                                           neighborBroken.BrokenCells.Contains(neighborPos);
+
+                            if (isBroken)
+                            {
+                                Debug.Log($"Is broken cell: {neighborPos}");
+                                continue;
+                            }
+
+                            if (neighborItem.GetImplantType() == implantType)
+                            {
+                                switch (implantType)
+                                {
+                                    case ImplantType.Health:
+                                        healthSynergy++;
+                                        break;
+                                    case ImplantType.Damage:
+                                        damageSynergy++;
+                                        break;
+                                    case ImplantType.Armor:
+                                        armorSynergy++;
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                processedBehaviour.Add(item);
             }
+            
+            Debug.Log($"Healh Synergy: {healthSynergy}");
+            Debug.Log($"Damage Synergy: {damageSynergy}");
+            Debug.Log($"Armor Synergy: {armorSynergy}");
+
+            health += healthSynergy ;
+            damage += damageSynergy;
+            armor += armorSynergy;
 
             return new WarriorTurnData(health, damage, armor);
         }
-        
+
         public bool TryPlaceItem(ImplantBehaviour item, Vector2Int gridPosition)
         {
             if (!CanPlaceItem(item, gridPosition)) return false;
@@ -87,7 +151,7 @@ namespace Game.Runtime.Gameplay.Implants
             }
 
             _itemPositions[item] = newPositions;
-                
+
             return true;
         }
 
@@ -95,18 +159,18 @@ namespace Game.Runtime.Gameplay.Implants
         {
             return _itemPositions.GetValueOrDefault(item) != default;
         }
-        
+
         private bool IsSlotOccupied(Vector2Int slot)
         {
             return _occupiedSlots.ContainsKey(slot);
         }
-        
+
         public void SetItemPosition(InventorySlot slot, ImplantBehaviour item)
         {
             var itemCenterPosition = InventoryHelper.CalculateCenterPosition(slot, item);
             _inventoryView.SetItemInInventory(item, itemCenterPosition);
         }
-        
+
         public void RemoveItem(ImplantBehaviour item)
         {
             if (_itemPositions.TryGetValue(item, out var positions))
@@ -120,7 +184,7 @@ namespace Game.Runtime.Gameplay.Implants
                 _itemPositions.Remove(item);
             }
         }
-        
+
         public void UpdateSlotHighlight(ImplantBehaviour item, Vector2Int gridPosition, Color color)
         {
             var rotatedSlots = GetRotatedSlots(item);
@@ -135,12 +199,12 @@ namespace Game.Runtime.Gameplay.Implants
                 }
             }
         }
-        
+
         public void ResetSlotHighlight(ImplantBehaviour item)
         {
             foreach (var slot in _slots)
             {
-                if (!slot.Value.Occupied || 
+                if (!slot.Value.Occupied ||
                     _occupiedSlots.TryGetValue(slot.Key, out var itemOccupied) && itemOccupied.Equals(item))
                     slot.Value.SetColor(Color.white);
             }
@@ -151,14 +215,14 @@ namespace Game.Runtime.Gameplay.Implants
             var defaultInventoryGrid = CM.Get(CMs.Gameplay.Inventory).GetComponent<InventoryComponent>();
             _gridSize = defaultInventoryGrid.Grid.GridSize;
             _cellSize = defaultInventoryGrid.CellSize;
-            
+
             _inventoryView.ResizeInventoryView(_gridSize, _cellSize);
-            
+
             foreach (var slotPos in defaultInventoryGrid.Grid.GridPattern)
             {
                 var slotObj = new GameObject($"InventorySlot_{slotPos.x}_{slotPos.y}");
                 var slot = slotObj.AddComponent<InventorySlot>();
-                
+
                 _inventoryView.SetupInventorySlot(slotObj, slotPos, _cellSize);
 
                 slot.Initialize(slotPos);
@@ -173,7 +237,7 @@ namespace Game.Runtime.Gameplay.Implants
 
             foreach (var slot in targetSlots)
             {
-                if (!IsSlotExist(slot) || 
+                if (!IsSlotExist(slot) ||
                     (_occupiedSlots.TryGetValue(slot, out var itemOccupied) && !itemOccupied.Equals(item)))
                 {
                     return false;
@@ -195,7 +259,7 @@ namespace Game.Runtime.Gameplay.Implants
                 slot.SetOccupied(IsSlotOccupied(slotPosition));
             }
         }
-        
+
         public void UpdateAllSlotVisual()
         {
             foreach (var slot in _slots)
