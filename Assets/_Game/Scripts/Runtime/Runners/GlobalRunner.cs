@@ -1,4 +1,5 @@
 ﻿using Game.Runtime.CMS;
+using Game.Runtime.CMS.Components.Commons;
 using Game.Runtime.Services;
 using Game.Runtime.Services.Audio;
 using Game.Runtime.Services.Camera;
@@ -45,6 +46,16 @@ namespace Game.Runtime.Runners
             SL.Register<UIFaderService>(new UIFaderService(), _globalScope);
             SL.Register<CameraService>(new CameraService(), _globalScope);
             SL.Register<InputService>(new InputService(), _globalScope);
+            SL.Register<DialogController>(CreateDialogController(), _globalScope);
+            SL.Register<Invoker>(new Invoker(), _globalScope);
+        }
+
+        private DialogController CreateDialogController()
+        {
+            var prefab = CM.Get(CMs.Configs.DialogReference).GetComponent<PrefabComponent>().Prefab;
+            var gameObject = GameObject.Instantiate(prefab);
+            DontDestroyOnLoad(gameObject);
+            return gameObject.GetComponentInChildren<DialogController>();
         }
 
         private void OnDestroy()

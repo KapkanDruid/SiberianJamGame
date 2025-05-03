@@ -8,6 +8,6 @@ namespace Game.Runtime.CMS.Components.Audio
     public class SFXComponent : CMSComponent
     {
         public List<AudioClip> Clips = new();
-        public float Volume = 1f;
+        [Range(0, 2)] public float Volume = 1f;
     }
 }
