@@ -17,10 +17,12 @@ namespace Game.Runtime.CMS
                 public const string SFXTest = "CMS/Audio/SFX/SFXTest";
             }
             public const string AmbientTest = "CMS/Audio/AmbientTest";
+            public const string VoiceTest = "CMS/Audio/VoiceTest";
         }
         public static class CommandBlocks
         {
             public const string Block1 = "CMS/CommandBlocks/Block1";
+            public const string Block2 = "CMS/CommandBlocks/Block2";
         }
         public static class Configs
         {
@@ -35,11 +37,31 @@ namespace Game.Runtime.CMS
             {
                 public static class Implants
                 {
-                    public const string Implant_3 = "CMS/Gameplay/Inventory/Implants/Implant_3";
-                    public const string Implant_7 = "CMS/Gameplay/Inventory/Implants/Implant_7";
-                    public const string Implant_8 = "CMS/Gameplay/Inventory/Implants/Implant_8";
+                    public const string basic_blue = "CMS/Gameplay/Inventory/Implants/basic_blue";
+                    public const string basic_green_2 = "CMS/Gameplay/Inventory/Implants/basic_green_2";
+                    public const string basic_red_2 = "CMS/Gameplay/Inventory/Implants/basic_red_2";
+                    public const string blue_1 = "CMS/Gameplay/Inventory/Implants/blue_1";
+                    public const string blue_2 = "CMS/Gameplay/Inventory/Implants/blue_2";
+                    public const string blue_3 = "CMS/Gameplay/Inventory/Implants/blue_3";
+                    public const string blue_4 = "CMS/Gameplay/Inventory/Implants/blue_4";
+                    public const string blue_5 = "CMS/Gameplay/Inventory/Implants/blue_5";
+                    public const string blue_6 = "CMS/Gameplay/Inventory/Implants/blue_6";
+                    public const string blue_7 = "CMS/Gameplay/Inventory/Implants/blue_7";
+                    public const string green_1 = "CMS/Gameplay/Inventory/Implants/green_1";
+                    public const string green_2 = "CMS/Gameplay/Inventory/Implants/green_2";
+                    public const string green_3 = "CMS/Gameplay/Inventory/Implants/green_3";
+                    public const string green_4 = "CMS/Gameplay/Inventory/Implants/green_4";
+                    public const string green_5 = "CMS/Gameplay/Inventory/Implants/green_5";
+                    public const string green_6 = "CMS/Gameplay/Inventory/Implants/green_6";
+                    public const string green_7 = "CMS/Gameplay/Inventory/Implants/green_7";
+                    public const string red_1 = "CMS/Gameplay/Inventory/Implants/red_1";
+                    public const string red_2 = "CMS/Gameplay/Inventory/Implants/red_2";
+                    public const string red_3 = "CMS/Gameplay/Inventory/Implants/red_3";
+                    public const string red_4 = "CMS/Gameplay/Inventory/Implants/red_4";
+                    public const string red_5 = "CMS/Gameplay/Inventory/Implants/red_5";
+                    public const string red_6 = "CMS/Gameplay/Inventory/Implants/red_6";
+                    public const string red_7 = "CMS/Gameplay/Inventory/Implants/red_7";
                 }
-                public const string green_2 = "CMS/Gameplay/Inventory/green_2";
                 public const string InventoryGrid = "CMS/Gameplay/Inventory/InventoryGrid";
             }
             public const string HUD = "CMS/Gameplay/HUD";

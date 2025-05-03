@@ -56,8 +56,6 @@ namespace Game.Runtime.Services
 
             await UniTask.WaitUntil(() => _isPrintEnded && _isSkipped);
 
-            Debug.Log($"Await dialog ended _isPrintEnded {_isPrintEnded}  _isSkipped  {_isSkipped}");
-
             _isSkipped = false;
             _isPrintEnded = false;
         }
@@ -74,7 +72,7 @@ namespace Game.Runtime.Services
             image.sprite = sprite;
             image.rectTransform.anchoredPosition = offset;
             image.SetNativeSize();
-            image.rectTransform.localScale = Vector3.one * 0.5f;
+            image.rectTransform.localScale = Vector3.one * 0.6f;
 
             var color = image.color;
             color.a = 0;
@@ -86,16 +84,40 @@ namespace Game.Runtime.Services
 
         public void HideAll(float duration, Action onCompleted)
         {
+            var textColor = _dialogText.color;
+            var nameColor = _name.color;
+
             DOTween.Sequence()
                 .Append(_dialogPanel.DOFade(0, duration))
-                .Join(_iconImage.DOFade(0,duration))
+                .Join(_rightImage.DOFade(0,duration))
+                .Join(_leftImage.DOFade(0, duration))
                 .Join(_name.DOFade(0, duration))
                 .Join(_dialogText.DOFade(0, duration))
                 .OnComplete(() => 
                 {
                     onCompleted?.Invoke();
                     gameObject.SetActive(false);
+                    _leftImage.gameObject.SetActive(false);
+                    _rightImage.gameObject.SetActive(false);
+
+                    _dialogText.color = textColor;
+                    _dialogText.text = " ";
+
+                    _name.color = nameColor;
+                    _name.text = " ";
                 });
+        }
+
+        public void HideIcon(PositionType positionType, float duration)
+        {
+            Image image = null;
+
+            if (positionType == PositionType.Left)
+                image = _leftImage;
+            else if (positionType == PositionType.Right)
+                image = _rightImage;
+
+            image.DOFade(0, duration);
         }
 
         private void OnSkipText()

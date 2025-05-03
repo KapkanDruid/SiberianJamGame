@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3405359809594700275}
   - component: {fileID: 1554981954346889324}
   m_Layer: 0
-  m_Name: Block1
+  m_Name: Block4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3491bc35dc84132acbda8b4eb9ddf2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityId: CMS/CommandBlocks/Block1
+  entityId: CMS/CommandBlocks/Block4
   Components:
   - rid: 4717638325419638861
   - rid: 4717638325419638910
@@ -110,4 +110,4 @@ MonoBehaviour:
     - rid: 4717638325419638917
       type: {class: GoToBlockCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _blockPrefab: {fileID: 1554981954346889324, guid: 95f7c24d1cd3bdd47bd657e03e1d9466, type: 3}
+        _blockPrefab: {fileID: 1554981954346889324, guid: 6be652bd9681d494c82498aa5690a5de, type: 3}

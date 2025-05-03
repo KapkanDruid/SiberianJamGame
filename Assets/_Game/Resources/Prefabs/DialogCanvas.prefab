@@ -95,7 +95,6 @@ MonoBehaviour:
   _dialogWriter: {fileID: 7646246223687208240}
   _name: {fileID: 7589698846779108379}
   _dialogPanel: {fileID: 4571877132843325956}
-  _iconImage: {fileID: 0}
   _rightImage: {fileID: 3693102664283830023}
   _leftImage: {fileID: 49378367300018959}
 --- !u!1 &3928447746192070713
@@ -134,8 +133,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000002265, y: -25}
-  m_SizeDelta: {x: 1194.7734, y: 202.0813}
+  m_AnchoredPosition: {x: 0, y: -25}
+  m_SizeDelta: {x: 861.9346, y: 202.0813}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3669356210591047164
 CanvasRenderer:
@@ -377,7 +376,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -497.39, y: 99.932}
+  m_AnchoredPosition: {x: -330.97, y: 101.04}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8299205005807248756
