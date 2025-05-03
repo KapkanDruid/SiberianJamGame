@@ -48,7 +48,6 @@ MonoBehaviour:
   Components:
   - rid: 4717638325419638861
   - rid: 4717638325419638910
-  - rid: 4717638325419638891
   - rid: 4717638325419638892
   - rid: 4717638325419638914
   - rid: 4717638325419638912
@@ -69,11 +68,6 @@ MonoBehaviour:
         _delay: 0.035
         _name: SomeName
         _text: Some place holder text
-    - rid: 4717638325419638891
-      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
-      data:
-        _soundConfigs:
-        - {fileID: 8065732582307256877, guid: eb8d0bf4ee5d98a4f921c81da41d7f69, type: 3}
     - rid: 4717638325419638892
       type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
