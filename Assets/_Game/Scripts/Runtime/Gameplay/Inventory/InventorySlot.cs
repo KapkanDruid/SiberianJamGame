@@ -20,7 +20,7 @@ namespace Game.Runtime.Gameplay.Inventory
             _gridPosition = gridPosition;
             
             _backgroundImage = GetComponent<Image>();
-            _backgroundImage.sprite = CM.Get(CMs.Gameplay.Inventory.InventoryGrid).GetComponent<SpriteComponent>().Sprite;
+            _backgroundImage.sprite = CM.Get(CMs.Gameplay.Inventory).GetComponent<SpriteComponent>().Sprite;
         }
 
         public void SetOccupied(bool isOccupied)

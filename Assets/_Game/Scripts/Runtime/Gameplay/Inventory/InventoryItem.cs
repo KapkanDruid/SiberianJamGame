@@ -141,7 +141,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             _pivotPoint.x - 0.5f,
             _pivotPoint.y - 0.5f);
 
-        return Helpers.InventoryHelper.ApplyRotationToOffset(
+        return InventoryHelper.ApplyRotationToOffset(
             new Vector2(
                 pivotDifference.x * _rectTransform.rect.width,
                 pivotDifference.y * _rectTransform.rect.height),
