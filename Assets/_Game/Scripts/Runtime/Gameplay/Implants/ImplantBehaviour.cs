@@ -2,6 +2,7 @@
 using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Commons;
 using Game.Runtime.CMS.Components.Gameplay;
+using Game.Runtime.CMS.Components.Implants;
 using Game.Runtime.Gameplay.HUD;
 using Game.Runtime.Services;
 using Game.Runtime.Services.Input;
@@ -11,6 +12,12 @@ using UnityEngine.UI;
 
 namespace Game.Runtime.Gameplay.Implants
 {
+    public enum ImplantType
+    {
+        Health,
+        Armor,
+        Damage
+    }
     [RequireComponent(typeof(RectTransform), typeof(Image), typeof(CanvasGroup))]
     public class ImplantBehaviour : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
@@ -44,6 +51,13 @@ namespace Game.Runtime.Gameplay.Implants
             SlotPositions = itemComponent.Grid.GridPattern;
             _rectTransform.sizeDelta = itemComponent.SizeDelta;
             _image.sprite = itemModel.GetComponent<SpriteComponent>().Sprite;
+        }
+
+        public ImplantType GetImplantType()
+        {
+            if (Model.Is<HealthImplantComponent>()) return ImplantType.Health;
+            if (Model.Is<ArmorImplantComponent>()) return ImplantType.Armor;
+            return ImplantType.Damage;
         }
 
         public void OnBeginDrag(PointerEventData eventData)
@@ -83,6 +97,8 @@ namespace Game.Runtime.Gameplay.Implants
             _canvasGroup.blocksRaycasts = false;
 
             transform.SetParent(_root);
+            _rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+            _rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
         }
 
         private void StopDragging()
@@ -97,7 +113,7 @@ namespace Game.Runtime.Gameplay.Implants
         {
             if (TryGetLocalPoint(eventData, out Vector2 localPoint))
             {
-                _rectTransform.anchoredPosition = localPoint - CalculatePivotOffset(eventData);
+                _rectTransform.anchoredPosition = localPoint - CalculatePivotOffset();
             }
         }
 
@@ -106,14 +122,8 @@ namespace Game.Runtime.Gameplay.Implants
             return RectTransformUtility.ScreenPointToLocalPointInRectangle(_root, eventData.position, eventData.pressEventCamera, out localPoint);
         }
 
-        private Vector2 CalculatePivotOffset(PointerEventData eventData)
+        private Vector2 CalculatePivotOffset()
         {
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                _rectTransform,
-                eventData.position,
-                eventData.pressEventCamera,
-                out Vector2 _);
-
             Vector2 pivotDifference = new Vector2(
                 _pivotPoint.x - 0.5f,
                 _pivotPoint.y - 0.5f);
@@ -181,6 +191,9 @@ namespace Game.Runtime.Gameplay.Implants
             
             if (_inventoryService.HasItem(this))
                 _inventoryService.RemoveItem(this);
+
+            CurrentRotation = 0;
+            _rectTransform.localRotation = Quaternion.Euler(0, 0, 0);
             
             return true;
         }

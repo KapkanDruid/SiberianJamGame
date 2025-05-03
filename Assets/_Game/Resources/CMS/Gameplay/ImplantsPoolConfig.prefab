@@ -55,4 +55,4 @@ MonoBehaviour:
       data:
         BaseLootCount: 4
         BaseChoiceCount: 3
-        BaseDeckCount: 3
+        BaseDeckCount: 4

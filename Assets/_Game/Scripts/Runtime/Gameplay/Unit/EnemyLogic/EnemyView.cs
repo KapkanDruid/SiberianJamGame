@@ -15,10 +15,13 @@ namespace Game.Runtime.Gameplay.Enemy
             SL.Get<HUDService>().Behaviour.EnemyUI.UpdateText(startHealth.ToString());
         }
 
-        public async UniTask TakeDamageAsync(float currentHealth, float maxHealth, float damage)
+        public void PlayHitAnimation()
         {
             _animator.SetTrigger("Hit");
+        }
 
+        public async UniTask TakeDamageAsync(float currentHealth, float maxHealth, float damage)
+        {
             SL.Get<HUDService>().Behaviour.EnemyUI.UpdateHealthBar(currentHealth, maxHealth);
 
             float startHp = currentHealth;
