@@ -70,4 +70,4 @@ MonoBehaviour:
     - rid: 5361599205655707720
       type: {class: ArmorImplantComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
       data:
-        Armor: 2
+        Armor: 20

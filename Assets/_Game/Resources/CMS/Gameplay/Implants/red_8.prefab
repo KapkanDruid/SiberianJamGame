@@ -70,4 +70,4 @@ MonoBehaviour:
     - rid: 5361599205655707739
       type: {class: DamageImplantComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
       data:
-        Damage: 4
+        Damage: 40
