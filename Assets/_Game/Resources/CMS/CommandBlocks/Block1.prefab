@@ -58,7 +58,7 @@ MonoBehaviour:
     - rid: 4717638325419638861
       type: {class: DialogAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _appearType: 1
+        _appearType: 0
         _duration: 0.2
     - rid: 4717638325419638867
       type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
@@ -69,7 +69,7 @@ MonoBehaviour:
     - rid: 4717638325419638869
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _appearType: 1
+        _appearType: 0
         _duration: 0.4
     - rid: 4717638325419638891
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
@@ -88,5 +88,5 @@ MonoBehaviour:
     - rid: 4717638325419638893
       type: {class: DialogAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _appearType: 2
+        _appearType: 1
         _duration: 0.3
