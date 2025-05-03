@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2118454253565686109
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4320309297728863132}
+  - component: {fileID: 4443999720199238786}
+  m_Layer: 0
+  m_Name: basic_red
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4320309297728863132
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118454253565686109}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4443999720199238786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118454253565686109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3491bc35dc84132acbda8b4eb9ddf2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityId: CMS/Gameplay/Implants/basic_red
+  Components:
+  - rid: 5361599194504888397
+  - rid: 5361599194504888398
+  - rid: 635145038440169682
+  references:
+    version: 2
+    RefIds:
+    - rid: 635145038440169682
+      type: {class: DamageImplantComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
+      data:
+        Damage: 2
+    - rid: 5361599194504888397
+      type: {class: SpriteComponent, ns: Game.Runtime.CMS.Components.Commons, asm: Runtime}
+      data:
+        Sprite: {fileID: 5374418100180392016, guid: 874a0b8bb6ecdb840873df01c3ad673e, type: 3}
+    - rid: 5361599194504888398
+      type: {class: InventoryItemComponent, ns: Game.Runtime.CMS.Components.Gameplay, asm: Runtime}
+      data:
+        SizeDelta: {x: 38, y: 20}
+        Pivot: {x: 0.75, y: 0.6}
+        Grid: {fileID: 11400000, guid: 4ca3e5ae71384994b80b15fb6cb66df6, type: 2}
