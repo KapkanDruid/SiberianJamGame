@@ -66,6 +66,7 @@ namespace Game.Runtime.CMS
                 public const string Level_0 = "CMS/Gameplay/Levels/Level_0";
             }
             public const string HUD = "CMS/Gameplay/HUD";
+            public const string ImplantsPoolConfig = "CMS/Gameplay/ImplantsPoolConfig";
             public const string Inventory = "CMS/Gameplay/Inventory";
         }
     }
