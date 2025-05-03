@@ -1,15 +1,15 @@
 ﻿using Cysharp.Threading.Tasks;
 using Game.Runtime.CMS;
-using Game.Runtime.CMS.Components.Commons;
 using Game.Runtime.CMS.Components.Configs;
 using Game.Runtime.Gameplay;
+using Game.Runtime.Gameplay.Enemy;
+using Game.Runtime.Gameplay.HUD;
+using Game.Runtime.Gameplay.Inventory;
+using Game.Runtime.Gameplay.Warrior;
 using Game.Runtime.Services;
-using Game.Runtime.Services.Audio;
 using Game.Runtime.Services.Camera;
 using Game.Runtime.Services.UI;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Game.Runtime.Runners
 {
@@ -18,11 +18,6 @@ namespace Game.Runtime.Runners
         [SerializeField] private Camera gameCamera;
         [SerializeField] private BattleController _battleController;
         [SerializeField] private WarriorView _warriorView;
-
-        [Header("enemyUI")]
-        [SerializeField] private RectTransform _healthParent;
-        [SerializeField] private Image _healthBar;
-        [SerializeField] private TextMeshProUGUI _healthText;
 
         private int _currentLevelIndex;
 
@@ -42,12 +37,13 @@ namespace Game.Runtime.Runners
 
         private void RegisterServices()
         {
+            SL.Register<HUDService>(new HUDService(), _gameScope);
+            SL.Register<InventoryService>(new InventoryService(), _gameScope);
             SL.Register<WarriorController>(new WarriorController(), _gameScope);
             SL.Register<BattleController>(_battleController, _gameScope);
 
             var enemy = CreateEnemy();
 
-            SL.Register<IEnemy>(enemy, _gameScope);
             SL.Register<EnemyController>(enemy, _gameScope);
             SL.Register<WarriorView>(_warriorView, _gameScope);
         }
@@ -68,7 +64,7 @@ namespace Game.Runtime.Runners
             var prefabByIndex = entityByIndex.GetComponent<EnemyPrefabComponent>().EnemyView;
             var configByIndex = entityByIndex.GetComponent<EnemyConfig>();
 
-            return new EnemyController(configByIndex, new EnemyViewData(_healthParent, _healthBar, _healthText), prefabByIndex);
+            return new EnemyController(configByIndex, prefabByIndex);
         }
 
         private void OnDestroy()

@@ -26,7 +26,11 @@ namespace Game.Runtime.Gameplay.Inventory
         public void SetOccupied(bool isOccupied)
         {
             Occupied = isOccupied;
-            SetColor(isOccupied ? Color.red : Color.white);
+
+            var occupiedColor = Color.gray;
+            occupiedColor.a = 0.5f;
+            
+            SetColor(isOccupied ? occupiedColor : Color.white);
         }
 
         public void SetColor(Color color)

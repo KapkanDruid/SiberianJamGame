@@ -1,4 +1,4 @@
-﻿using Game.Runtime.Gameplay;
+﻿using Game.Runtime.Gameplay.Enemy;
 using UnityEngine;
 
 namespace Game.Runtime.CMS.Components.Configs

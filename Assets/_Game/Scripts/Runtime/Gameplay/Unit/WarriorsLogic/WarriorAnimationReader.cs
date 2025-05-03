@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game.Runtime.Gameplay
+namespace Game.Runtime.Gameplay.Warrior
 {
     public class WarriorAnimationReader : MonoBehaviour
     {

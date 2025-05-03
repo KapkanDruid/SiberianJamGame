@@ -1,7 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using Game.Runtime.Services;
 
-namespace Game.Runtime.Gameplay
+namespace Game.Runtime.Gameplay.Enemy
 {
     public interface IEnemy : IService
     {

@@ -1,14 +1,16 @@
 ﻿using Cysharp.Threading.Tasks;
 using Game.Runtime.Services;
 using System;
+using Game.Runtime.Gameplay.Enemy;
+using Game.Runtime.Gameplay.HUD;
+using Game.Runtime.Gameplay.Inventory;
+using Game.Runtime.Gameplay.Warrior;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Game.Runtime.Gameplay
 {
     public class BattleController : MonoBehaviour, IInitializable, IService
     {
-        [SerializeField] private Button _endTurnButton;
         [SerializeField] private Transform _enemyPosition;
 
         private bool _isTurnStarted;
@@ -22,10 +24,10 @@ namespace Game.Runtime.Gameplay
 
         public void Initialize()
         {
-            _endTurnButton.onClick.AddListener(() =>
+            SL.Get<HUDService>().Behaviour.EndTurnButton.onClick.AddListener(() =>
             {
                 TurnAsync().Forget();
-                _endTurnButton.interactable = false;
+                SL.Get<HUDService>().Behaviour.EndTurnButton.interactable = false;
             });
         }
 
@@ -38,8 +40,9 @@ namespace Game.Runtime.Gameplay
 
             var warrior = SL.Get<WarriorController>();
             var enemy = SL.Get<EnemyController>();
-
-            warrior.SetTurnData(new WarriorTurnData(5, 1, 3)); //MOCK
+            
+            //TODO: Это просто тест, потом удалить
+            warrior.SetTurnData( SL.Get<InventoryService>().CalculateTurnData()); //MOCK
             //warrior.SetTurnData(OnTurnStarted.Invoke()); //To replace MOCK
 
             var token = this.GetCancellationTokenOnDestroy();
@@ -50,7 +53,7 @@ namespace Game.Runtime.Gameplay
 
 
             OnTurnEnded?.Invoke();
-            _endTurnButton.interactable = true;
+            SL.Get<HUDService>().Behaviour.EndTurnButton.interactable = true;
             _isTurnStarted = false;
         }
 

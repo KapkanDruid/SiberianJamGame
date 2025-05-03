@@ -1,7 +1,7 @@
 ﻿using Game.Runtime.CMS;
 using UnityEngine;
 
-namespace Game.Runtime.Gameplay.HUD
+namespace Game.Runtime.Gameplay.Test
 {
     public class TestImplantBehaviour : InventoryItem
     {
