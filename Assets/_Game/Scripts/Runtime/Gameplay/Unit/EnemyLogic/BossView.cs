@@ -5,19 +5,18 @@ using UnityEngine;
 
 namespace Game.Runtime.Gameplay.Enemy
 {
-    public class EnemyView : MonoBehaviour
+    public class BossView : MonoBehaviour
     {
-        [SerializeField] private Animator _animator;
         [SerializeField] private EnemyAnimationReader _reader;
+        [SerializeField] private Animator _animator;
 
-        public void Configurate(float startHealth)
+        public async UniTask AttackAsync()
         {
-            SL.Get<HUDService>().Behaviour.EnemyUI.UpdateText(startHealth.ToString());
-        }
+            _animator.SetTrigger("Attack");
 
-        public void PlayHitAnimation()
-        {
-            _animator.SetTrigger("Hit");
+            await UniTask.WaitUntil(() => _reader.AttackPerformed == true);
+
+            _reader.AttackPerformed = false;
         }
 
         public async UniTask TakeDamageAsync(float currentHealth, float maxHealth, float damage)
@@ -29,19 +28,14 @@ namespace Game.Runtime.Gameplay.Enemy
 
             if (endHp <= 0)
                 endHp = 0;
-            
+
             await SL.Get<HUDService>().Behaviour.EnemyUI.TakeDamageSequenceAsync(maxHealth, startHp, endHp);
         }
 
-        public async UniTask AttackAsync()
+        public void PlayHitAnimation()
         {
-            _animator.SetTrigger("Attack");
-
-            await UniTask.WaitUntil(() => _reader.AttackPerformed == true);
-
-            _reader.AttackPerformed = false;
+            _animator.SetTrigger("Hit");
         }
-
         public void Death()
         {
             _animator.SetTrigger("Death");
