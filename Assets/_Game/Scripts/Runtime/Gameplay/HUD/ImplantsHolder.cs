@@ -1,5 +1,7 @@
 ﻿using System;
 using Game.Runtime.Gameplay.Implants;
+using Game.Runtime.Services;
+using Game.Runtime.Services.Camera;
 using UnityEngine;
 
 namespace Game.Runtime.Gameplay.HUD
@@ -17,7 +19,8 @@ namespace Game.Runtime.Gameplay.HUD
         
         public bool IsInsideHolder(Vector2 screenPosition)
         {
-            return RectTransformUtility.RectangleContainsScreenPoint(parent, screenPosition);
+            return RectTransformUtility.RectangleContainsScreenPoint(parent, 
+                SL.Get<CameraService>().Camera.ScreenToViewportPoint(screenPosition));
         }
 
         public void SetItemPosition(ImplantBehaviour item, Vector2 position)
