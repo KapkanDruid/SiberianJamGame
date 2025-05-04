@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using DG.Tweening;
 using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Commons;
 using Game.Runtime.CMS.Components.Gameplay;
@@ -28,6 +30,7 @@ namespace Game.Runtime.Gameplay.Implants
         public List<Vector2Int> SlotPositions { get; private set; }
         public CMSEntity Model { get; private set; }
         public int CurrentRotation { get; private set; }
+        public Vector2Int CenterSlotPosition { get; private set; }
 
         private Transform _originalParent;
         private Vector2 _originalPosition;
@@ -37,6 +40,11 @@ namespace Game.Runtime.Gameplay.Implants
         private bool _isDragging;
         private int _originalRotation;
         private Vector2 _pivotPoint;
+
+        private void Start()
+        {
+            transform.localScale = Vector3.one;
+        }
 
         public void SetupItem(CMSEntity itemModel, RectTransform root)
         {
@@ -88,6 +96,11 @@ namespace Game.Runtime.Gameplay.Implants
             ReturnToOriginalPosition();
         }
 
+        public void PingPongScale()
+        {
+            transform.DOScale(Vector3.one * 1.2f, 0.1f).SetLoops(2, LoopType.Yoyo);
+        }
+
         private void StartDragging()
         {
             _isDragging = true;
@@ -99,6 +112,8 @@ namespace Game.Runtime.Gameplay.Implants
             transform.SetParent(_root);
             _rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
             _rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+
+            transform.localScale = Vector3.one * 1.2f;
         }
 
         private void StopDragging()
@@ -106,6 +121,7 @@ namespace Game.Runtime.Gameplay.Implants
             _isDragging = false;
             _canvasGroup.blocksRaycasts = true;
             SL.Get<InputService>().OnRotateItem -= HandleRotation;
+            transform.DOScale(Vector3.one, 0.1f);
             ResetHighlight();
         }
 
@@ -181,6 +197,7 @@ namespace Game.Runtime.Gameplay.Implants
                 _holderService.RemoveItem(this);
             
             _inventoryService.SetItemPosition(slot, this);
+            CenterSlotPosition = slot.GridPosition;
             return true;
         }
 
