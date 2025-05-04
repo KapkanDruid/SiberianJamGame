@@ -60,4 +60,4 @@ MonoBehaviour:
     - rid: 4717638307256991919
       type: {class: EnemyPrefabComponent, ns: Game.Runtime.CMS.Components.Configs, asm: Runtime}
       data:
-        _enemyView: {fileID: -7791952286858956461, guid: 00e5a688ad0f22943ad4f52979dad825, type: 3}
+        _enemyView: {fileID: -7791952286858956461, guid: 68bdcda0bb318db4f99c3a3275972e53, type: 3}
