@@ -34,6 +34,7 @@ namespace Game.Runtime.Gameplay.Implants
 
         private Transform _originalParent;
         private Vector2 _originalPosition;
+        private int _originIndex;
         private InventoryService _inventoryService;
         private ImplantsHolderService _holderService;
         private RectTransform _root;
@@ -108,6 +109,7 @@ namespace Game.Runtime.Gameplay.Implants
             _originalPosition = _rectTransform.anchoredPosition;
             _originalRotation = CurrentRotation;
             _canvasGroup.blocksRaycasts = false;
+            _originIndex = transform.GetSiblingIndex();
 
             transform.SetParent(_root);
             _rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
@@ -239,6 +241,7 @@ namespace Game.Runtime.Gameplay.Implants
             _rectTransform.localRotation = Quaternion.Euler(0, 0, -90 * _originalRotation);
             CurrentRotation = _originalRotation;
             _inventoryService.UpdateAllSlotVisual();
+            transform.SetSiblingIndex(_originIndex);
         }
     }
 }
