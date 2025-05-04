@@ -46,7 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityId: CMS/CommandBlocks/Tutorial/tutorial_block_3
   Components:
-  - rid: 6583048891092697208
   - rid: 6583048891092697177
   - rid: 6583048891092697178
   - rid: 6583048891092697179
@@ -57,10 +56,14 @@ MonoBehaviour:
   - rid: 6583048891092697184
   - rid: 6583048891092697185
   - rid: 6583048891092697186
-  - rid: 6583048891092697187
+  - rid: 4717638356834451553
   references:
     version: 2
     RefIds:
+    - rid: 4717638356834451553
+      type: {class: StartTutorialCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        TutorialStage: 3
     - rid: 6583048891092697177
       type: {class: DialogAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -127,11 +130,3 @@ MonoBehaviour:
       data:
         _appearType: 1
         _duration: 0.3
-    - rid: 6583048891092697187
-      type: {class: GoToBlockCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
-      data:
-        _blockPrefab: {fileID: 0}
-    - rid: 6583048891092697208
-      type: {class: BackgroundSetCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
-      data:
-        BackgroundSprite: {fileID: 21300000, guid: cde3d42df50d8734a834947e1cc30978, type: 3}

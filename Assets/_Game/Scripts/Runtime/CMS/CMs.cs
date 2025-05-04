@@ -12,11 +12,127 @@ namespace Game.Runtime.CMS
     {
         public static class Audio
         {
+            public static class Adam
+            {
+                public const string subway_adam_1 = "CMS/Audio/Adam/subway_adam_1";
+                public const string subway_adam_2 = "CMS/Audio/Adam/subway_adam_2";
+            }
+            public static class Alta
+            {
+                public static class Forest
+                {
+                    public const string forest_RCA_1 = "CMS/Audio/Alta/Forest/forest_RCA_1";
+                    public const string forest_RCA_10 = "CMS/Audio/Alta/Forest/forest_RCA_10";
+                    public const string forest_RCA_11 = "CMS/Audio/Alta/Forest/forest_RCA_11";
+                    public const string forest_RCA_12 = "CMS/Audio/Alta/Forest/forest_RCA_12";
+                    public const string forest_RCA_13 = "CMS/Audio/Alta/Forest/forest_RCA_13";
+                    public const string forest_RCA_2 = "CMS/Audio/Alta/Forest/forest_RCA_2";
+                    public const string forest_RCA_3 = "CMS/Audio/Alta/Forest/forest_RCA_3";
+                    public const string forest_RCA_4 = "CMS/Audio/Alta/Forest/forest_RCA_4";
+                    public const string forest_RCA_5 = "CMS/Audio/Alta/Forest/forest_RCA_5";
+                    public const string forest_RCA_6 = "CMS/Audio/Alta/Forest/forest_RCA_6";
+                    public const string forest_RCA_7 = "CMS/Audio/Alta/Forest/forest_RCA_7";
+                    public const string forest_RCA_8 = "CMS/Audio/Alta/Forest/forest_RCA_8";
+                    public const string forest_RCA_9 = "CMS/Audio/Alta/Forest/forest_RCA_9";
+                }
+                public static class Ofice
+                {
+                    public const string office_RCA_1 = "CMS/Audio/Alta/Ofice/office_RCA_1";
+                }
+                public static class Roof
+                {
+                    public const string roof_RCA_1 = "CMS/Audio/Alta/Roof/roof_RCA_1";
+                }
+                public static class Suburb
+                {
+                    public const string suburb_RCA_1 = "CMS/Audio/Alta/Suburb/suburb_RCA_1";
+                    public const string suburb_RCA_2 = "CMS/Audio/Alta/Suburb/suburb_RCA_2";
+                    public const string suburb_RCA_3 = "CMS/Audio/Alta/Suburb/suburb_RCA_3";
+                    public const string suburb_RCA_4 = "CMS/Audio/Alta/Suburb/suburb_RCA_4";
+                    public const string suburb_RCA_5 = "CMS/Audio/Alta/Suburb/suburb_RCA_5";
+                    public const string suburb_RCA_6 = "CMS/Audio/Alta/Suburb/suburb_RCA_6";
+                }
+            }
+            public static class August
+            {
+                public const string suburb_august_1 = "CMS/Audio/August/suburb_august_1";
+                public const string suburb_august_2 = "CMS/Audio/August/suburb_august_2";
+                public const string suburb_august_3 = "CMS/Audio/August/suburb_august_3";
+                public const string suburb_august_4 = "CMS/Audio/August/suburb_august_4";
+                public const string suburb_august_5 = "CMS/Audio/August/suburb_august_5";
+            }
             public static class Dictor
             {
-                public const string forest_dictor_6 = "CMS/Audio/Dictor/forest_dictor_6";
-                public const string forest_dictor_7 = "CMS/Audio/Dictor/forest_dictor_7";
-                public const string forest_dictor_8 = "CMS/Audio/Dictor/forest_dictor_8";
+                public static class Death
+                {
+                    public const string death_in_forest = "CMS/Audio/Dictor/Death/death_in_forest";
+                    public const string death_in_office = "CMS/Audio/Dictor/Death/death_in_office";
+                    public const string death_in_roof = "CMS/Audio/Dictor/Death/death_in_roof";
+                    public const string death_in_suburb = "CMS/Audio/Dictor/Death/death_in_suburb";
+                    public const string death_in_subway = "CMS/Audio/Dictor/Death/death_in_subway";
+                }
+                public static class forest
+                {
+                    public const string forest_dictor_1 = "CMS/Audio/Dictor/forest/forest_dictor_1";
+                    public const string forest_dictor_10 = "CMS/Audio/Dictor/forest/forest_dictor_10";
+                    public const string forest_dictor_11 = "CMS/Audio/Dictor/forest/forest_dictor_11";
+                    public const string forest_dictor_12 = "CMS/Audio/Dictor/forest/forest_dictor_12";
+                    public const string forest_dictor_2 = "CMS/Audio/Dictor/forest/forest_dictor_2";
+                    public const string forest_dictor_3 = "CMS/Audio/Dictor/forest/forest_dictor_3";
+                    public const string forest_dictor_4 = "CMS/Audio/Dictor/forest/forest_dictor_4";
+                    public const string forest_dictor_5 = "CMS/Audio/Dictor/forest/forest_dictor_5";
+                    public const string forest_dictor_6 = "CMS/Audio/Dictor/forest/forest_dictor_6";
+                    public const string forest_dictor_7 = "CMS/Audio/Dictor/forest/forest_dictor_7";
+                    public const string forest_dictor_8 = "CMS/Audio/Dictor/forest/forest_dictor_8";
+                    public const string forest_dictor_9 = "CMS/Audio/Dictor/forest/forest_dictor_9";
+                }
+                public static class Office
+                {
+                    public const string office_dictor_5 = "CMS/Audio/Dictor/Office/office_dictor_5";
+                }
+                public static class Roof
+                {
+                    public const string roof_dictor_1 = "CMS/Audio/Dictor/Roof/roof_dictor_1";
+                    public const string roof_dictor_2 = "CMS/Audio/Dictor/Roof/roof_dictor_2";
+                    public const string roof_dictor_3 = "CMS/Audio/Dictor/Roof/roof_dictor_3";
+                    public const string roof_dictor_4 = "CMS/Audio/Dictor/Roof/roof_dictor_4";
+                }
+                public static class Suburb
+                {
+                    public const string suburb_dictor_1 = "CMS/Audio/Dictor/Suburb/suburb_dictor_1";
+                    public const string suburb_dictor_2 = "CMS/Audio/Dictor/Suburb/suburb_dictor_2";
+                    public const string suburb_dictor_3 = "CMS/Audio/Dictor/Suburb/suburb_dictor_3";
+                    public const string suburb_dictor_4 = "CMS/Audio/Dictor/Suburb/suburb_dictor_4";
+                    public const string suburb_dictor_5 = "CMS/Audio/Dictor/Suburb/suburb_dictor_5";
+                }
+                public static class Subway
+                {
+                    public const string subway_dictor_1 = "CMS/Audio/Dictor/Subway/subway_dictor_1";
+                    public const string subway_dictor_2 = "CMS/Audio/Dictor/Subway/subway_dictor_2";
+                    public const string subway_dictor_3 = "CMS/Audio/Dictor/Subway/subway_dictor_3";
+                }
+            }
+            public static class Fox
+            {
+                public const string endGame_fox_1 = "CMS/Audio/Fox/endGame_fox_1";
+                public const string endGame_fox_2 = "CMS/Audio/Fox/endGame_fox_2";
+                public const string forest_fox_1 = "CMS/Audio/Fox/forest_fox_1";
+                public const string forest_fox_2 = "CMS/Audio/Fox/forest_fox_2";
+                public const string roof_fox_1 = "CMS/Audio/Fox/roof_fox_1";
+                public const string roof_fox_2 = "CMS/Audio/Fox/roof_fox_2";
+            }
+            public static class RedCap
+            {
+                public const string forest_redcap_1 = "CMS/Audio/RedCap/forest_redcap_1";
+                public const string forest_redcap_2 = "CMS/Audio/RedCap/forest_redcap_2";
+                public const string office_redcap_1 = "CMS/Audio/RedCap/office_redcap_1";
+                public const string roof_redcap_1 = "CMS/Audio/RedCap/roof_redcap_1";
+                public const string suburb_redcap_1 = "CMS/Audio/RedCap/suburb_redcap_1";
+                public const string suburb_redcap_2 = "CMS/Audio/RedCap/suburb_redcap_2";
+                public const string suburb_redcap_3 = "CMS/Audio/RedCap/suburb_redcap_3";
+                public const string suburb_redcap_4 = "CMS/Audio/RedCap/suburb_redcap_4";
+                public const string subway_redcap_1 = "CMS/Audio/RedCap/subway_redcap_1";
+                public const string subway_redcap_2 = "CMS/Audio/RedCap/subway_redcap_2";
             }
             public static class SFX
             {
@@ -62,6 +178,12 @@ namespace Game.Runtime.CMS
             {
                 public const string Office_begin = "CMS/CommandBlocks/5_OfficeDialogue/Office_begin";
                 public const string Office_end = "CMS/CommandBlocks/5_OfficeDialogue/Office_end";
+            }
+            public static class Tutorial
+            {
+                public const string tutorial_block_1 = "CMS/CommandBlocks/Tutorial/tutorial_block_1";
+                public const string tutorial_block_2 = "CMS/CommandBlocks/Tutorial/tutorial_block_2";
+                public const string tutorial_block_3 = "CMS/CommandBlocks/Tutorial/tutorial_block_3";
             }
             public const string TestDeathDialog = "CMS/CommandBlocks/TestDeathDialog";
             public const string TestDialog = "CMS/CommandBlocks/TestDialog";
