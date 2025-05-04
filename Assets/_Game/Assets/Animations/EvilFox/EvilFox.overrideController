@@ -7,5 +7,13 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: EvilFox
-  m_Controller: {fileID: 0}
-  m_Clips: []
+  m_Controller: {fileID: 9100000, guid: 1aefe9f6593e81148a5b7708e7dd3cb9, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 2da090aab5a5536449a6b6741dbb8e81, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 90f138ec531010b40a0b2fd8345b88c3, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 182900049e28e5749b7b60626e4d3767, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e5091d4bc353195448ada9a35ef01ce5, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 0aeeb4d8cd8bd2b4ea2ffa96798a03e6, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 4673fe220be5e514cadc0411eeb956df, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: df2c37de0a6dd3e4489aeb32267ec11c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d91ba0edee5e4634698dc49327fd4fd8, type: 2}
