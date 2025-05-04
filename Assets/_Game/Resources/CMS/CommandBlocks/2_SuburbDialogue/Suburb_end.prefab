@@ -486,7 +486,7 @@ MonoBehaviour:
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         _positionType: 1
-        _offset: {x: 0, y: 0, z: 0}
+        _offset: {x: -50, y: 0, z: 0}
         _duration: 0.3
         _sprite: {fileID: 5623948624648158621, guid: d59ae9eed7a510d40b0e17e9cc37aebc, type: 3}
     - rid: 6583048880660676840
