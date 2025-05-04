@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3601502985940682574}
   - component: {fileID: 1027668869208164526}
   m_Layer: 0
-  m_Name: Heal_Effect
+  m_Name: Damage_Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +48,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -1402,20 +1402,20 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.18022428, g: 0.26479208, b: 0.2830189, a: 0}
-        key1: {r: 0.13768554, g: 1, b: 0, a: 1}
-        key2: {r: 1, g: 1, b: 1, a: 1}
+        key0: {r: 1, g: 0.7028302, b: 0.7591206, a: 0}
+        key1: {r: 1, g: 0.018452026, b: 0, a: 1}
+        key2: {r: 1, g: 0, b: 0.00931406, a: 1}
         key3: {r: 1, g: 1, b: 1, a: 0}
-        key4: {r: 0.39999998, g: 1, b: 0.4444613, a: 0}
-        key5: {r: 0.23251157, g: 0.36469626, b: 0.5188679, a: 0}
+        key4: {r: 1, g: 1, b: 1, a: 0}
+        key5: {r: 1, g: 0.73248696, b: 0.4009434, a: 0}
         key6: {r: 1, g: 0.52990127, b: 0, a: 0}
-        key7: {r: 1, g: 0.52990127, b: 0, a: 0}
-        ctime0: 14071
-        ctime1: 53970
-        ctime2: 54741
-        ctime3: 56669
-        ctime4: 57054
-        ctime5: 65535
+        key7: {r: 0.5943396, g: 0.17661978, b: 0.5465115, a: 0}
+        ctime0: 0
+        ctime1: 26021
+        ctime2: 53585
+        ctime3: 54741
+        ctime4: 56090
+        ctime5: 57054
         ctime6: 65535
         ctime7: 65535
         atime0: 0
@@ -1428,7 +1428,7 @@ ParticleSystem:
         atime7: 0
         m_Mode: 0
         m_ColorSpace: 0
-        m_NumColorKeys: 6
+        m_NumColorKeys: 7
         m_NumAlphaKeys: 4
       minGradient:
         serializedVersion: 2
@@ -4919,7 +4919,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f7ff88d84b64ac14a8c61872351946fa, type: 2}
+  - {fileID: 2100000, guid: 42fc1a224796efa4cb6ad346fdf1e945, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
