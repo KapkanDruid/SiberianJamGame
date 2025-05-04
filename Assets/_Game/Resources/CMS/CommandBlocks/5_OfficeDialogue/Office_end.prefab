@@ -48,14 +48,12 @@ MonoBehaviour:
   Components:
   - rid: 6583048880660676614
   - rid: 6583048880660676619
-  - rid: 6583048880660676620
-  - rid: 6583048880660676621
-  - rid: 6583048880660676622
-  - rid: 6583048880660676623
-  - rid: 6583048880660676624
-  - rid: 6583048880660676625
-  - rid: 6583048880660676626
-  - rid: 6583048880660676627
+  - rid: 6583048891092697219
+  - rid: 6583048891092697220
+  - rid: 6583048891092697221
+  - rid: 6583048891092697222
+  - rid: 6583048891092697223
+  - rid: 6583048891092697224
   references:
     version: 2
     RefIds:
@@ -68,45 +66,29 @@ MonoBehaviour:
       data:
         _appearType: 0
         _duration: 0.3
-    - rid: 6583048880660676620
-      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
-      data:
-        _positionType: 0
-        _offset: {x: 0, y: 0, z: 0}
-        _duration: 0.3
-        _sprite: {fileID: 0}
-    - rid: 6583048880660676621
-      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
-      data:
-        _delay: 0.035
-        _name: 
-        _text: 
-    - rid: 6583048880660676622
+    - rid: 6583048891092697219
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _soundConfigs: []
-    - rid: 6583048880660676623
-      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+        _soundConfigs:
+        - {fileID: 2003383794840036807, guid: ac958fc3e57a7e245a7b161b83e0c4b0, type: 3}
+    - rid: 6583048891092697220
+      type: {class: WaitSecondsCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _positionType: 0
-        _offset: {x: 0, y: 0, z: 0}
-        _duration: 0.3
-        _sprite: {fileID: 0}
-    - rid: 6583048880660676624
-      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
-      data:
-        _delay: 0.035
-        _name: 
-        _text: 
-    - rid: 6583048880660676625
+        Seconds: 22
+    - rid: 6583048891092697221
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _soundConfigs: []
-    - rid: 6583048880660676626
+        _soundConfigs:
+        - {fileID: 2003383794840036807, guid: 574fca99b6798ca46a3879ae5e10c7e0, type: 3}
+    - rid: 6583048891092697222
+      type: {class: WaitSecondsCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        Seconds: 2
+    - rid: 6583048891092697223
       type: {class: DialogAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         _appearType: 1
         _duration: 0.3
-    - rid: 6583048880660676627
+    - rid: 6583048891092697224
       type: {class: EndDialogSceneCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data: 

@@ -96,7 +96,7 @@ MonoBehaviour:
         _positionType: 0
         _offset: {x: 0, y: 0, z: 0}
         _duration: 0.3
-        _sprite: {fileID: 0}
+        _sprite: {fileID: 21300000, guid: cde5c6bd369bb354298db82bf510252d, type: 3}
     - rid: 6583048880660676621
       type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -128,7 +128,8 @@ MonoBehaviour:
     - rid: 6583048880660676625
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _soundConfigs: []
+        _soundConfigs:
+        - {fileID: 5559382661348225583, guid: 8e73b0313fb71d04d920e00a803b9f83, type: 3}
     - rid: 6583048880660676870
       type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -143,13 +144,14 @@ MonoBehaviour:
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         _positionType: 0
-        _offset: {x: 0, y: 0, z: 0}
+        _offset: {x: 280, y: 0, z: 0}
         _duration: 0.3
-        _sprite: {fileID: 21300000, guid: be87cbd21ffc04b409cc985152181445, type: 3}
+        _sprite: {fileID: 21300000, guid: 409b1d9d895bb3148968ec5a18ac92b2, type: 3}
     - rid: 6583048880660676873
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _soundConfigs: []
+        _soundConfigs:
+        - {fileID: 2003383794840036807, guid: 1c0baee5d54ba4a49b143cb3548873fd, type: 3}
     - rid: 6583048880660676874
       type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -174,7 +176,7 @@ MonoBehaviour:
         _positionType: 0
         _offset: {x: 0, y: 0, z: 0}
         _duration: 0.3
-        _sprite: {fileID: 0}
+        _sprite: {fileID: 21300000, guid: cde5c6bd369bb354298db82bf510252d, type: 3}
     - rid: 6583048880660676877
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -200,13 +202,14 @@ MonoBehaviour:
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         _positionType: 0
-        _offset: {x: 0, y: 0, z: 0}
+        _offset: {x: 280, y: 0, z: 0}
         _duration: 0.3
-        _sprite: {fileID: 21300000, guid: be87cbd21ffc04b409cc985152181445, type: 3}
+        _sprite: {fileID: 21300000, guid: 409b1d9d895bb3148968ec5a18ac92b2, type: 3}
     - rid: 6583048880660676881
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _soundConfigs: []
+        _soundConfigs:
+        - {fileID: 2003383794840036807, guid: effb491725f33c84c974c39413b825c5, type: 3}
     - rid: 6583048880660676882
       type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -234,7 +237,7 @@ MonoBehaviour:
         _positionType: 0
         _offset: {x: 0, y: 0, z: 0}
         _duration: 0.3
-        _sprite: {fileID: 0}
+        _sprite: {fileID: 21300000, guid: cde5c6bd369bb354298db82bf510252d, type: 3}
     - rid: 6583048880660676885
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -246,7 +249,7 @@ MonoBehaviour:
         _delay: 0.035
         _name: "\u0420\u0430\u0441\u0441\u043A\u0430\u0437\u0447\u0438\u043A"
         _text: "\u041E\u0447\u0435\u043D\u044C \u043F\u043E\u0445\u043E\u0436\u0435
-          \u043D\u0430 \u043B\u043E\u0432\u0443\u0448\u043A\u0443. \u041A\u0440\u0430\u0441\u043D\u0430\u044F
+          \u043D\u0430 \u043B\u043E\u0432\u0443\u0448\u043A\u0443 \u041A\u0440\u0430\u0441\u043D\u0430\u044F
           \u0428\u0430\u043F\u043E\u0447\u043A\u0430. \u041C\u043E\u0436\u0435\u0442,
           \u0442\u044B \u043D\u0435 \u043F\u043E\u0439\u0434\u0435\u0448\u044C \u0434\u0430\u043B\u044C\u0448\u0435."
     - rid: 6583048880660676887
@@ -258,7 +261,7 @@ MonoBehaviour:
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         _positionType: 1
-        _offset: {x: 0, y: 0, z: 0}
+        _offset: {x: -50, y: 0, z: 0}
         _duration: 0.3
         _sprite: {fileID: 5623948624648158621, guid: d59ae9eed7a510d40b0e17e9cc37aebc, type: 3}
     - rid: 6583048880660676889

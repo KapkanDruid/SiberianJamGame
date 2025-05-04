@@ -88,7 +88,7 @@ MonoBehaviour:
         _positionType: 0
         _offset: {x: 0, y: 0, z: 0}
         _duration: 0.3
-        _sprite: {fileID: 0}
+        _sprite: {fileID: 21300000, guid: cde5c6bd369bb354298db82bf510252d, type: 3}
     - rid: 6583048880660676621
       type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -114,9 +114,9 @@ MonoBehaviour:
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         _positionType: 0
-        _offset: {x: 0, y: 0, z: 0}
+        _offset: {x: 180, y: 0, z: 0}
         _duration: 0.3
-        _sprite: {fileID: 21300000, guid: c1d0e52626285b7409d520216d05c216, type: 3}
+        _sprite: {fileID: 21300000, guid: 59f993d856e6b024dad93999eb6af659, type: 3}
     - rid: 6583048880660676624
       type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -155,7 +155,8 @@ MonoBehaviour:
     - rid: 6583048880660676856
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _soundConfigs: []
+        _soundConfigs:
+        - {fileID: 5559382661348225583, guid: 2ac86b0b0c3cd4e42a8b061d5bdb644d, type: 3}
     - rid: 6583048880660676857
       type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -174,9 +175,9 @@ MonoBehaviour:
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         _positionType: 0
-        _offset: {x: 0, y: 0, z: 0}
+        _offset: {x: 180, y: 0, z: 0}
         _duration: 0.3
-        _sprite: {fileID: 21300000, guid: c1d0e52626285b7409d520216d05c216, type: 3}
+        _sprite: {fileID: 21300000, guid: 59f993d856e6b024dad93999eb6af659, type: 3}
     - rid: 6583048880660676860
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -210,7 +211,8 @@ MonoBehaviour:
     - rid: 6583048880660676864
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _soundConfigs: []
+        _soundConfigs:
+        - {fileID: 5559382661348225583, guid: 60ba6a52e4ea0b44fbe1c9d22447ecda, type: 3}
     - rid: 6583048880660676865
       type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:

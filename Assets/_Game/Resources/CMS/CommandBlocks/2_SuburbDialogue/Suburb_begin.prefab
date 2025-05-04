@@ -72,7 +72,7 @@ MonoBehaviour:
     - rid: 6583048880660676614
       type: {class: BackgroundSetCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        BackgroundSprite: {fileID: 21300000, guid: 8503cdc1c426cf746b9a4cb9556c8c3d, type: 3}
+        BackgroundSprite: {fileID: 21300000, guid: 9b1ee8455b784814a8591f9b087d6344, type: 3}
     - rid: 6583048880660676619
       type: {class: DialogAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -84,7 +84,7 @@ MonoBehaviour:
         _positionType: 0
         _offset: {x: 0, y: 0, z: 0}
         _duration: 0.3
-        _sprite: {fileID: 0}
+        _sprite: {fileID: 21300000, guid: cde5c6bd369bb354298db82bf510252d, type: 3}
     - rid: 6583048880660676621
       type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -120,7 +120,8 @@ MonoBehaviour:
     - rid: 6583048880660676625
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _soundConfigs: []
+        _soundConfigs:
+        - {fileID: 5559382661348225583, guid: b616f2cca0227174a9ba61ed16ed554f, type: 3}
     - rid: 6583048880660676626
       type: {class: DialogAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -170,7 +171,7 @@ MonoBehaviour:
         _positionType: 0
         _offset: {x: 0, y: 0, z: 0}
         _duration: 0.3
-        _sprite: {fileID: 0}
+        _sprite: {fileID: 21300000, guid: cde5c6bd369bb354298db82bf510252d, type: 3}
     - rid: 6583048880660676788
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:

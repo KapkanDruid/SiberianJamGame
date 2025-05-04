@@ -120,7 +120,7 @@ MonoBehaviour:
     - rid: 6583048880660676614
       type: {class: BackgroundSetCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        BackgroundSprite: {fileID: 21300000, guid: 8503cdc1c426cf746b9a4cb9556c8c3d, type: 3}
+        BackgroundSprite: {fileID: 21300000, guid: 9b1ee8455b784814a8591f9b087d6344, type: 3}
     - rid: 6583048880660676619
       type: {class: DialogAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -132,7 +132,7 @@ MonoBehaviour:
         _positionType: 0
         _offset: {x: 0, y: 0, z: 0}
         _duration: 0.3
-        _sprite: {fileID: 0}
+        _sprite: {fileID: 21300000, guid: cde5c6bd369bb354298db82bf510252d, type: 3}
     - rid: 6583048880660676621
       type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -155,7 +155,7 @@ MonoBehaviour:
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         _positionType: 0
-        _offset: {x: 0, y: 0, z: 0}
+        _offset: {x: 180, y: 0, z: 0}
         _duration: 0.3
         _sprite: {fileID: 21300000, guid: c1d0e52626285b7409d520216d05c216, type: 3}
     - rid: 6583048880660676624
@@ -183,7 +183,7 @@ MonoBehaviour:
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         _positionType: 1
-        _offset: {x: 0, y: 0, z: 0}
+        _offset: {x: -50, y: 0, z: 0}
         _duration: 0.3
         _sprite: {fileID: 5623948624648158621, guid: d59ae9eed7a510d40b0e17e9cc37aebc, type: 3}
     - rid: 6583048880660676792
@@ -208,7 +208,7 @@ MonoBehaviour:
         _positionType: 0
         _offset: {x: 0, y: 0, z: 0}
         _duration: 0.3
-        _sprite: {fileID: 0}
+        _sprite: {fileID: 21300000, guid: cde5c6bd369bb354298db82bf510252d, type: 3}
     - rid: 6583048880660676796
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -230,7 +230,7 @@ MonoBehaviour:
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         _positionType: 0
-        _offset: {x: 0, y: 0, z: 0}
+        _offset: {x: 180, y: 0, z: 0}
         _duration: 0.3
         _sprite: {fileID: 21300000, guid: c1d0e52626285b7409d520216d05c216, type: 3}
     - rid: 6583048880660676800
@@ -255,7 +255,7 @@ MonoBehaviour:
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         _positionType: 1
-        _offset: {x: 0, y: 0, z: 0}
+        _offset: {x: -50, y: 0, z: 0}
         _duration: 0.3
         _sprite: {fileID: 5623948624648158621, guid: d59ae9eed7a510d40b0e17e9cc37aebc, type: 3}
     - rid: 6583048880660676804
@@ -279,13 +279,14 @@ MonoBehaviour:
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         _positionType: 1
-        _offset: {x: 0, y: 0, z: 0}
+        _offset: {x: -50, y: 0, z: 0}
         _duration: 0.3
         _sprite: {fileID: 21300000, guid: 15a058998a552794babcb158fd07e4c7, type: 3}
     - rid: 6583048880660676808
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _soundConfigs: []
+        _soundConfigs:
+        - {fileID: 5559382661348225583, guid: 5b94741c1b7afa549b9f90756cd335a9, type: 3}
     - rid: 6583048880660676809
       type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -301,7 +302,7 @@ MonoBehaviour:
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         _positionType: 0
-        _offset: {x: 0, y: 0, z: 0}
+        _offset: {x: 180, y: 0, z: 0}
         _duration: 0.3
         _sprite: {fileID: 21300000, guid: c1d0e52626285b7409d520216d05c216, type: 3}
     - rid: 6583048880660676812
@@ -331,7 +332,7 @@ MonoBehaviour:
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         _positionType: 1
-        _offset: {x: 0, y: 0, z: 0}
+        _offset: {x: -50, y: 0, z: 0}
         _duration: 0.3
         _sprite: {fileID: 5623948624648158621, guid: d59ae9eed7a510d40b0e17e9cc37aebc, type: 3}
     - rid: 6583048880660676816
@@ -357,7 +358,7 @@ MonoBehaviour:
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         _positionType: 1
-        _offset: {x: 0, y: 0, z: 0}
+        _offset: {x: -50, y: 0, z: 0}
         _duration: 0.3
         _sprite: {fileID: 5623948624648158621, guid: d59ae9eed7a510d40b0e17e9cc37aebc, type: 3}
     - rid: 6583048880660676820
@@ -383,7 +384,7 @@ MonoBehaviour:
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         _positionType: 0
-        _offset: {x: 0, y: 0, z: 0}
+        _offset: {x: 180, y: 0, z: 0}
         _duration: 0.3
         _sprite: {fileID: 21300000, guid: c1d0e52626285b7409d520216d05c216, type: 3}
     - rid: 6583048880660676824
@@ -406,14 +407,14 @@ MonoBehaviour:
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         _positionType: 1
-        _offset: {x: 0, y: 0, z: 0}
+        _offset: {x: -50, y: 0, z: 0}
         _duration: 0.3
         _sprite: {fileID: 21300000, guid: 15a058998a552794babcb158fd07e4c7, type: 3}
     - rid: 6583048880660676828
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         _soundConfigs:
-        - {fileID: 0}
+        - {fileID: 5559382661348225583, guid: d2fedca8ece626348a6b82468be67706, type: 3}
     - rid: 6583048880660676829
       type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -429,7 +430,7 @@ MonoBehaviour:
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         _positionType: 0
-        _offset: {x: 0, y: 0, z: 0}
+        _offset: {x: 180, y: 0, z: 0}
         _duration: 0.3
         _sprite: {fileID: 21300000, guid: c1d0e52626285b7409d520216d05c216, type: 3}
     - rid: 6583048880660676832
@@ -460,13 +461,14 @@ MonoBehaviour:
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         _positionType: 1
-        _offset: {x: 0, y: 0, z: 0}
+        _offset: {x: -50, y: 0, z: 0}
         _duration: 0.3
         _sprite: {fileID: 21300000, guid: 15a058998a552794babcb158fd07e4c7, type: 3}
     - rid: 6583048880660676836
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _soundConfigs: []
+        _soundConfigs:
+        - {fileID: 5559382661348225583, guid: 063bf14b46488144da46c2b31c2151e7, type: 3}
     - rid: 6583048880660676837
       type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -510,7 +512,7 @@ MonoBehaviour:
         _positionType: 0
         _offset: {x: 0, y: 0, z: 0}
         _duration: 0.3
-        _sprite: {fileID: 0}
+        _sprite: {fileID: 21300000, guid: cde5c6bd369bb354298db82bf510252d, type: 3}
     - rid: 6583048880660676844
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:

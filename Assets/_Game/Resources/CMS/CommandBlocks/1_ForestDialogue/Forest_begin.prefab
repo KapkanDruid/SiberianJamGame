@@ -80,7 +80,7 @@ MonoBehaviour:
         _positionType: 0
         _offset: {x: 0, y: 0, z: 0}
         _duration: 0.3
-        _sprite: {fileID: 0}
+        _sprite: {fileID: 21300000, guid: cde5c6bd369bb354298db82bf510252d, type: 3}
     - rid: 6583048880660676621
       type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -93,7 +93,7 @@ MonoBehaviour:
           \u0437\u0430\u0431\u043E\u0440 \u043F\u0435\u0440\u0435\u043F\u0440\u044B\u0433\u043D\u0443\u043B\u043E
           \u0435\u0449\u0435 \u043D\u0435\u0441\u043A\u043E\u043B\u044C\u043A\u043E
           \u0442\u0432\u0430\u0440\u0435\u0439. \u0421\u043C\u043E\u0436\u0435\u0442
-          \u043B\u0438."
+          \u043B\u0438..."
     - rid: 6583048880660676622
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
