@@ -47,9 +47,14 @@ MonoBehaviour:
   entityId: CMS/Gameplay/Levels/1_suburb/0_suburb_simple_enemy
   Components:
   - rid: 6583048880660676698
+  - rid: 3335048661485224019
   references:
     version: 2
     RefIds:
+    - rid: 3335048661485224019
+      type: {class: MusicComponent, ns: Game.Runtime.CMS.Components.Audio, asm: Runtime}
+      data:
+        Clip: {fileID: 8300000, guid: 9012041ad224945498e1ad0f05a3ba9b, type: 3}
     - rid: 6583048880660676698
       type: {class: LevelComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
       data:

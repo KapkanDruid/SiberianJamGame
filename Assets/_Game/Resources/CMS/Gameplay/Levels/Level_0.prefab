@@ -49,6 +49,7 @@ MonoBehaviour:
   - rid: 635145064486535254
   - rid: 635145064486535323
   - rid: 635145080740774057
+  - rid: 3335048661485224017
   references:
     version: 2
     RefIds:
@@ -72,3 +73,7 @@ MonoBehaviour:
       type: {class: SetCharacterHealthComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
       data:
         Health: 100
+    - rid: 3335048661485224017
+      type: {class: MusicComponent, ns: Game.Runtime.CMS.Components.Audio, asm: Runtime}
+      data:
+        Clip: {fileID: 8300000, guid: 819d5b17075be6b4bbc52c086109365b, type: 3}

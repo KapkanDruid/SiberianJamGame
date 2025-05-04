@@ -47,9 +47,14 @@ MonoBehaviour:
   entityId: CMS/Gameplay/Levels/3_roof/0_froof_simple_enemy
   Components:
   - rid: 6583048880660676698
+  - rid: 3335048661485224021
   references:
     version: 2
     RefIds:
+    - rid: 3335048661485224021
+      type: {class: MusicComponent, ns: Game.Runtime.CMS.Components.Audio, asm: Runtime}
+      data:
+        Clip: {fileID: 8300000, guid: 2659c138ef1e8414091e8c092afb1cae, type: 3}
     - rid: 6583048880660676698
       type: {class: LevelComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
       data:
