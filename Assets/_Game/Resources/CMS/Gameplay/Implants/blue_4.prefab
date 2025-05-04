@@ -67,6 +67,7 @@ MonoBehaviour:
         SizeDelta: {x: 60, y: 20}
         Pivot: {x: 0.5, y: 0.5}
         Grid: {fileID: 11400000, guid: a11675c96d226314aab9e8fe7cc4a9fe, type: 2}
+        Particle: {fileID: 7697098825066810461, guid: efb96b6afb20eed43819b00b68053c14, type: 3}
     - rid: 5361599205655707722
       type: {class: ArmorImplantComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
       data:
