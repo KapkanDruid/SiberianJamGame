@@ -6,6 +6,7 @@ using Game.Runtime.CMS.Components.Gameplay;
 using Game.Runtime.CMS.Components.Implants;
 using Game.Runtime.Gameplay.Level;
 using Game.Runtime.Services;
+using Game.Runtime.Services.Audio;
 using Game.Runtime.Services.Input;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -73,7 +74,7 @@ namespace Game.Runtime.Gameplay.Implants
         {
             if (this == null)return;
             if (eventData.button != PointerEventData.InputButton.Left) return;
-            
+            SL.Get<AudioService>().Play(CMs.Audio.SFX.SFXImplantDrag);
             StartDragging();
             SL.Get<InputService>().OnRotateItem += HandleRotation;
         }
@@ -206,6 +207,8 @@ namespace Game.Runtime.Gameplay.Implants
             if (_holderService.HasItem(this))
                 _holderService.RemoveItem(this);
             
+            SL.Get<AudioService>().Play(CMs.Audio.SFX.SFXImplantPut);
+
             _inventoryService.SetItemPosition(slot, this);
             CenterSlotPosition = slot.GridPosition;
             return true;

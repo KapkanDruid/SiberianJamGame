@@ -20,6 +20,8 @@ namespace Game.Runtime.CMS
             }
             public static class SFX
             {
+                public const string SFXImplantDrag = "CMS/Audio/SFX/SFXImplantDrag";
+                public const string SFXImplantPut = "CMS/Audio/SFX/SFXImplantPut";
                 public const string SFXTest = "CMS/Audio/SFX/SFXTest";
             }
             public const string AmbientTest = "CMS/Audio/AmbientTest";
@@ -133,7 +135,11 @@ namespace Game.Runtime.CMS
                 }
                 public static class Enemys
                 {
-                    public const string Enemy1 = "CMS/Gameplay/Levels/Enemys/Enemy1";
+                    public const string EnemyLvl1 = "CMS/Gameplay/Levels/Enemys/EnemyLvl1";
+                    public const string EnemyLvl3 = "CMS/Gameplay/Levels/Enemys/EnemyLvl3";
+                    public const string EnemyLvl5 = "CMS/Gameplay/Levels/Enemys/EnemyLvl5";
+                    public const string EnemyLvl7 = "CMS/Gameplay/Levels/Enemys/EnemyLvl7";
+                    public const string EnemyLvl9 = "CMS/Gameplay/Levels/Enemys/EnemyLvl9";
                 }
                 public const string Level_0 = "CMS/Gameplay/Levels/Level_0";
                 public const string Level_Boss = "CMS/Gameplay/Levels/Level_Boss";
