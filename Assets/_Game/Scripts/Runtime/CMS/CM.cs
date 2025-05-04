@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using Game.Runtime.Utils.Helpers;
 using UnityEngine;
 
@@ -67,7 +68,9 @@ namespace Game.Runtime.CMS
         private static void AutoCacheEntities()
         {
             _entitiesDatabase = new CMSTable<CMSEntity>();
-
+            var stringBuilder = new StringBuilder();
+            stringBuilder.Append($"[CMS] AutoCachedEntities:");
+            
             var entities = Helpers.ReflectionHelper.FindAllSubsClasses<CMSEntity>();
             foreach (var entity in entities)
             {
@@ -76,7 +79,7 @@ namespace Game.Runtime.CMS
                     CMSEntity entityInstance = Activator.CreateInstance(entity, entity.FullName, null) as CMSEntity;
                     _entitiesDatabase.Add(entityInstance);
 
-                    if (entityInstance != null) Debug.Log("[CMS] Load entity " + entityInstance.EntityId);
+                    if (entityInstance != null) stringBuilder.Append($"\n{entityInstance.EntityId}");
                 }
                 catch (Exception exception)
                 {
@@ -90,9 +93,9 @@ namespace Game.Runtime.CMS
                 try
                 {
 #if UNITY_EDITOR
-                    entityPrefab.PingEntity();
+                    entityPrefab.PingEntity(false);
 #endif
-                    Debug.Log("[CMS] Load entity " + entityPrefab.EntityId);
+                    stringBuilder.Append($"\n{entityPrefab.EntityId}");
 
                     var entity = new CMSEntity(entityPrefab.EntityId, entityPrefab.Components);
                     _entitiesDatabase.Add(entity);
@@ -102,6 +105,8 @@ namespace Game.Runtime.CMS
                     Debug.LogError($"[CMS] Failed to initialize {entityPrefab.EntityId}: {exception.Message}");
                 }
             }
+            
+            Debug.Log(stringBuilder + "\n");
         }
     }
 }

@@ -42,6 +42,7 @@ namespace Game.Runtime.Runners
             SL.Register<HUDService>(new HUDService(), _gameScope);
             SL.Register<ImplantsHolderService>(new ImplantsHolderService(), _gameScope);
             SL.Register<InventoryService>(new InventoryService(), _gameScope);
+            SL.Register<LootService>(new LootService(), _gameScope);
             SL.Register<WarriorController>(new WarriorController(), _gameScope);
             SL.Register<BattleController>(_battleController, _gameScope);
 

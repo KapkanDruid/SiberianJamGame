@@ -66,8 +66,8 @@ MonoBehaviour:
     - rid: 635145064486535278
       type: {class: ImplantLevelRequiredComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
       data:
-        RequiredLevelIndex: 1
+        RequiredLevelIndex: 5
     - rid: 5361599205655707724
       type: {class: ArmorImplantComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
       data:
-        Armor: 5
+        Armor: 50

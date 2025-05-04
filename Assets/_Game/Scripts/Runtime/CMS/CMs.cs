@@ -12,6 +12,12 @@ namespace Game.Runtime.CMS
     {
         public static class Audio
         {
+            public static class Dictor
+            {
+                public const string forest_dictor_6 = "CMS/Audio/Dictor/forest_dictor_6";
+                public const string forest_dictor_7 = "CMS/Audio/Dictor/forest_dictor_7";
+                public const string forest_dictor_8 = "CMS/Audio/Dictor/forest_dictor_8";
+            }
             public static class SFX
             {
                 public const string SFXTest = "CMS/Audio/SFX/SFXTest";
@@ -21,6 +27,39 @@ namespace Game.Runtime.CMS
         }
         public static class CommandBlocks
         {
+            public static class _0_Death
+            {
+                public const string death_in_forest = "CMS/CommandBlocks/0_Death/death_in_forest";
+                public const string death_in_office = "CMS/CommandBlocks/0_Death/death_in_office";
+                public const string death_in_roof = "CMS/CommandBlocks/0_Death/death_in_roof";
+                public const string death_in_suburb = "CMS/CommandBlocks/0_Death/death_in_suburb";
+                public const string death_in_subway = "CMS/CommandBlocks/0_Death/death_in_subway";
+            }
+            public static class _1_ForestDialogue
+            {
+                public const string Forest_begin = "CMS/CommandBlocks/1_ForestDialogue/Forest_begin";
+                public const string Forest_end = "CMS/CommandBlocks/1_ForestDialogue/Forest_end";
+            }
+            public static class _2_SuburbDialogue
+            {
+                public const string Suburb_begin = "CMS/CommandBlocks/2_SuburbDialogue/Suburb_begin";
+                public const string Suburb_end = "CMS/CommandBlocks/2_SuburbDialogue/Suburb_end";
+            }
+            public static class _3_SubwayDialogue
+            {
+                public const string Subway_begin = "CMS/CommandBlocks/3_SubwayDialogue/Subway_begin";
+                public const string Subway_end = "CMS/CommandBlocks/3_SubwayDialogue/Subway_end";
+            }
+            public static class _4_RoofDialogue
+            {
+                public const string Roof_begin = "CMS/CommandBlocks/4_RoofDialogue/Roof_begin";
+                public const string Roof_end = "CMS/CommandBlocks/4_RoofDialogue/Roof_end";
+            }
+            public static class _5_OfficeDialogue
+            {
+                public const string Office_begin = "CMS/CommandBlocks/5_OfficeDialogue/Office_begin";
+                public const string Office_end = "CMS/CommandBlocks/5_OfficeDialogue/Office_end";
+            }
             public const string TestDeathDialog = "CMS/CommandBlocks/TestDeathDialog";
             public const string TestDialog = "CMS/CommandBlocks/TestDialog";
             public const string TestDialog2 = "CMS/CommandBlocks/TestDialog2";
@@ -68,6 +107,34 @@ namespace Game.Runtime.CMS
             }
             public static class Levels
             {
+                public static class _0_Forest
+                {
+                    public const string _0_forest_simple_enemy = "CMS/Gameplay/Levels/0_Forest/0_forest_simple_enemy";
+                    public const string _1_forest_miniboss = "CMS/Gameplay/Levels/0_Forest/1_forest_miniboss";
+                }
+                public static class _1_suburb
+                {
+                    public const string _0_suburb_simple_enemy = "CMS/Gameplay/Levels/1_suburb/0_suburb_simple_enemy";
+                    public const string _1_suburb_miniboss = "CMS/Gameplay/Levels/1_suburb/1_suburb_miniboss";
+                }
+                public static class _2_subway
+                {
+                    public const string _0_subway_simple_enemy = "CMS/Gameplay/Levels/2_subway/0_subway_simple_enemy";
+                    public const string _1_subway_miniboss = "CMS/Gameplay/Levels/2_subway/1_subway_miniboss";
+                }
+                public static class _3_roof
+                {
+                    public const string _0_froof_simple_enemy = "CMS/Gameplay/Levels/3_roof/0_froof_simple_enemy";
+                    public const string _1_roof_miniboss = "CMS/Gameplay/Levels/3_roof/1_roof_miniboss";
+                }
+                public static class _4_Office
+                {
+                    public const string _0_office_miniboss = "CMS/Gameplay/Levels/4_Office/0_office_miniboss";
+                }
+                public static class Enemys
+                {
+                    public const string Enemy1 = "CMS/Gameplay/Levels/Enemys/Enemy1";
+                }
                 public const string Level_0 = "CMS/Gameplay/Levels/Level_0";
                 public const string Level_Boss = "CMS/Gameplay/Levels/Level_Boss";
             }

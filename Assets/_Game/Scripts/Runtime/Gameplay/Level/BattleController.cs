@@ -136,16 +136,15 @@ namespace Game.Runtime.Gameplay.Level
             SL.Get<SaveService>().SaveData.DialogBlockID = LevelConfig.NextSceneDialog.EntityId;
             SL.Get<SaveService>().Save();
             Debug.Log($"[BattleController] You win! {SL.Get<SaveService>().SaveData.LevelIndex}");
-
-            EndGameAsync().Forget();
+            
+            SL.Get<LootService>().GenerateLoot();
         }
 
         public async UniTask EndGameAsync()
         {
-            //TODO: Подождать получение имплантов 
-
             await UniTask.WaitForSeconds(1.2f);
             await SL.Get<UIFaderService>().FadeIn();
+            SL.Get<HUDService>().Behaviour.LootHolder.SetActive(false);
             await SceneManager.LoadSceneAsync(Const.ScenesConst.DialogReleaseScene);
         }
     }
