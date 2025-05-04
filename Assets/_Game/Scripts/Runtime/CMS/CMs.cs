@@ -25,6 +25,7 @@ namespace Game.Runtime.CMS
                 public const string SFXTest = "CMS/Audio/SFX/SFXTest";
             }
             public const string AmbientTest = "CMS/Audio/AmbientTest";
+            public const string AudioControl = "CMS/Audio/AudioControl";
             public const string VoiceTest = "CMS/Audio/VoiceTest";
         }
         public static class CommandBlocks

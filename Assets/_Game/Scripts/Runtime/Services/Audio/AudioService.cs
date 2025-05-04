@@ -1,5 +1,6 @@
 ﻿using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Audio;
+using Game.Runtime.CMS.Components.Commons;
 using Game.Runtime.Utils.Extensions;
 using UnityEngine;
 
@@ -29,6 +30,12 @@ namespace Game.Runtime.Services.Audio
             _musicSource = audioObject.AddComponent<AudioSource>();
             _sfxSource = audioObject.AddComponent<AudioSource>();
             _voiceSource = audioObject.AddComponent<AudioSource>();
+
+            var mixerReference = CM.Get(CMs.Audio.AudioControl).GetComponent<AudioSettingsComponent>();
+
+            _musicSource.outputAudioMixerGroup = mixerReference.MusicGroup;
+            _sfxSource.outputAudioMixerGroup = mixerReference.SFXGroup;
+            _voiceSource.outputAudioMixerGroup = mixerReference.VoiceGroup;
 
             Object.DontDestroyOnLoad(audioObject);
         }
