@@ -45,7 +45,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityId: 
-  Components: []
+  Components:
+  - rid: 635145080740774107
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 635145080740774107
+      type: {class: SFXComponent, ns: Game.Runtime.CMS.Components.Audio, asm: Runtime}
+      data:
+        Clips:
+        - {fileID: 8300000, guid: 323d2c04b08f15b45bdf5ad1774be6e3, type: 3}
+        - {fileID: 8300000, guid: eb16a0a0a4895e948a84d8891fac5f39, type: 3}
+        - {fileID: 8300000, guid: 280329c6823807f4e9c2f5254b96e7b0, type: 3}
+        - {fileID: 8300000, guid: 74fd5168afc344a4fbd93894a5a154a8, type: 3}
+        Volume: 1

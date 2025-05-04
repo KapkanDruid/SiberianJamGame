@@ -1,6 +1,9 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Game.Runtime.CMS;
+using Game.Runtime.Services;
+using Game.Runtime.Services.Audio;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -95,6 +98,7 @@ namespace Game.Runtime.Gameplay.HUD
         {
             var sequence = DOTween.Sequence()
                 .AppendInterval(0.2f)
+                .AppendCallback(() => SL.Get<AudioService>().Play(CMs.Audio.SFX.ShieldHit))
                 .Append(DOTween.To(() => startValue, x =>
                 {
                     startValue = x;
@@ -109,6 +113,7 @@ namespace Game.Runtime.Gameplay.HUD
         {
             var sequence = DOTween.Sequence()
                 .AppendInterval(0.2f)
+                .AppendCallback(() => SL.Get<AudioService>().Play(CMs.Audio.SFX.ShieldBroken))
                 .Append(DOTween.To(() => startValue, x =>
                 {
                     startValue = x;
