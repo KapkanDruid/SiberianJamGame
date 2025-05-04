@@ -93,13 +93,13 @@ namespace Game.Runtime.Gameplay.Implants
                             switch (implantType)
                             {
                                 case ImplantType.Health:
-                                    health += 1;
+                                    health += 10;
                                     break;
                                 case ImplantType.Damage:
-                                    damage += 1;
+                                    damage += 10;
                                     break;
                                 case ImplantType.Armor:
-                                    armor += 1;
+                                    armor += 10;
                                     break;
                             }
                         }
