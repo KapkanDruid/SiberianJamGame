@@ -54,11 +54,11 @@ MonoBehaviour:
     - rid: 635145038440169585
       type: {class: SpriteComponent, ns: Game.Runtime.CMS.Components.Commons, asm: Runtime}
       data:
-        Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+        Sprite: {fileID: 7607066685573769206, guid: 23a95d1064c4477499d2c31e81734623, type: 3}
     - rid: 635145038440169586
       type: {class: InventoryComponent, ns: Game.Runtime.CMS.Components.Gameplay, asm: Runtime}
       data:
-        CellSize: 23
+        CellSize: 16
         Grids:
         - RequiredLevel: 0
           Grid: {fileID: 11400000, guid: 94fb4d6e1b48e6047886a834f2f26e5a, type: 2}

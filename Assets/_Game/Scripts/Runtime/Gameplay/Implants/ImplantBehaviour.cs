@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DG.Tweening;
 using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Commons;
@@ -8,7 +7,6 @@ using Game.Runtime.CMS.Components.Implants;
 using Game.Runtime.Gameplay.Level;
 using Game.Runtime.Services;
 using Game.Runtime.Services.Audio;
-using Game.Runtime.Services.Camera;
 using Game.Runtime.Services.Input;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -29,6 +27,7 @@ namespace Game.Runtime.Gameplay.Implants
         [SerializeField] private Image _image;
         [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private CanvasGroup _canvasGroup;
+        [SerializeField] private Vector3 baseLocalScale;
 
         public List<Vector2Int> SlotPositions { get; private set; }
         public CMSEntity Model { get; private set; }
@@ -52,7 +51,7 @@ namespace Game.Runtime.Gameplay.Implants
 
         private void Start()
         {
-            transform.localScale = Vector3.one;
+            transform.localScale =baseLocalScale ;
         }
 
         public void SetupItem(CMSEntity itemModel, Canvas root)
@@ -69,7 +68,7 @@ namespace Game.Runtime.Gameplay.Implants
             _rectTransform.sizeDelta = itemComponent.SizeDelta;
             _image.sprite = itemModel.GetComponent<SpriteComponent>().Sprite;
             
-            _originalScale = _rectTransform.localScale;
+            _originalScale = baseLocalScale;
             
             var particlePrefab = itemComponent.Particle;
             _particleSystem = Instantiate(particlePrefab, transform);
@@ -95,7 +94,7 @@ namespace Game.Runtime.Gameplay.Implants
             if (SL.Get<InventoryService>().HasItem(this)) return;
             
             _currentTweenScale?.Kill();
-            _currentTweenScale = _rectTransform.DOScale(_originalScale * 1.3f, 0.2f)
+            _currentTweenScale = _rectTransform.DOScale(_originalScale * 1.2f, 0.2f)
                 .SetEase(Ease.OutBack).OnKill(() => _currentTweenScale = null);
         }
 
@@ -167,7 +166,7 @@ namespace Game.Runtime.Gameplay.Implants
             _rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
             _rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
 
-            transform.localScale = Vector3.one * 1.2f;
+            transform.localScale = baseLocalScale * 1.2f;
         }
 
         private void StopDragging()
@@ -175,7 +174,7 @@ namespace Game.Runtime.Gameplay.Implants
             _isDragging = false;
             _canvasGroup.blocksRaycasts = true;
             SL.Get<InputService>().OnRotateItem -= HandleRotation;
-            transform.DOScale(Vector3.one, 0.1f);
+            transform.DOScale(baseLocalScale, 0.1f);
             ResetHighlight();
         }
 
@@ -214,7 +213,7 @@ namespace Game.Runtime.Gameplay.Implants
             if (newSlot != null)
             {
                 ResetHighlight();
-                _inventoryService.UpdateSlotHighlight(this, newSlot.GridPosition, Color.yellow);
+                _inventoryService.UpdateSlotHighlight(this, newSlot.GridPosition, Color.green);
             }
         }
 
