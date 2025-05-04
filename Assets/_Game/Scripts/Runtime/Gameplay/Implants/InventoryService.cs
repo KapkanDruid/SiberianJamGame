@@ -23,6 +23,7 @@ namespace Game.Runtime.Gameplay.Implants
         private int _cellSize;
 
         private InventoryView _inventoryView;
+        public event Action OnImplpantPlaced;
 
         public void Initialize()
         {
@@ -176,6 +177,8 @@ namespace Game.Runtime.Gameplay.Implants
 
             _itemPositions[item] = newPositions;
 
+            OnImplpantPlaced?.Invoke();
+            Debug.Log("Implant placed");
             return true;
         }
 
