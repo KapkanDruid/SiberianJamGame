@@ -6,5 +6,7 @@ namespace Game.Runtime.Gameplay.Level
     {
         public int CurrentLevel;
         public float CharacterHealth;
+        public float CachedHealth;
+        public string DialogBlockID;
     }
 }
