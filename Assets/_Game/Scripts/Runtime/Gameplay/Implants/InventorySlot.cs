@@ -27,9 +27,7 @@ namespace Game.Runtime.Gameplay.Implants
         {
             Occupied = isOccupied;
 
-            var occupiedColor = Color.white;
-            occupiedColor.a = 0.5f;
-            
+            var occupiedColor = Color.gray;
             SetColor(isOccupied ? occupiedColor : Color.white);
         }
 

@@ -136,6 +136,23 @@ namespace Game.Runtime.CMS
             }
             public static class SFX
             {
+                public static class FOX
+                {
+                    public const string SFX_FOX_GETHIT = "CMS/Audio/SFX/FOX/SFX_FOX_GETHIT";
+                }
+                public static class Razboynik
+                {
+                    public const string Bandit_death = "CMS/Audio/SFX/Razboynik/Bandit_death";
+                    public const string Bandit_hit_1 = "CMS/Audio/SFX/Razboynik/Bandit_hit_1";
+                    public const string Bandit_hurt_1 = "CMS/Audio/SFX/Razboynik/Bandit_hurt_1";
+                }
+                public static class REDHOOD
+                {
+                    public const string REDHOOD_death = "CMS/Audio/SFX/REDHOOD/REDHOOD_death";
+                    public const string REDHOOD_hit_1 = "CMS/Audio/SFX/REDHOOD/REDHOOD_hit_1";
+                    public const string REDHOOD_hurt_1 = "CMS/Audio/SFX/REDHOOD/REDHOOD_hurt_1";
+                    public const string REDHOOD_supershot_1 = "CMS/Audio/SFX/REDHOOD/REDHOOD_supershot_1";
+                }
                 public const string SFXImplantDrag = "CMS/Audio/SFX/SFXImplantDrag";
                 public const string SFXImplantPut = "CMS/Audio/SFX/SFXImplantPut";
                 public const string SFXTest = "CMS/Audio/SFX/SFXTest";
