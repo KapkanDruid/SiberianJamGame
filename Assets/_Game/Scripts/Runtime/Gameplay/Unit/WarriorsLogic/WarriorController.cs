@@ -22,15 +22,15 @@ namespace Game.Runtime.Gameplay.Warrior
         {
             var entity = CM.Get(CMs.Configs.PlayerConfig);
             var config = entity.GetComponent<PlayerConfig>();
-
             _maxHealth = config.MaxHealth;
-            _currentHealth = _maxHealth;
         }   
 
         public void Initialize()
         {
             SL.Get<BattleController>().OnTurnEnded += () => SL.Get<HUDService>().Behaviour.WarriorUI.HideArmorSequenceAsync().Forget();
-            SL.Get<HUDService>().Behaviour.WarriorUI.SetStartHealth(_maxHealth);
+            _currentHealth = SL.Get<GameStateHolder>().CharacterHealth > 0 ? SL.Get<GameStateHolder>().CharacterHealth : _maxHealth;
+            SL.Get<HUDService>().Behaviour.WarriorUI.UpdateHealthBar(_currentHealth, _maxHealth);
+            SL.Get<HUDService>().Behaviour.WarriorUI.SetStartHealth(_currentHealth);
         }
 
         public void SetTurnData(WarriorTurnData turnData)
@@ -67,8 +67,9 @@ namespace Game.Runtime.Gameplay.Warrior
             {
                 _currentHealth = 0;
                 Death().Forget();
-                return;
             }
+            
+            SL.Get<GameStateHolder>().CharacterHealth = _currentHealth;
         }
 
         public async UniTask AttackAsync()
@@ -104,6 +105,8 @@ namespace Game.Runtime.Gameplay.Warrior
 
             if (_currentHealth >= _maxHealth)
                 _currentHealth = _maxHealth;
+
+            SL.Get<GameStateHolder>().CharacterHealth = _currentHealth;
         }
 
         private async UniTask Death()

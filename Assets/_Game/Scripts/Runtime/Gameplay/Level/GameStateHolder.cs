@@ -2,8 +2,9 @@
 
 namespace Game.Runtime.Gameplay.Level
 {
-    public class LevelIndexHolder : IService
+    public class GameStateHolder : IService
     {
         public int CurrentLevel;
+        public float CharacterHealth;
     }
 }

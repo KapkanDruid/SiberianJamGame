@@ -47,9 +47,14 @@ MonoBehaviour:
   entityId: CMS/Gameplay/Levels/0_Forest/0_forest_simple_enemy
   Components:
   - rid: 6583048880660676698
+  - rid: 635145080740774061
   references:
     version: 2
     RefIds:
+    - rid: 635145080740774061
+      type: {class: LevelParticleComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
+      data:
+        Particle: {fileID: 6475520120998431958, guid: 7fccd54e51d78674c80230f18c27391c, type: 3}
     - rid: 6583048880660676698
       type: {class: LevelComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
       data:

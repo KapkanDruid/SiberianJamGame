@@ -1,6 +1,7 @@
 ﻿using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Commons;
 using Game.Runtime.Gameplay.Implants;
+using Game.Runtime.Gameplay.Level;
 using Game.Runtime.Services;
 using Game.Runtime.Services.Audio;
 using Game.Runtime.Services.Camera;
@@ -47,6 +48,7 @@ namespace Game.Runtime.Runners
             SL.Register<UIFaderService>(new UIFaderService(), _globalScope);
             SL.Register<CameraService>(new CameraService(), _globalScope);
             SL.Register<InputService>(new InputService(), _globalScope);
+            SL.Register<GameStateHolder>(new GameStateHolder(), _globalScope);
             SL.Register<ImplantsPoolService>(new ImplantsPoolService(), _globalScope);
             SL.Register<DialogController>(CreateDialogController(), _globalScope);
             SL.Register<Invoker>(new Invoker(), _globalScope);
