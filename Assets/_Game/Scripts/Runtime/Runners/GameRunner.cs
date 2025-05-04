@@ -44,6 +44,7 @@ namespace Game.Runtime.Runners
             SL.Register<InventoryService>(new InventoryService(), _gameScope);
             SL.Register<LootService>(new LootService(), _gameScope);
             SL.Register<WarriorController>(new WarriorController(), _gameScope);
+            SL.Register<LevelIndexHolder>(new LevelIndexHolder(), _gameScope);
             SL.Register<BattleController>(_battleController, _gameScope);
 
             ConfigureLevel();
@@ -64,6 +65,8 @@ namespace Game.Runtime.Runners
         private void ConfigureLevel()
         {
             var currentLevelIndex = _debugLevelIndex >= 0 ? _debugLevelIndex : SL.Get<SaveService>().SaveData.LevelIndex;
+            SL.Get<LevelIndexHolder>().CurrentLevel = currentLevelIndex;
+            
             var levelModel = LevelHelper.GetLevelModel(currentLevelIndex);
 
             if (levelModel == null)

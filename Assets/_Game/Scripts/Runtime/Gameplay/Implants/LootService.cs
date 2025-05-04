@@ -36,7 +36,7 @@ namespace Game.Runtime.Gameplay.Implants
             
             foreach (var implant in _allImplants)
             {
-                if (implant.GetComponent<ImplantLevelRequiredComponent>().RequiredLevelIndex <= SL.Get<SaveService>().SaveData.LevelIndex)
+                if (implant.GetComponent<ImplantLevelRequiredComponent>().RequiredLevelIndex <= SL.Get<LevelIndexHolder>().CurrentLevel)
                     availableImplants.Add(implant);
             }
 

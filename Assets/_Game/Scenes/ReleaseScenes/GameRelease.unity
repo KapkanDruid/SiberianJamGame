@@ -240,7 +240,7 @@ MonoBehaviour:
   _battleController: {fileID: 1304696853}
   _warriorView: {fileID: 392571451}
   _backgroundRenderer: {fileID: 700353639}
-  _debugLevelIndex: 0
+  _debugLevelIndex: 10
 --- !u!4 &460449080
 Transform:
   m_ObjectHideFlags: 0
