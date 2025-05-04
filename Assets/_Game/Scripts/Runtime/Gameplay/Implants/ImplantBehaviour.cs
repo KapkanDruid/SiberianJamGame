@@ -4,6 +4,7 @@ using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Commons;
 using Game.Runtime.CMS.Components.Gameplay;
 using Game.Runtime.CMS.Components.Implants;
+using Game.Runtime.Gameplay.Level;
 using Game.Runtime.Services;
 using Game.Runtime.Services.Input;
 using UnityEngine;
@@ -88,7 +89,11 @@ namespace Game.Runtime.Gameplay.Implants
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (this == null)return;
+            if (this == null)
+            {
+                SL.Get<InputService>().OnRotateItem -= HandleRotation;
+                return;
+            }
             if (!_isDragging) return;
 
             StopDragging();
@@ -157,6 +162,7 @@ namespace Game.Runtime.Gameplay.Implants
 
         private void UpdateSlotHighlight()
         {
+            if (SL.Get<BattleController>().IsTurnStarted) return;
             var newSlot = GetSlotUnderCursor();
             if (newSlot != null)
             {
@@ -230,6 +236,11 @@ namespace Game.Runtime.Gameplay.Implants
 
         private void RotateItem()
         {
+            if (this == null)
+            {
+                SL.Get<InputService>().OnRotateItem -= HandleRotation;
+                return;
+            }
             CurrentRotation = (CurrentRotation + 1) % 4;
             float[] presetAngles = { 0f, -90f, -180f, -270f };
             _rectTransform.localRotation = Quaternion.Euler(0, 0, presetAngles[CurrentRotation]);

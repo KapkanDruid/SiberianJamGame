@@ -151,6 +151,7 @@ namespace Game.Runtime.Gameplay.Implants
 
         public bool TryPlaceItem(ImplantBehaviour item, Vector2Int gridPosition)
         {
+            if (SL.Get<BattleController>().IsTurnStarted) return false;
             if (!CanPlaceItem(item, gridPosition)) return false;
 
             if (_itemPositions.TryGetValue(item, out var oldPositions))
