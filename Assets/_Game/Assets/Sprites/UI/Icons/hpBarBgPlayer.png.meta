@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      hpBarBgPlayer_0: 559830288190453816
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

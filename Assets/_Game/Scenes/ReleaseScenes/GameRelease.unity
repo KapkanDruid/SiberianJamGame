@@ -240,6 +240,7 @@ MonoBehaviour:
   _battleController: {fileID: 1304696853}
   _warriorView: {fileID: 392571451}
   _backgroundRenderer: {fileID: 700353639}
+  _debugLevelIndex: -1
 --- !u!4 &460449080
 Transform:
   m_ObjectHideFlags: 0
@@ -372,7 +373,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyPosition: {fileID: 1318406733}
-  _debugLevelIndex: 0
   CurrentBattleType: 0
 --- !u!4 &1304696854
 Transform:
