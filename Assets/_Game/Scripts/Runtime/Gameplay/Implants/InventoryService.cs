@@ -105,6 +105,8 @@ namespace Game.Runtime.Gameplay.Implants
                         }
                     }
                 }
+                
+                item.PlayParticle();
             }
 
             Debug.Log($"Total Health: {health}");

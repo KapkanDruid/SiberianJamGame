@@ -8,5 +8,6 @@ namespace Game.Runtime.CMS.Components.Gameplay
         public Vector2 SizeDelta;
         public Vector2 Pivot;
         public GridConfig Grid;
+        public ParticleSystem Particle;
     }
 }
