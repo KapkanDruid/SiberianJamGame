@@ -48,6 +48,7 @@ MonoBehaviour:
   Components:
   - rid: 6583048880660676698
   - rid: 635145080740774061
+  - rid: 3335048661485224018
   references:
     version: 2
     RefIds:
@@ -55,6 +56,10 @@ MonoBehaviour:
       type: {class: LevelParticleComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
       data:
         Particle: {fileID: 6475520120998431958, guid: 7fccd54e51d78674c80230f18c27391c, type: 3}
+    - rid: 3335048661485224018
+      type: {class: MusicComponent, ns: Game.Runtime.CMS.Components.Audio, asm: Runtime}
+      data:
+        Clip: {fileID: 8300000, guid: e86c8a861a94ba647a2e73e6170eef5e, type: 3}
     - rid: 6583048880660676698
       type: {class: LevelComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
       data:
