@@ -87,6 +87,8 @@ namespace Game.Runtime.Gameplay.Warrior
         public async UniTask FinishAttackAsync()
         {
             _animator.SetTrigger("FinishAttack");
+            if (_shootEffect != null)
+                SL.Get<AudioService>().Play(_shootEffect.EntityId);
 
             await UniTask.WaitUntil(() => _reader.FinishAttackPerformed);
 
