@@ -54,7 +54,7 @@ MonoBehaviour:
     - rid: 635145038440169585
       type: {class: SpriteComponent, ns: Game.Runtime.CMS.Components.Commons, asm: Runtime}
       data:
-        Sprite: {fileID: 7607066685573769206, guid: 23a95d1064c4477499d2c31e81734623, type: 3}
+        Sprite: {fileID: -687373862, guid: 23a95d1064c4477499d2c31e81734623, type: 3}
     - rid: 635145038440169586
       type: {class: InventoryComponent, ns: Game.Runtime.CMS.Components.Gameplay, asm: Runtime}
       data:
