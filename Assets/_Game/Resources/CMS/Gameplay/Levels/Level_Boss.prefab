@@ -48,22 +48,17 @@ MonoBehaviour:
   Components:
   - rid: 635145064486535254
   - rid: 4717638325419638959
-  - rid: 3335048661485224024
   references:
     version: 2
     RefIds:
     - rid: 635145064486535254
       type: {class: LevelComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
       data:
-        LevelIndex: 10
-        BackgroundSprite: {fileID: 21300000, guid: d42167d62dbe8b64c9064116c3c69ca6, type: 3}
+        LevelIndex: 9
+        BackgroundSprite: {fileID: 21300000, guid: 8503cdc1c426cf746b9a4cb9556c8c3d, type: 3}
         EnemyPrefab: {fileID: 8389933710043619156, guid: 96e430034889d6048a276e071eb4af90, type: 3}
-        DeathDialog: {fileID: 1554981954346889324, guid: bacaac77714b3a44e938ea5787dc7caf, type: 3}
-        NextSceneDialog: {fileID: 1554981954346889324, guid: 95f7c24d1cd3bdd47bd657e03e1d9466, type: 3}
-    - rid: 3335048661485224024
-      type: {class: MusicComponent, ns: Game.Runtime.CMS.Components.Audio, asm: Runtime}
-      data:
-        Clip: {fileID: 8300000, guid: 6e3bbdd2de45f2b48afed2144fceb122, type: 3}
+        DeathDialog: {fileID: 5262409682486398458, guid: 3ee59193af45d4a4494e9b362624c0bb, type: 3}
+        NextSceneDialog: {fileID: 6989399238491455724, guid: 3b155317ccb7f044295cfe308bcf118b, type: 3}
     - rid: 4717638325419638959
       type: {class: BossLevelComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
       data:
