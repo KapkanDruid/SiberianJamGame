@@ -161,6 +161,11 @@ MonoBehaviour:
   SimpleAttackPerformed: 0
   FinishAttackPerformed: 0
   DeathEnded: 0
+--- !u!4 &213001653 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4926312335516145650, guid: e6fff8a02d2aded46af6e1e4672ebc80, type: 3}
+  m_PrefabInstance: {fileID: 6312047410956407605}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &392571450
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,6 +197,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 213001650}
   _reader: {fileID: 213001651}
+  _shootPoint: {fileID: 2072247503}
+  _singleShootPrefab: {fileID: 2792948078170225802, guid: 732ca155e43100f40bdfe42cca508469, type: 3}
+  _doubleShootPrefab: {fileID: 8662483201916357960, guid: c7617e4e0a0b0554c80f84f7e58f8d2c, type: 3}
 --- !u!4 &392571452
 Transform:
   m_ObjectHideFlags: 0
@@ -240,7 +248,7 @@ MonoBehaviour:
   _battleController: {fileID: 1304696853}
   _warriorView: {fileID: 392571451}
   _backgroundRenderer: {fileID: 700353639}
-  _debugLevelIndex: 10
+  _debugLevelIndex: 0
 --- !u!4 &460449080
 Transform:
   m_ObjectHideFlags: 0
@@ -649,6 +657,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2072247502
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2072247503}
+  m_Layer: 0
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2072247503
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072247502}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.62, y: 0.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 213001653}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2097831466
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,7 +936,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4926312335516145650, guid: e6fff8a02d2aded46af6e1e4672ebc80, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2072247503}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4704101009393771608, guid: e6fff8a02d2aded46af6e1e4672ebc80, type: 3}
       insertIndex: -1

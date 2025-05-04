@@ -9,10 +9,18 @@ namespace Game.Runtime.Gameplay.Warrior
     {
         [SerializeField] private Animator _animator;
         [SerializeField] private WarriorAnimationReader _reader;
+        [SerializeField] private Transform _shootPoint;
+        [SerializeField] private ParticleSystem _singleShootPrefab;
+        [SerializeField] private ParticleSystem _doubleShootPrefab;
+
+        private ParticleSystem _singleShoot;
+        private ParticleSystem _doubleShoot;
 
         public void Initialize()
         {
             SL.Get<HUDService>().Behaviour.WarriorUI.SetArmorIconActive(false);
+            _singleShoot = Instantiate(_singleShootPrefab, _shootPoint.position, Quaternion.identity);
+            _doubleShoot = Instantiate(_doubleShootPrefab, _shootPoint.position, Quaternion.identity);
         }
 
         public async UniTask DeathAsync()
@@ -48,14 +56,30 @@ namespace Game.Runtime.Gameplay.Warrior
 
             await UniTask.WaitUntil(() => _reader.SimpleAttackPerformed == true);
 
+            _singleShoot.Play();
+
             _reader.SimpleAttackPerformed = false;
         }
+
+/*        private void Update()
+        {
+            if (_singleShoot != null && _singleShoot.gameObject.activeInHierarchy && !_singleShoot.isPlaying)
+            {
+                _singleShoot.gameObject.SetActive(false);
+            }
+            if (_doubleShoot != null && _doubleShoot.gameObject.activeInHierarchy && !_doubleShoot.isPlaying)
+            {
+                _doubleShoot.gameObject.SetActive(false);
+            }
+        }*/
 
         public async UniTask FinishAttackAsync()
         {
             _animator.SetTrigger("FinishAttack");
 
             await UniTask.WaitUntil(() => _reader.FinishAttackPerformed);
+
+            _doubleShoot.Play();
 
             _reader.FinishAttackPerformed = false;
         }
