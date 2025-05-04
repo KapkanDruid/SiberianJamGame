@@ -66,16 +66,5 @@ namespace Game.Runtime.Gameplay.Implants
 
             return result;
         }
-        
-        public bool HasImplant(string implantId)
-        {
-            foreach (var implant in _implantPool)
-            {
-                if (implant.ImplantId == implantId)
-                    return true;
-            }
-              
-            return false;
-        }
     }
 }
