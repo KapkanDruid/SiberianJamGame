@@ -287,9 +287,10 @@ MonoBehaviour:
   _shootPoint: {fileID: 2072247503}
   _singleShootPrefab: {fileID: 2792948078170225802, guid: 732ca155e43100f40bdfe42cca508469, type: 3}
   _doubleShootPrefab: {fileID: 8662483201916357960, guid: c7617e4e0a0b0554c80f84f7e58f8d2c, type: 3}
-  _shootEffect: {fileID: 0}
-  _hitEffect: {fileID: 0}
-  _deathEffect: {fileID: 0}
+  _shootEffect: {fileID: 496384359287204082, guid: 29a3333e57f258b4f8700c287eb72305, type: 3}
+  _superShootEffect: {fileID: 496384359287204082, guid: 94317492e20cdf04c87719262536de7e, type: 3}
+  _hitEffect: {fileID: 496384359287204082, guid: c6f466a46114a42419069075614fcf05, type: 3}
+  _deathEffect: {fileID: 496384359287204082, guid: f2e59d1fdf9b4b54fa494031c8b7654f, type: 3}
 --- !u!4 &392571452
 Transform:
   m_ObjectHideFlags: 0
