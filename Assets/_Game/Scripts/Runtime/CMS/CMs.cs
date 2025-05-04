@@ -20,6 +20,8 @@ namespace Game.Runtime.CMS
             }
             public static class SFX
             {
+                public const string SFXImplantDrag = "CMS/Audio/SFX/SFXImplantDrag";
+                public const string SFXImplantPut = "CMS/Audio/SFX/SFXImplantPut";
                 public const string SFXTest = "CMS/Audio/SFX/SFXTest";
             }
             public const string AmbientTest = "CMS/Audio/AmbientTest";

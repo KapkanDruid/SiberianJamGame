@@ -235,12 +235,13 @@ namespace Game.Runtime.Gameplay.Implants
         private void CreateGrid()
         {
             var defaultInventoryGrid = CM.Get(CMs.Gameplay.Inventory).GetComponent<InventoryComponent>();
-            _gridSize = defaultInventoryGrid.Grid.GridSize;
+            var currentGrid = defaultInventoryGrid.Grids.Last(grid => grid.RequiredLevel <= SL.Get<LevelIndexHolder>().CurrentLevel).Grid;
+            _gridSize = currentGrid.GridSize;
             _cellSize = defaultInventoryGrid.CellSize;
 
             _inventoryView.ResizeInventoryView(_gridSize, _cellSize);
 
-            foreach (var slotPos in defaultInventoryGrid.Grid.GridPattern)
+            foreach (var slotPos in currentGrid.GridPattern)
             {
                 var slotObj = new GameObject($"InventorySlot_{slotPos.x}_{slotPos.y}");
                 var slot = slotObj.AddComponent<InventorySlot>();

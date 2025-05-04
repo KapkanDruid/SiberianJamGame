@@ -136,7 +136,7 @@ namespace Game.Runtime.Gameplay.Level
             SL.Get<SaveService>().SaveData.LevelIndex++;
             SL.Get<SaveService>().SaveData.DialogBlockID = LevelConfig.NextSceneDialog.EntityId;
             SL.Get<SaveService>().Save();
-            Debug.Log($"[BattleController] You win! {SL.Get<SaveService>().SaveData.LevelIndex}");
+            Debug.Log($"[BattleController] You win! {SL.Get<LevelIndexHolder>().CurrentLevel}");
             
             SL.Get<LootService>().GenerateLoot();
         }
