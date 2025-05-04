@@ -55,7 +55,7 @@ namespace Game.Runtime.Gameplay.Enemy
         {
             _animator.SetTrigger("Death");
             if (_deathEffect != null)
-                SL.Get<AudioService>().Play(_hitEffect.EntityId);
+                SL.Get<AudioService>().Play(_deathEffect.EntityId);
         }
     }
 }
