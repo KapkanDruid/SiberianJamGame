@@ -63,17 +63,8 @@ namespace Game.Runtime.Runners
 
         private void ConfigureLevel()
         {
-            var currentLevelIndex = _debugLevelIndex >= 0 ? _debugLevelIndex : SL.Get<SaveService>().SaveData.LevelIndex;
-            SL.Get<GameStateHolder>().CurrentLevel = currentLevelIndex;
-            
+            var currentLevelIndex = _debugLevelIndex >= 0 ? _debugLevelIndex : SL.Get<GameStateHolder>().CurrentLevel;
             var levelModel = LevelHelper.GetLevelModel(currentLevelIndex);
-
-            if (levelModel == null)
-            {
-                Debug.LogError($"Level {currentLevelIndex} not found, loading previous level");
-                levelModel = LevelHelper.GetLevelModel(currentLevelIndex - 1);
-                SL.Get<SaveService>().SaveData.LevelIndex--;
-            }
 
             var levelComponent = levelModel.GetComponent<LevelComponent>();
             _backgroundRenderer.sprite = levelComponent.BackgroundSprite;
