@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3491bc35dc84132acbda8b4eb9ddf2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityId: 
+  entityId: CMS/Audio/SFX/ShieldHit
   Components:
   - rid: 635145080740774111
   references:

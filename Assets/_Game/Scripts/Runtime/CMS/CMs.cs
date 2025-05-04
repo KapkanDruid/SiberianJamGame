@@ -136,9 +136,22 @@ namespace Game.Runtime.CMS
             }
             public static class SFX
             {
+                public static class BOSS
+                {
+                    public const string Boss_Death = "CMS/Audio/SFX/BOSS/Boss_Death";
+                    public const string Boss_GetHit = "CMS/Audio/SFX/BOSS/Boss_GetHit";
+                    public const string Boss_Hit = "CMS/Audio/SFX/BOSS/Boss_Hit";
+                }
+                public static class DUMMY
+                {
+                    public const string RobotDeath = "CMS/Audio/SFX/DUMMY/RobotDeath";
+                    public const string RobotShoot = "CMS/Audio/SFX/DUMMY/RobotShoot";
+                }
                 public static class FOX
                 {
+                    public const string SFX_FOX_Death = "CMS/Audio/SFX/FOX/SFX_FOX_Death";
                     public const string SFX_FOX_GETHIT = "CMS/Audio/SFX/FOX/SFX_FOX_GETHIT";
+                    public const string SFX_FOX_Shoot = "CMS/Audio/SFX/FOX/SFX_FOX_Shoot";
                 }
                 public static class Razboynik
                 {
@@ -152,6 +165,12 @@ namespace Game.Runtime.CMS
                     public const string REDHOOD_hit_1 = "CMS/Audio/SFX/REDHOOD/REDHOOD_hit_1";
                     public const string REDHOOD_hurt_1 = "CMS/Audio/SFX/REDHOOD/REDHOOD_hurt_1";
                     public const string REDHOOD_supershot_1 = "CMS/Audio/SFX/REDHOOD/REDHOOD_supershot_1";
+                }
+                public static class WOLF
+                {
+                    public const string SFX_Wolf_Death = "CMS/Audio/SFX/WOLF/SFX_Wolf_Death";
+                    public const string SFX_Wolf_GETHIT = "CMS/Audio/SFX/WOLF/SFX_Wolf_GETHIT";
+                    public const string SFX_Wolf_Shoot = "CMS/Audio/SFX/WOLF/SFX_Wolf_Shoot";
                 }
                 public const string EndTurn = "CMS/Audio/SFX/EndTurn";
                 public const string Hover = "CMS/Audio/SFX/Hover";
