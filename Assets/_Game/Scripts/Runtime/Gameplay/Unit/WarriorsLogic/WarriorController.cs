@@ -28,7 +28,16 @@ namespace Game.Runtime.Gameplay.Warrior
         public void Initialize()
         {
             SL.Get<BattleController>().OnTurnEnded += () => SL.Get<HUDService>().Behaviour.WarriorUI.HideArmorSequenceAsync().Forget();
-            _currentHealth = SL.Get<GameStateHolder>().CharacterHealth > 0 ? SL.Get<GameStateHolder>().CharacterHealth : _maxHealth;
+            
+            // :')
+            _currentHealth = SL.Get<GameStateHolder>().CharacterHealth > 0 ? 
+                SL.Get<GameStateHolder>().CharacterHealth : 
+                SL.Get<GameStateHolder>().CachedHealth > 0 ? 
+                    SL.Get<GameStateHolder>().CachedHealth : 
+                    _maxHealth;
+            
+            SL.Get<GameStateHolder>().CachedHealth = _currentHealth;
+            
             SL.Get<HUDService>().Behaviour.WarriorUI.UpdateHealthBar(_currentHealth, _maxHealth);
             SL.Get<HUDService>().Behaviour.WarriorUI.SetStartHealth(_currentHealth);
         }
