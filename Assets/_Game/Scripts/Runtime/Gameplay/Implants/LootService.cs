@@ -37,7 +37,12 @@ namespace Game.Runtime.Gameplay.Implants
             foreach (var implant in _allImplants)
             {
                 if (implant.GetComponent<ImplantLevelRequiredComponent>().RequiredLevelIndex <= SL.Get<GameStateHolder>().CurrentLevel)
+                {
+                    if (implant.GetComponent<ImplantLevelRequiredComponent>().RequiredLevelIndex == 0 && SL.Get<GameStateHolder>().CurrentLevel > 0)
+                        continue;
+                    
                     availableImplants.Add(implant);
+                }
             }
 
             availableImplants.Shuffle();
@@ -46,7 +51,7 @@ namespace Game.Runtime.Gameplay.Implants
             {
                 var implantPrefab = CM.Get(CMs.Gameplay.Implants.BaseImplantBehaviour).GetComponent<PrefabComponent>().Prefab;
                 var implantBehaviour = Object.Instantiate(implantPrefab).GetComponent<ImplantBehaviour>();
-                implantBehaviour.SetupItem(availableImplants.GetRandom(), SL.Get<HUDService>().Behaviour.GetComponent<RectTransform>());
+                implantBehaviour.SetupItem(availableImplants.GetRandom(), SL.Get<HUDService>().Behaviour.GetComponent<Canvas>());
             
                 SL.Get<HUDService>().Behaviour.LootHolder.SetItemPosition(implantBehaviour, Vector2.zero);
             }

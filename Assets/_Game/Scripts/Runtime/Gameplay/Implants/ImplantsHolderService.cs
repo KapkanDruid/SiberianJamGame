@@ -25,7 +25,7 @@ namespace Game.Runtime.Gameplay.Implants
             {
                 var implantPrefab = CM.Get(CMs.Gameplay.Implants.BaseImplantBehaviour).GetComponent<PrefabComponent>().Prefab;
                 var implantBehaviour = Object.Instantiate(implantPrefab).GetComponent<ImplantBehaviour>();
-                implantBehaviour.SetupItem(implantModel, SL.Get<HUDService>().Behaviour.GetComponent<RectTransform>());
+                implantBehaviour.SetupItem(implantModel, SL.Get<HUDService>().Behaviour.GetComponent<Canvas>());
                 
                 _implants.Add(implantBehaviour);
                 SL.Get<HUDService>().Behaviour.ImplantsHolder.SetItemPosition(implantBehaviour, Vector2.zero);

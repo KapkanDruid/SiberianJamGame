@@ -64,9 +64,9 @@ MonoBehaviour:
       type: {class: AddImplantsToPoolAtStartComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
       data:
         ImplantsPrefabs:
+        - {fileID: 8862212721897967724, guid: bd3d87fca46888e47b1a19d97aa27548, type: 3}
         - {fileID: 4443999720199238786, guid: b5f73cdd811d7ed40a5d62c1ad9d8660, type: 3}
-        - {fileID: 4443999720199238786, guid: b5f73cdd811d7ed40a5d62c1ad9d8660, type: 3}
-        - {fileID: 4443999720199238786, guid: b5f73cdd811d7ed40a5d62c1ad9d8660, type: 3}
+        - {fileID: 4443999720199238786, guid: 8563ec38633abc142b71d88177033976, type: 3}
         - {fileID: 4443999720199238786, guid: b5f73cdd811d7ed40a5d62c1ad9d8660, type: 3}
     - rid: 635145080740774057
       type: {class: SetCharacterHealthComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
