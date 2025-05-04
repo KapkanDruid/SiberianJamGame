@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using Game.Runtime.CMS;
+using Game.Runtime.Services;
+using Game.Runtime.Services.Audio;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game.Runtime.Gameplay.HUD
@@ -20,5 +24,10 @@ namespace Game.Runtime.Gameplay.HUD
         public EnemyUI EnemyUI => enemyUI;
         public Button EndTurnButton => endTurnButton;
         public GameObject DisableUI => disableUI;
+
+        public void Start()
+        {
+            endTurnButton.onClick.AddListener(() => SL.Get<AudioService>().Play(CMs.Audio.SFX.EndTurn));
+        }
     }
 }

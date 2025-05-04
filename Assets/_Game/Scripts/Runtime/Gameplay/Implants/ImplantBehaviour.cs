@@ -103,6 +103,7 @@ namespace Game.Runtime.Gameplay.Implants
             if (this == null)return;
             if (_isDragging) return;
             if (SL.Get<InventoryService>().HasItem(this)) return;
+            SL.Get<AudioService>().Play(CMs.Audio.SFX.Hover);
 
             _currentTweenScale?.Kill();
             _currentTweenScale = _rectTransform.DOScale(_originalScale, 0.2f)
@@ -117,9 +118,9 @@ namespace Game.Runtime.Gameplay.Implants
             _currentTweenScale?.Kill();
 
             if (eventData.button != PointerEventData.InputButton.Left) return;
-            SL.Get<AudioService>().Play(CMs.Audio.SFX.SFXImplantDrag);
             StartDragging();
             SL.Get<InputService>().OnRotateItem += HandleRotation;
+            SL.Get<AudioService>().Play(CMs.Audio.SFX.SFXImplantDrag);
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -140,6 +141,8 @@ namespace Game.Runtime.Gameplay.Implants
             if (!_isDragging) return;
 
             StopDragging();
+
+            SL.Get<AudioService>().Play(CMs.Audio.SFX.SFXImplantPut);
 
             if (TryPlaceItem()) return;
             if (TryReturnToHolder(eventData.position)) return;
@@ -252,8 +255,6 @@ namespace Game.Runtime.Gameplay.Implants
             if (_holderService.HasItem(this))
                 _holderService.RemoveItem(this);
             
-            SL.Get<AudioService>().Play(CMs.Audio.SFX.SFXImplantPut);
-
             _inventoryService.SetItemPosition(slot, this);
             CenterSlotPosition = slot.GridPosition;
             //PlayParticle();
@@ -294,6 +295,7 @@ namespace Game.Runtime.Gameplay.Implants
             _rectTransform.localRotation = Quaternion.Euler(0, 0, presetAngles[CurrentRotation]);
             _rectTransform.anchoredPosition = _lastPosition;
             UpdateSlotHighlight();
+            SL.Get<AudioService>().Play(CMs.Audio.SFX.ImplantRotate);
         }
 
         private void ReturnToOriginalPosition()
