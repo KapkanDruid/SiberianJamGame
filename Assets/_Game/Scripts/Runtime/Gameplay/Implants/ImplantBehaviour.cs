@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DG.Tweening;
 using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Commons;
 using Game.Runtime.CMS.Components.Gameplay;
 using Game.Runtime.CMS.Components.Implants;
-using Game.Runtime.Gameplay.HUD;
 using Game.Runtime.Services;
 using Game.Runtime.Services.Input;
 using UnityEngine;
@@ -20,6 +18,7 @@ namespace Game.Runtime.Gameplay.Implants
         Armor,
         Damage
     }
+    
     [RequireComponent(typeof(RectTransform), typeof(Image), typeof(CanvasGroup))]
     public class ImplantBehaviour : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
@@ -71,6 +70,7 @@ namespace Game.Runtime.Gameplay.Implants
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            if (this == null)return;
             if (eventData.button != PointerEventData.InputButton.Left) return;
             
             StartDragging();
@@ -79,6 +79,7 @@ namespace Game.Runtime.Gameplay.Implants
 
         public void OnDrag(PointerEventData eventData)
         {
+            if (this == null)return;
             if (!_isDragging) return;
 
             UpdateDragPosition(eventData);
@@ -87,6 +88,7 @@ namespace Game.Runtime.Gameplay.Implants
 
         public void OnEndDrag(PointerEventData eventData)
         {
+            if (this == null)return;
             if (!_isDragging) return;
 
             StopDragging();
@@ -210,6 +212,8 @@ namespace Game.Runtime.Gameplay.Implants
             
             if (_inventoryService.HasItem(this))
                 _inventoryService.RemoveItem(this);
+            
+            SL.Get<LootService>().Choice(Model.EntityId);
 
             CurrentRotation = 0;
             _rectTransform.localRotation = Quaternion.Euler(0, 0, 0);

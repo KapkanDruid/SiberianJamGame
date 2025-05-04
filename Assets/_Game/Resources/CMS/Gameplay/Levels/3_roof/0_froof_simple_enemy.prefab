@@ -54,7 +54,7 @@ MonoBehaviour:
       type: {class: LevelComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
       data:
         LevelIndex: 7
-        BackgroundSprite: {fileID: 21300000, guid: cde3d42df50d8734a834947e1cc30978, type: 3}
-        EnemyPrefab: {fileID: 0}
+        BackgroundSprite: {fileID: 21300000, guid: d42167d62dbe8b64c9064116c3c69ca6, type: 3}
+        EnemyPrefab: {fileID: 8389933710043619156, guid: dcbfb57de662aa448860ef68eb1db10a, type: 3}
         DeathDialog: {fileID: 5262409682486398458, guid: df6e9dbea24d8ba4d8ea7001b8871380, type: 3}
         NextSceneDialog: {fileID: 6989399238491455724, guid: 44ef9bb6160e79942b9bf66085a637ba, type: 3}
