@@ -13,6 +13,7 @@ namespace Game.Runtime.Gameplay.Enemy
         [SerializeField] private EnemyAnimationReader _reader;
         [SerializeField] private CMSPrefab _shootEffect;
         [SerializeField] private CMSPrefab _hitEffect;
+        [SerializeField] private CMSPrefab _deathEffect;
 
         public void Configurate(float startHealth)
         {
@@ -53,6 +54,8 @@ namespace Game.Runtime.Gameplay.Enemy
         public void Death()
         {
             _animator.SetTrigger("Death");
+            if (_deathEffect != null)
+                SL.Get<AudioService>().Play(_hitEffect.EntityId);
         }
     }
 }

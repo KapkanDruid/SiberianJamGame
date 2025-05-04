@@ -1,6 +1,8 @@
 ﻿using Cysharp.Threading.Tasks;
+using Game.Runtime.CMS;
 using Game.Runtime.Gameplay.HUD;
 using Game.Runtime.Services;
+using Game.Runtime.Services.Audio;
 using UnityEngine;
 
 namespace Game.Runtime.Gameplay.Enemy
@@ -9,6 +11,9 @@ namespace Game.Runtime.Gameplay.Enemy
     {
         [SerializeField] private EnemyAnimationReader _reader;
         [SerializeField] private Animator _animator;
+        [SerializeField] private CMSPrefab _shootEffect;
+        [SerializeField] private CMSPrefab _hitEffect;
+        [SerializeField] private CMSPrefab _deathEffect;
 
         public void Configurate(float startHealth)
         {
@@ -18,7 +23,8 @@ namespace Game.Runtime.Gameplay.Enemy
         public async UniTask AttackAsync()
         {
             _animator.SetTrigger("Attack");
-
+            if (_shootEffect != null)
+                SL.Get<AudioService>().Play(_shootEffect.EntityId);
             await UniTask.WaitUntil(() => _reader.AttackPerformed == true);
 
             _reader.AttackPerformed = false;
@@ -40,10 +46,14 @@ namespace Game.Runtime.Gameplay.Enemy
         public void PlayHitAnimation()
         {
             _animator.SetTrigger("Hit");
+            if (_hitEffect != null)
+                SL.Get<AudioService>().Play(_hitEffect.EntityId);
         }
         public void Death()
         {
             _animator.SetTrigger("Death");
+            if (_deathEffect != null)
+                SL.Get<AudioService>().Play(_hitEffect.EntityId);
         }
     }
 }
