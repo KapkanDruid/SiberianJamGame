@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3491bc35dc84132acbda8b4eb9ddf2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityId: CMS/Gameplay/Levels/Forest/forest_simple_enemy
+  entityId: CMS/Gameplay/Levels/3_roof/1_roof_miniboss
   Components:
   - rid: 6583048880660676698
   references:
@@ -53,8 +53,8 @@ MonoBehaviour:
     - rid: 6583048880660676698
       type: {class: LevelComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
       data:
-        LevelIndex: 1
-        BackgroundSprite: {fileID: 21300000, guid: cde3d42df50d8734a834947e1cc30978, type: 3}
-        EnemyPrefab: {fileID: 8389933710043619156, guid: 96e430034889d6048a276e071eb4af90, type: 3}
+        LevelIndex: 8
+        BackgroundSprite: {fileID: 21300000, guid: d42167d62dbe8b64c9064116c3c69ca6, type: 3}
+        EnemyPrefab: {fileID: 0}
         DeathDialog: {fileID: 5262409682486398458, guid: df6e9dbea24d8ba4d8ea7001b8871380, type: 3}
         NextSceneDialog: {fileID: 6989399238491455724, guid: 1a23cf4207723de439db28fd57a63c72, type: 3}

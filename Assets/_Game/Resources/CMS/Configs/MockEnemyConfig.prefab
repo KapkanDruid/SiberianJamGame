@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3491bc35dc84132acbda8b4eb9ddf2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityId: 
+  entityId: CMS/Configs/MockEnemyConfig
   Components:
   - rid: 4717638307256991856
   - rid: 4717638307256991919
@@ -54,10 +54,10 @@ MonoBehaviour:
     - rid: 4717638307256991856
       type: {class: EnemyConfig, ns: Game.Runtime.CMS.Components.Configs, asm: Runtime}
       data:
-        _maxHealth: 1
-        _damage: 0.2
-        _armor: 0.4
+        _maxHealth: 30
+        _damage: 10
+        _armor: 10
     - rid: 4717638307256991919
       type: {class: EnemyPrefabComponent, ns: Game.Runtime.CMS.Components.Configs, asm: Runtime}
       data:
-        _enemyView: {fileID: -7791952286858956461, guid: d28e4208433923e4ca652daab649728f, type: 3}
+        _enemyView: {fileID: -7791952286858956461, guid: 00e5a688ad0f22943ad4f52979dad825, type: 3}

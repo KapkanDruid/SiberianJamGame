@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Commons;
 using Game.Runtime.CMS.Components.Gameplay;
 using Game.Runtime.CMS.Components.Implants;
-using Game.Runtime.Gameplay.HUD;
+using Game.Runtime.Gameplay.Level;
 using Game.Runtime.Services;
 using Game.Runtime.Services.Input;
 using UnityEngine;
@@ -18,6 +19,7 @@ namespace Game.Runtime.Gameplay.Implants
         Armor,
         Damage
     }
+    
     [RequireComponent(typeof(RectTransform), typeof(Image), typeof(CanvasGroup))]
     public class ImplantBehaviour : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
@@ -28,15 +30,22 @@ namespace Game.Runtime.Gameplay.Implants
         public List<Vector2Int> SlotPositions { get; private set; }
         public CMSEntity Model { get; private set; }
         public int CurrentRotation { get; private set; }
+        public Vector2Int CenterSlotPosition { get; private set; }
 
         private Transform _originalParent;
         private Vector2 _originalPosition;
+        private int _originIndex;
         private InventoryService _inventoryService;
         private ImplantsHolderService _holderService;
         private RectTransform _root;
         private bool _isDragging;
         private int _originalRotation;
         private Vector2 _pivotPoint;
+
+        private void Start()
+        {
+            transform.localScale = Vector3.one;
+        }
 
         public void SetupItem(CMSEntity itemModel, RectTransform root)
         {
@@ -62,6 +71,7 @@ namespace Game.Runtime.Gameplay.Implants
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            if (this == null)return;
             if (eventData.button != PointerEventData.InputButton.Left) return;
             
             StartDragging();
@@ -70,6 +80,7 @@ namespace Game.Runtime.Gameplay.Implants
 
         public void OnDrag(PointerEventData eventData)
         {
+            if (this == null)return;
             if (!_isDragging) return;
 
             UpdateDragPosition(eventData);
@@ -78,6 +89,11 @@ namespace Game.Runtime.Gameplay.Implants
 
         public void OnEndDrag(PointerEventData eventData)
         {
+            if (this == null)
+            {
+                SL.Get<InputService>().OnRotateItem -= HandleRotation;
+                return;
+            }
             if (!_isDragging) return;
 
             StopDragging();
@@ -88,6 +104,11 @@ namespace Game.Runtime.Gameplay.Implants
             ReturnToOriginalPosition();
         }
 
+        public void PingPongScale()
+        {
+            transform.DOScale(Vector3.one * 1.2f, 0.1f).SetLoops(2, LoopType.Yoyo);
+        }
+
         private void StartDragging()
         {
             _isDragging = true;
@@ -95,10 +116,13 @@ namespace Game.Runtime.Gameplay.Implants
             _originalPosition = _rectTransform.anchoredPosition;
             _originalRotation = CurrentRotation;
             _canvasGroup.blocksRaycasts = false;
+            _originIndex = transform.GetSiblingIndex();
 
             transform.SetParent(_root);
             _rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
             _rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+
+            transform.localScale = Vector3.one * 1.2f;
         }
 
         private void StopDragging()
@@ -106,6 +130,7 @@ namespace Game.Runtime.Gameplay.Implants
             _isDragging = false;
             _canvasGroup.blocksRaycasts = true;
             SL.Get<InputService>().OnRotateItem -= HandleRotation;
+            transform.DOScale(Vector3.one, 0.1f);
             ResetHighlight();
         }
 
@@ -137,6 +162,7 @@ namespace Game.Runtime.Gameplay.Implants
 
         private void UpdateSlotHighlight()
         {
+            if (SL.Get<BattleController>().IsTurnStarted) return;
             var newSlot = GetSlotUnderCursor();
             if (newSlot != null)
             {
@@ -181,6 +207,7 @@ namespace Game.Runtime.Gameplay.Implants
                 _holderService.RemoveItem(this);
             
             _inventoryService.SetItemPosition(slot, this);
+            CenterSlotPosition = slot.GridPosition;
             return true;
         }
 
@@ -191,6 +218,8 @@ namespace Game.Runtime.Gameplay.Implants
             
             if (_inventoryService.HasItem(this))
                 _inventoryService.RemoveItem(this);
+            
+            SL.Get<LootService>().Choice(Model.EntityId);
 
             CurrentRotation = 0;
             _rectTransform.localRotation = Quaternion.Euler(0, 0, 0);
@@ -207,6 +236,11 @@ namespace Game.Runtime.Gameplay.Implants
 
         private void RotateItem()
         {
+            if (this == null)
+            {
+                SL.Get<InputService>().OnRotateItem -= HandleRotation;
+                return;
+            }
             CurrentRotation = (CurrentRotation + 1) % 4;
             float[] presetAngles = { 0f, -90f, -180f, -270f };
             _rectTransform.localRotation = Quaternion.Euler(0, 0, presetAngles[CurrentRotation]);
@@ -222,6 +256,7 @@ namespace Game.Runtime.Gameplay.Implants
             _rectTransform.localRotation = Quaternion.Euler(0, 0, -90 * _originalRotation);
             CurrentRotation = _originalRotation;
             _inventoryService.UpdateAllSlotVisual();
+            transform.SetSiblingIndex(_originIndex);
         }
     }
 }

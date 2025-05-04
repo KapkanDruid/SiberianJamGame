@@ -7,5 +7,6 @@ namespace Game.Runtime.Gameplay.HUD
     public class LootWindow
     {
         [SerializeField] private GameObject _lootWindow;
+        [SerializeField] private Transform group;
     }
 }

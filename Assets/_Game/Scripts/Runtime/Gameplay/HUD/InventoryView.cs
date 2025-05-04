@@ -16,6 +16,11 @@ namespace Game.Runtime.Gameplay.HUD
             //inventoryRoot.anchoredPosition = Vector2.zero;
         }
         
+        public void SetActive(bool active)
+        {
+            inventoryRoot.gameObject.SetActive(active);
+        }
+        
         public void SetupInventorySlot(GameObject slotObject, Vector2Int slotPosistion, float cellSize)
         {
             slotObject.transform.SetParent(cellsRoot.transform);

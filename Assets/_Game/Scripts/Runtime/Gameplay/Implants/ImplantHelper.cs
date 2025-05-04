@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game.Runtime.Gameplay.Implants
@@ -22,17 +23,13 @@ namespace Game.Runtime.Gameplay.Implants
         
         public static Vector2 ApplyRotationToOffset(Vector2 offset, int rotation)
         {
-            switch (rotation)
+            return rotation switch
             {
-                case 1:
-                    return new Vector2(offset.y, -offset.x);
-                case 2:
-                    return new Vector2(-offset.x, -offset.y);
-                case 3:
-                    return new Vector2(-offset.y, offset.x);
-                default:
-                    return offset;
-            }
+                1 => new Vector2(offset.y, -offset.x),
+                2 => new Vector2(-offset.x, -offset.y),
+                3 => new Vector2(-offset.y, offset.x),
+                _ => offset
+            };
         }
     }
 }

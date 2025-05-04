@@ -57,7 +57,7 @@ MonoBehaviour:
     - rid: 635145038440169681
       type: {class: HealthImplantComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
       data:
-        Health: 1
+        Health: 10
     - rid: 635145064486535270
       type: {class: ImplantLevelRequiredComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
       data:
