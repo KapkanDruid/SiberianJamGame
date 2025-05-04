@@ -36,12 +36,13 @@ namespace Game.Runtime.Gameplay.HUD
 
             _armorText.text = armor.ToString();
         }
-        
+
         public async UniTask TakeDamageSequenceAsync(float maxHealth, float startHp, float endHp)
         {
             var sequence = DOTween.Sequence()
-                .Append(_healthParent.DOScale(1.5f, 0.2f))
-                .Append(_healthParent.DOShakeAnchorPos(0.5f, strength: 20))
+                .Append(_healthBar.rectTransform.DOScale(1.2f, 0.2f))
+                .AppendInterval(0.2f)
+                .Append(_healthBar.rectTransform.DOShakeAnchorPos(0.5f, strength: 5))
                 .Append(_healthBar.DOFillAmount(endHp / maxHealth, 0.6f))
                 .Join(DOTween.To(() => startHp, x =>
                 {
@@ -49,10 +50,11 @@ namespace Game.Runtime.Gameplay.HUD
                     _healthText.text = Mathf.CeilToInt(x).ToString();
                 }, endHp, 0.6f))
                 .AppendInterval(0.4f)
-                .Append(_healthParent.DOScale(1f, 0.2f));
-            
+                .Append(_healthBar.rectTransform.DOScale(1, 0.2f));
+
             await sequence.AsyncWaitForCompletion();
         }
+
         public async UniTask HealSequenceAsync(float currentHealth, float maxHealth, float heal)
         {
             float startHp = currentHealth;
@@ -62,7 +64,7 @@ namespace Game.Runtime.Gameplay.HUD
                 endHp = maxHealth;
 
             var sequence = DOTween.Sequence()
-                .Append(_healthParent.DOScale(1.5f, 0.2f))
+                .Append(_healthBar.rectTransform.DOScale(1.2f, 0.2f))
                 .AppendInterval(0.2f)
                 .Append(_healthBar.DOFillAmount(endHp / maxHealth, 0.6f))
                 .Join(DOTween.To(() => startHp, x =>
@@ -70,8 +72,8 @@ namespace Game.Runtime.Gameplay.HUD
                     startHp = x;
                     _healthText.text = Mathf.CeilToInt(x).ToString();
                 }, endHp, 0.6f))
-                .AppendInterval(0.2f)
-                .Append(_healthParent.DOScale(1f, 0.2f));
+            .AppendInterval(0.2f)
+                .Append(_healthBar.rectTransform.DOScale(1, 0.2f));
 
             await sequence.AsyncWaitForCompletion();
         }
@@ -127,7 +129,7 @@ namespace Game.Runtime.Gameplay.HUD
                     _armorText.text = Mathf.CeilToInt(x).ToString();
                 }, 0, 0.4f).SetEase(Ease.Linear))
                 .AppendInterval(0.2f)
-                .Append(_armorIcon.rectTransform.DOShakeAnchorPos(0.5f, strength: 20))
+                .Append(_armorIcon.rectTransform.DOShakeAnchorPos(0.5f, strength: 7))
                 .Append(_armorIcon.rectTransform.DOScale(0f, 0.2f))
                 .OnComplete(() => _armorIcon.gameObject.SetActive(false));
 
