@@ -53,4 +53,4 @@ MonoBehaviour:
     - rid: 4717638307256991850
       type: {class: PlayerConfig, ns: Game.Runtime.CMS.Components.Configs, asm: Runtime}
       data:
-        _maxHealth: 20
+        _maxHealth: 150
