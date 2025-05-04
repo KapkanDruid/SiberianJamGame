@@ -126,6 +126,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 4642285318447051925}
   _reader: {fileID: 5567635856647584833}
+  _shootEffect: {fileID: 0}
+  _hitEffect: {fileID: 0}
 --- !u!114 &5567635856647584833
 MonoBehaviour:
   m_ObjectHideFlags: 0
