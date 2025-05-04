@@ -44,7 +44,6 @@ namespace Game.Runtime.Runners
             SL.Register<InventoryService>(new InventoryService(), _gameScope);
             SL.Register<LootService>(new LootService(), _gameScope);
             SL.Register<WarriorController>(new WarriorController(), _gameScope);
-            SL.Register<LevelIndexHolder>(new LevelIndexHolder(), _gameScope);
             SL.Register<BattleController>(_battleController, _gameScope);
 
             ConfigureLevel();
@@ -65,7 +64,7 @@ namespace Game.Runtime.Runners
         private void ConfigureLevel()
         {
             var currentLevelIndex = _debugLevelIndex >= 0 ? _debugLevelIndex : SL.Get<SaveService>().SaveData.LevelIndex;
-            SL.Get<LevelIndexHolder>().CurrentLevel = currentLevelIndex;
+            SL.Get<GameStateHolder>().CurrentLevel = currentLevelIndex;
             
             var levelModel = LevelHelper.GetLevelModel(currentLevelIndex);
 
@@ -108,6 +107,12 @@ namespace Game.Runtime.Runners
                 SL.Get<ImplantsPoolService>().AddImplants(implantIds);
             }
             else if (currentLevelIndex == 0) Debug.LogWarning($"[GameRunner] Implants pool is empty!");
+
+            if (levelModel.Is<SetCharacterHealthComponent>(out var healthComponent))
+            {
+                SL.Get<GameStateHolder>().CharacterHealth = healthComponent.Health;
+            }
+            else if (currentLevelIndex == 0) Debug.LogWarning($"[GameRunner] SetCharacterHealthComponent not exist!");
             
             Debug.Log($"[GameRunner] Level {currentLevelIndex} loaded!");
         }

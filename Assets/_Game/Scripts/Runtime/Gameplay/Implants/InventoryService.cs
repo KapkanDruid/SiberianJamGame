@@ -235,7 +235,7 @@ namespace Game.Runtime.Gameplay.Implants
         private void CreateGrid()
         {
             var defaultInventoryGrid = CM.Get(CMs.Gameplay.Inventory).GetComponent<InventoryComponent>();
-            var currentGrid = defaultInventoryGrid.Grids.Last(grid => grid.RequiredLevel <= SL.Get<LevelIndexHolder>().CurrentLevel).Grid;
+            var currentGrid = defaultInventoryGrid.Grids.Last(grid => grid.RequiredLevel <= SL.Get<GameStateHolder>().CurrentLevel).Grid;
             _gridSize = currentGrid.GridSize;
             _cellSize = defaultInventoryGrid.CellSize;
 
