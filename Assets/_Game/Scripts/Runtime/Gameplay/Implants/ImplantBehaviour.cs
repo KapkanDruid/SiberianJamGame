@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Commons;
@@ -22,7 +23,7 @@ namespace Game.Runtime.Gameplay.Implants
     }
     
     [RequireComponent(typeof(RectTransform), typeof(Image), typeof(CanvasGroup))]
-    public class ImplantBehaviour : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class ImplantBehaviour : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] private Image _image;
         [SerializeField] private RectTransform _rectTransform;
@@ -42,6 +43,11 @@ namespace Game.Runtime.Gameplay.Implants
         private bool _isDragging;
         private int _originalRotation;
         private Vector2 _pivotPoint;
+        
+        private Vector2 _originalPositionOnEnter;
+        private Vector3 _originalScale;
+        private Tweener _currentTweenPos;
+        private Tweener _currentTweenScale;
 
         private void Start()
         {
@@ -61,6 +67,9 @@ namespace Game.Runtime.Gameplay.Implants
             SlotPositions = itemComponent.Grid.GridPattern;
             _rectTransform.sizeDelta = itemComponent.SizeDelta;
             _image.sprite = itemModel.GetComponent<SpriteComponent>().Sprite;
+            
+            _originalPositionOnEnter = _rectTransform.anchoredPosition;
+            _originalScale = _rectTransform.localScale;
         }
 
         public ImplantType GetImplantType()
@@ -69,10 +78,47 @@ namespace Game.Runtime.Gameplay.Implants
             if (Model.Is<ArmorImplantComponent>()) return ImplantType.Armor;
             return ImplantType.Damage;
         }
+        
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if (this == null)return;
+            if (_isDragging) return;
+            if (SL.Get<InventoryService>().HasItem(this)) return;
+            
+            _currentTweenPos?.Kill();
+            _currentTweenScale?.Kill();
+            
+            _currentTweenPos = _rectTransform.DOAnchorPosY(_originalPositionOnEnter.y + 5f, 0.2f)
+                .SetEase(Ease.OutBack).OnKill(() => _currentTweenPos = null);
+        
+            _currentTweenScale = _rectTransform.DOScale(_originalScale * 1.1f, 0.2f)
+                .SetEase(Ease.OutBack).OnKill(() => _currentTweenScale = null);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            if (this == null)return;
+            if (_isDragging) return;
+            if (SL.Get<InventoryService>().HasItem(this)) return;
+
+            _currentTweenPos?.Kill();
+            _currentTweenScale?.Kill();
+            
+            _currentTweenPos = _rectTransform.DOAnchorPosY(_originalPositionOnEnter.y, 0.2f)
+                .SetEase(Ease.InOutQuad).OnKill(() => _currentTweenPos = null);
+        
+            _currentTweenScale = _rectTransform.DOScale(_originalScale, 0.2f)
+                .SetEase(Ease.InOutQuad).OnKill(() => _currentTweenScale = null);
+        }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
             if (this == null)return;
+            if (_isDragging) return;
+            
+            _currentTweenPos?.Kill();
+            _currentTweenScale?.Kill();
+
             if (eventData.button != PointerEventData.InputButton.Left) return;
             SL.Get<AudioService>().Play(CMs.Audio.SFX.SFXImplantDrag);
             StartDragging();
@@ -226,7 +272,8 @@ namespace Game.Runtime.Gameplay.Implants
 
             CurrentRotation = 0;
             _rectTransform.localRotation = Quaternion.Euler(0, 0, 0);
-            
+            _originalPositionOnEnter = _rectTransform.anchoredPosition;
+            _originalScale = _rectTransform.localScale;
             return true;
         }
         
@@ -260,6 +307,12 @@ namespace Game.Runtime.Gameplay.Implants
             CurrentRotation = _originalRotation;
             _inventoryService.UpdateAllSlotVisual();
             transform.SetSiblingIndex(_originIndex);
+        }
+
+        private void OnDestroy()
+        {
+            _currentTweenPos?.Kill();
+            _currentTweenScale?.Kill();
         }
     }
 }
