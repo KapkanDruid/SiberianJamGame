@@ -48,6 +48,7 @@ MonoBehaviour:
   Components:
   - rid: 635145064486535254
   - rid: 4717638325419638959
+  - rid: 3335048661485224024
   references:
     version: 2
     RefIds:
@@ -59,12 +60,16 @@ MonoBehaviour:
         EnemyPrefab: {fileID: 8389933710043619156, guid: 96e430034889d6048a276e071eb4af90, type: 3}
         DeathDialog: {fileID: 1554981954346889324, guid: bacaac77714b3a44e938ea5787dc7caf, type: 3}
         NextSceneDialog: {fileID: 1554981954346889324, guid: 95f7c24d1cd3bdd47bd657e03e1d9466, type: 3}
+    - rid: 3335048661485224024
+      type: {class: MusicComponent, ns: Game.Runtime.CMS.Components.Audio, asm: Runtime}
+      data:
+        Clip: {fileID: 8300000, guid: 6e3bbdd2de45f2b48afed2144fceb122, type: 3}
     - rid: 4717638325419638959
       type: {class: BossLevelComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
       data:
-        FirstHitDamage: 40
-        SecondHitDamage: 80
-        Armor: 80
-        Health: 200
+        FirstHitDamage: 30
+        SecondHitDamage: 60
+        Armor: 60
+        Health: 150
         Heal: 20
         BossViewPrefab: {fileID: 8651910598201145362, guid: e1ddc1f6da6f0764999d537ec5054964, type: 3}

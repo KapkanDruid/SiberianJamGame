@@ -126,6 +126,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 4642285318447051925}
   _reader: {fileID: 5567635856647584833}
+  _shootEffect: {fileID: 496384359287204082, guid: decf379994a20474a93c0011f0effe9e, type: 3}
+  _hitEffect: {fileID: 496384359287204082, guid: a6936977c2cf5974390e8f9f8a27e416, type: 3}
 --- !u!114 &5567635856647584833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,3 +141,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackPerformed: 0
+  IsDeath: 0
