@@ -87,6 +87,9 @@ namespace Game.Runtime.Gameplay.Implants
                         {
                             Debug.Log($"Add Cell: {neighborPos}");
 
+                            neighborItem.PingPongScale();
+                            item.PingPongScale();
+                            
                             switch (implantType)
                             {
                                 case ImplantType.Health:
