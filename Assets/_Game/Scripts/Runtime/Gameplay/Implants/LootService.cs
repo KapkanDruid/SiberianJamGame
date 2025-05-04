@@ -28,6 +28,8 @@ namespace Game.Runtime.Gameplay.Implants
 
         public void GenerateLoot()
         {
+            SL.Get<HUDService>().Behaviour.EndTurnButton.gameObject.SetActive(false);
+            SL.Get<HUDService>().Behaviour.InventoryView.SetActive(false);
             SL.Get<HUDService>().Behaviour.LootHolder.SetActive(true);
 
             var availableImplants = new List<CMSEntity>();

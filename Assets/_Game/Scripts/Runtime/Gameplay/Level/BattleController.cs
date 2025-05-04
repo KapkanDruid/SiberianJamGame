@@ -27,6 +27,7 @@ namespace Game.Runtime.Gameplay.Level
         public event Func<WarriorTurnData> OnTurnStarted;
         public event Action OnTurnEnded;
         public bool IsBattleEnded => _isBattleEnded;
+        public bool IsTurnStarted => _isTurnStarted;
 
         public Transform EnemyPosition => _enemyPosition;
         public LevelComponent LevelConfig;
@@ -142,7 +143,7 @@ namespace Game.Runtime.Gameplay.Level
 
         public async UniTask EndGameAsync()
         {
-            await UniTask.WaitForSeconds(1.2f);
+            SL.Get<HUDService>().Behaviour.DisableUI.SetActive(true);
             await SL.Get<UIFaderService>().FadeIn();
             SL.Get<HUDService>().Behaviour.LootHolder.SetActive(false);
             await SceneManager.LoadSceneAsync(Const.ScenesConst.DialogReleaseScene);

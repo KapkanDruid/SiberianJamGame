@@ -1,0 +1,858 @@
+fileFormatVersion: 2
+guid: a8f2f4a782334e347b1d9963f17e2194
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3746738641345248802
+    second: EvilFoxy_SpriteSheet_0
+  - first:
+      213: 6890961174696419633
+    second: EvilFoxy_SpriteSheet_1
+  - first:
+      213: 1495304577182939506
+    second: EvilFoxy_SpriteSheet_2
+  - first:
+      213: -4112299838733729063
+    second: EvilFoxy_SpriteSheet_3
+  - first:
+      213: -7850527877592723114
+    second: EvilFoxy_SpriteSheet_4
+  - first:
+      213: -595407753681557501
+    second: EvilFoxy_SpriteSheet_5
+  - first:
+      213: 5830604449449666027
+    second: EvilFoxy_SpriteSheet_6
+  - first:
+      213: -8306749204574049933
+    second: EvilFoxy_SpriteSheet_7
+  - first:
+      213: -3880797154685449832
+    second: EvilFoxy_SpriteSheet_8
+  - first:
+      213: -2657311608080475355
+    second: EvilFoxy_SpriteSheet_9
+  - first:
+      213: -2273078930710726565
+    second: EvilFoxy_SpriteSheet_10
+  - first:
+      213: 7351959596137417261
+    second: EvilFoxy_SpriteSheet_11
+  - first:
+      213: 7014084144977645156
+    second: EvilFoxy_SpriteSheet_12
+  - first:
+      213: -1519788228903359064
+    second: EvilFoxy_SpriteSheet_13
+  - first:
+      213: 4717377600793595562
+    second: EvilFoxy_SpriteSheet_14
+  - first:
+      213: 6377545928002119923
+    second: EvilFoxy_SpriteSheet_15
+  - first:
+      213: 993362104480017246
+    second: EvilFoxy_SpriteSheet_16
+  - first:
+      213: -537498832268490213
+    second: EvilFoxy_SpriteSheet_17
+  - first:
+      213: 997708745320240101
+    second: EvilFoxy_SpriteSheet_18
+  - first:
+      213: 4799085092498265994
+    second: EvilFoxy_SpriteSheet_19
+  - first:
+      213: -5215757391276752369
+    second: EvilFoxy_SpriteSheet_20
+  - first:
+      213: -2864668562659334020
+    second: EvilFoxy_SpriteSheet_21
+  - first:
+      213: 4755017988922591292
+    second: EvilFoxy_SpriteSheet_22
+  - first:
+      213: -3605658500521635592
+    second: EvilFoxy_SpriteSheet_23
+  - first:
+      213: 6078270916110066142
+    second: EvilFoxy_SpriteSheet_24
+  - first:
+      213: -1560474111969301945
+    second: EvilFoxy_SpriteSheet_25
+  - first:
+      213: -7709915271886996681
+    second: EvilFoxy_SpriteSheet_26
+  - first:
+      213: -2313994507877597962
+    second: EvilFoxy_SpriteSheet_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 385
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22efc9771f61ff330800000000000000
+      internalID: 3746738641345248802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 385
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 131e9c2bdac91af50800000000000000
+      internalID: 6890961174696419633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 385
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 279310a279360c410800000000000000
+      internalID: 1495304577182939506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 385
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d24166a51d2ee6c0800000000000000
+      internalID: -4112299838733729063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 385
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 651d8cc3d725d0390800000000000000
+      internalID: -7850527877592723114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 385
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3082c497dcfacb7f0800000000000000
+      internalID: -595407753681557501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 385
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be5624bdad77ae050800000000000000
+      internalID: 5830604449449666027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_7
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 385
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 379ea170c9f78bc80800000000000000
+      internalID: -8306749204574049933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_8
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 385
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89980a59c83a42ac0800000000000000
+      internalID: -3880797154685449832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_9
+      rect:
+        serializedVersion: 2
+        x: 693
+        y: 385
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52b57d6eb255f1bd0800000000000000
+      internalID: -2657311608080475355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 308
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b58ff8c71c66470e0800000000000000
+      internalID: -2273078930710726565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_11
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 308
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2a8bc2ec48670660800000000000000
+      internalID: 7351959596137417261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_12
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 308
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46e871e1e58075160800000000000000
+      internalID: 7014084144977645156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_13
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 308
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ad256278a0a8eae0800000000000000
+      internalID: -1519788228903359064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_14
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 308
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aaecfa62fed777140800000000000000
+      internalID: 4717377600793595562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_15
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 308
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f82e495b38918850800000000000000
+      internalID: 6377545928002119923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_16
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 308
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5badda229129cd00800000000000000
+      internalID: 993362104480017246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_17
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 308
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1a037be8ab6a88f0800000000000000
+      internalID: -537498832268490213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_18
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 308
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e31d1a51d298dd00800000000000000
+      internalID: 997708745320240101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_19
+      rect:
+        serializedVersion: 2
+        x: 693
+        y: 308
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a875b390776c99240800000000000000
+      internalID: 4799085092498265994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 231
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f02c4527948ed97b0800000000000000
+      internalID: -5215757391276752369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_21
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 231
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c782673be17ae38d0800000000000000
+      internalID: -2864668562659334020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_22
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 231
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c38c252faa73df140800000000000000
+      internalID: 4755017988922591292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_23
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 231
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f05a0782b026fdc0800000000000000
+      internalID: -3605658500521635592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_24
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 231
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed12453b13b5a5450800000000000000
+      internalID: 6078270916110066142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_25
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 231
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74a60ea1015185ae0800000000000000
+      internalID: -1560474111969301945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_26
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 231
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73bf0dab8e0e00590800000000000000
+      internalID: -7709915271886996681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilFoxy_SpriteSheet_27
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 231
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fc30c1514a03efd0800000000000000
+      internalID: -2313994507877597962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: c4c1ddc32f2e66c40897dadbfa6ff939
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      EvilFoxy_SpriteSheet_0: 3746738641345248802
+      EvilFoxy_SpriteSheet_1: 6890961174696419633
+      EvilFoxy_SpriteSheet_10: -2273078930710726565
+      EvilFoxy_SpriteSheet_11: 7351959596137417261
+      EvilFoxy_SpriteSheet_12: 7014084144977645156
+      EvilFoxy_SpriteSheet_13: -1519788228903359064
+      EvilFoxy_SpriteSheet_14: 4717377600793595562
+      EvilFoxy_SpriteSheet_15: 6377545928002119923
+      EvilFoxy_SpriteSheet_16: 993362104480017246
+      EvilFoxy_SpriteSheet_17: -537498832268490213
+      EvilFoxy_SpriteSheet_18: 997708745320240101
+      EvilFoxy_SpriteSheet_19: 4799085092498265994
+      EvilFoxy_SpriteSheet_2: 1495304577182939506
+      EvilFoxy_SpriteSheet_20: -5215757391276752369
+      EvilFoxy_SpriteSheet_21: -2864668562659334020
+      EvilFoxy_SpriteSheet_22: 4755017988922591292
+      EvilFoxy_SpriteSheet_23: -3605658500521635592
+      EvilFoxy_SpriteSheet_24: 6078270916110066142
+      EvilFoxy_SpriteSheet_25: -1560474111969301945
+      EvilFoxy_SpriteSheet_26: -7709915271886996681
+      EvilFoxy_SpriteSheet_27: -2313994507877597962
+      EvilFoxy_SpriteSheet_3: -4112299838733729063
+      EvilFoxy_SpriteSheet_4: -7850527877592723114
+      EvilFoxy_SpriteSheet_5: -595407753681557501
+      EvilFoxy_SpriteSheet_6: 5830604449449666027
+      EvilFoxy_SpriteSheet_7: -8306749204574049933
+      EvilFoxy_SpriteSheet_8: -3880797154685449832
+      EvilFoxy_SpriteSheet_9: -2657311608080475355
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
