@@ -3,6 +3,7 @@ using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Gameplay;
 using Game.Runtime.CMS.Components.Implants;
 using Game.Runtime.Services;
+using Game.Runtime.Services.Save;
 using Game.Runtime.Utils.Extensions;
 
 namespace Game.Runtime.Gameplay.Implants
@@ -34,6 +35,11 @@ namespace Game.Runtime.Gameplay.Implants
                 if (implant.GetComponent<ImplantLevelRequiredComponent>().RequiredLevelIndex == 0)
                     _basicImplantModels.Add(implant);
             }
+        }
+        
+        public void AddImplant(string implantId)
+        {
+            _implantPool.Add(new ImplantPoolState(implantId));
         }
 
         public void AddImplants(List<string> implantIds)
