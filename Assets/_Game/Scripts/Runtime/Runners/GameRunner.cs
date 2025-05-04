@@ -59,7 +59,7 @@ namespace Game.Runtime.Runners
         private void ConfigureLevel()
         {
             var currentLevelIndex = _debugLevelIndex >= 0 ? _debugLevelIndex : SL.Get<SaveService>().SaveData.LevelIndex;
-            var levelModel = LevelHelper.GetCurrentLevelModel();
+            var levelModel = LevelHelper.GetLevelModel(currentLevelIndex);
 
             if (levelModel == null)
             {
