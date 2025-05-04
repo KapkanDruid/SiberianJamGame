@@ -53,5 +53,5 @@ MonoBehaviour:
     - rid: 6583048891092697088
       type: {class: VoiceComponent, ns: Game.Runtime.CMS.Components.Audio, asm: Runtime}
       data:
-        Clip: {fileID: 8300000, guid: 6067f48c950230748922cc891eba0ed9, type: 3}
+        Clip: {fileID: 0}
         Volume: 1
