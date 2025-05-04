@@ -234,7 +234,8 @@ MonoBehaviour:
     - rid: 6583048880660676642
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _soundConfigs: []
+        _soundConfigs:
+        - {fileID: 3946565200266130319, guid: 9e7f6260c5c130d4ab8a203892efb33d, type: 3}
     - rid: 6583048880660676644
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -276,7 +277,8 @@ MonoBehaviour:
     - rid: 6583048880660676649
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _soundConfigs: []
+        _soundConfigs:
+        - {fileID: 3946565200266130319, guid: 36f271aad973a8f4abb39470fa466401, type: 3}
     - rid: 6583048880660676650
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -319,7 +321,8 @@ MonoBehaviour:
     - rid: 6583048880660676655
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _soundConfigs: []
+        _soundConfigs:
+        - {fileID: 8168405603981787170, guid: b30a4e94bd0db504e856f908555ff6f3, type: 3}
     - rid: 6583048880660676656
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -343,7 +346,8 @@ MonoBehaviour:
     - rid: 6583048880660676658
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _soundConfigs: []
+        _soundConfigs:
+        - {fileID: 8168405603981787170, guid: 03915db0c9c49934ba33993d5d799801, type: 3}
     - rid: 6583048880660676659
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -360,7 +364,8 @@ MonoBehaviour:
     - rid: 6583048880660676661
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _soundConfigs: []
+        _soundConfigs:
+        - {fileID: 3946565200266130319, guid: 6c5b0faa6c3476e4c999206a01aa8e7e, type: 3}
     - rid: 6583048880660676662
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -378,7 +383,8 @@ MonoBehaviour:
     - rid: 6583048880660676664
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _soundConfigs: []
+        _soundConfigs:
+        - {fileID: 3946565200266130319, guid: 2bc095086d7c27d4fb68eea15c7eff8f, type: 3}
     - rid: 6583048880660676665
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -397,7 +403,8 @@ MonoBehaviour:
     - rid: 6583048880660676667
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _soundConfigs: []
+        _soundConfigs:
+        - {fileID: 8168405603981787170, guid: 89d31ed5fb0f7904c999f5b0bb87895a, type: 3}
     - rid: 6583048880660676668
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -416,7 +423,8 @@ MonoBehaviour:
     - rid: 6583048880660676670
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _soundConfigs: []
+        _soundConfigs:
+        - {fileID: 3946565200266130319, guid: 2b1aa6fe92e988f429460186bc54fa15, type: 3}
     - rid: 6583048880660676671
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -436,7 +444,8 @@ MonoBehaviour:
     - rid: 6583048880660676673
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _soundConfigs: []
+        _soundConfigs:
+        - {fileID: 8168405603981787170, guid: 1cdee9bca68a7274fb3fd5af3b6209d8, type: 3}
     - rid: 6583048880660676674
       type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -455,7 +464,8 @@ MonoBehaviour:
     - rid: 6583048880660676676
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _soundConfigs: []
+        _soundConfigs:
+        - {fileID: 3946565200266130319, guid: a01e8cee2df7d2f449eb4a5876fa7e74, type: 3}
     - rid: 6583048880660676677
       type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:

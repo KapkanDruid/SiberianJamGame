@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3491bc35dc84132acbda8b4eb9ddf2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityId: CMS/Audio/Dictor/forest/forest_dictor_6
+  entityId: CMS/Audio/Dictor/forest/forest_dictor_1
   Components:
   - rid: 6583048880660676629
   references:
@@ -53,5 +53,5 @@ MonoBehaviour:
     - rid: 6583048880660676629
       type: {class: VoiceComponent, ns: Game.Runtime.CMS.Components.Audio, asm: Runtime}
       data:
-        Clip: {fileID: 8300000, guid: 5c863aa841c7ecf459356f2120eb377f, type: 3}
+        Clip: {fileID: 8300000, guid: 286e7bcbee7f7a24697ff18fb8b1a005, type: 3}
         Volume: 1
