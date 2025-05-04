@@ -135,6 +135,7 @@ namespace Game.Runtime.CMS
                 }
                 public static class Enemys
                 {
+                    public const string EnemyLvl0 = "CMS/Gameplay/Levels/Enemys/EnemyLvl0";
                     public const string EnemyLvl1 = "CMS/Gameplay/Levels/Enemys/EnemyLvl1";
                     public const string EnemyLvl3 = "CMS/Gameplay/Levels/Enemys/EnemyLvl3";
                     public const string EnemyLvl5 = "CMS/Gameplay/Levels/Enemys/EnemyLvl5";
