@@ -139,9 +139,8 @@ namespace Game.Runtime.Gameplay.Level
 
         public async UniTask EndGameAsync()
         {
-            SL.Get<SaveService>().SaveData.LevelIndex++;
-            SL.Get<SaveService>().SaveData.DialogBlockID = LevelConfig.NextSceneDialog.EntityId;
-            SL.Get<SaveService>().Save();
+            SL.Get<GameStateHolder>().CurrentLevel++;
+            SL.Get<GameStateHolder>().DialogBlockID = LevelConfig.NextSceneDialog.EntityId;
             SL.Get<HUDService>().Behaviour.DisableUI.SetActive(true);
             await SL.Get<UIFaderService>().FadeIn();
             SL.Get<HUDService>().Behaviour.LootHolder.SetActive(false);

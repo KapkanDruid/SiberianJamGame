@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using Game.Runtime.CMS;
+using Game.Runtime.Gameplay.Level;
 using Game.Runtime.Services;
 using Game.Runtime.Services.Audio;
 using Game.Runtime.Services.Save;
@@ -23,7 +24,7 @@ namespace Game.Runtime.Runners
 
         private void Configurate()
         {
-            var dialogPrefabID = SL.Get<SaveService>().SaveData.DialogBlockID;
+            var dialogPrefabID = SL.Get<GameStateHolder>().DialogBlockID;
 
             SL.Get<Invoker>().Play(CM.Get(dialogPrefabID));
         }
