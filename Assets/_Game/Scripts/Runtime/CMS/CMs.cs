@@ -153,9 +153,14 @@ namespace Game.Runtime.CMS
                     public const string REDHOOD_hurt_1 = "CMS/Audio/SFX/REDHOOD/REDHOOD_hurt_1";
                     public const string REDHOOD_supershot_1 = "CMS/Audio/SFX/REDHOOD/REDHOOD_supershot_1";
                 }
+                public const string EndTurn = "CMS/Audio/SFX/EndTurn";
+                public const string Hover = "CMS/Audio/SFX/Hover";
+                public const string ImplantRotate = "CMS/Audio/SFX/ImplantRotate";
                 public const string SFXImplantDrag = "CMS/Audio/SFX/SFXImplantDrag";
                 public const string SFXImplantPut = "CMS/Audio/SFX/SFXImplantPut";
                 public const string SFXTest = "CMS/Audio/SFX/SFXTest";
+                public const string ShieldBroken = "CMS/Audio/SFX/ShieldBroken";
+                public const string ShieldHit = "CMS/Audio/SFX/ShieldHit";
             }
             public const string AmbientTest = "CMS/Audio/AmbientTest";
             public const string AudioControl = "CMS/Audio/AudioControl";
