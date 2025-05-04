@@ -8,6 +8,7 @@ using Game.Runtime.CMS.Components.Implants;
 using Game.Runtime.Gameplay.Level;
 using Game.Runtime.Services;
 using Game.Runtime.Services.Audio;
+using Game.Runtime.Services.Camera;
 using Game.Runtime.Services.Input;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -39,7 +40,7 @@ namespace Game.Runtime.Gameplay.Implants
         private int _originIndex;
         private InventoryService _inventoryService;
         private ImplantsHolderService _holderService;
-        private RectTransform _root;
+        private Canvas _root;
         private bool _isDragging;
         private int _originalRotation;
         private Vector2 _pivotPoint;
@@ -54,7 +55,7 @@ namespace Game.Runtime.Gameplay.Implants
             transform.localScale = Vector3.one;
         }
 
-        public void SetupItem(CMSEntity itemModel, RectTransform root)
+        public void SetupItem(CMSEntity itemModel, Canvas root)
         {
             Model = itemModel;
             _root = root;
@@ -126,7 +127,6 @@ namespace Game.Runtime.Gameplay.Implants
         {
             if (this == null)return;
             if (!_isDragging) return;
-
             UpdateDragPosition(eventData);
             UpdateSlotHighlight();
         }
@@ -163,7 +163,7 @@ namespace Game.Runtime.Gameplay.Implants
             _canvasGroup.blocksRaycasts = false;
             _originIndex = transform.GetSiblingIndex();
 
-            transform.SetParent(_root);
+            transform.SetParent(_root.transform);
             _rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
             _rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
 
@@ -179,18 +179,19 @@ namespace Game.Runtime.Gameplay.Implants
             ResetHighlight();
         }
 
+        private Vector2 _lastPosition;
         private void UpdateDragPosition(PointerEventData eventData)
         {
             if (TryGetLocalPoint(eventData, out Vector2 localPoint))
             {
                 var targetPosition = localPoint - CalculatePivotOffset();
-                _rectTransform.anchoredPosition = new Vector3(targetPosition.x, targetPosition.y, 0);
+                _rectTransform.anchoredPosition = _lastPosition = targetPosition;
             }
         }
 
         private bool TryGetLocalPoint(PointerEventData eventData, out Vector2 localPoint)
         {
-            return RectTransformUtility.ScreenPointToLocalPointInRectangle(_root, eventData.position, eventData.pressEventCamera, out localPoint);
+            return RectTransformUtility.ScreenPointToLocalPointInRectangle(_root.transform as RectTransform, eventData.position, eventData.pressEventCamera, out localPoint);
         }
 
         private Vector2 CalculatePivotOffset()
@@ -292,8 +293,7 @@ namespace Game.Runtime.Gameplay.Implants
             CurrentRotation = (CurrentRotation + 1) % 4;
             float[] presetAngles = { 0f, -90f, -180f, -270f };
             _rectTransform.localRotation = Quaternion.Euler(0, 0, presetAngles[CurrentRotation]);
-
-            UpdateDragPosition(new PointerEventData(EventSystem.current) { position = Input.mousePosition });
+            _rectTransform.anchoredPosition = _lastPosition;
             UpdateSlotHighlight();
         }
 

@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: InventroyGrid_1
   m_EditorClassIdentifier: 
   gridPattern:
+  - {x: -2, y: -2}
+  - {x: -1, y: -2}
+  - {x: 0, y: -2}
+  - {x: 1, y: -2}
   - {x: -2, y: -1}
   - {x: -1, y: -1}
   - {x: 0, y: -1}
@@ -21,8 +25,4 @@ MonoBehaviour:
   - {x: -1, y: 0}
   - {x: 0, y: 0}
   - {x: 1, y: 0}
-  - {x: -2, y: 1}
-  - {x: -1, y: 1}
-  - {x: 0, y: 1}
-  - {x: 1, y: 1}
   gridSize: {x: 5, y: 5}
