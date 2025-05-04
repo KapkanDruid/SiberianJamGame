@@ -16,6 +16,7 @@ namespace Game.Runtime.Gameplay.Warrior
         [SerializeField] private ParticleSystem _doubleShootPrefab;
         [SerializeField] private CMSPrefab _shootEffect;
         [SerializeField] private CMSPrefab _hitEffect;
+        [SerializeField] private CMSPrefab _deathEffect;
 
         private ParticleSystem _singleShoot;
         private ParticleSystem _doubleShoot;
@@ -30,6 +31,8 @@ namespace Game.Runtime.Gameplay.Warrior
         public async UniTask DeathAsync()
         {
             _animator.SetTrigger("Death");
+            if (_deathEffect != null)
+                SL.Get<AudioService>().Play(_hitEffect.EntityId);
 
             await UniTask.WaitUntil(() => _reader.DeathEnded);
 
