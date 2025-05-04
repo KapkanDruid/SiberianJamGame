@@ -108,7 +108,7 @@ namespace Game.Runtime.Runners
             }
             else if (currentLevelIndex == 0) Debug.LogWarning($"[GameRunner] Implants pool is empty!");
 
-            if (levelModel.Is<SetCharacterHealthComponent>(out var healthComponent) && currentLevelIndex == 0)
+            if (levelModel.Is<SetCharacterHealthComponent>(out var healthComponent))
             {
                 SL.Get<GameStateHolder>().CharacterHealth = healthComponent.Health;
             }

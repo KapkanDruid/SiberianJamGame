@@ -48,6 +48,7 @@ MonoBehaviour:
   Components:
   - rid: 635145064486535254
   - rid: 635145064486535323
+  - rid: 635145080740774057
   references:
     version: 2
     RefIds:
@@ -67,3 +68,7 @@ MonoBehaviour:
         - {fileID: 4443999720199238786, guid: b5f73cdd811d7ed40a5d62c1ad9d8660, type: 3}
         - {fileID: 4443999720199238786, guid: b5f73cdd811d7ed40a5d62c1ad9d8660, type: 3}
         - {fileID: 4443999720199238786, guid: b5f73cdd811d7ed40a5d62c1ad9d8660, type: 3}
+    - rid: 635145080740774057
+      type: {class: SetCharacterHealthComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
+      data:
+        Health: 100
