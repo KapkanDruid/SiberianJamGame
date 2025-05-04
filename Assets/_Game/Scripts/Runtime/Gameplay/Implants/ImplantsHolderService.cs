@@ -18,6 +18,8 @@ namespace Game.Runtime.Gameplay.Implants
         {                
             SL.Get<BattleController>().OnTurnEnded += OnTurnEnded;
         }
+        
+
 
         public void SpawnImplants()
         {
@@ -54,6 +56,11 @@ namespace Game.Runtime.Gameplay.Implants
 
             SL.Get<HUDService>().Behaviour.ImplantsHolder.SetItemPosition(implantBehaviour, position);
             return true;
+        }
+
+        private void AddImplantsToPool()
+        {
+            
         }
         
         private void OnTurnEnded()
