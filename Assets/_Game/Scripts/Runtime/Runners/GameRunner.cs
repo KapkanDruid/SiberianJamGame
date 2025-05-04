@@ -113,6 +113,11 @@ namespace Game.Runtime.Runners
                 SL.Get<GameStateHolder>().CharacterHealth = healthComponent.Health;
             }
             else if (currentLevelIndex == 0) Debug.LogWarning($"[GameRunner] SetCharacterHealthComponent not exist!");
+
+            if (levelModel.Is<LevelParticleComponent>(out var particleComponent))
+            {
+                Instantiate(particleComponent.Particle);
+            }
             
             Debug.Log($"[GameRunner] Level {currentLevelIndex} loaded!");
         }

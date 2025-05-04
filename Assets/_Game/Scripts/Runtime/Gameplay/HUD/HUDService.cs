@@ -1,11 +1,12 @@
 ﻿using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Commons;
 using Game.Runtime.Services;
+using Game.Runtime.Services.Camera;
 using UnityEngine;
 
 namespace Game.Runtime.Gameplay.HUD
 {
-    public class HUDService : IService
+    public class HUDService : IService, IInitializable
     {
         public readonly HUDBehaviour Behaviour;
 
@@ -16,6 +17,13 @@ namespace Game.Runtime.Gameplay.HUD
             uiObject.name = nameof(HUDService);
             
             Behaviour = uiObject.GetComponent<HUDBehaviour>();
+        }
+
+        public void Initialize()
+        {
+            var canvas = Behaviour.GetComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceCamera;
+            canvas.worldCamera = SL.Get<CameraService>().Camera;
         }
     }
 }
