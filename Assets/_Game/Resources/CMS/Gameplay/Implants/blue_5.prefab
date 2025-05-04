@@ -56,7 +56,7 @@ MonoBehaviour:
     - rid: 635145064486535276
       type: {class: ImplantLevelRequiredComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
       data:
-        RequiredLevelIndex: 1
+        RequiredLevelIndex: 5
     - rid: 5361599194504888401
       type: {class: SpriteComponent, ns: Game.Runtime.CMS.Components.Commons, asm: Runtime}
       data:
@@ -70,4 +70,4 @@ MonoBehaviour:
     - rid: 5361599205655707723
       type: {class: ArmorImplantComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
       data:
-        Armor: 4
+        Armor: 40

@@ -160,6 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleAttackPerformed: 0
   FinishAttackPerformed: 0
+  DeathEnded: 0
 --- !u!1 &392571450
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,6 +239,7 @@ MonoBehaviour:
   gameCamera: {fileID: 2097831468}
   _battleController: {fileID: 1304696853}
   _warriorView: {fileID: 392571451}
+  _backgroundRenderer: {fileID: 1453915475}
 --- !u!4 &460449080
 Transform:
   m_ObjectHideFlags: 0
@@ -283,6 +285,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyPosition: {fileID: 1318406733}
+  _debugLevelIndex: 0
+  CurrentBattleType: 0
 --- !u!4 &1304696854
 Transform:
   m_ObjectHideFlags: 0

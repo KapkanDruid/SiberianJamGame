@@ -10,7 +10,6 @@ namespace Game.Runtime.Services.Camera
         public void RegisterCamera(UnityEngine.Camera camera)
         {
             Camera = camera;
-            Debug.Log($"[Service Locator] Set camera: {Camera}");
         }
 
         public void Shake(float duration, float strength)

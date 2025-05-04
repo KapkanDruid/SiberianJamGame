@@ -131,6 +131,10 @@ namespace Game.Runtime.CMS
                 {
                     public const string _0_office_miniboss = "CMS/Gameplay/Levels/4_Office/0_office_miniboss";
                 }
+                public static class Enemys
+                {
+                    public const string Enemy1 = "CMS/Gameplay/Levels/Enemys/Enemy1";
+                }
                 public const string Level_0 = "CMS/Gameplay/Levels/Level_0";
                 public const string Level_Boss = "CMS/Gameplay/Levels/Level_Boss";
             }

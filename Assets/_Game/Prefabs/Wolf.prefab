@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -7791952286858956461}
   - component: {fileID: 5567635856647584833}
   m_Layer: 0
-  m_Name: MockEnemy
+  m_Name: Wolf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4725754807658695486, guid: c9d58b11ae706fa4f94846f4cec766fc, type: 3}
+  m_Sprite: {fileID: -1609910734111384776, guid: e549f2d483df63a44b9067fd59102dc7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,7 +100,7 @@ Animator:
   m_GameObject: {fileID: 6254650526999703419}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1aefe9f6593e81148a5b7708e7dd3cb9, type: 2}
+  m_Controller: {fileID: 22100000, guid: b400a10d12e40234c974c4560ace6537, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -139,3 +139,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackPerformed: 0
+  IsDeath: 0

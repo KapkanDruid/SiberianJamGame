@@ -12,24 +12,27 @@ namespace Game.Runtime.CMS
         public string EntityId => entityId;
 
 #if UNITY_EDITOR
-        public void PingEntity()
+        public void PingEntity(bool showDebug = true)
         {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.Append($"[{nameof(CMSPrefab)}] ");
-            if (Components == null)
+            if (showDebug)
             {
-                stringBuilder.Append("Entity doesnt has components");
-            }
-            else
-            {
-                for (int i = 0; i < Components.Count; i++)
+                var stringBuilder = new StringBuilder();
+                stringBuilder.Append($"[{nameof(CMSPrefab)}] ");
+                if (Components == null)
                 {
-                    stringBuilder.Append($"{i}.{Components[i].GetType().Name}");
-                    stringBuilder.Append(i < Components.Count - 1 ? ", " : ".");
+                    stringBuilder.Append("Entity doesnt has components");
                 }
-            }
+                else
+                {
+                    for (int i = 0; i < Components.Count; i++)
+                    {
+                        stringBuilder.Append($"{i}.{Components[i].GetType().Name}");
+                        stringBuilder.Append(i < Components.Count - 1 ? ", " : ".");
+                    }
+                }
             
-            Debug.Log(stringBuilder.ToString());
+                Debug.Log(stringBuilder.ToString());
+            }
             
             string path = UnityEditor.AssetDatabase.GetAssetPath(gameObject);
 

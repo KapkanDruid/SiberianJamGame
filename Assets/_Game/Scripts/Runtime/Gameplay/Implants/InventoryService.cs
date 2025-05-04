@@ -50,136 +50,108 @@ namespace Game.Runtime.Gameplay.Implants
             float health = 0f;
             float damage = 0f;
             float armor = 0f;
-            int healthSynergy = 0;
-            int damageSynergy = 0;
-            int armorSynergy = 0;
 
+            var checkedPairs = new HashSet<(ImplantBehaviour, ImplantBehaviour)>(new PairComparer());
+            var blockedPositionsCache = new Dictionary<Vector2Int, bool>();
             Vector2Int[] neighborOffsets = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
-            HashSet<ImplantBehaviour> processedBehaviour = new();
 
             foreach (var itemPair in _itemPositions)
             {
                 var item = itemPair.Key;
-                
                 var implantType = item.GetImplantType();
 
                 if (item.Model.Is<HealthImplantComponent>(out var healthImplant))
-                {
                     health += healthImplant.Health;
-                }
                 else if (item.Model.Is<DamageImplantComponent>(out var damageImplant))
-                {
                     damage += damageImplant.Damage;
-                }
                 else if (item.Model.Is<ArmorImplantComponent>(out var armorImplant))
-                {
                     armor += armorImplant.Armor;
-                }
 
-                foreach (var pos in itemPair.Value)
+                foreach (var itemPosition in itemPair.Value)
                 {
-                    if (item.Model.Is<BrokenImplantCellsComponent>(out var qwer))
-                    {
-                        var neighborCenter = GetItemCenter(item);
-        
-                        var localPos = pos - neighborCenter;
-        
-                        // Проверяем сломанные ячейки
-                        bool isBroken = item.Model.Is<BrokenImplantCellsComponent>(out var neighborBroken) 
-                                        && neighborBroken.BrokenCells.Contains(localPos);
+                    if (IsPositionBlocked(item, itemPosition))
+                        continue;
 
-                        Debug.Log($"Проверка: Глобальная позиция {pos}, " +
-                                  $"Центр соседа {neighborCenter}, " +
-                                  $"Локальная позиция {localPos}, " +
-                                  $"Сломанные ячейки: [{string.Join(", ", neighborBroken?.BrokenCells ?? Array.Empty<Vector2Int>())}], " +
-                                  $"Результат: {(isBroken ? "СЛОМАН" : "РАБОТАЕТ")}");
+                    foreach (var offset in neighborOffsets)
+                    {
+                        var neighborPos = itemPosition + offset;
+
+                        if (!_occupiedSlots.TryGetValue(neighborPos, out var neighborItem) || neighborItem.Equals(item))
+                            continue;
+
+                        if (IsPositionBlocked(neighborItem, neighborPos))
+                            continue;
+
+                        if (neighborItem.GetImplantType() == implantType &&
+                            checkedPairs.Add((item, neighborItem)))
+                        {
+                            Debug.Log($"Add Cell: {neighborPos}");
+
+                            neighborItem.PingPongScale();
+                            item.PingPongScale();
+                            
+                            switch (implantType)
+                            {
+                                case ImplantType.Health:
+                                    health += 10;
+                                    break;
+                                case ImplantType.Damage:
+                                    damage += 10;
+                                    break;
+                                case ImplantType.Armor:
+                                    armor += 10;
+                                    break;
+                            }
+                        }
                     }
                 }
+            }
 
-                // foreach (var offset in neighborOffsets)
-                    // {
-                    //     var neighborPos = pos + offset;
-                    //
-                    //     if (_occupiedSlots.TryGetValue(neighborPos, out var neighborItem))
-                    //     {
-                    //         if (neighborItem.Equals(item))
-                    //             continue;
-                    //
-                    //         var neighborMinPos = GetImplantMinPosition(neighborItem);
-                    //         var localPosInNeighbor = pos - neighborMinPos;
-                    //         
-                    //         var isBroken = false;
-                    //         if (neighborItem.Model.Is<BrokenImplantCellsComponent>(out var brokenComponent))
-                    //         {
-                    //             foreach (var cell in brokenComponent.BrokenCells)
-                    //             {
-                    //                 var resultPosition = ImplantHelper.ApplyRotationToOffset(cell, neighborItem.CurrentRotation);
-                    //                 if (resultPosition.Equals(localPosInNeighbor))
-                    //                     isBroken = true;
-                    //                 
-                    //                 Debug.Log($"broken cell: {resultPosition}, Pos - {neighborPos}, Локал- {localPosInNeighbor}");
-                    //             }
-                    //         }
-                    //
-                    //         if (isBroken)
-                    //         {
-                    //             Debug.Log($"Is broken cell: {neighborPos}");
-                    //             continue;
-                    //         }
-                    //
-                    //         if (neighborItem.GetImplantType() == implantType)
-                    //         {
-                    //             switch (implantType)
-                    //             {
-                    //                 case ImplantType.Health:
-                    //                     healthSynergy++;
-                    //                     break;
-                    //                 case ImplantType.Damage:
-                    //                     damageSynergy++;
-                    //                     break;
-                    //                 case ImplantType.Armor:
-                    //                     armorSynergy++;
-                    //                     break;
-                    //             }
-                    //         }
-                    //     }
-                    // }
-                }
-
-            //     processedBehaviour.Add(item);
-            // }
-            //
-            Debug.Log($"Healh Synergy: {healthSynergy}");
-            Debug.Log($"Damage Synergy: {damageSynergy}");
-            Debug.Log($"Armor Synergy: {armorSynergy}");
-
-            health += healthSynergy ;
-            damage += damageSynergy;
-            armor += armorSynergy;
+            Debug.Log($"Total Health: {health}");
+            Debug.Log($"Total Damage: {damage}");
+            Debug.Log($"Total Armor: {armor}");
 
             return new WarriorTurnData(health, damage, armor);
-        }
-        
-        private Vector2Int GetItemCenter(ImplantBehaviour item)
-        {
-            if (!_itemPositions.TryGetValue(item, out var positions) || positions.Count == 0)
-                return Vector2Int.zero;
 
-            // Среднее арифметическое всех координат
-            int sumX = 0, sumY = 0;
-            foreach (var pos in positions)
+            bool IsPositionBlocked(ImplantBehaviour implant, Vector2Int position)
             {
-                sumX += pos.x;
-                sumY += pos.y;
+                if (!implant.Model.Is<BrokenImplantCellsComponent>(out var blockComponent))
+                    return false;
+
+                if (blockedPositionsCache.TryGetValue(position, out var isBlocked))
+                    return isBlocked;
+
+                var rotatedCell = GetRotatedSlots(blockComponent.BrokenCells.ToList(), implant.CurrentRotation);
+                var globalBlockCell = rotatedCell.Select(x => x + implant.CenterSlotPosition);
+                isBlocked = globalBlockCell.Contains(position);
+
+                blockedPositionsCache[position] = isBlocked;
+                if (isBlocked)
+                    Debug.Log($"Broken Cell: {position}");
+
+                return isBlocked;
             }
-    
-            return new Vector2Int(
-                Mathf.RoundToInt((float)sumX / positions.Count),
-                Mathf.RoundToInt((float)sumY / positions.Count)
-            );
         }
+
+        private class PairComparer : IEqualityComparer<(ImplantBehaviour, ImplantBehaviour)>
+        {
+            public bool Equals((ImplantBehaviour, ImplantBehaviour) x, (ImplantBehaviour, ImplantBehaviour) y)
+            {
+                return (x.Item1 == y.Item1 && x.Item2 == y.Item2) ||
+                       (x.Item1 == y.Item2 && x.Item2 == y.Item1);
+            }
+
+            public int GetHashCode((ImplantBehaviour, ImplantBehaviour) obj)
+            {
+                int hash1 = obj.Item1.GetHashCode();
+                int hash2 = obj.Item2.GetHashCode();
+                return hash1 < hash2 ? HashCode.Combine(hash1, hash2) : HashCode.Combine(hash2, hash1);
+            }
+        }
+
         public bool TryPlaceItem(ImplantBehaviour item, Vector2Int gridPosition)
         {
+            if (SL.Get<BattleController>().IsTurnStarted) return false;
             if (!CanPlaceItem(item, gridPosition)) return false;
 
             if (_itemPositions.TryGetValue(item, out var oldPositions))
@@ -191,7 +163,7 @@ namespace Game.Runtime.Gameplay.Implants
                 }
             }
 
-            var rotatedSlots = GetRotatedSlots(item);
+            var rotatedSlots = GetRotatedSlots(item.SlotPositions, item.CurrentRotation);
             var newPositions = rotatedSlots.Select(slot => slot + gridPosition).ToList();
 
             foreach (var pos in newPositions)
@@ -237,7 +209,7 @@ namespace Game.Runtime.Gameplay.Implants
 
         public void UpdateSlotHighlight(ImplantBehaviour item, Vector2Int gridPosition, Color color)
         {
-            var rotatedSlots = GetRotatedSlots(item);
+            var rotatedSlots = GetRotatedSlots(item.SlotPositions, item.CurrentRotation);
             var newPositions = rotatedSlots.Select(slot => slot + gridPosition).ToList();
 
             foreach (var pos in newPositions)
@@ -282,7 +254,7 @@ namespace Game.Runtime.Gameplay.Implants
 
         public bool CanPlaceItem(ImplantBehaviour item, Vector2Int gridPosition)
         {
-            var rotatedSlots = GetRotatedSlots(item);
+            var rotatedSlots = GetRotatedSlots(item.SlotPositions, item.CurrentRotation);
             var targetSlots = rotatedSlots.Select(slot => slot + gridPosition).ToList();
 
             foreach (var slot in targetSlots)
@@ -318,11 +290,9 @@ namespace Game.Runtime.Gameplay.Implants
             }
         }
 
-        private List<Vector2Int> GetRotatedSlots(ImplantBehaviour item)
+        private List<Vector2Int> GetRotatedSlots(List<Vector2Int> slots, int currentRotation)
         {
-            var slots = new List<Vector2Int>(item.SlotPositions);
-
-            for (int i = 0; i < item.CurrentRotation; i++)
+            for (int i = 0; i < currentRotation; i++)
             {
                 slots = RotateSlotsClockwise(slots);
             }

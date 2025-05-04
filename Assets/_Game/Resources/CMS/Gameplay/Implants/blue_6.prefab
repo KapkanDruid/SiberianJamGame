@@ -50,6 +50,7 @@ MonoBehaviour:
   - rid: 635145038440169588
   - rid: 5361599205655707724
   - rid: 635145064486535277
+  - rid: 5361599223428022272
   references:
     version: 2
     RefIds:
@@ -66,8 +67,13 @@ MonoBehaviour:
     - rid: 635145064486535277
       type: {class: ImplantLevelRequiredComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
       data:
-        RequiredLevelIndex: 1
+        RequiredLevelIndex: 5
     - rid: 5361599205655707724
       type: {class: ArmorImplantComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
       data:
-        Armor: 4
+        Armor: 40
+    - rid: 5361599223428022272
+      type: {class: BrokenImplantCellsComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
+      data:
+        BrokenCells:
+        - {x: 0, y: 0}

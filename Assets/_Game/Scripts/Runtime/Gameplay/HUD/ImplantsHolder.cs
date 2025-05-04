@@ -1,6 +1,5 @@
 ﻿using System;
 using Game.Runtime.Gameplay.Implants;
-using Game.Runtime.Utils.Extensions;
 using UnityEngine;
 
 namespace Game.Runtime.Gameplay.HUD
@@ -10,6 +9,11 @@ namespace Game.Runtime.Gameplay.HUD
     {
         [SerializeField] private RectTransform parent;
         [SerializeField] private RectTransform holderRoot;
+
+        public void SetActive(bool active)
+        {
+            parent.gameObject.SetActive(active);
+        }
         
         public bool IsInsideHolder(Vector2 screenPosition)
         {
@@ -20,11 +24,6 @@ namespace Game.Runtime.Gameplay.HUD
         {
             item.transform.SetParent(holderRoot);
             item.GetComponent<RectTransform>().anchoredPosition = position;
-        }
-
-        public Vector2 GetRandomPosition()
-        {
-            return holderRoot.GetRandomPositionInside();
         }
     }
 }
