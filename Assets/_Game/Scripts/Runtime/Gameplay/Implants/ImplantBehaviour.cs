@@ -28,6 +28,7 @@ namespace Game.Runtime.Gameplay.Implants
         public List<Vector2Int> SlotPositions { get; private set; }
         public CMSEntity Model { get; private set; }
         public int CurrentRotation { get; private set; }
+        public Vector2Int CenterSlotPosition { get; private set; }
 
         private Transform _originalParent;
         private Vector2 _originalPosition;
@@ -181,6 +182,7 @@ namespace Game.Runtime.Gameplay.Implants
                 _holderService.RemoveItem(this);
             
             _inventoryService.SetItemPosition(slot, this);
+            CenterSlotPosition = slot.GridPosition;
             return true;
         }
 
