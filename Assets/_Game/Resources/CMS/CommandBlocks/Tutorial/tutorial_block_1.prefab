@@ -51,6 +51,10 @@ MonoBehaviour:
   - rid: 6583048891092697179
   - rid: 6583048891092697180
   - rid: 6583048891092697181
+  - rid: 6583048897891926016
+  - rid: 6583048897891926017
+  - rid: 6583048897891926018
+  - rid: 6583048897891926019
   - rid: 6583048891092697182
   - rid: 6583048891092697183
   - rid: 6583048891092697184
@@ -136,4 +140,30 @@ MonoBehaviour:
       type: {class: DialogAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         _appearType: 1
+        _duration: 0.3
+    - rid: 6583048897891926016
+      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 0
+        _offset: {x: 0, y: 0, z: 0}
+        _duration: 0.3
+        _sprite: {fileID: 21300000, guid: cde5c6bd369bb354298db82bf510252d, type: 3}
+    - rid: 6583048897891926017
+      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _soundConfigs:
+        - {fileID: 8168405603981787170, guid: 2e546e05a86940e44a3861e5dd716c01, type: 3}
+    - rid: 6583048897891926018
+      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _delay: 0.035
+        _name: "\u0420\u0430\u0441\u0441\u043A\u0430\u0437\u0447\u0438\u043A"
+        _text: "\u041D\u043E \u0447\u0442\u043E \u044D\u0442\u043E? \u0427\u0442\u043E
+          \u0437\u0430 \u0442\u0432\u0430\u0440\u044C \u0442\u0430\u043A\u0430\u044F
+          \u043F\u0435\u0440\u0435\u0432\u0430\u043B\u0438\u043B\u0430\u0441\u044C
+          \u0447\u0435\u0440\u0435\u0437 \u0447\u0430\u0441\u0442\u043E\u043A\u043E\u043B?"
+    - rid: 6583048897891926019
+      type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 0
         _duration: 0.3

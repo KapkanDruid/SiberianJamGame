@@ -54,7 +54,7 @@ MonoBehaviour:
     - rid: 4717638307256991856
       type: {class: EnemyConfig, ns: Game.Runtime.CMS.Components.Configs, asm: Runtime}
       data:
-        _maxHealth: 120
+        _maxHealth: 110
         _damage: 40
         _armor: 0
     - rid: 4717638307256991919

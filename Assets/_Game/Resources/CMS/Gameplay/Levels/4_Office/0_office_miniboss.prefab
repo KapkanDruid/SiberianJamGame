@@ -47,9 +47,14 @@ MonoBehaviour:
   entityId: CMS/Gameplay/Levels/4_Office/0_office_miniboss
   Components:
   - rid: 6583048880660676698
+  - rid: 3335048661485224022
   references:
     version: 2
     RefIds:
+    - rid: 3335048661485224022
+      type: {class: MusicComponent, ns: Game.Runtime.CMS.Components.Audio, asm: Runtime}
+      data:
+        Clip: {fileID: 8300000, guid: c5b858d96da44fc4f81f12ca0aa71bf7, type: 3}
     - rid: 6583048880660676698
       type: {class: LevelComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
       data:

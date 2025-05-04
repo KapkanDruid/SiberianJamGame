@@ -2,6 +2,8 @@
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using Game.Runtime.Gameplay.HUD;
+using Game.Runtime.CMS;
+using Game.Runtime.Services.Audio;
 
 namespace Game.Runtime.Gameplay.Warrior
 {
@@ -12,6 +14,8 @@ namespace Game.Runtime.Gameplay.Warrior
         [SerializeField] private Transform _shootPoint;
         [SerializeField] private ParticleSystem _singleShootPrefab;
         [SerializeField] private ParticleSystem _doubleShootPrefab;
+        [SerializeField] private CMSPrefab _shootEffect;
+        [SerializeField] private CMSPrefab _hitEffect;
 
         private ParticleSystem _singleShoot;
         private ParticleSystem _doubleShoot;
@@ -35,6 +39,8 @@ namespace Game.Runtime.Gameplay.Warrior
         public void PlayHitAnimation()
         {
             _animator.SetTrigger("Hit");
+            if (_hitEffect != null)
+                SL.Get<AudioService>().Play(_hitEffect.EntityId);
         }
 
         public async UniTask TakeDamageAsync(float currentHealth, float maxHealth, float damage)
@@ -53,6 +59,8 @@ namespace Game.Runtime.Gameplay.Warrior
         public async UniTask AttackAsync()
         {
             _animator.SetTrigger("SimpleAttack");
+            if (_shootEffect != null)
+                SL.Get<AudioService>().Play(_shootEffect.EntityId);
 
             await UniTask.WaitUntil(() => _reader.SimpleAttackPerformed == true);
 
