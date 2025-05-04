@@ -149,7 +149,7 @@ namespace Game.Runtime.Gameplay.Implants
 
         public void PingPongScale()
         {
-            transform.DOScale(Vector3.one * 1.2f, 0.1f).SetLoops(2, LoopType.Yoyo);
+            transform.DOScale(baseLocalScale * 1.2f, 0.1f).SetLoops(2, LoopType.Yoyo);
            //PlayParticle();
         }
 
