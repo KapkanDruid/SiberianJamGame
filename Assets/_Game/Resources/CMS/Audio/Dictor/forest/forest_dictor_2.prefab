@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6273562969838225584}
   - component: {fileID: 8168405603981787170}
   m_Layer: 0
-  m_Name: forest_dictor_7
+  m_Name: forest_dictor_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3491bc35dc84132acbda8b4eb9ddf2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityId: CMS/Audio/Dictor/forest_dictor_7
+  entityId: CMS/Audio/Dictor/forest/forest_dictor_6
   Components:
   - rid: 6583048880660676629
   references:
@@ -53,5 +53,5 @@ MonoBehaviour:
     - rid: 6583048880660676629
       type: {class: VoiceComponent, ns: Game.Runtime.CMS.Components.Audio, asm: Runtime}
       data:
-        Clip: {fileID: 8300000, guid: e68dd865232b1e34c9c0b1859a494153, type: 3}
+        Clip: {fileID: 8300000, guid: 5c863aa841c7ecf459356f2120eb377f, type: 3}
         Volume: 1

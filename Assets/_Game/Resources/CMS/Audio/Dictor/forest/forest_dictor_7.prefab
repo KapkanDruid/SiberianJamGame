@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4848913718184292308
+--- !u!1 &4224887926273954166
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1699832369134714257}
-  - component: {fileID: 1065510079705446343}
+  - component: {fileID: 6273562969838225584}
+  - component: {fileID: 8168405603981787170}
   m_Layer: 0
-  m_Name: 1_roof_miniboss
+  m_Name: forest_dictor_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1699832369134714257
+--- !u!4 &6273562969838225584
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4848913718184292308}
+  m_GameObject: {fileID: 4224887926273954166}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,29 +32,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1065510079705446343
+--- !u!114 &8168405603981787170
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4848913718184292308}
+  m_GameObject: {fileID: 4224887926273954166}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3491bc35dc84132acbda8b4eb9ddf2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityId: CMS/Gameplay/Levels/Forest/forest_simple_enemy
+  entityId: CMS/Audio/Dictor/forest/forest_dictor_7
   Components:
-  - rid: 6583048880660676698
+  - rid: 6583048880660676629
   references:
     version: 2
     RefIds:
-    - rid: 6583048880660676698
-      type: {class: LevelComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
+    - rid: 6583048880660676629
+      type: {class: VoiceComponent, ns: Game.Runtime.CMS.Components.Audio, asm: Runtime}
       data:
-        LevelIndex: 1
-        BackgroundSprite: {fileID: 21300000, guid: cde3d42df50d8734a834947e1cc30978, type: 3}
-        EnemyPrefab: {fileID: 8389933710043619156, guid: 96e430034889d6048a276e071eb4af90, type: 3}
-        DeathDialog: {fileID: 5262409682486398458, guid: df6e9dbea24d8ba4d8ea7001b8871380, type: 3}
-        NextSceneDialog: {fileID: 6989399238491455724, guid: 1a23cf4207723de439db28fd57a63c72, type: 3}
+        Clip: {fileID: 8300000, guid: e68dd865232b1e34c9c0b1859a494153, type: 3}
+        Volume: 1
