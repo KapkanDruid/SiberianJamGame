@@ -214,6 +214,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _reader: {fileID: 5184329839641089395}
   _animator: {fileID: 2702455803130243369}
+  _shootEffect: {fileID: 496384359287204082, guid: 1c5f511a0c2930946921747dcf382979, type: 3}
+  _hitEffect: {fileID: 496384359287204082, guid: bec711be80a55d34aa5b4bd65d36667d, type: 3}
+  _deathEffect: {fileID: 496384359287204082, guid: b6afe882588b9194bb3b08482118bacd, type: 3}
 --- !u!114 &5184329839641089395
 MonoBehaviour:
   m_ObjectHideFlags: 0

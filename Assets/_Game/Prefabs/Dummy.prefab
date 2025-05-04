@@ -127,8 +127,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 4642285318447051925}
   _reader: {fileID: 5567635856647584833}
-  _shootEffect: {fileID: 0}
+  _shootEffect: {fileID: 496384359287204082, guid: 96942d50cd2a33743b822f8c0d1dbd41, type: 3}
   _hitEffect: {fileID: 0}
+  _deathEffect: {fileID: 496384359287204082, guid: addca03703f59454ba731d6072be3459, type: 3}
 --- !u!114 &5567635856647584833
 MonoBehaviour:
   m_ObjectHideFlags: 0
