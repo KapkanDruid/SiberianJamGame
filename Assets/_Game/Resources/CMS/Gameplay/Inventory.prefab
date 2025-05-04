@@ -62,7 +62,7 @@ MonoBehaviour:
         Grids:
         - RequiredLevel: 0
           Grid: {fileID: 11400000, guid: 94fb4d6e1b48e6047886a834f2f26e5a, type: 2}
-        - RequiredLevel: 1
+        - RequiredLevel: 4
           Grid: {fileID: 11400000, guid: 7e9a219abac7c2d43b9f07d33584feb8, type: 2}
-        - RequiredLevel: 2
+        - RequiredLevel: 0
           Grid: {fileID: 11400000, guid: db17ba1b99f027e4084d0623ccffef65, type: 2}
