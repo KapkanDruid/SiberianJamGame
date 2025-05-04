@@ -57,8 +57,8 @@ namespace Game.Runtime.Runners
             SL.Get<HUDService>().Behaviour.InventoryView.SetActive(true);
             SL.Get<DialogController>().Background.gameObject.SetActive(false);
             SL.Get<ImplantsHolderService>().SpawnImplants();
-            await SL.Get<UIFaderService>().FadeOut();
             SL.Get<HUDService>().Behaviour.DisableUI.SetActive(false);
+            await SL.Get<UIFaderService>().FadeOut();
         }
 
         private void ConfigureLevel()
