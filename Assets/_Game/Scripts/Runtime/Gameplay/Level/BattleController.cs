@@ -13,6 +13,8 @@ using Game.Runtime.CMS.Components.Level;
 using Game.Runtime.Services.UI;
 using UnityEngine.SceneManagement;
 using Game.Runtime.Utils.Consts;
+using Codice.Client.Common.GameUI;
+using Game.Runtime.CMS.Components.Commons;
 
 namespace Game.Runtime.Gameplay.Level
 {
@@ -139,6 +141,13 @@ namespace Game.Runtime.Gameplay.Level
 
         public async UniTask EndGameAsync()
         {
+            if (SL.Get<GameStateHolder>().CurrentLevel == 0)
+            {
+                SL.Get<Tutorial>().IsImplantLooted = true;
+
+                await UniTask.WaitUntil(() => SL.Get<Tutorial>().IsFinished);
+            }
+
             SL.Get<GameStateHolder>().CurrentLevel++;
             SL.Get<GameStateHolder>().DialogBlockID = LevelConfig.NextSceneDialog.EntityId;
             SL.Get<HUDService>().Behaviour.DisableUI.SetActive(true);

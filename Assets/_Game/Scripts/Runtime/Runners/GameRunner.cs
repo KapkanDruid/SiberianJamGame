@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Game.Runtime.CMS;
+using Game.Runtime.CMS.Components.Audio;
 using Game.Runtime.CMS.Components.Level;
 using Game.Runtime.Gameplay.Enemy;
 using Game.Runtime.Gameplay.HUD;
@@ -8,6 +9,7 @@ using Game.Runtime.Gameplay.Implants;
 using Game.Runtime.Gameplay.Level;
 using Game.Runtime.Gameplay.Warrior;
 using Game.Runtime.Services;
+using Game.Runtime.Services.Audio;
 using Game.Runtime.Services.Camera;
 using Game.Runtime.Services.Save;
 using Game.Runtime.Services.UI;
@@ -22,6 +24,7 @@ namespace Game.Runtime.Runners
         [SerializeField] private WarriorView _warriorView;
         [SerializeField] private SpriteRenderer _backgroundRenderer;
         [SerializeField] private int _debugLevelIndex = -1;
+        [SerializeField] private Tutorial _tutorial;
 
         private readonly Scope _gameScope = Scope.Game;
 
@@ -45,10 +48,11 @@ namespace Game.Runtime.Runners
             SL.Register<LootService>(new LootService(), _gameScope);
             SL.Register<WarriorController>(new WarriorController(), _gameScope);
             SL.Register<BattleController>(_battleController, _gameScope);
+            SL.Register<Tutorial>(_tutorial, _gameScope);
 
             ConfigureLevel();
         }
-
+        
         private async UniTask StartGame()
         {
             SL.InitializeScope(_gameScope);
@@ -69,6 +73,8 @@ namespace Game.Runtime.Runners
             var levelComponent = levelModel.GetComponent<LevelComponent>();
             _backgroundRenderer.sprite = levelComponent.BackgroundSprite;
             _battleController.LevelConfig = levelComponent;
+
+            SL.Get<AudioService>().Play(levelModel);
 
             if (levelModel.Is<BossLevelComponent>(out var bossComponent))
             {
