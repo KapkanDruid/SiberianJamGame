@@ -44,9 +44,7 @@ namespace Game.Runtime.Gameplay.Implants
         private int _originalRotation;
         private Vector2 _pivotPoint;
         
-        private Vector2 _originalPositionOnEnter;
         private Vector3 _originalScale;
-        private Tweener _currentTweenPos;
         private Tweener _currentTweenScale;
 
         private void Start()
@@ -68,7 +66,6 @@ namespace Game.Runtime.Gameplay.Implants
             _rectTransform.sizeDelta = itemComponent.SizeDelta;
             _image.sprite = itemModel.GetComponent<SpriteComponent>().Sprite;
             
-            _originalPositionOnEnter = _rectTransform.anchoredPosition;
             _originalScale = _rectTransform.localScale;
         }
 
@@ -85,13 +82,8 @@ namespace Game.Runtime.Gameplay.Implants
             if (_isDragging) return;
             if (SL.Get<InventoryService>().HasItem(this)) return;
             
-            _currentTweenPos?.Kill();
             _currentTweenScale?.Kill();
-            
-            _currentTweenPos = _rectTransform.DOAnchorPosY(_originalPositionOnEnter.y + 5f, 0.2f)
-                .SetEase(Ease.OutBack).OnKill(() => _currentTweenPos = null);
-        
-            _currentTweenScale = _rectTransform.DOScale(_originalScale * 1.1f, 0.2f)
+            _currentTweenScale = _rectTransform.DOScale(_originalScale * 1.3f, 0.2f)
                 .SetEase(Ease.OutBack).OnKill(() => _currentTweenScale = null);
         }
 
@@ -101,12 +93,7 @@ namespace Game.Runtime.Gameplay.Implants
             if (_isDragging) return;
             if (SL.Get<InventoryService>().HasItem(this)) return;
 
-            _currentTweenPos?.Kill();
             _currentTweenScale?.Kill();
-            
-            _currentTweenPos = _rectTransform.DOAnchorPosY(_originalPositionOnEnter.y, 0.2f)
-                .SetEase(Ease.InOutQuad).OnKill(() => _currentTweenPos = null);
-        
             _currentTweenScale = _rectTransform.DOScale(_originalScale, 0.2f)
                 .SetEase(Ease.InOutQuad).OnKill(() => _currentTweenScale = null);
         }
@@ -116,7 +103,6 @@ namespace Game.Runtime.Gameplay.Implants
             if (this == null)return;
             if (_isDragging) return;
             
-            _currentTweenPos?.Kill();
             _currentTweenScale?.Kill();
 
             if (eventData.button != PointerEventData.InputButton.Left) return;
@@ -272,8 +258,6 @@ namespace Game.Runtime.Gameplay.Implants
 
             CurrentRotation = 0;
             _rectTransform.localRotation = Quaternion.Euler(0, 0, 0);
-            _originalPositionOnEnter = _rectTransform.anchoredPosition;
-            _originalScale = _rectTransform.localScale;
             return true;
         }
         
@@ -311,7 +295,6 @@ namespace Game.Runtime.Gameplay.Implants
 
         private void OnDestroy()
         {
-            _currentTweenPos?.Kill();
             _currentTweenScale?.Kill();
         }
     }
