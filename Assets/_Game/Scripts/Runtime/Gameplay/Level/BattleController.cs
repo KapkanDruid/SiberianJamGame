@@ -133,16 +133,15 @@ namespace Game.Runtime.Gameplay.Level
         public void Win()
         {
             _isBattleEnded = true;
-            SL.Get<SaveService>().SaveData.LevelIndex++;
-            SL.Get<SaveService>().SaveData.DialogBlockID = LevelConfig.NextSceneDialog.EntityId;
-            SL.Get<SaveService>().Save();
-            Debug.Log($"[BattleController] You win! {SL.Get<LevelIndexHolder>().CurrentLevel}");
-            
+            Debug.Log($"[BattleController] You win! {SL.Get<GameStateHolder>().CurrentLevel}");
             SL.Get<LootService>().GenerateLoot();
         }
 
         public async UniTask EndGameAsync()
         {
+            SL.Get<SaveService>().SaveData.LevelIndex++;
+            SL.Get<SaveService>().SaveData.DialogBlockID = LevelConfig.NextSceneDialog.EntityId;
+            SL.Get<SaveService>().Save();
             SL.Get<HUDService>().Behaviour.DisableUI.SetActive(true);
             await SL.Get<UIFaderService>().FadeIn();
             SL.Get<HUDService>().Behaviour.LootHolder.SetActive(false);
