@@ -53,7 +53,7 @@ MonoBehaviour:
     - rid: 6583048880660676698
       type: {class: LevelComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
       data:
-        LevelIndex: 9
+        LevelIndex: 100
         BackgroundSprite: {fileID: 21300000, guid: 8503cdc1c426cf746b9a4cb9556c8c3d, type: 3}
         EnemyPrefab: {fileID: 8389933710043619156, guid: 4156d807f5559974c8922787be853298, type: 3}
         DeathDialog: {fileID: 5262409682486398458, guid: 3ee59193af45d4a4494e9b362624c0bb, type: 3}

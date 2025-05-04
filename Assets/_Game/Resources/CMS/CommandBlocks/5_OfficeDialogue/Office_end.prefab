@@ -47,12 +47,10 @@ MonoBehaviour:
   entityId: CMS/CommandBlocks/5_OfficeDialogue/Office_end
   Components:
   - rid: 6583048880660676614
-  - rid: 6583048880660676619
   - rid: 6583048891092697219
   - rid: 6583048891092697220
   - rid: 6583048891092697221
   - rid: 6583048891092697222
-  - rid: 6583048891092697223
   - rid: 6583048891092697224
   references:
     version: 2
@@ -61,11 +59,6 @@ MonoBehaviour:
       type: {class: BackgroundSetCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         BackgroundSprite: {fileID: 21300000, guid: 7a12ff80c7f3651418f9c4a89648579f, type: 3}
-    - rid: 6583048880660676619
-      type: {class: DialogAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
-      data:
-        _appearType: 0
-        _duration: 0.3
     - rid: 6583048891092697219
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
@@ -84,11 +77,6 @@ MonoBehaviour:
       type: {class: WaitSecondsCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
         Seconds: 2
-    - rid: 6583048891092697223
-      type: {class: DialogAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
-      data:
-        _appearType: 1
-        _duration: 0.3
     - rid: 6583048891092697224
       type: {class: EndDialogSceneCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data: 
