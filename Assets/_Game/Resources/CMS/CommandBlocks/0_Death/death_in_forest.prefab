@@ -67,11 +67,12 @@ MonoBehaviour:
     - rid: 6583048880660676611
       type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        _soundConfigs: []
+        _soundConfigs:
+        - {fileID: 8454324805911319976, guid: afaf4c1d3e8b59541be2d04df4ae960f, type: 3}
     - rid: 6583048880660676612
       type: {class: WaitSecondsCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data:
-        Seconds: 0
+        Seconds: 7
     - rid: 6583048880660676613
       type: {class: EndDialogSceneCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data: 
