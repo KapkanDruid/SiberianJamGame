@@ -15,14 +15,7 @@ namespace Game.Runtime.Services
             var type = typeof(T);
 
             var scopeServices = GetScopeServices(scope);
-            if (scopeServices.TryAdd(type, service))
-            {
-                Debug.Log($"[ServiceLocator] {scope}. Registered {type.Name}.");
-            }
-            else
-            {
-                Debug.LogError($"[ServiceLocator] Cannot registered {type.Name}");
-            }
+            scopeServices.TryAdd(type, service);
         }
         
         public static T Get<T>() where T : IService
@@ -53,10 +46,7 @@ namespace Game.Runtime.Services
             if (_scopes == null) return;
             
             if (!_scopes.TryGetValue(scope, out var scopeServices))
-            {
-                Debug.LogWarning($"[ServiceLocator] {scope} is null. Cannot dispose.");
                 return;
-            }
 
             foreach (var service in scopeServices)
             {
@@ -90,7 +80,6 @@ namespace Game.Runtime.Services
             var newScope = new Dictionary<Type, object>();
             _scopes.Add(scope, newScope);
             
-            Debug.Log($"[ServiceLocator] {scope} registered.");
             return newScope;
         }
     }

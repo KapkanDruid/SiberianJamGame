@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Runtime.Gameplay.Implants
 {
-    public static class InventoryHelper
+    public static class ImplantHelper
     {
         public static Vector2 CalculateCenterPosition(InventorySlot slot, ImplantBehaviour item)
         {
