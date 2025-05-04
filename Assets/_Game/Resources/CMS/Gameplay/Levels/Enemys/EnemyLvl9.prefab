@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1818943205228161433}
   - component: {fileID: 8389933710043619156}
   m_Layer: 0
-  m_Name: Enemy1
+  m_Name: EnemyLvl9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3491bc35dc84132acbda8b4eb9ddf2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityId: CMS/Gameplay/Levels/Enemys/Enemy1
+  entityId: CMS/Gameplay/Levels/Enemys/EnemyLvl9
   Components:
   - rid: 4717638307256991856
   - rid: 4717638307256991919
@@ -54,8 +54,8 @@ MonoBehaviour:
     - rid: 4717638307256991856
       type: {class: EnemyConfig, ns: Game.Runtime.CMS.Components.Configs, asm: Runtime}
       data:
-        _maxHealth: 100
-        _damage: 30
+        _maxHealth: 140
+        _damage: 50
         _armor: 0
     - rid: 4717638307256991919
       type: {class: EnemyPrefabComponent, ns: Game.Runtime.CMS.Components.Configs, asm: Runtime}
