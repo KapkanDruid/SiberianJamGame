@@ -65,7 +65,7 @@ MonoBehaviour:
       type: {class: InventoryItemComponent, ns: Game.Runtime.CMS.Components.Gameplay, asm: Runtime}
       data:
         SizeDelta: {x: 20, y: 86}
-        Pivot: {x: 0.5, y: 0.12}
+        Pivot: {x: 0.55, y: 0.38}
         Grid: {fileID: 11400000, guid: e929360d5cb78454889a2e87dc074a92, type: 2}
     - rid: 5361599205655707739
       type: {class: DamageImplantComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
