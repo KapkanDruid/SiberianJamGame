@@ -56,7 +56,7 @@ MonoBehaviour:
     - rid: 635145064486535287
       type: {class: ImplantLevelRequiredComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
       data:
-        RequiredLevelIndex: 0
+        RequiredLevelIndex: 7
     - rid: 5361599194504888405
       type: {class: SpriteComponent, ns: Game.Runtime.CMS.Components.Commons, asm: Runtime}
       data:
@@ -65,7 +65,7 @@ MonoBehaviour:
       type: {class: InventoryItemComponent, ns: Game.Runtime.CMS.Components.Gameplay, asm: Runtime}
       data:
         SizeDelta: {x: 20, y: 86}
-        Pivot: {x: 0.12, y: 0.5}
+        Pivot: {x: 0.55, y: 0.38}
         Grid: {fileID: 11400000, guid: e929360d5cb78454889a2e87dc074a92, type: 2}
     - rid: 5361599205655707732
       type: {class: HealthImplantComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
