@@ -40,6 +40,7 @@ namespace Game.Runtime.Gameplay.Enemy
         public void Initialize()
         {
             _view.Configurate(_config.MaxHealth);
+            SL.Get<HUDService>().Behaviour.EnemyUI.UpdateHealthBar(CurrentHealth, _config.MaxHealth);
             _view.transform.position = SL.Get<BattleController>().EnemyPosition.position;
         }
 
