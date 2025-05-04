@@ -46,6 +46,8 @@ namespace Game.Runtime.Gameplay.Implants
         
         private Vector3 _originalScale;
         private Tweener _currentTweenScale;
+        
+        private ParticleSystem _particleSystem;
 
         private void Start()
         {
@@ -67,6 +69,15 @@ namespace Game.Runtime.Gameplay.Implants
             _image.sprite = itemModel.GetComponent<SpriteComponent>().Sprite;
             
             _originalScale = _rectTransform.localScale;
+            
+            var particlePrefab = itemComponent.Particle;
+            _particleSystem = Instantiate(particlePrefab, transform);
+            _particleSystem.Stop();
+        }
+
+        public void PlayParticle()
+        {
+            _particleSystem.Play();
         }
 
         public ImplantType GetImplantType()
@@ -140,6 +151,7 @@ namespace Game.Runtime.Gameplay.Implants
         public void PingPongScale()
         {
             transform.DOScale(Vector3.one * 1.2f, 0.1f).SetLoops(2, LoopType.Yoyo);
+           //PlayParticle();
         }
 
         private void StartDragging()
@@ -171,7 +183,8 @@ namespace Game.Runtime.Gameplay.Implants
         {
             if (TryGetLocalPoint(eventData, out Vector2 localPoint))
             {
-                _rectTransform.anchoredPosition = localPoint - CalculatePivotOffset();
+                var targetPosition = localPoint - CalculatePivotOffset();
+                _rectTransform.anchoredPosition = new Vector3(targetPosition.x, targetPosition.y, 0);
             }
         }
 
@@ -243,6 +256,7 @@ namespace Game.Runtime.Gameplay.Implants
 
             _inventoryService.SetItemPosition(slot, this);
             CenterSlotPosition = slot.GridPosition;
+            //PlayParticle();
             return true;
         }
 
