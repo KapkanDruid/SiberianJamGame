@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f114866ba63fc0d468e8bb40073b62ae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -216,7 +216,7 @@ MonoBehaviour:
   _reader: {fileID: 5567635856647584833}
   _shootEffect: {fileID: 496384359287204082, guid: decf379994a20474a93c0011f0effe9e, type: 3}
   _hitEffect: {fileID: 496384359287204082, guid: a6936977c2cf5974390e8f9f8a27e416, type: 3}
-  _deathEffect: {fileID: 0}
+  _deathEffect: {fileID: 496384359287204082, guid: a13106b51b0ce1549bd73adfda00ab0f, type: 3}
 --- !u!114 &5567635856647584833
 MonoBehaviour:
   m_ObjectHideFlags: 0

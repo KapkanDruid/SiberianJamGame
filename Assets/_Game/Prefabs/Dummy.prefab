@@ -79,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 7594322086093173903, guid: 99d6c8009c4816148aa7365781dee540, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -129,7 +129,6 @@ MonoBehaviour:
   _reader: {fileID: 5567635856647584833}
   _shootEffect: {fileID: 0}
   _hitEffect: {fileID: 0}
-  _deathEffect: {fileID: 0}
 --- !u!114 &5567635856647584833
 MonoBehaviour:
   m_ObjectHideFlags: 0

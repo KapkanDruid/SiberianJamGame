@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 425064272869837418}
   - component: {fileID: 496384359287204082}
   m_Layer: 0
-  m_Name: SFX_FOX_GETHIT
+  m_Name: SFX_FOX_Shoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3491bc35dc84132acbda8b4eb9ddf2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityId: CMS/Audio/SFX/FOX/SFX_FOX_GETHIT
+  entityId: CMS/Audio/SFX/FOX/SFX_FOX_Shoot
   Components:
   - rid: 635145019282161917
   references:
@@ -54,5 +54,5 @@ MonoBehaviour:
       type: {class: SFXComponent, ns: Game.Runtime.CMS.Components.Audio, asm: Runtime}
       data:
         Clips:
-        - {fileID: 8300000, guid: 153db4b979f898346a57ce3912194c52, type: 3}
+        - {fileID: 8300000, guid: 6ae1c6d4eabf7cd42bb249ae582ea162, type: 3}
         Volume: 1
