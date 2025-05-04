@@ -52,6 +52,7 @@ MonoBehaviour:
   - rid: 6583048891092697221
   - rid: 6583048891092697222
   - rid: 6583048891092697224
+  - rid: 6583048897891926121
   references:
     version: 2
     RefIds:
@@ -80,3 +81,7 @@ MonoBehaviour:
     - rid: 6583048891092697224
       type: {class: EndDialogSceneCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data: 
+    - rid: 6583048897891926121
+      type: {class: EndGameCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        TitlesPrefab: {fileID: 4539585203149518105, guid: c342ee5258ef1874097ef9007bfd5347, type: 3}
