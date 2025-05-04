@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: e2a1b3199424d3347b4cbdf671a0f0f8
+guid: 8f641944c2825694bb7216ae400fce21
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4445443994715994174
-    second: Particle_08 1_0
-  - first:
-      213: 6688997084075199766
-    second: Particle_08 1_1
-  - first:
-      213: 1676100882331058789
-    second: Particle_08 1_2
-  - first:
-      213: 4457367293890242822
-    second: Particle_08 1_3
-  - first:
-      213: 3382282984470995390
-    second: Particle_08 1_4
+      213: -114197139961795376
+    second: Particle_10_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -58,12 +46,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -84,9 +72,9 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 32
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -125,100 +113,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Particle_08 1_0
+      name: Particle_10_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 63
-        width: 73
-        height: 46
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2c74f026d3c9e42c0800000000000000
-      internalID: -4445443994715994174
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Particle_08 1_1
-      rect:
-        serializedVersion: 2
-        x: 115
-        y: 5
-        width: 43
-        height: 92
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 61d0deb786714dc50800000000000000
-      internalID: 6688997084075199766
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Particle_08 1_2
-      rect:
-        serializedVersion: 2
-        x: 486
-        y: 96
-        width: 36
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 562cf034fd4b24710800000000000000
-      internalID: 1676100882331058789
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Particle_08 1_3
-      rect:
-        serializedVersion: 2
-        x: 224
-        y: 4
-        width: 69
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 609a5c900ffbbdd30800000000000000
-      internalID: 4457367293890242822
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Particle_08 1_4
-      rect:
-        serializedVersion: 2
-        x: 342
-        y: 4
-        width: 55
+        x: 0
+        y: 0
+        width: 30
         height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -228,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: eb1ed3b447840fe20800000000000000
-      internalID: 3382282984470995390
+      spriteID: 0dc26366e4a4a6ef0800000000000000
+      internalID: -114197139961795376
       vertices: []
       indices: 
       edges: []
@@ -238,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -248,11 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Particle_08 1_0: -4445443994715994174
-      Particle_08 1_1: 6688997084075199766
-      Particle_08 1_2: 1676100882331058789
-      Particle_08 1_3: 4457367293890242822
-      Particle_08 1_4: 3382282984470995390
+      Particle_10_0: -114197139961795376
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
