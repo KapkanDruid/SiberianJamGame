@@ -22,6 +22,7 @@ namespace Game.Runtime.Runners
         [SerializeField] private WarriorView _warriorView;
         [SerializeField] private SpriteRenderer _backgroundRenderer;
         [SerializeField] private int _debugLevelIndex = -1;
+        [SerializeField] private Tutorial _tutorial;
 
         private readonly Scope _gameScope = Scope.Game;
 
@@ -45,10 +46,11 @@ namespace Game.Runtime.Runners
             SL.Register<LootService>(new LootService(), _gameScope);
             SL.Register<WarriorController>(new WarriorController(), _gameScope);
             SL.Register<BattleController>(_battleController, _gameScope);
+            SL.Register<Tutorial>(_tutorial, _gameScope);
 
             ConfigureLevel();
         }
-
+        
         private async UniTask StartGame()
         {
             SL.InitializeScope(_gameScope);

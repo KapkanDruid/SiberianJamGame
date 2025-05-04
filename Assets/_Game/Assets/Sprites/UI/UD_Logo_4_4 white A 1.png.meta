@@ -1,0 +1,225 @@
+fileFormatVersion: 2
+guid: d7f2a131ea08f3042af7059a1812f95d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8471238709589286203
+    second: UD_Logo_4_4 white A 1_0
+  - first:
+      213: 6514100608349255490
+    second: UD_Logo_4_4 white A 1_1
+  - first:
+      213: 580498730063194544
+    second: UD_Logo_4_4 white A 1_2
+  - first:
+      213: -842995576418862934
+    second: UD_Logo_4_4 white A 1_3
+  - first:
+      213: -2402194621636008671
+    second: UD_Logo_4_4 white A 1_4
+  - first:
+      213: 1463344712349861233
+    second: UD_Logo_4_4 white A 1_5
+  - first:
+      213: 8358417365691584744
+    second: UD_Logo_4_4 white A 1_6
+  - first:
+      213: 2529543666237161511
+    second: UD_Logo_4_4 white A 1_7
+  - first:
+      213: -245762600936514494
+    second: UD_Logo_4_4 white A 1_8
+  - first:
+      213: 7888343675953313009
+    second: UD_Logo_4_4 white A 1_9
+  - first:
+      213: -7644631867903335535
+    second: UD_Logo_4_4 white A 1_10
+  - first:
+      213: 3329538627795298696
+    second: UD_Logo_4_4 white A 1_11
+  - first:
+      213: 4090872419320690095
+    second: UD_Logo_4_4 white A 1_12
+  - first:
+      213: -3971145943638757912
+    second: UD_Logo_4_4 white A 1_13
+  - first:
+      213: -3626297849264790464
+    second: UD_Logo_4_4 white A 1_14
+  - first:
+      213: -2989159330272827029
+    second: UD_Logo_4_4 white A 1_15
+  - first:
+      213: 6071333640211719493
+    second: UD_Logo_4_4 white A 1_16
+  - first:
+      213: -8913065489644346230
+    second: UD_Logo_4_4 white A 1_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 195, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: UD_Logo_4_4 white A 1_0
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 186
+        width: 793
+        height: 815
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c26463b64d107a80800000000000000
+      internalID: -8471238709589286203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      UD_Logo_4_4 white A 1_0: -8471238709589286203
+      UD_Logo_4_4 white A 1_1: 6514100608349255490
+      UD_Logo_4_4 white A 1_10: -7644631867903335535
+      UD_Logo_4_4 white A 1_11: 3329538627795298696
+      UD_Logo_4_4 white A 1_12: 4090872419320690095
+      UD_Logo_4_4 white A 1_13: -3971145943638757912
+      UD_Logo_4_4 white A 1_14: -3626297849264790464
+      UD_Logo_4_4 white A 1_15: -2989159330272827029
+      UD_Logo_4_4 white A 1_16: 6071333640211719493
+      UD_Logo_4_4 white A 1_17: -8913065489644346230
+      UD_Logo_4_4 white A 1_18: 484090885
+      UD_Logo_4_4 white A 1_2: 580498730063194544
+      UD_Logo_4_4 white A 1_3: -842995576418862934
+      UD_Logo_4_4 white A 1_4: -2402194621636008671
+      UD_Logo_4_4 white A 1_5: 1463344712349861233
+      UD_Logo_4_4 white A 1_6: 8358417365691584744
+      UD_Logo_4_4 white A 1_7: 2529543666237161511
+      UD_Logo_4_4 white A 1_8: -245762600936514494
+      UD_Logo_4_4 white A 1_9: 7888343675953313009
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
