@@ -50,6 +50,7 @@ MonoBehaviour:
   - rid: 6583048880660676610
   - rid: 6583048880660676611
   - rid: 6583048880660676612
+  - rid: 6583048897891926096
   - rid: 6583048880660676613
   references:
     version: 2
@@ -75,3 +76,8 @@ MonoBehaviour:
     - rid: 6583048880660676613
       type: {class: EndDialogSceneCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
       data: 
+    - rid: 6583048897891926096
+      type: {class: DialogAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _appearType: 1
+        _duration: 0.3
