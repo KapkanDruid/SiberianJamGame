@@ -30,8 +30,8 @@ RectTransform:
   m_GameObject: {fileID: 3256100500880327681}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -105,6 +105,7 @@ MonoBehaviour:
   _image: {fileID: 3334477017477248598}
   _rectTransform: {fileID: 6286546035229939487}
   _canvasGroup: {fileID: 2053942204217226423}
+  baseLocalScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &2835948620522070318
 MonoBehaviour:
   m_ObjectHideFlags: 0
