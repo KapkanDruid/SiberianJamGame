@@ -48,8 +48,8 @@ MonoBehaviour:
   Components:
   - rid: 635145064486535254
   - rid: 635145064486535323
-  - rid: 635145080740774057
   - rid: 4717638356834451561
+  - rid: 635145118707613905
   references:
     version: 2
     RefIds:
@@ -69,10 +69,10 @@ MonoBehaviour:
         - {fileID: 4443999720199238786, guid: 8563ec38633abc142b71d88177033976, type: 3}
         - {fileID: 4443999720199238786, guid: 8563ec38633abc142b71d88177033976, type: 3}
         - {fileID: 4443999720199238786, guid: 8563ec38633abc142b71d88177033976, type: 3}
-    - rid: 635145080740774057
-      type: {class: SetCharacterHealthComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
+    - rid: 635145118707613905
+      type: {class: LevelParticleComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
       data:
-        Health: 100
+        Particle: {fileID: 6475520120998431958, guid: 7fccd54e51d78674c80230f18c27391c, type: 3}
     - rid: 4717638356834451561
       type: {class: MusicComponent, ns: Game.Runtime.CMS.Components.Audio, asm: Runtime}
       data:

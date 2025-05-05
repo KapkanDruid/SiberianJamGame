@@ -2,6 +2,7 @@
 using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Gameplay;
 using Game.Runtime.CMS.Components.Implants;
+using Game.Runtime.Gameplay.Level;
 using Game.Runtime.Services;
 using Game.Runtime.Services.Save;
 using Game.Runtime.Utils.Extensions;
@@ -22,13 +23,14 @@ namespace Game.Runtime.Gameplay.Implants
     {
         private readonly ImplantsPoolConfig _config;
         private readonly List<CMSEntity> _basicImplantModels;
+        private readonly List<CMSEntity> _allImplants;
         private readonly List<ImplantPoolState> _implantPool;
 
         public ImplantsPoolService()
         {
             _implantPool = new List<ImplantPoolState>();
             _config = CM.Get(CMs.Gameplay.ImplantsPoolConfig).GetComponent<ImplantsPoolConfig>();
-            
+            _allImplants = CM.GetAll<InventoryItemComponent>();
             _basicImplantModels = new List<CMSEntity>();
             foreach (var implant in CM.GetAll<InventoryItemComponent>())
             {
@@ -56,7 +58,16 @@ namespace Game.Runtime.Gameplay.Implants
             {
                 if (_implantPool.Count == 0)
                 {
-                    result.Add(_basicImplantModels.GetRandom());
+                    _allImplants.Shuffle();
+                    foreach (var implant in _allImplants)
+                    {
+                        if (implant.GetComponent<ImplantLevelRequiredComponent>().RequiredLevelIndex <= SL.Get<GameStateHolder>().CurrentLevel)
+                        {
+                            result.Add(implant);
+                            break;
+                        }
+                    }
+
                 }
                 else
                 {
