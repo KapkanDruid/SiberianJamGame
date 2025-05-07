@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8376597705016103875
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6113167874437011305}
+  - component: {fileID: 8190553664295386260}
+  m_Layer: 0
+  m_Name: New_tutorial_block_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6113167874437011305
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8376597705016103875}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8190553664295386260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8376597705016103875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3491bc35dc84132acbda8b4eb9ddf2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityId: CMS/CommandBlocks/Tutorial/New_tutorial_block_2
+  Components:
+  - rid: 6583048962365194251
+  - rid: 6583048962365194252
+  - rid: 6583048962365194253
+  - rid: 6583048962365194254
+  - rid: 6583048962365194256
+  - rid: 6583048962365194257
+  - rid: 6583048962365194258
+  references:
+    version: 2
+    RefIds:
+    - rid: 6583048962365194251
+      type: {class: DialogAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _appearType: 0
+        _duration: 0.3
+    - rid: 6583048962365194252
+      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 1
+        _offset: {x: -80, y: 0, z: 0}
+        _duration: 0.3
+        _sprite: {fileID: 5623948624648158621, guid: d59ae9eed7a510d40b0e17e9cc37aebc, type: 3}
+    - rid: 6583048962365194253
+      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _soundConfigs:
+        - {fileID: 3946565200266130319, guid: b77dd5235dc553549b2c37e0c143db89, type: 3}
+    - rid: 6583048962365194254
+      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _delay: 0.035
+        _name: "\u0410\u043B\u044C\u0442\u0430"
+        _text: "\u0421\u043C\u043E\u0442\u0440\u0438, \u043A\u0430\u043A \u043E\u043D
+          \u0440\u0430\u0437\u043B\u0435\u0442\u0430\u0435\u0442\u0441\u044F \u0432
+          \u0449\u0435\u043F\u043A\u0438!. \u0416\u0430\u043B\u044C \u0442\u043E\u043B\u044C\u043A\u043E
+          \u043C\u0430\u043C\u0435\u043D\u044C\u043A\u0430 \u043D\u0435 \u0441\u043C\u043E\u0433\u043B\u0430
+          \u043F\u043E\u0431\u0435\u0434\u0438\u0442\u044C \u043F\u0435\u0440\u0435\u0433\u0440\u0443\u0437\u043A\u0443
+          \u043C\u043E\u0437\u0433\u0430. \u041D\u043E \u0442\u0435\u043C \u0432\u0435\u0441\u0435\u043B\u0435\u0435
+          \u043A\u0430\u0436\u0434\u044B\u0439 \u0440\u0430\u0437 \u0442\u044B\u0440\u043A\u0430\u0442\u044C
+          \u0432 \u0441\u0435\u0431\u044F \u0432\u0441\u0435 \u044D\u0442\u0438 \u0438\u043C\u043F\u043B\u0430\u043D\u0442\u0438\u043A\u0438!
+          \u0414\u0430\u0432\u0430\u0439 \u0435\u0449\u0435 \u0440\u0430\u0437\u043E\u043A!"
+    - rid: 6583048962365194256
+      type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 1
+        _duration: 0.3
+    - rid: 6583048962365194257
+      type: {class: DialogAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _appearType: 1
+        _duration: 0.3
+    - rid: 6583048962365194258
+      type: {class: StartTutorialCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        TutorialStage: 0

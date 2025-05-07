@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1249354727581787998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8042329763761775940}
+  - component: {fileID: 8803804612768493802}
+  m_Layer: 0
+  m_Name: New_tutorial_block_4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8042329763761775940
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249354727581787998}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8803804612768493802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249354727581787998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3491bc35dc84132acbda8b4eb9ddf2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityId: CMS/CommandBlocks/Tutorial/New_tutorial_block_4
+  Components:
+  - rid: 6583048962365194274
+  - rid: 6583048962365194275
+  - rid: 6583048962365194276
+  - rid: 6583048962365194277
+  - rid: 6583048962365194278
+  - rid: 6583048962365194279
+  - rid: 6583048962365194280
+  - rid: 6583048962365194281
+  - rid: 6583048962365194282
+  - rid: 6583048962365194283
+  - rid: 6583048962365194284
+  references:
+    version: 2
+    RefIds:
+    - rid: 6583048962365194274
+      type: {class: DialogAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _appearType: 0
+        _duration: 0.3
+    - rid: 6583048962365194275
+      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 0
+        _offset: {x: 0, y: 0, z: 0}
+        _duration: 0.3
+        _sprite: {fileID: 21300000, guid: cde5c6bd369bb354298db82bf510252d, type: 3}
+    - rid: 6583048962365194276
+      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _soundConfigs:
+        - {fileID: 8168405603981787170, guid: 2e546e05a86940e44a3861e5dd716c01, type: 3}
+    - rid: 6583048962365194277
+      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _delay: 0.035
+        _name: "\u0420\u0430\u0441\u0441\u043A\u0430\u0437\u0447\u0438\u043A"
+        _text: "\u041D\u043E \u0447\u0442\u043E \u044D\u0442\u043E? \u0427\u0442\u043E
+          \u0437\u0430 \u0442\u0432\u0430\u0440\u044C \u0442\u0430\u043A\u0430\u044F
+          \u043F\u0435\u0440\u0435\u0432\u0430\u043B\u0438\u043B\u0430\u0441\u044C
+          \u0447\u0435\u0440\u0435\u0437 \u0447\u0430\u0441\u0442\u043E\u043A\u043E\u043B?!"
+    - rid: 6583048962365194278
+      type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 0
+        _duration: 0.3
+    - rid: 6583048962365194279
+      type: {class: IconAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 1
+        _offset: {x: -80, y: 0, z: 0}
+        _duration: 0.3
+        _sprite: {fileID: 5623948624648158621, guid: d59ae9eed7a510d40b0e17e9cc37aebc, type: 3}
+    - rid: 6583048962365194280
+      type: {class: PlaySoundCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _soundConfigs:
+        - {fileID: 3946565200266130319, guid: 7c96c1530f53dce418b069a35a708854, type: 3}
+    - rid: 6583048962365194281
+      type: {class: PrintTextCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _delay: 0.035
+        _name: "\u0410\u043B\u044C\u0442\u0430"
+        _text: "\u0423\u0445 \u0442\u044B! \u0421\u0435\u0441\u0442\u0440\u0438\u0446\u0430!
+          \u041C\u044B \u0432\u0441\u044E \u0436\u0438\u0437\u043D\u044C \u0433\u043E\u0442\u043E\u0432\u0438\u043B\u0438\u0441\u044C
+          \u0438\u043C\u0435\u043D\u043D\u043E \u043A \u044D\u0442\u043E\u043C\u0443
+          \u043C\u043E\u043C\u0435\u043D\u0442\u0443! \u0414\u0430\u0432\u0430\u0439
+          \u0436\u0430\u0445\u043D\u0435\u043C!"
+    - rid: 6583048962365194282
+      type: {class: IconHideCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _positionType: 1
+        _duration: 0.3
+    - rid: 6583048962365194283
+      type: {class: DialogAppearCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        _appearType: 1
+        _duration: 0.3
+    - rid: 6583048962365194284
+      type: {class: StartTutorialCommand, ns: Game.Runtime.CMS.Components.Commands, asm: Runtime}
+      data:
+        TutorialStage: 0
