@@ -19,7 +19,13 @@ namespace Game.Runtime.Gameplay.Implants
         private readonly Dictionary<Vector2Int, InventorySlot> _slots = new();
         private readonly Dictionary<Vector2Int, ImplantBehaviour> _occupiedSlots = new();
         private readonly Dictionary<ImplantBehaviour, List<Vector2Int>> _itemPositions = new();
-
+        private readonly Dictionary<ImplantBehaviour.ImplantType, float> _statsMap = new()
+        {
+            { ImplantBehaviour.ImplantType.Health, 0 },
+            { ImplantBehaviour.ImplantType.Armor, 0 },
+            { ImplantBehaviour.ImplantType.Damage, 0 }
+        };
+        
         private Vector2Int _gridSize;
         private int _cellSize;
 
@@ -46,14 +52,24 @@ namespace Game.Runtime.Gameplay.Implants
             _itemPositions.Clear();
 
             UpdateAllSlotVisual();
-
+            UpdateStatsMap();
             IsBlocked = false;
         }
 
         public WarriorTurnData CalculateTurnData()
         {
             IsBlocked = true;
-            
+
+            foreach (var itemPair in _itemPositions)
+                itemPair.Key.PlayParticle();
+
+            return new WarriorTurnData(_statsMap[ImplantBehaviour.ImplantType.Health], 
+                _statsMap[ImplantBehaviour.ImplantType.Damage], 
+                _statsMap[ImplantBehaviour.ImplantType.Armor]);
+        }
+
+        private void UpdateStatsMap()
+        {
             float health = 0f;
             float damage = 0f;
             float armor = 0f;
@@ -91,9 +107,6 @@ namespace Game.Runtime.Gameplay.Implants
                         if (neighborItem.GetImplantType() == implantType &&
                             checkedPairs.Add((item, neighborItem)))
                         {
-                            neighborItem.PingPongScale();
-                            item.PingPongScale();
-                            
                             switch (implantType)
                             {
                                 case ImplantBehaviour.ImplantType.Health:
@@ -109,11 +122,15 @@ namespace Game.Runtime.Gameplay.Implants
                         }
                     }
                 }
-                
-                item.PlayParticle();
             }
 
-            return new WarriorTurnData(health, damage, armor);
+            _statsMap[ImplantBehaviour.ImplantType.Health] = health;
+            _statsMap[ImplantBehaviour.ImplantType.Damage] = damage;
+            _statsMap[ImplantBehaviour.ImplantType.Armor] = armor;
+            
+            SL.Get<HUDService>().Behaviour.StatsPanel.UpdateStat(ImplantBehaviour.ImplantType.Health, _statsMap[ImplantBehaviour.ImplantType.Health]);
+            SL.Get<HUDService>().Behaviour.StatsPanel.UpdateStat(ImplantBehaviour.ImplantType.Damage, _statsMap[ImplantBehaviour.ImplantType.Damage]);
+            SL.Get<HUDService>().Behaviour.StatsPanel.UpdateStat(ImplantBehaviour.ImplantType.Armor, _statsMap[ImplantBehaviour.ImplantType.Armor]);
         }
 
         private bool IsPositionBlocked(ImplantBehaviour implant, Vector2Int position)
@@ -151,7 +168,7 @@ namespace Game.Runtime.Gameplay.Implants
             }
 
             _itemPositions[item] = newPositions;
-
+            UpdateStatsMap();
             OnImplpantPlaced?.Invoke();
             return true;
         }
@@ -183,6 +200,7 @@ namespace Game.Runtime.Gameplay.Implants
                 }
 
                 _itemPositions.Remove(item);
+                UpdateStatsMap();
             }
         }
 

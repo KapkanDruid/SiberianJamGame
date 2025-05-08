@@ -153,12 +153,6 @@ namespace Game.Runtime.Gameplay.Implants
             ReturnToOriginalPosition();
         }
 
-        public void PingPongScale()
-        {
-            transform.DOScale(baseLocalScale * 1.2f, 0.1f).SetLoops(2, LoopType.Yoyo);
-           //PlayParticle();
-        }
-
         private void StartDragging()
         {
             _isDragging = true;
