@@ -2,6 +2,7 @@
 using Cysharp.Threading.Tasks;
 using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Audio;
+using Game.Runtime.CMS.Components.Configs;
 using Game.Runtime.CMS.Components.Level;
 using Game.Runtime.Gameplay.Enemy;
 using Game.Runtime.Gameplay.HUD;
@@ -13,6 +14,7 @@ using Game.Runtime.Services.Audio;
 using Game.Runtime.Services.Camera;
 using Game.Runtime.Services.Save;
 using Game.Runtime.Services.UI;
+using Game.Runtime.Utils;
 using UnityEngine;
 
 namespace Game.Runtime.Runners
@@ -57,7 +59,7 @@ namespace Game.Runtime.Runners
         {
             SL.InitializeScope(_gameScope);
             SL.Get<HUDService>().Behaviour.DisableUI.SetActive(true);
-            SL.Get<HUDService>().Behaviour.EndTurnButton.gameObject.SetActive(true);
+            SL.Get<HUDService>().Behaviour.EndTurnButtonParent.SetActive(SL.Get<GameStateHolder>().CurrentData.Level > 0);
             SL.Get<HUDService>().Behaviour.InventoryView.SetActive(true);
             SL.Get<DialogController>().Background.gameObject.SetActive(false);
             SL.Get<ImplantsHolderService>().SpawnImplants();
@@ -67,15 +69,50 @@ namespace Game.Runtime.Runners
 
         private void ConfigureLevel()
         {
-            var currentLevelIndex = _debugLevelIndex >= 0 ? _debugLevelIndex : SL.Get<GameStateHolder>().CurrentLevel;
+            var currentLevelIndex = GetCurrentLevelIndex();
             var levelModel = LevelHelper.GetLevelModel(currentLevelIndex);
-
             var levelComponent = levelModel.GetComponent<LevelComponent>();
-            _backgroundRenderer.sprite = levelComponent.BackgroundSprite;
-            _battleController.LevelConfig = levelComponent;
 
-            SL.Get<AudioService>().Play(levelModel);
+            RegisterCharacter(levelModel, currentLevelIndex);
+            RegisterEnemy(levelModel, levelComponent);
+            ConfigureImplants(levelModel);
+            ConfigureLevelEnvironment(levelModel, levelComponent);
+            RegisterLevelCheckpoint(levelModel, currentLevelIndex);
 
+            LogUtil.Log(nameof(GameRunner), $"Level {currentLevelIndex} loaded!");
+        }
+        
+        private int GetCurrentLevelIndex()
+        {
+            if (SL.Get<GameStateHolder>().NeedRespawnOnCheckpoint)
+                SL.Get<GameStateHolder>().LoadCheckpoint();
+            
+            if (_debugLevelIndex >= 0)
+            {
+                SL.Get<GameStateHolder>().CurrentData.Level = _debugLevelIndex;
+                return _debugLevelIndex;
+            }
+
+            return SL.Get<GameStateHolder>().CurrentData.Level;
+        }
+
+        private void RegisterCharacter(CMSEntity levelModel, int currentLevelIndex)
+        {
+            if (levelModel.Is<SetCharacterHealthComponent>(out var healthComponent))
+            {
+                SL.Get<GameStateHolder>().CurrentData.CharacterHealth = healthComponent.Health;
+            }
+            else if (currentLevelIndex == 0)
+            {
+                var playerConfig = CM.Get(CMs.Configs.PlayerConfig).GetComponent<PlayerConfig>();
+                SL.Get<GameStateHolder>().CurrentData.CharacterHealth = playerConfig.MaxHealth;
+            }
+            
+            SL.Register<WarriorView>(_warriorView, _gameScope);
+        }
+
+        private void RegisterEnemy(CMSEntity levelModel, LevelComponent levelComponent)
+        {
             if (levelModel.Is<BossLevelComponent>(out var bossComponent))
             {
                 var boss = new BossController(bossComponent.Health, bossComponent.Heal, bossComponent.BossViewPrefab);
@@ -92,31 +129,50 @@ namespace Game.Runtime.Runners
                 SL.Register<EnemyController>(enemy, _gameScope);
                 _battleController.CurrentBattleType = BattleController.BattleType.Common;
             }
+        }
 
-            SL.Register<WarriorView>(_warriorView, _gameScope);
-
+        private void ConfigureImplants(CMSEntity levelModel)
+        {
             if (levelModel.Is<AddImplantsToPoolAtStartComponent>(out var component))
             {
-                var implantIds = new List<string>();
                 foreach (var implant in component.ImplantsPrefabs)
-                    implantIds.Add(implant.EntityId);
-                
-                SL.Get<ImplantsPoolService>().AddImplants(implantIds);
+                    SL.Get<GameStateHolder>().CurrentData.ImplantsPool.Add(implant.EntityId);
             }
-            else if (currentLevelIndex == 0) Debug.LogWarning($"[GameRunner] Implants pool is empty!");
 
-            if (levelModel.Is<SetCharacterHealthComponent>(out var healthComponent))
-            {
-                SL.Get<GameStateHolder>().CharacterHealth = healthComponent.Health;
-            }
-            else if (currentLevelIndex == 0) Debug.LogWarning($"[GameRunner] SetCharacterHealthComponent not exist!");
+            SL.Get<ImplantsPoolService>().CachePool();
+        }
 
+        private void ConfigureLevelEnvironment(CMSEntity levelModel, LevelComponent levelComponent)
+        {
+            SL.Get<AudioService>().Play(levelModel);
+            _backgroundRenderer.sprite = levelComponent.BackgroundSprite;
             if (levelModel.Is<LevelParticleComponent>(out var particleComponent))
-            {
                 Instantiate(particleComponent.Particle);
-            }
+        }
+        
+        private void RegisterLevelCheckpoint(CMSEntity levelModel, int currentLevelIndex)
+        {
+            var checkPointData = SL.Get<GameStateHolder>().CheckpointData;
+            if (checkPointData.Level >= currentLevelIndex)
+                return;
             
-            Debug.Log($"[GameRunner] Level {currentLevelIndex} loaded!");
+            if (levelModel.Is<LevelCheckpointComponent>(out _))
+            {
+                var gameStateHolder = SL.Get<GameStateHolder>();
+                var playerConfig = CM.Get(CMs.Configs.PlayerConfig).GetComponent<PlayerConfig>();
+
+                checkPointData.Level = currentLevelIndex;
+                checkPointData.CharacterHealth =
+                    gameStateHolder.CurrentData.CharacterHealth >= playerConfig.MaxHealth / 2
+                        ? gameStateHolder.CurrentData.CharacterHealth
+                        : playerConfig.MaxHealth / 2;
+                checkPointData.ImplantsPool.Clear(); 
+                checkPointData.ImplantsPool.AddRange(gameStateHolder.CurrentData.ImplantsPool);
+                
+                LogUtil.Log(nameof(GameRunner), $"Level checkpoint - {gameStateHolder.CheckpointData.Level}! " +
+                                                $"Character health - {gameStateHolder.CheckpointData.CharacterHealth}, " +
+                                                $"Count static implant pool - {gameStateHolder.CheckpointData.ImplantsPool.Count}");
+            }
         }
 
         private void OnDestroy()

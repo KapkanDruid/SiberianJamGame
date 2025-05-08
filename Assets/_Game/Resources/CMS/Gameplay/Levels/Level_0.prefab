@@ -68,7 +68,6 @@ MonoBehaviour:
         - {fileID: 4443999720199238786, guid: 8563ec38633abc142b71d88177033976, type: 3}
         - {fileID: 4443999720199238786, guid: 8563ec38633abc142b71d88177033976, type: 3}
         - {fileID: 4443999720199238786, guid: 8563ec38633abc142b71d88177033976, type: 3}
-        - {fileID: 4443999720199238786, guid: 8563ec38633abc142b71d88177033976, type: 3}
     - rid: 635145118707613905
       type: {class: LevelParticleComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
       data:

@@ -15,6 +15,7 @@ namespace Game.Runtime.Gameplay.HUD
         [SerializeField] private WarriorUI warriorUI;
         [SerializeField] private EnemyUI enemyUI;
         [SerializeField] private Button endTurnButton;
+        [SerializeField] private GameObject endTurnButtonParent;
         [SerializeField] private GameObject disableUI;
         
         public InventoryView InventoryView => inventoryView;
@@ -23,6 +24,7 @@ namespace Game.Runtime.Gameplay.HUD
         public WarriorUI WarriorUI => warriorUI;
         public EnemyUI EnemyUI => enemyUI;
         public Button EndTurnButton => endTurnButton;
+        public GameObject EndTurnButtonParent => endTurnButtonParent;
         public GameObject DisableUI => disableUI;
 
         public void Start()

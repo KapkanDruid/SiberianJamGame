@@ -4,33 +4,21 @@ using Game.Runtime.CMS.Components.Gameplay;
 using Game.Runtime.CMS.Components.Implants;
 using Game.Runtime.Gameplay.Level;
 using Game.Runtime.Services;
-using Game.Runtime.Services.Save;
+using Game.Runtime.Utils;
 using Game.Runtime.Utils.Extensions;
 
 namespace Game.Runtime.Gameplay.Implants
 {
-    public class ImplantPoolState
-    {
-        public readonly string ImplantId;
-
-        public ImplantPoolState(string implantId)
-        {
-            ImplantId = implantId;
-        }
-    }
-    
     public class ImplantsPoolService : IService
     {
         private readonly ImplantsPoolConfig _config;
         private readonly List<CMSEntity> _basicImplantModels;
-        private readonly List<CMSEntity> _allImplants;
-        private readonly List<ImplantPoolState> _implantPool;
+        private readonly List<string> _dynamicImplantPool;
 
         public ImplantsPoolService()
         {
-            _implantPool = new List<ImplantPoolState>();
+            _dynamicImplantPool = new List<string>();
             _config = CM.Get(CMs.Gameplay.ImplantsPoolConfig).GetComponent<ImplantsPoolConfig>();
-            _allImplants = CM.GetAll<InventoryItemComponent>();
             _basicImplantModels = new List<CMSEntity>();
             foreach (var implant in CM.GetAll<InventoryItemComponent>())
             {
@@ -38,16 +26,14 @@ namespace Game.Runtime.Gameplay.Implants
                     _basicImplantModels.Add(implant);
             }
         }
-        
-        public void AddImplant(string implantId)
-        {
-            _implantPool.Add(new ImplantPoolState(implantId));
-        }
 
-        public void AddImplants(List<string> implantIds)
+        public void CachePool()
         {
-            foreach (var implantId in implantIds)
-                _implantPool.Add(new ImplantPoolState(implantId));
+            _dynamicImplantPool.Clear();
+            _dynamicImplantPool.AddRange(SL.Get<GameStateHolder>().CurrentData.ImplantsPool);
+            _dynamicImplantPool.Shuffle();
+            
+            LogUtil.Log(nameof(ImplantsPoolService), $"{_dynamicImplantPool.Count} implants in pool");
         }
 
         public List<CMSEntity> GetImplants()
@@ -56,22 +42,16 @@ namespace Game.Runtime.Gameplay.Implants
 
             for (var i = 0; i < _config.BaseDeckCount; i++)
             {
-                if (_implantPool.Count == 0)
+                if (_dynamicImplantPool.Count == 0)
                 {
-                    _allImplants.Shuffle();
-                    foreach (var implant in _allImplants)
-                    {
-                        if (implant.GetComponent<ImplantLevelRequiredComponent>().RequiredLevelIndex <= SL.Get<GameStateHolder>().CurrentLevel)
-                        {
-                            result.Add(implant);
-                            break;
-                        }
-                    }
-
+                    _basicImplantModels.Shuffle();
+                    result.Add(CM.Get(_basicImplantModels.GetRandom().EntityId));
                 }
                 else
                 {
-                    result.Add(CM.Get(_implantPool.Pop().ImplantId));
+                    var implant = _dynamicImplantPool.GetRandom();
+                    result.Add(CM.Get(implant));
+                    _dynamicImplantPool.Remove(implant);
                 }
             }
 

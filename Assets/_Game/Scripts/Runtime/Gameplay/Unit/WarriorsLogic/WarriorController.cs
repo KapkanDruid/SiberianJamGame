@@ -5,7 +5,6 @@ using Game.Runtime.Gameplay.Enemy;
 using Game.Runtime.Gameplay.HUD;
 using Game.Runtime.Gameplay.Level;
 using Game.Runtime.Services;
-using UnityEngine;
 
 namespace Game.Runtime.Gameplay.Warrior
 {
@@ -28,15 +27,8 @@ namespace Game.Runtime.Gameplay.Warrior
         public void Initialize()
         {
             SL.Get<BattleController>().OnTurnEnded += () => SL.Get<HUDService>().Behaviour.WarriorUI.HideArmorSequenceAsync().Forget();
-            
-            // :')
-            _currentHealth = SL.Get<GameStateHolder>().CharacterHealth > 0 ? 
-                SL.Get<GameStateHolder>().CharacterHealth : 
-                SL.Get<GameStateHolder>().CachedHealth > 0 ? 
-                    SL.Get<GameStateHolder>().CachedHealth : 
-                    _maxHealth;
-            
-            SL.Get<GameStateHolder>().CachedHealth = _currentHealth;
+
+            _currentHealth = SL.Get<GameStateHolder>().CurrentData.CharacterHealth;
             
             SL.Get<HUDService>().Behaviour.WarriorUI.UpdateHealthBar(_currentHealth, _maxHealth);
             SL.Get<HUDService>().Behaviour.WarriorUI.SetStartHealth(_currentHealth);
@@ -78,7 +70,7 @@ namespace Game.Runtime.Gameplay.Warrior
                 Death().Forget();
             }
             
-            SL.Get<GameStateHolder>().CharacterHealth = _currentHealth;
+            SL.Get<GameStateHolder>().CurrentData.CharacterHealth = _currentHealth;
         }
 
         public async UniTask AttackAsync()
@@ -115,12 +107,11 @@ namespace Game.Runtime.Gameplay.Warrior
             if (_currentHealth >= _maxHealth)
                 _currentHealth = _maxHealth;
 
-            SL.Get<GameStateHolder>().CharacterHealth = _currentHealth;
+            SL.Get<GameStateHolder>().CurrentData.CharacterHealth = _currentHealth;
         }
 
         private async UniTask Death()
         {
-            Debug.Log("Loose");
             await SL.Get<WarriorView>().DeathAsync();
             SL.Get<BattleController>().Loose();
         }

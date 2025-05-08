@@ -53,6 +53,6 @@ MonoBehaviour:
     - rid: 635145064486535264
       type: {class: ImplantsPoolConfig, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
       data:
-        BaseLootCount: 4
-        BaseChoiceCount: 3
-        BaseDeckCount: 4
+        BaseLootCount: 3
+        BaseChoiceCount: 1
+        BaseDeckCount: 3

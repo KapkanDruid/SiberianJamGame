@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using Game.Runtime.CMS;
+using Game.Runtime.Gameplay.HUD;
 using Game.Runtime.Services;
 using Game.Runtime.Services.Audio;
 using Game.Runtime.Gameplay.Implants;
@@ -15,7 +16,7 @@ namespace Game.Runtime.Gameplay.Level
 
         public void Initialize()
         {
-            if (SL.Get<GameStateHolder>().CurrentLevel == 0)
+            if (SL.Get<GameStateHolder>().CurrentData.Level == 0)
                 SL.Get<Invoker>().Play(CM.Get(CMs.CommandBlocks.Tutorial.tutorial_block_1));
 
             Finger.gameObject.SetActive(false);
@@ -49,7 +50,11 @@ namespace Game.Runtime.Gameplay.Level
             Finger.SetTrigger("ImplantUse");
 
             bool executed = false;
-            SL.Get<InventoryService>().OnImplpantPlaced += () => executed = true;
+            SL.Get<InventoryService>().OnImplpantPlaced += () =>
+            {
+                executed = true;
+                SL.Get<HUDService>().Behaviour.EndTurnButtonParent.SetActive(true);
+            };
             await UniTask.WaitUntil(() => executed == true);
         }
 

@@ -3005,6 +3005,7 @@ MonoBehaviour:
     _armorIcon: {fileID: 3116366057379156699}
     _armorText: {fileID: 2091872158536706716}
   endTurnButton: {fileID: 8651539792398954443}
+  endTurnButtonParent: {fileID: 2224778568473662953}
   disableUI: {fileID: 18118810306522681}
 --- !u!114 &1671806685062799615
 MonoBehaviour:

@@ -1,6 +1,5 @@
 ﻿using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Commons;
-using Game.Runtime.Gameplay;
 using Game.Runtime.Gameplay.Implants;
 using Game.Runtime.Gameplay.Level;
 using Game.Runtime.Services;
@@ -10,6 +9,7 @@ using Game.Runtime.Services.Input;
 using Game.Runtime.Services.Save;
 using Game.Runtime.Services.Timer;
 using Game.Runtime.Services.UI;
+using Game.Runtime.Utils;
 using UnityEngine;
 
 namespace Game.Runtime.Runners
@@ -34,7 +34,8 @@ namespace Game.Runtime.Runners
         
         private void Awake()
         {
-            Debug.Log("[GlobalRunner] Entry point!");
+            LogUtil.Log(nameof(GlobalRunner), "ENTRY POINT!", Color.green);
+            
             CM.Reload();
             RegisterServices();
             SL.InitializeScope(_globalScope);
@@ -53,24 +54,16 @@ namespace Game.Runtime.Runners
             SL.Register<ImplantsPoolService>(new ImplantsPoolService(), _globalScope);
             SL.Register<DialogController>(CreateDialogController(), _globalScope);
             SL.Register<Invoker>(new Invoker(), _globalScope);
-            //SL.Register<SoundPanel>(CreateSoundPanel(), _globalScope);
         }
 
         private DialogController CreateDialogController()
         {
             var prefab = CM.Get(CMs.Configs.DialogReference).GetComponent<PrefabComponent>().Prefab;
-            var gameObject = GameObject.Instantiate(prefab);
-            DontDestroyOnLoad(gameObject);
-            return gameObject.GetComponentInChildren<DialogController>();
+            var DialogyObject = Instantiate(prefab);
+            DontDestroyOnLoad(DialogyObject);
+            
+            return DialogyObject.GetComponentInChildren<DialogController>();
         }
-
-/*        private SoundPanel CreateSoundPanel()
-        {
-            var prefab = CM.Get(CMs.Audio.AudioControl).GetComponent<PrefabComponent>().Prefab;
-            var gameObject = GameObject.Instantiate(prefab);
-            DontDestroyOnLoad(gameObject);
-            return gameObject.GetComponentInChildren<SoundPanel>();
-        }*/
 
         private void OnDestroy()
         {

@@ -12,5 +12,10 @@ namespace Game.Runtime.Gameplay.Level
             var allLevels = CM.GetAll<LevelComponent>();
             return allLevels.Find(level => level.GetComponent<LevelComponent>().LevelIndex == levelIndex);
         }
+
+        public static CMSEntity GetCurrentLevelModel()
+        {
+            return GetLevelModel(SL.Get<GameStateHolder>().CurrentData.Level);
+        }
     }
 }

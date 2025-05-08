@@ -49,6 +49,7 @@ MonoBehaviour:
   - rid: 6583048880660676698
   - rid: 635145080740774061
   - rid: 3335048661485224018
+  - rid: 635145176261066856
   references:
     version: 2
     RefIds:
@@ -56,6 +57,9 @@ MonoBehaviour:
       type: {class: LevelParticleComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
       data:
         Particle: {fileID: 6475520120998431958, guid: 7fccd54e51d78674c80230f18c27391c, type: 3}
+    - rid: 635145176261066856
+      type: {class: LevelCheckpointComponent, ns: Game.Runtime.CMS.Components.Level, asm: Runtime}
+      data: 
     - rid: 3335048661485224018
       type: {class: MusicComponent, ns: Game.Runtime.CMS.Components.Audio, asm: Runtime}
       data:

@@ -82,7 +82,6 @@ namespace Game.Runtime.Gameplay.Enemy
 
         private void Death()
         {
-            Debug.Log("Win");
             _view.Death();
             SL.Get<BattleController>().Win();
         }

@@ -8,6 +8,7 @@ using Game.Runtime.Gameplay.HUD;
 using Game.Runtime.Gameplay.Level;
 using Game.Runtime.Gameplay.Warrior;
 using Game.Runtime.Services;
+using Game.Runtime.Utils;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -24,6 +25,7 @@ namespace Game.Runtime.Gameplay.Implants
 
         private InventoryView _inventoryView;
         public event Action OnImplpantPlaced;
+        public bool IsBlocked { get; private set; }
 
         public void Initialize()
         {
@@ -44,16 +46,19 @@ namespace Game.Runtime.Gameplay.Implants
             _itemPositions.Clear();
 
             UpdateAllSlotVisual();
+
+            IsBlocked = false;
         }
 
         public WarriorTurnData CalculateTurnData()
         {
+            IsBlocked = true;
+            
             float health = 0f;
             float damage = 0f;
             float armor = 0f;
 
-            var checkedPairs = new HashSet<(ImplantBehaviour, ImplantBehaviour)>(new PairComparer());
-            var blockedPositionsCache = new Dictionary<Vector2Int, bool>();
+            var checkedPairs = new HashSet<(ImplantBehaviour, ImplantBehaviour)>(new ImplantsPairComparer());
             Vector2Int[] neighborOffsets = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
 
             foreach (var itemPair in _itemPositions)
@@ -86,20 +91,18 @@ namespace Game.Runtime.Gameplay.Implants
                         if (neighborItem.GetImplantType() == implantType &&
                             checkedPairs.Add((item, neighborItem)))
                         {
-                            Debug.Log($"Add Cell: {neighborPos}");
-
                             neighborItem.PingPongScale();
                             item.PingPongScale();
                             
                             switch (implantType)
                             {
-                                case ImplantType.Health:
+                                case ImplantBehaviour.ImplantType.Health:
                                     health += 10;
                                     break;
-                                case ImplantType.Damage:
+                                case ImplantBehaviour.ImplantType.Damage:
                                     damage += 10;
                                     break;
-                                case ImplantType.Armor:
+                                case ImplantBehaviour.ImplantType.Armor:
                                     armor += 10;
                                     break;
                             }
@@ -110,46 +113,18 @@ namespace Game.Runtime.Gameplay.Implants
                 item.PlayParticle();
             }
 
-            Debug.Log($"Total Health: {health}");
-            Debug.Log($"Total Damage: {damage}");
-            Debug.Log($"Total Armor: {armor}");
-
             return new WarriorTurnData(health, damage, armor);
-
-            bool IsPositionBlocked(ImplantBehaviour implant, Vector2Int position)
-            {
-                if (!implant.Model.Is<BrokenImplantCellsComponent>(out var blockComponent))
-                    return false;
-
-                if (blockedPositionsCache.TryGetValue(position, out var isBlocked))
-                    return isBlocked;
-
-                var rotatedCell = GetRotatedSlots(blockComponent.BrokenCells.ToList(), implant.CurrentRotation);
-                var globalBlockCell = rotatedCell.Select(x => x + implant.CenterSlotPosition);
-                isBlocked = globalBlockCell.Contains(position);
-
-                blockedPositionsCache[position] = isBlocked;
-                if (isBlocked)
-                    Debug.Log($"Broken Cell: {position}");
-
-                return isBlocked;
-            }
         }
 
-        private class PairComparer : IEqualityComparer<(ImplantBehaviour, ImplantBehaviour)>
+        private bool IsPositionBlocked(ImplantBehaviour implant, Vector2Int position)
         {
-            public bool Equals((ImplantBehaviour, ImplantBehaviour) x, (ImplantBehaviour, ImplantBehaviour) y)
-            {
-                return (x.Item1 == y.Item1 && x.Item2 == y.Item2) ||
-                       (x.Item1 == y.Item2 && x.Item2 == y.Item1);
-            }
+            if (!implant.Model.Is<BrokenImplantCellsComponent>(out var blockComponent))
+                return false;
 
-            public int GetHashCode((ImplantBehaviour, ImplantBehaviour) obj)
-            {
-                int hash1 = obj.Item1.GetHashCode();
-                int hash2 = obj.Item2.GetHashCode();
-                return hash1 < hash2 ? HashCode.Combine(hash1, hash2) : HashCode.Combine(hash2, hash1);
-            }
+            var rotatedCell = GetRotatedSlots(blockComponent.BrokenCells.ToList(), implant.CurrentRotation);
+            var globalBlockCell = rotatedCell.Select(x => x + implant.CenterSlotPosition);
+            
+            return globalBlockCell.Contains(position);
         }
 
         public bool TryPlaceItem(ImplantBehaviour item, Vector2Int gridPosition)
@@ -178,7 +153,6 @@ namespace Game.Runtime.Gameplay.Implants
             _itemPositions[item] = newPositions;
 
             OnImplpantPlaced?.Invoke();
-            Debug.Log("Implant placed");
             return true;
         }
 
@@ -240,7 +214,7 @@ namespace Game.Runtime.Gameplay.Implants
         private void CreateGrid()
         {
             var defaultInventoryGrid = CM.Get(CMs.Gameplay.Inventory).GetComponent<InventoryComponent>();
-            var currentGrid = defaultInventoryGrid.Grids.Last(grid => grid.RequiredLevel <= SL.Get<GameStateHolder>().CurrentLevel).Grid;
+            var currentGrid = defaultInventoryGrid.Grids.Last(grid => grid.RequiredLevel <= SL.Get<GameStateHolder>().CurrentData.Level).Grid;
             _gridSize = currentGrid.GridSize;
             _cellSize = defaultInventoryGrid.CellSize;
 
