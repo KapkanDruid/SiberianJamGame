@@ -7,6 +7,7 @@ using Game.Runtime.CMS.Components.Implants;
 using Game.Runtime.Gameplay.Level;
 using Game.Runtime.Services;
 using Game.Runtime.Services.Audio;
+using Game.Runtime.Services.Camera;
 using Game.Runtime.Services.Input;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -178,13 +179,11 @@ namespace Game.Runtime.Gameplay.Implants
             ResetHighlight();
         }
 
-        private Vector2 _lastPosition;
         private void UpdateDragPosition(PointerEventData eventData)
         {
             if (TryGetLocalPoint(eventData, out Vector2 localPoint))
             {
-                var targetPosition = localPoint - CalculatePivotOffset();
-                _rectTransform.anchoredPosition = _lastPosition = targetPosition;
+                _rectTransform.anchoredPosition =  localPoint - CalculatePivotOffset();
             }
         }
 
@@ -246,14 +245,17 @@ namespace Game.Runtime.Gameplay.Implants
         private bool TryPlaceItem()
         {
             var slot = GetSlotUnderCursor();
-            if (slot == null || !_inventoryService.TryPlaceItem(this, slot.GridPosition))
+            if (slot == null)
                 return false;
 
+            CenterSlotPosition = slot.GridPosition;
+            if (!_inventoryService.TryPlaceItem(this, CenterSlotPosition))
+                return false;
+            
             if (_holderService.HasItem(this))
                 _holderService.RemoveItem(this);
             
             _inventoryService.SetItemPosition(slot, this);
-            CenterSlotPosition = slot.GridPosition;
             //PlayParticle();
             return true;
         }
@@ -290,7 +292,11 @@ namespace Game.Runtime.Gameplay.Implants
             CurrentRotation = (CurrentRotation + 1) % 4;
             float[] presetAngles = { 0f, -90f, -180f, -270f };
             _rectTransform.localRotation = Quaternion.Euler(0, 0, presetAngles[CurrentRotation]);
-            _rectTransform.anchoredPosition = _lastPosition;
+            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(_root.transform as RectTransform, Input.mousePosition,
+                    SL.Get<CameraService>().Camera, out var localPoint))
+            {
+                _rectTransform.anchoredPosition = localPoint - CalculatePivotOffset();
+            }
             UpdateSlotHighlight();
             SL.Get<AudioService>().Play(CMs.Audio.SFX.ImplantRotate);
         }
