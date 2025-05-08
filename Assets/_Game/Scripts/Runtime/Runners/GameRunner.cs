@@ -68,6 +68,7 @@ namespace Game.Runtime.Runners
         private void ConfigureLevel()
         {
             var currentLevelIndex = _debugLevelIndex >= 0 ? _debugLevelIndex : SL.Get<GameStateHolder>().CurrentLevel;
+            SL.Get<GameStateHolder>().CurrentLevel = currentLevelIndex;
             var levelModel = LevelHelper.GetLevelModel(currentLevelIndex);
 
             var levelComponent = levelModel.GetComponent<LevelComponent>();
