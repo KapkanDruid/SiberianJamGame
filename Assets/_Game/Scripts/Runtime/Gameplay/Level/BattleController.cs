@@ -10,6 +10,7 @@ using Game.Runtime.Gameplay.Warrior;
 using UnityEngine;
 using Game.Runtime.CMS.Components.Level;
 using Game.Runtime.Services.UI;
+using Game.Runtime.Utils;
 using UnityEngine.SceneManagement;
 using Game.Runtime.Utils.Consts;
 
@@ -29,9 +30,10 @@ namespace Game.Runtime.Gameplay.Level
         public bool IsTurnStarted => _isTurnStarted;
 
         public Transform EnemyPosition => _enemyPosition;
-        public LevelComponent LevelConfig;
         public BossLevelComponent BossConfig;
         public BattleType CurrentBattleType;
+        
+        private LevelComponent _levelConfig;
 
         public enum BattleType
         {
@@ -41,6 +43,7 @@ namespace Game.Runtime.Gameplay.Level
 
         public void Initialize()
         {
+            _levelConfig = LevelHelper.GetCurrentLevelModel().GetComponent<LevelComponent>();
             SL.Get<HUDService>().Behaviour.EndTurnButton.onClick.AddListener(() =>
             {
                 TurnAsync().Forget();
@@ -125,28 +128,35 @@ namespace Game.Runtime.Gameplay.Level
         public void Loose()
         {
             _isBattleEnded = true;
+            SL.Get<Invoker>().Play(CM.Get(_levelConfig.DeathDialog.EntityId));
+            SL.Get<GameStateHolder>().NeedRespawnOnCheckpoint = true;
 
-            SL.Get<Invoker>().Play(CM.Get(LevelConfig.DeathDialog.EntityId));
+            LogUtil.Log(nameof(BattleController), $"You loose! " +
+                                                  $"Current level - {SL.Get<GameStateHolder>().CurrentData.Level}. " +
+                                                  $"Last checkpoint - {SL.Get<GameStateHolder>().CheckpointData.Level}");
         }
 
         public void Win()
         {
             _isBattleEnded = true;
-            Debug.Log($"[BattleController] You win! {SL.Get<GameStateHolder>().CurrentLevel}");
             SL.Get<LootService>().GenerateLoot();
+            SL.Get<GameStateHolder>().NeedRespawnOnCheckpoint = false;
+
+            LogUtil.Log(nameof(BattleController), "You win! " +
+                                                  $"Current level - {SL.Get<GameStateHolder>().CurrentData.Level}.");
         }
 
         public async UniTask EndGameAsync()
         {
-            if (SL.Get<GameStateHolder>().CurrentLevel == 0)
+            if (SL.Get<GameStateHolder>().CurrentData.Level == 0)
             {
                 SL.Get<Tutorial>().IsImplantLooted = true;
 
                 await UniTask.WaitUntil(() => SL.Get<Tutorial>().IsFinished);
             }
 
-            SL.Get<GameStateHolder>().CurrentLevel++;
-            SL.Get<GameStateHolder>().DialogBlockID = LevelConfig.NextSceneDialog.EntityId;
+            SL.Get<GameStateHolder>().CurrentData.Level++;
+            SL.Get<GameStateHolder>().DialogBlockID = _levelConfig.NextSceneDialog.EntityId;
             SL.Get<HUDService>().Behaviour.DisableUI.SetActive(true);
             await SL.Get<UIFaderService>().FadeIn();
             SL.Get<HUDService>().Behaviour.LootHolder.SetActive(false);

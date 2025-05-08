@@ -14,12 +14,7 @@ using UnityEngine.UI;
 
 namespace Game.Runtime.Gameplay.Implants
 {
-    public enum ImplantType
-    {
-        Health,
-        Armor,
-        Damage
-    }
+
     
     [RequireComponent(typeof(RectTransform), typeof(Image), typeof(CanvasGroup))]
     public class ImplantBehaviour : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
@@ -28,6 +23,13 @@ namespace Game.Runtime.Gameplay.Implants
         [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private Vector3 baseLocalScale;
+        
+        public enum ImplantType
+        {
+            Health,
+            Armor,
+            Damage
+        }
 
         public List<Vector2Int> SlotPositions { get; private set; }
         public CMSEntity Model { get; private set; }
@@ -113,6 +115,7 @@ namespace Game.Runtime.Gameplay.Implants
         public void OnBeginDrag(PointerEventData eventData)
         {
             if (this == null)return;
+            if (SL.Get<InventoryService>().IsBlocked) return;
             if (_isDragging) return;
             
             _currentTweenScale?.Kill();

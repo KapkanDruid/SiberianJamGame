@@ -36,9 +36,9 @@ namespace Game.Runtime.Gameplay.Implants
             
             foreach (var implant in _allImplants)
             {
-                if (implant.GetComponent<ImplantLevelRequiredComponent>().RequiredLevelIndex <= SL.Get<GameStateHolder>().CurrentLevel)
+                if (implant.GetComponent<ImplantLevelRequiredComponent>().RequiredLevelIndex <= SL.Get<GameStateHolder>().CurrentData.Level)
                 {
-                    if (implant.GetComponent<ImplantLevelRequiredComponent>().RequiredLevelIndex == 0 && SL.Get<GameStateHolder>().CurrentLevel > 0)
+                    if (implant.GetComponent<ImplantLevelRequiredComponent>().RequiredLevelIndex == 0 && SL.Get<GameStateHolder>().CurrentData.Level > 0)
                         continue;
                     
                     availableImplants.Add(implant);
@@ -63,7 +63,7 @@ namespace Game.Runtime.Gameplay.Implants
         {
             if (needChoice <= 0) return;
             
-            SL.Get<ImplantsPoolService>().AddImplant(implantId);
+            SL.Get<GameStateHolder>().CurrentData.ImplantsPool.Add(implantId);
             needChoice--;
 
             if (needChoice == 0)

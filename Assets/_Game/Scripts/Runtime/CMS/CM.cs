@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Game.Runtime.Utils;
 using Game.Runtime.Utils.Helpers;
 using UnityEngine;
 
@@ -36,7 +37,10 @@ namespace Game.Runtime.CMS
             var entity = _entitiesDatabase.GetEntityOrDefault(entityId);
 
             if (entity == default)
-                throw new Exception($"[CMS] Unable to resolve entity id '{entityId}'");
+            {
+                LogUtil.LogError(nameof(CM),$"Unable to resolve entity id '{entityId}");
+                throw new NullReferenceException();
+            }
 
             return entity;
         }
@@ -47,7 +51,10 @@ namespace Game.Runtime.CMS
             var entity = _entitiesDatabase.GetEntityOrDefault(entityId);
 
             if (entity == default)
-                throw new Exception($"[CMS] Unable to resolve entity id '{entityId}'");
+            {
+                LogUtil.LogError(nameof(CM),$"Unable to resolve entity id '{entityId}");
+                throw new NullReferenceException();
+            }
 
             return entity;
         }
@@ -69,7 +76,7 @@ namespace Game.Runtime.CMS
         {
             _entitiesDatabase = new CMSTable<CMSEntity>();
             var stringBuilder = new StringBuilder();
-            stringBuilder.Append($"[CMS] AutoCachedEntities:");
+            stringBuilder.Append("AutoCachedEntities:");
             
             var entities = Helpers.ReflectionHelper.FindAllSubsClasses<CMSEntity>();
             foreach (var entity in entities)
@@ -83,7 +90,7 @@ namespace Game.Runtime.CMS
                 }
                 catch (Exception exception)
                 {
-                    Debug.LogError($"[CMS] Failed to initialize {entity.Name}: {exception.Message}");
+                    LogUtil.LogError(nameof(CM),$"Failed to initialize {entity.Name}: {exception.Message}");
                 }
             }
 
@@ -93,7 +100,7 @@ namespace Game.Runtime.CMS
                 try
                 {
 #if UNITY_EDITOR
-                    entityPrefab.PingEntity(false);
+                    entityPrefab.PingEntity();
 #endif
                     stringBuilder.Append($"\n{entityPrefab.EntityId}");
 
@@ -102,11 +109,11 @@ namespace Game.Runtime.CMS
                 }
                 catch (Exception exception)
                 {
-                    Debug.LogError($"[CMS] Failed to initialize {entityPrefab.EntityId}: {exception.Message}");
+                    LogUtil.LogError(nameof(CM),$"Failed to initialize {entityPrefab.EntityId}: {exception.Message}");
                 }
             }
             
-            Debug.Log(stringBuilder + "\n");
+            LogUtil.Log(nameof(CM), stringBuilder + "\n", Color.green);
         }
     }
 }
