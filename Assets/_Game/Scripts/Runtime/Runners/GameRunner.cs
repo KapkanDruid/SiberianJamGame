@@ -28,6 +28,8 @@ namespace Game.Runtime.Runners
         [SerializeField] private int _debugLevelIndex = -1;
         [SerializeField] private Tutorial _tutorial;
 
+        private bool _isDebug;
+        
         private readonly Scope _gameScope = Scope.Game;
 
         private void Start()
@@ -87,7 +89,8 @@ namespace Game.Runtime.Runners
             if (SL.Get<GameStateHolder>().NeedRespawnOnCheckpoint)
                 SL.Get<GameStateHolder>().LoadCheckpoint();
             
-            if (_debugLevelIndex >= 0)
+            _isDebug = _debugLevelIndex >= 0;
+            if (_isDebug)
             {
                 SL.Get<GameStateHolder>().CurrentData.Level = _debugLevelIndex;
                 return _debugLevelIndex;
@@ -102,7 +105,7 @@ namespace Game.Runtime.Runners
             {
                 SL.Get<GameStateHolder>().CurrentData.CharacterHealth = healthComponent.Health;
             }
-            else if (currentLevelIndex == 0)
+            else if (currentLevelIndex == 0 || _isDebug)
             {
                 var playerConfig = CM.Get(CMs.Configs.PlayerConfig).GetComponent<PlayerConfig>();
                 SL.Get<GameStateHolder>().CurrentData.CharacterHealth = playerConfig.MaxHealth;

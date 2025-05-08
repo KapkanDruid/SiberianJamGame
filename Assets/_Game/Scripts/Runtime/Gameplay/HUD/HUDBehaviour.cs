@@ -13,6 +13,7 @@ namespace Game.Runtime.Gameplay.HUD
         [SerializeField] private ImplantsHolder implantsHolder;
         [SerializeField] private ImplantsHolder lootHolder;
         [SerializeField] private WarriorUI warriorUI;
+        [SerializeField] private ImplantStatsPanel implantStatsPanel;
         [SerializeField] private EnemyUI enemyUI;
         [SerializeField] private Button endTurnButton;
         [SerializeField] private GameObject endTurnButtonParent;
@@ -26,6 +27,7 @@ namespace Game.Runtime.Gameplay.HUD
         public Button EndTurnButton => endTurnButton;
         public GameObject EndTurnButtonParent => endTurnButtonParent;
         public GameObject DisableUI => disableUI;
+        public ImplantStatsPanel StatsPanel => implantStatsPanel;
 
         public void Start()
         {
