@@ -8,14 +8,16 @@ using Game.Runtime.Services;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Game.Runtime.Gameplay.Implants
+namespace Game.Runtime.Gameplay.Implants.Services
 {
     public class ImplantsHolderService : IService, IInitializable, IDisposable
     {
         private readonly List<ImplantBehaviour> _implants = new();
+        private ImplantsHolder _implantsHolder;
             
         public void Initialize()
-        {                
+        {
+            _implantsHolder = ServiceLocator.Get<HUDService>().ImplantsHolder;
             ServiceLocator.Get<BattleController>().OnTurnEnded += OnTurnEnded;
         }
         
@@ -28,10 +30,10 @@ namespace Game.Runtime.Gameplay.Implants
                 implantBehaviour.SetupItem(implantModel, ServiceLocator.Get<HUDService>().GetComponent<RectTransform>());
                 
                 _implants.Add(implantBehaviour);
-                ServiceLocator.Get<HUDService>().ImplantsHolder.SetItemPosition(implantBehaviour, Vector2.zero);
+                _implantsHolder.SetItemPosition(implantBehaviour, Vector2.zero);
             }
         }
-        
+
         public void RemoveItem(ImplantBehaviour implantBehaviour)
         {
             _implants.Remove(implantBehaviour);
@@ -47,22 +49,19 @@ namespace Game.Runtime.Gameplay.Implants
             if (_implants.Contains(implantBehaviour)) 
                 return false;
             
-            if (!ServiceLocator.Get<HUDService>().ImplantsHolder.IsInsideHolder(position))
+            if (!_implantsHolder.IsInsideHolder(position))
                 return false;
 
             _implants.Add(implantBehaviour);
 
-            ServiceLocator.Get<HUDService>().ImplantsHolder.SetItemPosition(implantBehaviour, position);
+            _implantsHolder.SetItemPosition(implantBehaviour, position);
             return true;
         }
         
         private void OnTurnEnded()
         {
             foreach (var item in _implants)
-            {
-                Object.Destroy(item.gameObject);
-            }
-            
+                item.ReleaseImplant();
             _implants.Clear();
             
             if (!ServiceLocator.Get<BattleController>().IsBattleEnded)

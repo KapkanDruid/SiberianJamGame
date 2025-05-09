@@ -11,7 +11,7 @@ using Game.Runtime.Services.Save;
 using Game.Runtime.Utils.Extensions;
 using UnityEngine;
 
-namespace Game.Runtime.Gameplay.Implants
+namespace Game.Runtime.Gameplay.Implants.Services
 {
     public class LootService : IService
     {

@@ -7,7 +7,7 @@ using Game.Runtime.Services;
 using Game.Runtime.Utils;
 using Game.Runtime.Utils.Extensions;
 
-namespace Game.Runtime.Gameplay.Implants
+namespace Game.Runtime.Gameplay.Implants.Services
 {
     public class ImplantsPoolService : IService
     {

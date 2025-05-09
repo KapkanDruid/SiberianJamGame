@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using Game.Runtime.CMS;
+using Game.Runtime.Gameplay.Inventory;
 using Game.Runtime.Services;
 using Game.Runtime.Services.Audio;
 using UnityEngine.EventSystems;

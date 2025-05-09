@@ -31,16 +31,11 @@ namespace Game.Runtime.Gameplay.HUD
             rectTransform.sizeDelta = new Vector2(cellSize, cellSize);
         }
         
-        public void SetItemInInventory(ImplantBehaviour item, Vector2 calculateCenterPosition, bool isShadow)
+        public void SetItemInInventory(ImplantBehaviour item, Vector2 calculateCenterPosition, bool showHighlighter)
         {
-            if (isShadow)
+            if (showHighlighter)
             {
-                item.HighlightImplant.transform.SetParent(inventoryRoot.transform);
-                item.HighlightImplant.GetComponent<RectTransform>().anchoredPosition = calculateCenterPosition;
-                var presetAngles = new[]{ 0f, -90f, -180f, -270f };
-                item.HighlightImplant.localRotation = Quaternion.Euler(0, 0, presetAngles[item.CurrentRotation]);
-                item.HighlightImplant.gameObject.SetActive(true);
-
+                item.Highlighter.ShowHighlight(inventoryRoot.transform, calculateCenterPosition);
             }
             else
             {

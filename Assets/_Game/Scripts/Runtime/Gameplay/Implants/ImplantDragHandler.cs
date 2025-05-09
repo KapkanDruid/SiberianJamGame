@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using DG.Tweening;
 using Game.Runtime.CMS;
+using Game.Runtime.Gameplay.Implants.Services;
+using Game.Runtime.Gameplay.Inventory;
 using Game.Runtime.Gameplay.Level;
 using Game.Runtime.Services;
 using Game.Runtime.Services.Audio;
@@ -14,7 +16,6 @@ namespace Game.Runtime.Gameplay.Implants
     public class ImplantDragHandler
     {
         private readonly ImplantBehaviour _implant;
-        private readonly float[] _presetAngles = { 0f, -90f, -180f, -270f };
         private readonly InventoryService _inventoryService;
         
         private Vector2Int _lastSelectedSlotPosition;
@@ -53,7 +54,7 @@ namespace Game.Runtime.Gameplay.Implants
             if (!_implant.IsDragging) return;
 
             _implant.StopDragging();
-            HideHighlightImplant();
+            _implant.Highlighter.HideHighlightImplant();
             ServiceLocator.Get<AudioService>().Play(CMs.Audio.SFX.SFXImplantPut);
 
             if (TryPlaceItem()) return;
@@ -62,17 +63,10 @@ namespace Game.Runtime.Gameplay.Implants
             _implant.ReturnToOriginalPosition();
         }
 
-        private void HideHighlightImplant()
-        {
-            _implant.HighlightImplant.transform.SetParent(_implant.transform);
-            _implant.HighlightImplant.gameObject.SetActive(false);
-            _implant.HighlightImplant.localRotation = Quaternion.identity;
-        }
-
         private void HandleRotation()
         {
             _implant.CurrentRotation = (_implant.CurrentRotation + 1) % 4;
-            _implant.RectTransform.localRotation = Quaternion.Euler(0, 0, _presetAngles[_implant.CurrentRotation]);
+            _implant.RectTransform.localRotation = Quaternion.Euler(0, 0, ImplantHelper.PresetAngles[_implant.CurrentRotation]);
             ServiceLocator.Get<AudioService>().Play(CMs.Audio.SFX.ImplantRotate);
             UpdateImplantPosition();
             UpdateSlotHighlight();
@@ -86,7 +80,6 @@ namespace Game.Runtime.Gameplay.Implants
             }
         }
 
-
         private void UpdateSlotHighlight()
         {
             if (ServiceLocator.Get<BattleController>().IsTurnStarted) return;
@@ -95,7 +88,7 @@ namespace Game.Runtime.Gameplay.Implants
             if (newSlot == null)
             {
                 ClearHighlights();
-                HideHighlightImplant();
+                _implant.Highlighter.HideHighlightImplant();
                 return;
             }
 
@@ -103,18 +96,17 @@ namespace Game.Runtime.Gameplay.Implants
                 ClearHighlights();
             
             _lastSelectedSlotPosition = newSlot.GridPosition;
-            if (!_inventoryService.TryHighlightSynergySlots(_implant, newSlot))
+            if (!_inventoryService.Highlighter.TryHighlightSynergySlots(_implant, newSlot))
                 ClearHighlights();
 
             if (_inventoryService.CanPlaceItem(_implant, newSlot.GridPosition, _implant.CurrentRotation))
                 _inventoryService.SetItemPosition(newSlot, _implant, true);
-            else HideHighlightImplant();
+            else _implant.Highlighter.HideHighlightImplant();
         }
 
         private void ClearHighlights()
         {
-            _inventoryService.SynergySlots.Clear();
-            _inventoryService.Highlighter.ResetSlotHighlight(_implant);
+            _inventoryService.Highlighter.ResetSlotsHighlight();
         }
 
         private InventorySlot GetSlotUnderCursor()

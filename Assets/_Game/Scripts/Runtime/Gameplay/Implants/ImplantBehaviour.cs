@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DG.Tweening;
 using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Commons;
 using Game.Runtime.CMS.Components.Gameplay;
 using Game.Runtime.CMS.Components.Implants;
+using Game.Runtime.Gameplay.Inventory;
 using Game.Runtime.Services;
 using Game.Runtime.Services.Audio;
 using UnityEngine;
@@ -19,7 +19,7 @@ namespace Game.Runtime.Gameplay.Implants
         [SerializeField] private Image _image;
         [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private CanvasGroup _canvasGroup;
-        [SerializeField] private RectTransform highlightImplant;
+        [SerializeField] private ImplantHighlighter implantHighlighter;
         
         private ImplantPointerHandler _implantPointerHandler;
         private ImplantDragHandler _implantDragHandler;
@@ -46,7 +46,7 @@ namespace Game.Runtime.Gameplay.Implants
         public Vector2 PivotPoint { get; private set; }
         public bool IsDragging { get; private set; }
 
-        public RectTransform HighlightImplant => highlightImplant;
+        public ImplantHighlighter Highlighter => implantHighlighter;
 
         public void SetupItem(CMSEntity itemModel, RectTransform hudRoot)
         {
@@ -63,19 +63,15 @@ namespace Game.Runtime.Gameplay.Implants
             PivotPoint = itemComponent.Pivot;
             SlotPositions = itemComponent.Grid.GridPattern;
             _rectTransform.sizeDelta = itemComponent.SizeDelta;
-            HighlightImplant.sizeDelta = itemComponent.SizeDelta;
             _image.sprite = itemModel.GetComponent<SpriteComponent>().Sprite;
 
-            var highlightImage = HighlightImplant.GetComponent<Image>();
-            highlightImage.sprite = itemModel.GetComponent<SpriteComponent>().Sprite;
-            
             OriginalScale = transform.localScale;
             
             var particlePrefab = itemComponent.Particle;
             _particleSystem = Instantiate(particlePrefab, transform);
             _particleSystem.Stop();
             
-            HighlightImplant.gameObject.SetActive(false);
+            Highlighter.SetupHighlightImplant(itemModel, this);
         }
 
         public void PlayParticle() => _particleSystem.Play();
@@ -110,8 +106,7 @@ namespace Game.Runtime.Gameplay.Implants
             IsDragging = true;
             _canvasGroup.blocksRaycasts = true;
             transform.DOScale(OriginalScale, 0.1f);
-            _inventoryService.SynergySlots.Clear();
-            _inventoryService.Highlighter.ResetSlotHighlight(this);
+            _inventoryService.Highlighter.ResetSlotsHighlight();
         }
 
         public void ReturnToOriginalPosition()
@@ -120,8 +115,14 @@ namespace Game.Runtime.Gameplay.Implants
             _rectTransform.anchoredPosition = _originalPosition;
             _rectTransform.localRotation = Quaternion.Euler(0, 0, -90 * _originalRotation);
             CurrentRotation = _originalRotation;
-            _inventoryService.Highlighter.UpdateAllSlotVisual();
+            _inventoryService.Highlighter.UpdateSlotsHighlight();
             transform.SetSiblingIndex(_originIndex);
+        }
+
+        public void ReleaseImplant()
+        {
+            Destroy(Highlighter.HighlightImplant.gameObject);
+            Destroy(gameObject);
         }
 
         public void OnPointerEnter(PointerEventData eventData) => _implantPointerHandler.OnPointerEnter(eventData);

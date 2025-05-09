@@ -106,7 +106,8 @@ MonoBehaviour:
   _image: {fileID: 3334477017477248598}
   _rectTransform: {fileID: 6286546035229939487}
   _canvasGroup: {fileID: 2053942204217226423}
-  highlightImplant: {fileID: 6288428285662584667}
+  implantHighlighter:
+    highlightImplant: {fileID: 6288428285662584667}
 --- !u!114 &2835948620522070318
 MonoBehaviour:
   m_ObjectHideFlags: 0

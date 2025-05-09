@@ -3,7 +3,7 @@ using Game.Runtime.CMS;
 using Game.Runtime.Gameplay.HUD;
 using Game.Runtime.Services;
 using Game.Runtime.Services.Audio;
-using Game.Runtime.Gameplay.Implants;
+using Game.Runtime.Gameplay.Inventory;
 using UnityEngine;
 
 namespace Game.Runtime.Gameplay.Level

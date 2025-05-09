@@ -1,4 +1,6 @@
-﻿using Game.Runtime.CMS;
+﻿using System;
+using Game.Runtime.CMS;
+using Game.Runtime.Gameplay.Inventory;
 using Game.Runtime.Services;
 using Game.Runtime.Services.Audio;
 using Game.Runtime.Services.Camera;
@@ -7,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Game.Runtime.Gameplay.HUD
 {
-    public class HUDService : MonoBehaviour, IService, IInitializable
+    public class HUDService : MonoBehaviour, IService, IInitializable, IDisposable
     {
         [SerializeField] private InventoryView inventoryView;
         [SerializeField] private ImplantsHolder implantsHolder;
@@ -27,18 +29,31 @@ namespace Game.Runtime.Gameplay.HUD
         public Button EndTurnButton => endTurnButton;
         public GameObject EndTurnButtonParent => endTurnButtonParent;
         public GameObject DisableUI => disableUI;
-        public ImplantStatsPanel StatsPanel => implantStatsPanel;
-
-        public void Start()
-        {
-            endTurnButton.onClick.AddListener(() => ServiceLocator.Get<AudioService>().Play(CMs.Audio.SFX.EndTurn));
-        }
 
         public void Initialize()
         {
             var canvas = gameObject.GetComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceCamera;
             canvas.worldCamera = ServiceLocator.Get<CameraService>().Camera;
+
+            Subscribe();
+        }
+
+        private void Subscribe()
+        {
+            endTurnButton.onClick.AddListener(() => ServiceLocator.Get<AudioService>().Play(CMs.Audio.SFX.EndTurn));
+            ServiceLocator.Get<InventoryService>().Stats.OnImplantStatsRecalculated += implantStatsPanel.UpdateStats;
+        }
+        
+        private void Unsubscribe()
+        {
+            endTurnButton.onClick.RemoveAllListeners();
+            ServiceLocator.Get<InventoryService>().Stats.OnImplantStatsRecalculated -= implantStatsPanel.UpdateStats;
+        }
+
+        public void Dispose()
+        {
+            Unsubscribe();
         }
     }
 }
