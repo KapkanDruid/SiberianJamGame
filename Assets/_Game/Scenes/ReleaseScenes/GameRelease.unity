@@ -1334,7 +1334,7 @@ MonoBehaviour:
   _backgroundRenderer: {fileID: 700353639}
   _hudService: {fileID: 1180516622}
   _tutorial: {fileID: 746792270}
-  _debugLevelIndex: 0
+  _debugLevelIndex: -1
 --- !u!4 &460449080
 Transform:
   m_ObjectHideFlags: 0
