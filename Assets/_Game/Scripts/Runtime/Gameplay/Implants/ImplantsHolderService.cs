@@ -16,19 +16,19 @@ namespace Game.Runtime.Gameplay.Implants
             
         public void Initialize()
         {                
-            SL.Get<BattleController>().OnTurnEnded += OnTurnEnded;
+            ServiceLocator.Get<BattleController>().OnTurnEnded += OnTurnEnded;
         }
         
         public void SpawnImplants()
         {
-            foreach (var implantModel in SL.Get<ImplantsPoolService>().GetImplants())
+            foreach (var implantModel in ServiceLocator.Get<ImplantsPoolService>().GetImplants())
             {
                 var implantPrefab = CM.Get(CMs.Gameplay.Implants.BaseImplantBehaviour).GetComponent<PrefabComponent>().Prefab;
                 var implantBehaviour = Object.Instantiate(implantPrefab).GetComponent<ImplantBehaviour>();
-                implantBehaviour.SetupItem(implantModel, SL.Get<HUDService>().Behaviour.GetComponent<Canvas>());
+                implantBehaviour.SetupItem(implantModel, ServiceLocator.Get<HUDService>().GetComponent<RectTransform>());
                 
                 _implants.Add(implantBehaviour);
-                SL.Get<HUDService>().Behaviour.ImplantsHolder.SetItemPosition(implantBehaviour, Vector2.zero);
+                ServiceLocator.Get<HUDService>().ImplantsHolder.SetItemPosition(implantBehaviour, Vector2.zero);
             }
         }
         
@@ -47,12 +47,12 @@ namespace Game.Runtime.Gameplay.Implants
             if (_implants.Contains(implantBehaviour)) 
                 return false;
             
-            if (!SL.Get<HUDService>().Behaviour.ImplantsHolder.IsInsideHolder(position))
+            if (!ServiceLocator.Get<HUDService>().ImplantsHolder.IsInsideHolder(position))
                 return false;
 
             _implants.Add(implantBehaviour);
 
-            SL.Get<HUDService>().Behaviour.ImplantsHolder.SetItemPosition(implantBehaviour, position);
+            ServiceLocator.Get<HUDService>().ImplantsHolder.SetItemPosition(implantBehaviour, position);
             return true;
         }
         
@@ -65,13 +65,13 @@ namespace Game.Runtime.Gameplay.Implants
             
             _implants.Clear();
             
-            if (!SL.Get<BattleController>().IsBattleEnded)
+            if (!ServiceLocator.Get<BattleController>().IsBattleEnded)
                 SpawnImplants();
         }
         
         public void Dispose()
         {
-            SL.Get<BattleController>().OnTurnEnded -= OnTurnEnded;
+            ServiceLocator.Get<BattleController>().OnTurnEnded -= OnTurnEnded;
         }
     }
 }

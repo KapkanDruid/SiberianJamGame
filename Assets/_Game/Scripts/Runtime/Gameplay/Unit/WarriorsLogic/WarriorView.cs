@@ -24,7 +24,7 @@ namespace Game.Runtime.Gameplay.Warrior
 
         public void Initialize()
         {
-            SL.Get<HUDService>().Behaviour.WarriorUI.SetArmorIconActive(false);
+            ServiceLocator.Get<HUDService>().WarriorUI.SetArmorIconActive(false);
             _singleShoot = Instantiate(_singleShootPrefab, _shootPoint.position, Quaternion.identity);
             _doubleShoot = Instantiate(_doubleShootPrefab, _shootPoint.position, Quaternion.identity);
         }
@@ -33,7 +33,7 @@ namespace Game.Runtime.Gameplay.Warrior
         {
             _animator.SetTrigger("Death");
             if (_deathEffect != null)
-                SL.Get<AudioService>().Play(_hitEffect.EntityId);
+                ServiceLocator.Get<AudioService>().Play(_hitEffect.EntityId);
 
             await UniTask.WaitUntil(() => _reader.DeathEnded);
 
@@ -44,12 +44,12 @@ namespace Game.Runtime.Gameplay.Warrior
         {
             _animator.SetTrigger("Hit");
             if (_hitEffect != null)
-                SL.Get<AudioService>().Play(_hitEffect.EntityId);
+                ServiceLocator.Get<AudioService>().Play(_hitEffect.EntityId);
         }
 
         public async UniTask TakeDamageAsync(float currentHealth, float maxHealth, float damage)
         {
-            SL.Get<HUDService>().Behaviour.WarriorUI.UpdateHealthBar(currentHealth, maxHealth);
+            ServiceLocator.Get<HUDService>().WarriorUI.UpdateHealthBar(currentHealth, maxHealth);
 
             float startHp = currentHealth;
             float endHp = currentHealth - damage;
@@ -57,14 +57,14 @@ namespace Game.Runtime.Gameplay.Warrior
             if (endHp <= 0)
                 endHp = 0;
 
-            await SL.Get<HUDService>().Behaviour.WarriorUI.TakeDamageSequenceAsync(maxHealth, startHp, endHp);
+            await ServiceLocator.Get<HUDService>().WarriorUI.TakeDamageSequenceAsync(maxHealth, startHp, endHp);
         }
 
         public async UniTask AttackAsync()
         {
             _animator.SetTrigger("SimpleAttack");
             if (_shootEffect != null)
-                SL.Get<AudioService>().Play(_shootEffect.EntityId);
+                ServiceLocator.Get<AudioService>().Play(_shootEffect.EntityId);
 
             await UniTask.WaitUntil(() => _reader.SimpleAttackPerformed == true);
 
@@ -89,7 +89,7 @@ namespace Game.Runtime.Gameplay.Warrior
         {
             _animator.SetTrigger("FinishAttack");
             if (_superShootEffect != null)
-                SL.Get<AudioService>().Play(_superShootEffect.EntityId);
+                ServiceLocator.Get<AudioService>().Play(_superShootEffect.EntityId);
 
             await UniTask.WaitUntil(() => _reader.FinishAttackPerformed);
 

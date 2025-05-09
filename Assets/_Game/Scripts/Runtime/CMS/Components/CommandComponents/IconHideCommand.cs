@@ -10,7 +10,7 @@ namespace Game.Runtime.CMS.Components.Commands
         [SerializeField] private float _duration = 0.3f;
         public override void Execute(Action onCompleted)
         {
-            SL.Get<DialogController>().HideIcon(_positionType, _duration);
+            ServiceLocator.Get<DialogController>().HideIcon(_positionType, _duration);
             onCompleted?.Invoke();
         }
     }

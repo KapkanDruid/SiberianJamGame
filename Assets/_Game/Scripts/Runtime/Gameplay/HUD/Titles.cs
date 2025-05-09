@@ -16,7 +16,7 @@ namespace Game.Runtime.Gameplay
 
         public void End()
         {
-            SL.Get<GameStateHolder>().CurrentData.Level = 0;
+            ServiceLocator.Get<GameStateHolder>().CurrentData.Level = 0;
             SceneManager.LoadSceneAsync(Const.ScenesConst.GameReleaseScene);
         }
     }

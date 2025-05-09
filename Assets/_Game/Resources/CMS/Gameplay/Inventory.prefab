@@ -48,6 +48,7 @@ MonoBehaviour:
   Components:
   - rid: 635145038440169585
   - rid: 635145038440169586
+  - rid: 635145176261067211
   references:
     version: 2
     RefIds:
@@ -66,3 +67,8 @@ MonoBehaviour:
           Grid: {fileID: 11400000, guid: 7e9a219abac7c2d43b9f07d33584feb8, type: 2}
         - RequiredLevel: 8
           Grid: {fileID: 11400000, guid: db17ba1b99f027e4084d0623ccffef65, type: 2}
+    - rid: 635145176261067211
+      type: {class: InventorySlotColorsComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
+      data:
+        DefaultColor: {r: 0.061276253, g: 0.254717, b: 0.20221165, a: 1}
+        OccupiedColor: {r: 0.03675686, g: 0.13207549, b: 0.1055981, a: 1}

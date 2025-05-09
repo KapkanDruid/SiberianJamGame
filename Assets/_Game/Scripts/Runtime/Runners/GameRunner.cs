@@ -25,8 +25,9 @@ namespace Game.Runtime.Runners
         [SerializeField] private BattleController _battleController;
         [SerializeField] private WarriorView _warriorView;
         [SerializeField] private SpriteRenderer _backgroundRenderer;
-        [SerializeField] private int _debugLevelIndex = -1;
+        [SerializeField] private HUDService _hudService;
         [SerializeField] private Tutorial _tutorial;
+        [SerializeField] private int _debugLevelIndex = -1;
 
         private bool _isDebug;
         
@@ -41,32 +42,32 @@ namespace Game.Runtime.Runners
 
         private void RegisterCamera()
         {
-            SL.Get<CameraService>().RegisterCamera(gameCamera);
+            ServiceLocator.Get<CameraService>().RegisterCamera(gameCamera);
         }
 
         private void RegisterServices()
         {
-            SL.Register<HUDService>(new HUDService(), _gameScope);
-            SL.Register<ImplantsHolderService>(new ImplantsHolderService(), _gameScope);
-            SL.Register<InventoryService>(new InventoryService(), _gameScope);
-            SL.Register<LootService>(new LootService(), _gameScope);
-            SL.Register<WarriorController>(new WarriorController(), _gameScope);
-            SL.Register<BattleController>(_battleController, _gameScope);
-            SL.Register<Tutorial>(_tutorial, _gameScope);
+            ServiceLocator.Register<HUDService>(_hudService, _gameScope);
+            ServiceLocator.Register<ImplantsHolderService>(new ImplantsHolderService(), _gameScope);
+            ServiceLocator.Register<InventoryService>(new InventoryService(), _gameScope);
+            ServiceLocator.Register<LootService>(new LootService(), _gameScope);
+            ServiceLocator.Register<WarriorController>(new WarriorController(), _gameScope);
+            ServiceLocator.Register<BattleController>(_battleController, _gameScope);
+            ServiceLocator.Register<Tutorial>(_tutorial, _gameScope);
 
             ConfigureLevel();
         }
         
         private async UniTask StartGame()
         {
-            SL.InitializeScope(_gameScope);
-            SL.Get<HUDService>().Behaviour.DisableUI.SetActive(true);
-            SL.Get<HUDService>().Behaviour.EndTurnButtonParent.SetActive(SL.Get<GameStateHolder>().CurrentData.Level > 0);
-            SL.Get<HUDService>().Behaviour.InventoryView.SetActive(true);
-            SL.Get<DialogController>().Background.gameObject.SetActive(false);
-            SL.Get<ImplantsHolderService>().SpawnImplants();
-            SL.Get<HUDService>().Behaviour.DisableUI.SetActive(false);
-            await SL.Get<UIFaderService>().FadeOut();
+            ServiceLocator.InitializeScope(_gameScope);
+            ServiceLocator.Get<HUDService>().DisableUI.SetActive(true);
+            ServiceLocator.Get<HUDService>().EndTurnButtonParent.SetActive(ServiceLocator.Get<GameStateHolder>().CurrentData.Level > 0);
+            ServiceLocator.Get<HUDService>().InventoryView.SetActive(true);
+            ServiceLocator.Get<DialogController>().Background.gameObject.SetActive(false);
+            ServiceLocator.Get<ImplantsHolderService>().SpawnImplants();
+            ServiceLocator.Get<HUDService>().DisableUI.SetActive(false);
+            await ServiceLocator.Get<UIFaderService>().FadeOut();
         }
 
         private void ConfigureLevel()
@@ -86,32 +87,32 @@ namespace Game.Runtime.Runners
         
         private int GetCurrentLevelIndex()
         {
-            if (SL.Get<GameStateHolder>().NeedRespawnOnCheckpoint)
-                SL.Get<GameStateHolder>().LoadCheckpoint();
+            if (ServiceLocator.Get<GameStateHolder>().NeedRespawnOnCheckpoint)
+                ServiceLocator.Get<GameStateHolder>().LoadCheckpoint();
             
             _isDebug = _debugLevelIndex >= 0;
             if (_isDebug)
             {
-                SL.Get<GameStateHolder>().CurrentData.Level = _debugLevelIndex;
+                ServiceLocator.Get<GameStateHolder>().CurrentData.Level = _debugLevelIndex;
                 return _debugLevelIndex;
             }
 
-            return SL.Get<GameStateHolder>().CurrentData.Level;
+            return ServiceLocator.Get<GameStateHolder>().CurrentData.Level;
         }
 
         private void RegisterCharacter(CMSEntity levelModel, int currentLevelIndex)
         {
             if (levelModel.Is<SetCharacterHealthComponent>(out var healthComponent))
             {
-                SL.Get<GameStateHolder>().CurrentData.CharacterHealth = healthComponent.Health;
+                ServiceLocator.Get<GameStateHolder>().CurrentData.CharacterHealth = healthComponent.Health;
             }
             else if (currentLevelIndex == 0 || _isDebug)
             {
                 var playerConfig = CM.Get(CMs.Configs.PlayerConfig).GetComponent<PlayerConfig>();
-                SL.Get<GameStateHolder>().CurrentData.CharacterHealth = playerConfig.MaxHealth;
+                ServiceLocator.Get<GameStateHolder>().CurrentData.CharacterHealth = playerConfig.MaxHealth;
             }
             
-            SL.Register<WarriorView>(_warriorView, _gameScope);
+            ServiceLocator.Register<WarriorView>(_warriorView, _gameScope);
         }
 
         private void RegisterEnemy(CMSEntity levelModel, LevelComponent levelComponent)
@@ -119,8 +120,8 @@ namespace Game.Runtime.Runners
             if (levelModel.Is<BossLevelComponent>(out var bossComponent))
             {
                 var boss = new BossController(bossComponent.Health, bossComponent.Heal, bossComponent.BossViewPrefab);
-                SL.Register<IEnemy>(boss, _gameScope);
-                SL.Register<BossController>(boss, _gameScope);
+                ServiceLocator.Register<IEnemy>(boss, _gameScope);
+                ServiceLocator.Register<BossController>(boss, _gameScope);
                 _battleController.CurrentBattleType = BattleController.BattleType.Boss;
                 _battleController.BossConfig = bossComponent;
             }
@@ -128,8 +129,8 @@ namespace Game.Runtime.Runners
             {
                 var enemy = new EnemyController(CM.Get(levelComponent.EnemyPrefab.EntityId));
 
-                SL.Register<IEnemy>(enemy, _gameScope);
-                SL.Register<EnemyController>(enemy, _gameScope);
+                ServiceLocator.Register<IEnemy>(enemy, _gameScope);
+                ServiceLocator.Register<EnemyController>(enemy, _gameScope);
                 _battleController.CurrentBattleType = BattleController.BattleType.Common;
             }
         }
@@ -139,15 +140,15 @@ namespace Game.Runtime.Runners
             if (levelModel.Is<AddImplantsToPoolAtStartComponent>(out var component))
             {
                 foreach (var implant in component.ImplantsPrefabs)
-                    SL.Get<GameStateHolder>().CurrentData.ImplantsPool.Add(implant.EntityId);
+                    ServiceLocator.Get<GameStateHolder>().CurrentData.ImplantsPool.Add(implant.EntityId);
             }
 
-            SL.Get<ImplantsPoolService>().CachePool();
+            ServiceLocator.Get<ImplantsPoolService>().CachePool();
         }
 
         private void ConfigureLevelEnvironment(CMSEntity levelModel, LevelComponent levelComponent)
         {
-            SL.Get<AudioService>().Play(levelModel);
+            ServiceLocator.Get<AudioService>().Play(levelModel);
             _backgroundRenderer.sprite = levelComponent.BackgroundSprite;
             if (levelModel.Is<LevelParticleComponent>(out var particleComponent))
                 Instantiate(particleComponent.Particle);
@@ -155,13 +156,13 @@ namespace Game.Runtime.Runners
         
         private void RegisterLevelCheckpoint(CMSEntity levelModel, int currentLevelIndex)
         {
-            var checkPointData = SL.Get<GameStateHolder>().CheckpointData;
+            var checkPointData = ServiceLocator.Get<GameStateHolder>().CheckpointData;
             if (checkPointData.Level >= currentLevelIndex)
                 return;
             
             if (levelModel.Is<LevelCheckpointComponent>(out _))
             {
-                var gameStateHolder = SL.Get<GameStateHolder>();
+                var gameStateHolder = ServiceLocator.Get<GameStateHolder>();
                 var playerConfig = CM.Get(CMs.Configs.PlayerConfig).GetComponent<PlayerConfig>();
 
                 checkPointData.Level = currentLevelIndex;
@@ -180,7 +181,7 @@ namespace Game.Runtime.Runners
 
         private void OnDestroy()
         {
-            SL.DisposeScope(_gameScope);
+            ServiceLocator.DisposeScope(_gameScope);
         }
     }
 }

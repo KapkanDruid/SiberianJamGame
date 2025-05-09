@@ -18,10 +18,10 @@ namespace Game.Runtime.CMS.Components.Commands
 
         private async UniTask Print(Action onCompleted)
         {
-            SL.Get<DialogController>().IsSkipped = false;
+            ServiceLocator.Get<DialogController>().IsSkipped = false;
 
-            SL.Get<DialogController>().Name.text = _name;
-            await SL.Get<DialogController>().PrintText(_text, _delay);
+            ServiceLocator.Get<DialogController>().Name.text = _name;
+            await ServiceLocator.Get<DialogController>().PrintText(_text, _delay);
 
             onCompleted?.Invoke();
         }

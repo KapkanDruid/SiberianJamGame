@@ -13,7 +13,7 @@ namespace Game.Runtime.CMS.Components.Commands
         public override void Execute(Action onCompleted)
         {
             foreach (var config in _soundConfigs)
-                SL.Get<AudioService>().Play(config.EntityId);
+                ServiceLocator.Get<AudioService>().Play(config.EntityId);
 
             onCompleted?.Invoke();
         }

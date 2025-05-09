@@ -11,7 +11,7 @@ namespace Game.Runtime.CMS.Components.Commands
         [SerializeField] private float _duration = 0.3f;
         public override void Execute(Action onCompleted)
         {
-            var controller = SL.Get<DialogController>();
+            var controller = ServiceLocator.Get<DialogController>();
             if (_appearType == AppearType.Show)
             {
                 controller.gameObject.SetActive(true);

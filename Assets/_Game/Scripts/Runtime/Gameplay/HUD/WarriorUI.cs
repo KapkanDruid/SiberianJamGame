@@ -105,7 +105,7 @@ namespace Game.Runtime.Gameplay.HUD
             var sequence = DOTween.Sequence()
                 .Append(_armorIcon.rectTransform.DOScale(1.2f, 0.2f))
                 .AppendInterval(0.2f)
-                .AppendCallback(() => SL.Get<AudioService>().Play(CMs.Audio.SFX.ShieldHit))
+                .AppendCallback(() => ServiceLocator.Get<AudioService>().Play(CMs.Audio.SFX.ShieldHit))
                 .Append(DOTween.To(() => startValue, x =>
                 {
                     startValue = x;
@@ -127,7 +127,7 @@ namespace Game.Runtime.Gameplay.HUD
                     startValue = x;
                     _armorText.text = Mathf.CeilToInt(x).ToString();
                 }, 0, 0.4f).SetEase(Ease.Linear))
-                .AppendCallback(() => SL.Get<AudioService>().Play(CMs.Audio.SFX.ShieldBroken))
+                .AppendCallback(() => ServiceLocator.Get<AudioService>().Play(CMs.Audio.SFX.ShieldBroken))
                 .AppendInterval(0.2f)
                 .Append(_armorIcon.rectTransform.DOShakeAnchorPos(0.5f, strength: 7))
                 .Append(_armorIcon.rectTransform.DOScale(0f, 0.2f))

@@ -11,7 +11,7 @@ namespace Game.Runtime.Gameplay.HUD
     {
         [SerializeField] private ImplantStatPanel[] implantStatPanels;
 
-        public void UpdateStat(ImplantBehaviour.ImplantType implantType, float endValue)
+        public void UpdateStat(ImplantType implantType, float endValue)
         {
             foreach (var statPanel in implantStatPanels)
             {
@@ -27,10 +27,10 @@ namespace Game.Runtime.Gameplay.HUD
     [Serializable]
     public class ImplantStatPanel
     {
-        [SerializeField] private ImplantBehaviour.ImplantType implantType;
+        [SerializeField] private ImplantType implantType;
         [SerializeField] private TMP_Text valueText;
         
-        public ImplantBehaviour.ImplantType ImplantType => implantType;
+        public ImplantType ImplantType => implantType;
         
         private Tweener _statTween;
 

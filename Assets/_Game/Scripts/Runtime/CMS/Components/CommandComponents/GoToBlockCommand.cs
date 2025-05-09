@@ -10,7 +10,7 @@ namespace Game.Runtime.CMS.Components.Commands
         [SerializeField] private CMSPrefab _blockPrefab;
         public override void Execute(Action onCompleted)
         {
-            SL.Get<Invoker>().Play(CM.Get(_blockPrefab.EntityId));
+            ServiceLocator.Get<Invoker>().Play(CM.Get(_blockPrefab.EntityId));
             onCompleted?.Invoke();
         }
     }

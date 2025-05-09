@@ -1,5 +1,7 @@
 ﻿using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Commons;
+using Game.Runtime.CMS.Components.Implants;
+using Game.Runtime.Utils.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +10,9 @@ namespace Game.Runtime.Gameplay.Implants
     [RequireComponent(typeof(Image))]
     public class InventorySlot : MonoBehaviour
     {
+        public Color DefaultColor { get; private set; }
+        public Color OccupiedColor { get; private set; }
+            
         private Image _backgroundImage;
         private InventoryService _inventoryService;
         private Vector2Int _gridPosition;
@@ -21,14 +26,18 @@ namespace Game.Runtime.Gameplay.Implants
             
             _backgroundImage = GetComponent<Image>();
             _backgroundImage.sprite = CM.Get(CMs.Gameplay.Inventory).GetComponent<SpriteComponent>().Sprite;
+
+            var inventorySlotColorsComponent = CM.Get(CMs.Gameplay.Inventory).GetComponent<InventorySlotColorsComponent>();
+            DefaultColor = inventorySlotColorsComponent.DefaultColor;
+            OccupiedColor = inventorySlotColorsComponent.OccupiedColor;
+            
+            SetColor(DefaultColor);
         }
 
         public void SetOccupied(bool isOccupied)
         {
             Occupied = isOccupied;
-
-            var occupiedColor = Color.gray;
-            SetColor(isOccupied ? occupiedColor : Color.white);
+            SetColor(isOccupied ? OccupiedColor : DefaultColor);
         }
 
         public void SetColor(Color color)

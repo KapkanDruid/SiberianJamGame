@@ -10,7 +10,7 @@ namespace Game.Runtime.CMS.Components.Commands
 
         public override void Execute(Action onCompleted)
         {
-            var background = SL.Get<DialogController>().Background;
+            var background = ServiceLocator.Get<DialogController>().Background;
             background.sprite = BackgroundSprite;
             background.gameObject.SetActive(true);
             onCompleted?.Invoke();

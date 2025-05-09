@@ -16,8 +16,8 @@ namespace Game.Runtime.Gameplay.Level
 
         public void Initialize()
         {
-            if (SL.Get<GameStateHolder>().CurrentData.Level == 0)
-                SL.Get<Invoker>().Play(CM.Get(CMs.CommandBlocks.Tutorial.tutorial_block_1));
+            if (ServiceLocator.Get<GameStateHolder>().CurrentData.Level == 0)
+                ServiceLocator.Get<Invoker>().Play(CM.Get(CMs.CommandBlocks.Tutorial.tutorial_block_1));
 
             Finger.gameObject.SetActive(false);
         }
@@ -27,7 +27,7 @@ namespace Game.Runtime.Gameplay.Level
             await ShowImplantUse();
             await ShowUseButton();
 
-            SL.Get<Invoker>().Play(CM.Get(CMs.CommandBlocks.Tutorial.tutorial_block_2));
+            ServiceLocator.Get<Invoker>().Play(CM.Get(CMs.CommandBlocks.Tutorial.tutorial_block_2));
         }
 
         public async UniTask StartSecondStage()
@@ -40,7 +40,7 @@ namespace Game.Runtime.Gameplay.Level
 
             Finger.gameObject.SetActive(false);
 
-            SL.Get<Invoker>().Play(CM.Get(CMs.CommandBlocks.Tutorial.tutorial_block_3));
+            ServiceLocator.Get<Invoker>().Play(CM.Get(CMs.CommandBlocks.Tutorial.tutorial_block_3));
         }
 
         private async UniTask ShowImplantUse()
@@ -50,10 +50,10 @@ namespace Game.Runtime.Gameplay.Level
             Finger.SetTrigger("ImplantUse");
 
             bool executed = false;
-            SL.Get<InventoryService>().OnImplpantPlaced += () =>
+            ServiceLocator.Get<InventoryService>().OnImplantPlaced += () =>
             {
                 executed = true;
-                SL.Get<HUDService>().Behaviour.EndTurnButtonParent.SetActive(true);
+                ServiceLocator.Get<HUDService>().EndTurnButtonParent.SetActive(true);
             };
             await UniTask.WaitUntil(() => executed == true);
         }
@@ -62,12 +62,12 @@ namespace Game.Runtime.Gameplay.Level
         {
             Finger.SetTrigger("ButtonUse");
 
-            await UniTask.WaitUntil(() => SL.Get<BattleController>().IsTurnStarted);
+            await UniTask.WaitUntil(() => ServiceLocator.Get<BattleController>().IsTurnStarted);
 
             Finger.gameObject.SetActive(false);
 
             bool executed = false;
-            SL.Get<BattleController>().OnTurnEnded += () => executed = true;
+            ServiceLocator.Get<BattleController>().OnTurnEnded += () => executed = true;
             await UniTask.WaitUntil(() => executed == true);
 
             Finger.gameObject.SetActive(false);

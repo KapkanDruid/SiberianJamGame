@@ -17,19 +17,19 @@ namespace Game.Runtime.Gameplay.Enemy
 
         public void Configurate(float startHealth)
         {
-            SL.Get<HUDService>().Behaviour.EnemyUI.UpdateText(startHealth.ToString());
+            ServiceLocator.Get<HUDService>().EnemyUI.UpdateText(startHealth.ToString());
         }
 
         public void PlayHitAnimation()
         {
             if (_hitEffect != null)
-                SL.Get<AudioService>().Play(_hitEffect.EntityId);
+                ServiceLocator.Get<AudioService>().Play(_hitEffect.EntityId);
             _animator.SetTrigger("Hit");
         }
 
         public async UniTask TakeDamageAsync(float currentHealth, float maxHealth, float damage)
         {
-            SL.Get<HUDService>().Behaviour.EnemyUI.UpdateHealthBar(currentHealth, maxHealth);
+            ServiceLocator.Get<HUDService>().EnemyUI.UpdateHealthBar(currentHealth, maxHealth);
 
             float startHp = currentHealth;
             float endHp = currentHealth - damage;
@@ -37,14 +37,14 @@ namespace Game.Runtime.Gameplay.Enemy
             if (endHp <= 0)
                 endHp = 0;
             
-            await SL.Get<HUDService>().Behaviour.EnemyUI.TakeDamageSequenceAsync(maxHealth, startHp, endHp);
+            await ServiceLocator.Get<HUDService>().EnemyUI.TakeDamageSequenceAsync(maxHealth, startHp, endHp);
         }
 
         public async UniTask AttackAsync()
         {
             _animator.SetTrigger("Attack");
             if (_shootEffect != null)
-                SL.Get<AudioService>().Play(_shootEffect.EntityId);
+                ServiceLocator.Get<AudioService>().Play(_shootEffect.EntityId);
 
             await UniTask.WaitUntil(() => _reader.AttackPerformed == true);
 
@@ -55,7 +55,7 @@ namespace Game.Runtime.Gameplay.Enemy
         {
             _animator.SetTrigger("Death");
             if (_deathEffect != null)
-                SL.Get<AudioService>().Play(_deathEffect.EntityId);
+                ServiceLocator.Get<AudioService>().Play(_deathEffect.EntityId);
         }
     }
 }

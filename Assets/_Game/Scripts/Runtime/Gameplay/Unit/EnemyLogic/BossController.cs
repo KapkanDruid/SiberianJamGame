@@ -25,15 +25,15 @@ namespace Game.Runtime.Gameplay.Enemy
             _currentHealth = _maxHealth;
             _heal = heal;
 
-            SL.Get<HUDService>().Behaviour.EnemyUI.UpdateArmorIcon(_armor);
+            ServiceLocator.Get<HUDService>().EnemyUI.UpdateArmorIcon(_armor);
             _view = Object.Instantiate(viewPrefab);
         }
 
         public void Initialize()
         {
             _view.Configurate(_maxHealth);
-            SL.Get<HUDService>().Behaviour.EnemyUI.UpdateHealthBar(CurrentHealth, _maxHealth);
-            _view.transform.position = SL.Get<BattleController>().EnemyPosition.position;
+            ServiceLocator.Get<HUDService>().EnemyUI.UpdateHealthBar(CurrentHealth, _maxHealth);
+            _view.transform.position = ServiceLocator.Get<BattleController>().EnemyPosition.position;
         }
 
         public async UniTask TakeDamage(float damage)
@@ -41,13 +41,13 @@ namespace Game.Runtime.Gameplay.Enemy
             _view.PlayHitAnimation();
             if (_armor > damage)
             {
-                await SL.Get<HUDService>().Behaviour.EnemyUI.DecreaseArmorSequenceAsync(_armor, _armor - damage);
+                await ServiceLocator.Get<HUDService>().EnemyUI.DecreaseArmorSequenceAsync(_armor, _armor - damage);
                 _armor -= damage;
                 return;
             }
             else if (_armor <= damage && _armor > 0)
             {
-                await SL.Get<HUDService>().Behaviour.EnemyUI.BreakArmorSequenceAsync(_armor);
+                await ServiceLocator.Get<HUDService>().EnemyUI.BreakArmorSequenceAsync(_armor);
 
                 damage -= _armor;
                 _armor = 0;
@@ -66,33 +66,33 @@ namespace Game.Runtime.Gameplay.Enemy
         {
             Debug.Log("Win");
             _view.Death();
-            SL.Get<BattleController>().Win();
+            ServiceLocator.Get<BattleController>().Win();
         }
 
         public async UniTask Attack(float damage)
         {
-            if (SL.Get<BattleController>().IsBattleEnded)
+            if (ServiceLocator.Get<BattleController>().IsBattleEnded)
                 return;
 
             await _view.AttackAsync();
-            await SL.Get<WarriorController>().TakeDamage(damage);
+            await ServiceLocator.Get<WarriorController>().TakeDamage(damage);
         }
 
         public async UniTask ActivateArmor(float armor)
         {
             _armor = armor;
-            await SL.Get<HUDService>().Behaviour.EnemyUI.ShowArmorSequenceAsync(armor);
+            await ServiceLocator.Get<HUDService>().EnemyUI.ShowArmorSequenceAsync(armor);
         }
 
         public async UniTask DeactivateArmor()
         {
             _armor = 0;
-            await SL.Get<HUDService>().Behaviour.EnemyUI.HideArmorSequenceAsync();
+            await ServiceLocator.Get<HUDService>().EnemyUI.HideArmorSequenceAsync();
         }
 
         public async UniTask Heal()
         {
-            if (SL.Get<BattleController>().IsBattleEnded)
+            if (ServiceLocator.Get<BattleController>().IsBattleEnded)
                 return;
 
             if (_heal <= 0)
@@ -101,7 +101,7 @@ namespace Game.Runtime.Gameplay.Enemy
             if (_currentHealth >= _maxHealth)
                 return;
 
-            await SL.Get<HUDService>().Behaviour.EnemyUI.HealSequenceAsync(_currentHealth, _maxHealth, _heal);
+            await ServiceLocator.Get<HUDService>().EnemyUI.HealSequenceAsync(_currentHealth, _maxHealth, _heal);
 
             _currentHealth += _heal;
 
