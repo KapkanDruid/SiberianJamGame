@@ -12,11 +12,11 @@ namespace Game.Runtime.CMS.Components.Commands
         public override void Execute(Action onCompleted)
         {
             if (TutorialStage == 1)
-                SL.Get<Tutorial>().StartFirstStage().Forget();
+                ServiceLocator.Get<Tutorial>().StartFirstStage().Forget();
             else if (TutorialStage == 2)
-                SL.Get<Tutorial>().StartSecondStage().Forget();
+                ServiceLocator.Get<Tutorial>().StartSecondStage().Forget();
             else if (TutorialStage == 3)
-                SL.Get<Tutorial>().IsFinished = true;
+                ServiceLocator.Get<Tutorial>().IsFinished = true;
 
             onCompleted?.Invoke();
         }

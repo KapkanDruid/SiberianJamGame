@@ -30,7 +30,7 @@ namespace Game.Runtime.Gameplay.Implants
         public void CachePool()
         {
             _dynamicImplantPool.Clear();
-            _dynamicImplantPool.AddRange(SL.Get<GameStateHolder>().CurrentData.ImplantsPool);
+            _dynamicImplantPool.AddRange(ServiceLocator.Get<GameStateHolder>().CurrentData.ImplantsPool);
             _dynamicImplantPool.Shuffle();
             
             LogUtil.Log(nameof(ImplantsPoolService), $"{_dynamicImplantPool.Count} implants in pool");
@@ -44,7 +44,6 @@ namespace Game.Runtime.Gameplay.Implants
             {
                 if (_dynamicImplantPool.Count == 0)
                 {
-                    _basicImplantModels.Shuffle();
                     result.Add(CM.Get(_basicImplantModels.GetRandom().EntityId));
                 }
                 else

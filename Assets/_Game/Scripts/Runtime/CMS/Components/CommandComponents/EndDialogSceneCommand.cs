@@ -17,7 +17,7 @@ namespace Game.Runtime.CMS.Components.Commands
 
         private async UniTask SwitchScene(Action onCompleted)
         {
-            await SL.Get<UIFaderService>().FadeIn();
+            await ServiceLocator.Get<UIFaderService>().FadeIn();
             await SceneManager.LoadSceneAsync(Const.ScenesConst.GameReleaseScene);
             onCompleted?.Invoke();
         }

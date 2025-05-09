@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Runtime.Services
 {
-    public static class SL
+    public static class ServiceLocator
     {
         private static Dictionary<Scope, Dictionary<Type, object>> _scopes;
 

@@ -1,87 +1,84 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Commons;
 using Game.Runtime.CMS.Components.Gameplay;
 using Game.Runtime.CMS.Components.Implants;
-using Game.Runtime.Gameplay.Level;
 using Game.Runtime.Services;
 using Game.Runtime.Services.Audio;
-using Game.Runtime.Services.Camera;
-using Game.Runtime.Services.Input;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Game.Runtime.Gameplay.Implants
 {
-
-    
     [RequireComponent(typeof(RectTransform), typeof(Image), typeof(CanvasGroup))]
-    public class ImplantBehaviour : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
+    public class ImplantBehaviour : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IDragHandler, IPointerUpHandler
     {
         [SerializeField] private Image _image;
         [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private CanvasGroup _canvasGroup;
-        [SerializeField] private Vector3 baseLocalScale;
+        [SerializeField] private RectTransform highlightImplant;
         
-        public enum ImplantType
-        {
-            Health,
-            Armor,
-            Damage
-        }
-
-        public List<Vector2Int> SlotPositions { get; private set; }
-        public CMSEntity Model { get; private set; }
-        public int CurrentRotation { get; private set; }
-        public Vector2Int CenterSlotPosition { get; private set; }
-
+        private ImplantPointerHandler _implantPointerHandler;
+        private ImplantDragHandler _implantDragHandler;
+        
         private Transform _originalParent;
         private Vector2 _originalPosition;
         private int _originIndex;
-        private InventoryService _inventoryService;
-        private ImplantsHolderService _holderService;
-        private Canvas _root;
-        private bool _isDragging;
         private int _originalRotation;
-        private Vector2 _pivotPoint;
         
-        private Vector3 _originalScale;
-        private Tweener _currentTweenScale;
+        private InventoryService _inventoryService;
+        private AudioService _audioService;
         
         private ParticleSystem _particleSystem;
+        public Tweener CurrentTweenScale;
+        
+        public int CurrentRotation { get;  set; }
+        public Vector2Int CenterSlotPosition { get; set; }
+        
+        public CMSEntity Model { get; private set; }
+        public RectTransform RectTransform => _rectTransform;
+        public RectTransform HUDRoot { get; private set; }
+        public List<Vector2Int> SlotPositions { get; private set; }
+        public Vector3 OriginalScale { get; private set; }
+        public Vector2 PivotPoint { get; private set; }
+        public bool IsDragging { get; private set; }
 
-        private void Start()
-        {
-            transform.localScale =baseLocalScale ;
-        }
+        public RectTransform HighlightImplant => highlightImplant;
 
-        public void SetupItem(CMSEntity itemModel, Canvas root)
+        public void SetupItem(CMSEntity itemModel, RectTransform hudRoot)
         {
             Model = itemModel;
-            _root = root;
+            HUDRoot = hudRoot;
             
-            _inventoryService = SL.Get<InventoryService>();
-            _holderService = SL.Get<ImplantsHolderService>();
+            _implantPointerHandler = new ImplantPointerHandler(this);
+            _implantDragHandler = new ImplantDragHandler(this);
+            
+            _inventoryService = ServiceLocator.Get<InventoryService>();
+            _audioService = ServiceLocator.Get<AudioService>();
 
             var itemComponent = itemModel.GetComponent<InventoryItemComponent>();
-            _pivotPoint = itemComponent.Pivot;
+            PivotPoint = itemComponent.Pivot;
             SlotPositions = itemComponent.Grid.GridPattern;
             _rectTransform.sizeDelta = itemComponent.SizeDelta;
+            HighlightImplant.sizeDelta = itemComponent.SizeDelta;
             _image.sprite = itemModel.GetComponent<SpriteComponent>().Sprite;
+
+            var highlightImage = HighlightImplant.GetComponent<Image>();
+            highlightImage.sprite = itemModel.GetComponent<SpriteComponent>().Sprite;
             
-            _originalScale = baseLocalScale;
+            OriginalScale = transform.localScale;
             
             var particlePrefab = itemComponent.Particle;
             _particleSystem = Instantiate(particlePrefab, transform);
             _particleSystem.Stop();
+            
+            HighlightImplant.gameObject.SetActive(false);
         }
 
-        public void PlayParticle()
-        {
-            _particleSystem.Play();
-        }
+        public void PlayParticle() => _particleSystem.Play();
 
         public ImplantType GetImplantType()
         {
@@ -89,231 +86,50 @@ namespace Game.Runtime.Gameplay.Implants
             if (Model.Is<ArmorImplantComponent>()) return ImplantType.Armor;
             return ImplantType.Damage;
         }
-        
-        public void OnPointerEnter(PointerEventData eventData)
+
+        public void StartDragging()
         {
-            if (this == null)return;
-            if (_isDragging) return;
-            if (SL.Get<InventoryService>().HasItem(this)) return;
-            
-            _currentTweenScale?.Kill();
-            _currentTweenScale = _rectTransform.DOScale(_originalScale * 1.2f, 0.2f)
-                .SetEase(Ease.OutBack).OnKill(() => _currentTweenScale = null);
-        }
+            IsDragging = true;
 
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            if (this == null)return;
-            if (_isDragging) return;
-            if (SL.Get<InventoryService>().HasItem(this)) return;
-            SL.Get<AudioService>().Play(CMs.Audio.SFX.Hover);
-
-            _currentTweenScale?.Kill();
-            _currentTweenScale = _rectTransform.DOScale(_originalScale, 0.2f)
-                .SetEase(Ease.InOutQuad).OnKill(() => _currentTweenScale = null);
-        }
-
-        public void OnBeginDrag(PointerEventData eventData)
-        {
-            if (this == null)return;
-            if (SL.Get<InventoryService>().IsBlocked) return;
-            if (_isDragging) return;
-            
-            _currentTweenScale?.Kill();
-
-            if (eventData.button != PointerEventData.InputButton.Left) return;
-            StartDragging();
-            SL.Get<InputService>().OnRotateItem += HandleRotation;
-            SL.Get<AudioService>().Play(CMs.Audio.SFX.SFXImplantDrag);
-        }
-
-        public void OnDrag(PointerEventData eventData)
-        {
-            if (this == null)return;
-            if (!_isDragging) return;
-            UpdateDragPosition(eventData);
-            UpdateSlotHighlight();
-        }
-
-        public void OnEndDrag(PointerEventData eventData)
-        {
-            if (this == null)
-            {
-                SL.Get<InputService>().OnRotateItem -= HandleRotation;
-                return;
-            }
-            if (!_isDragging) return;
-
-            StopDragging();
-
-            SL.Get<AudioService>().Play(CMs.Audio.SFX.SFXImplantPut);
-
-            if (TryPlaceItem()) return;
-            if (TryReturnToHolder(eventData.position)) return;
-
-            ReturnToOriginalPosition();
-        }
-
-        private void StartDragging()
-        {
-            _isDragging = true;
             _originalParent = transform.parent;
             _originalPosition = _rectTransform.anchoredPosition;
             _originalRotation = CurrentRotation;
             _canvasGroup.blocksRaycasts = false;
             _originIndex = transform.GetSiblingIndex();
 
-            transform.SetParent(_root.transform);
+            transform.SetParent(HUDRoot.transform);
             _rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
             _rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
 
-            transform.localScale = baseLocalScale * 1.2f;
+            transform.localScale = OriginalScale * 1.2f;
+            _audioService.Play(CMs.Audio.SFX.SFXImplantDrag);
         }
 
-        private void StopDragging()
+        public void StopDragging()
         {
-            _isDragging = false;
+            IsDragging = true;
             _canvasGroup.blocksRaycasts = true;
-            SL.Get<InputService>().OnRotateItem -= HandleRotation;
-            transform.DOScale(baseLocalScale, 0.1f);
-            ResetHighlight();
+            transform.DOScale(OriginalScale, 0.1f);
+            _inventoryService.SynergySlots.Clear();
+            _inventoryService.Highlighter.ResetSlotHighlight(this);
         }
 
-        private void UpdateDragPosition(PointerEventData eventData)
-        {
-            if (TryGetLocalPoint(eventData, out Vector2 localPoint))
-            {
-                _rectTransform.anchoredPosition =  localPoint - CalculatePivotOffset();
-            }
-        }
-
-        private bool TryGetLocalPoint(PointerEventData eventData, out Vector2 localPoint)
-        {
-            return RectTransformUtility.ScreenPointToLocalPointInRectangle(_root.transform as RectTransform, eventData.position, eventData.pressEventCamera, out localPoint);
-        }
-
-        private Vector2 CalculatePivotOffset()
-        {
-            Vector2 pivotDifference = new Vector2(
-                _pivotPoint.x - 0.5f,
-                _pivotPoint.y - 0.5f);
-
-            return ImplantHelper.ApplyRotationToOffset(
-                new Vector2(
-                    pivotDifference.x * _rectTransform.rect.width,
-                    pivotDifference.y * _rectTransform.rect.height),
-                CurrentRotation);
-        }
-
-        private void UpdateSlotHighlight()
-        {
-            if (SL.Get<BattleController>().IsTurnStarted) return;
-            var newSlot = GetSlotUnderCursor();
-            if (newSlot != null)
-            {
-                ResetHighlight();
-                _inventoryService.UpdateSlotHighlight(this, newSlot.GridPosition, Color.green);
-            }
-        }
-
-        private InventorySlot GetSlotUnderCursor()
-        {
-            var pointerData = new PointerEventData(EventSystem.current)
-            {
-                position = Input.mousePosition
-            };
-
-            var results = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(pointerData, results);
-
-            foreach (var result in results)
-            {
-                if (result.gameObject.TryGetComponent(out InventorySlot slot))
-                {
-                    return slot;
-                }
-            }
-
-            return null;
-        }
-
-        private void ResetHighlight()
-        {
-            _inventoryService.ResetSlotHighlight(this);
-        }
-
-        private bool TryPlaceItem()
-        {
-            var slot = GetSlotUnderCursor();
-            if (slot == null)
-                return false;
-
-            CenterSlotPosition = slot.GridPosition;
-            if (!_inventoryService.TryPlaceItem(this, CenterSlotPosition))
-                return false;
-            
-            if (_holderService.HasItem(this))
-                _holderService.RemoveItem(this);
-            
-            _inventoryService.SetItemPosition(slot, this);
-            //PlayParticle();
-            return true;
-        }
-
-        private bool TryReturnToHolder(Vector2 position)
-        {
-            var result = _holderService.TryReturnToHolder(this, position);
-            if (!result) return false;
-            
-            if (_inventoryService.HasItem(this))
-                _inventoryService.RemoveItem(this);
-            
-            SL.Get<LootService>().Choice(Model.EntityId);
-
-            CurrentRotation = 0;
-            _rectTransform.localRotation = Quaternion.Euler(0, 0, 0);
-            return true;
-        }
-        
-        private void HandleRotation()
-        {
-            if (!_isDragging) return;
-
-            RotateItem();
-        }
-
-        private void RotateItem()
-        {
-            if (this == null)
-            {
-                SL.Get<InputService>().OnRotateItem -= HandleRotation;
-                return;
-            }
-            CurrentRotation = (CurrentRotation + 1) % 4;
-            float[] presetAngles = { 0f, -90f, -180f, -270f };
-            _rectTransform.localRotation = Quaternion.Euler(0, 0, presetAngles[CurrentRotation]);
-            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(_root.transform as RectTransform, Input.mousePosition,
-                    SL.Get<CameraService>().Camera, out var localPoint))
-            {
-                _rectTransform.anchoredPosition = localPoint - CalculatePivotOffset();
-            }
-            UpdateSlotHighlight();
-            SL.Get<AudioService>().Play(CMs.Audio.SFX.ImplantRotate);
-        }
-
-        private void ReturnToOriginalPosition()
+        public void ReturnToOriginalPosition()
         {
             transform.SetParent(_originalParent);
             _rectTransform.anchoredPosition = _originalPosition;
             _rectTransform.localRotation = Quaternion.Euler(0, 0, -90 * _originalRotation);
             CurrentRotation = _originalRotation;
-            _inventoryService.UpdateAllSlotVisual();
+            _inventoryService.Highlighter.UpdateAllSlotVisual();
             transform.SetSiblingIndex(_originIndex);
         }
 
-        private void OnDestroy()
-        {
-            _currentTweenScale?.Kill();
-        }
+        public void OnPointerEnter(PointerEventData eventData) => _implantPointerHandler.OnPointerEnter(eventData);
+        public void OnPointerExit(PointerEventData eventData) => _implantPointerHandler.OnPointerExit(eventData);
+        public void OnPointerDown(PointerEventData eventData) => _implantDragHandler.OnPointerDown(eventData);
+        public void OnDrag(PointerEventData eventData) => _implantDragHandler.OnDrag(eventData);
+        public void OnPointerUp(PointerEventData eventData) => _implantDragHandler.OnPointerUp(eventData);
+
+        private void OnDestroy() => CurrentTweenScale?.Kill();
     }
 }

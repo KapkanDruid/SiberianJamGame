@@ -19,14 +19,14 @@ namespace Game.Runtime.Runners
         private async UniTask StartGame()
         {
             Configurate();
-            await SL.Get<UIFaderService>().FadeOut();
+            await ServiceLocator.Get<UIFaderService>().FadeOut();
         }
 
         private void Configurate()
         {
-            var dialogPrefabID = SL.Get<GameStateHolder>().DialogBlockID;
+            var dialogPrefabID = ServiceLocator.Get<GameStateHolder>().DialogBlockID;
 
-            SL.Get<Invoker>().Play(CM.Get(dialogPrefabID));
+            ServiceLocator.Get<Invoker>().Play(CM.Get(dialogPrefabID));
         }
     }
 }

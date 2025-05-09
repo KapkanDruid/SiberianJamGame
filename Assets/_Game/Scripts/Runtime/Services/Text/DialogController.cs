@@ -51,7 +51,7 @@ namespace Game.Runtime.Services
             Background.gameObject.SetActive(false);
             _panelColor = _dialogPanel.color;
 
-            SL.Get<InputService>().OnDialogSkip += OnSkipText;
+            ServiceLocator.Get<InputService>().OnDialogSkip += OnSkipText;
         }
 
         public async UniTask PrintText(string text, float speed)
@@ -144,10 +144,10 @@ namespace Game.Runtime.Services
 
         public void Dispose()
         {
-            if (SL.Get<InputService>() == null)
+            if (ServiceLocator.Get<InputService>() == null)
                 return;
 
-            SL.Get<InputService>().OnDialogSkip -= OnSkipText;
+            ServiceLocator.Get<InputService>().OnDialogSkip -= OnSkipText;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Game.Runtime.CMS.Components.Commands
 
         private async UniTask ShowAsync(Action action)
         {
-            await SL.Get<DialogController>().ShowIcon(_positionType, _sprite, _offset, _duration);
+            await ServiceLocator.Get<DialogController>().ShowIcon(_positionType, _sprite, _offset, _duration);
 
             action?.Invoke();
         }

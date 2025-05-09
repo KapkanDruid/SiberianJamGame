@@ -28,17 +28,17 @@ namespace Game.Runtime.Gameplay.Implants
 
         public void GenerateLoot()
         {
-            SL.Get<HUDService>().Behaviour.EndTurnButton.gameObject.SetActive(false);
-            SL.Get<HUDService>().Behaviour.InventoryView.SetActive(false);
-            SL.Get<HUDService>().Behaviour.LootHolder.SetActive(true);
+            ServiceLocator.Get<HUDService>().EndTurnButton.gameObject.SetActive(false);
+            ServiceLocator.Get<HUDService>().InventoryView.SetActive(false);
+            ServiceLocator.Get<HUDService>().LootHolder.SetActive(true);
 
             var availableImplants = new List<CMSEntity>();
             
             foreach (var implant in _allImplants)
             {
-                if (implant.GetComponent<ImplantLevelRequiredComponent>().RequiredLevelIndex <= SL.Get<GameStateHolder>().CurrentData.Level)
+                if (implant.GetComponent<ImplantLevelRequiredComponent>().RequiredLevelIndex <= ServiceLocator.Get<GameStateHolder>().CurrentData.Level)
                 {
-                    if (implant.GetComponent<ImplantLevelRequiredComponent>().RequiredLevelIndex == 0 && SL.Get<GameStateHolder>().CurrentData.Level > 0)
+                    if (implant.GetComponent<ImplantLevelRequiredComponent>().RequiredLevelIndex == 0 && ServiceLocator.Get<GameStateHolder>().CurrentData.Level > 0)
                         continue;
                     
                     availableImplants.Add(implant);
@@ -51,9 +51,9 @@ namespace Game.Runtime.Gameplay.Implants
             {
                 var implantPrefab = CM.Get(CMs.Gameplay.Implants.BaseImplantBehaviour).GetComponent<PrefabComponent>().Prefab;
                 var implantBehaviour = Object.Instantiate(implantPrefab).GetComponent<ImplantBehaviour>();
-                implantBehaviour.SetupItem(availableImplants.GetRandom(), SL.Get<HUDService>().Behaviour.GetComponent<Canvas>());
+                implantBehaviour.SetupItem(availableImplants.GetRandom(), ServiceLocator.Get<HUDService>().GetComponent<RectTransform>());
             
-                SL.Get<HUDService>().Behaviour.LootHolder.SetItemPosition(implantBehaviour, Vector2.zero);
+                ServiceLocator.Get<HUDService>().LootHolder.SetItemPosition(implantBehaviour, Vector2.zero);
             }
 
             needChoice = _config.BaseChoiceCount;
@@ -63,12 +63,12 @@ namespace Game.Runtime.Gameplay.Implants
         {
             if (needChoice <= 0) return;
             
-            SL.Get<GameStateHolder>().CurrentData.ImplantsPool.Add(implantId);
+            ServiceLocator.Get<GameStateHolder>().CurrentData.ImplantsPool.Add(implantId);
             needChoice--;
 
             if (needChoice == 0)
             {
-                SL.Get<BattleController>().EndGameAsync().Forget();
+                ServiceLocator.Get<BattleController>().EndGameAsync().Forget();
             }
         }
     }

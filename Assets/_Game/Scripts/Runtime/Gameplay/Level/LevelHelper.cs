@@ -15,7 +15,7 @@ namespace Game.Runtime.Gameplay.Level
 
         public static CMSEntity GetCurrentLevelModel()
         {
-            return GetLevelModel(SL.Get<GameStateHolder>().CurrentData.Level);
+            return GetLevelModel(ServiceLocator.Get<GameStateHolder>().CurrentData.Level);
         }
     }
 }

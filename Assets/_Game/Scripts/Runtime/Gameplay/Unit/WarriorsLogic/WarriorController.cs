@@ -26,12 +26,12 @@ namespace Game.Runtime.Gameplay.Warrior
 
         public void Initialize()
         {
-            SL.Get<BattleController>().OnTurnEnded += () => SL.Get<HUDService>().Behaviour.WarriorUI.HideArmorSequenceAsync().Forget();
+            ServiceLocator.Get<BattleController>().OnTurnEnded += () => ServiceLocator.Get<HUDService>().WarriorUI.HideArmorSequenceAsync().Forget();
 
-            _currentHealth = SL.Get<GameStateHolder>().CurrentData.CharacterHealth;
+            _currentHealth = ServiceLocator.Get<GameStateHolder>().CurrentData.CharacterHealth;
             
-            SL.Get<HUDService>().Behaviour.WarriorUI.UpdateHealthBar(_currentHealth, _maxHealth);
-            SL.Get<HUDService>().Behaviour.WarriorUI.SetStartHealth(_currentHealth);
+            ServiceLocator.Get<HUDService>().WarriorUI.UpdateHealthBar(_currentHealth, _maxHealth);
+            ServiceLocator.Get<HUDService>().WarriorUI.SetStartHealth(_currentHealth);
         }
 
         public void SetTurnData(WarriorTurnData turnData)
@@ -41,27 +41,27 @@ namespace Game.Runtime.Gameplay.Warrior
             _damage = turnData.Damage;
 
             if (_armor > 0)
-                SL.Get<HUDService>().Behaviour.WarriorUI.ShowArmorSequenceAsync(_armor).Forget();
+                ServiceLocator.Get<HUDService>().WarriorUI.ShowArmorSequenceAsync(_armor).Forget();
         }
 
         public async UniTask TakeDamage(float damage)
         {
-            SL.Get<WarriorView>().PlayHitAnimation();
+            ServiceLocator.Get<WarriorView>().PlayHitAnimation();
             if (_armor > damage)
             {
-                await SL.Get<HUDService>().Behaviour.WarriorUI.DecreaseArmorSequenceAsync(_armor, _armor - damage);
+                await ServiceLocator.Get<HUDService>().WarriorUI.DecreaseArmorSequenceAsync(_armor, _armor - damage);
                 _armor -= damage;
                 return;
             }
             else if (_armor <= damage && _armor > 0)
             {
-                await SL.Get<HUDService>().Behaviour.WarriorUI.BreakArmorSequenceAsync(_armor);
+                await ServiceLocator.Get<HUDService>().WarriorUI.BreakArmorSequenceAsync(_armor);
 
                 damage -= _armor;
                 _armor = 0;
             }
 
-            await SL.Get<WarriorView>().TakeDamageAsync(_currentHealth, _maxHealth, damage);
+            await ServiceLocator.Get<WarriorView>().TakeDamageAsync(_currentHealth, _maxHealth, damage);
             _currentHealth -= damage;
 
             if (_currentHealth <= 0)
@@ -70,7 +70,7 @@ namespace Game.Runtime.Gameplay.Warrior
                 Death().Forget();
             }
             
-            SL.Get<GameStateHolder>().CurrentData.CharacterHealth = _currentHealth;
+            ServiceLocator.Get<GameStateHolder>().CurrentData.CharacterHealth = _currentHealth;
         }
 
         public async UniTask AttackAsync()
@@ -78,20 +78,20 @@ namespace Game.Runtime.Gameplay.Warrior
             if (_damage <= 0)
                 return;
 
-            if (SL.Get<BattleController>().IsBattleEnded)
+            if (ServiceLocator.Get<BattleController>().IsBattleEnded)
                 return;
 
-            if (SL.Get<IEnemy>().CurrentHealth + SL.Get<IEnemy>().CurrentArmor > _damage)
-                await SL.Get<WarriorView>().AttackAsync();
+            if (ServiceLocator.Get<IEnemy>().CurrentHealth + ServiceLocator.Get<IEnemy>().CurrentArmor > _damage)
+                await ServiceLocator.Get<WarriorView>().AttackAsync();
             else
-                await SL.Get<WarriorView>().FinishAttackAsync();
+                await ServiceLocator.Get<WarriorView>().FinishAttackAsync();
 
-            await SL.Get<IEnemy>().TakeDamage(_damage);
+            await ServiceLocator.Get<IEnemy>().TakeDamage(_damage);
         }
 
         public async UniTask HealAsync()
         {
-            if (SL.Get<BattleController>().IsBattleEnded)
+            if (ServiceLocator.Get<BattleController>().IsBattleEnded)
                 return;
 
             if (_heal <= 0)
@@ -100,20 +100,20 @@ namespace Game.Runtime.Gameplay.Warrior
             if (_currentHealth >= _maxHealth)
                 return;
 
-            await SL.Get<HUDService>().Behaviour.WarriorUI.HealSequenceAsync(_currentHealth, _maxHealth, _heal);
+            await ServiceLocator.Get<HUDService>().WarriorUI.HealSequenceAsync(_currentHealth, _maxHealth, _heal);
 
             _currentHealth += _heal;
 
             if (_currentHealth >= _maxHealth)
                 _currentHealth = _maxHealth;
 
-            SL.Get<GameStateHolder>().CurrentData.CharacterHealth = _currentHealth;
+            ServiceLocator.Get<GameStateHolder>().CurrentData.CharacterHealth = _currentHealth;
         }
 
         private async UniTask Death()
         {
-            await SL.Get<WarriorView>().DeathAsync();
-            SL.Get<BattleController>().Loose();
+            await ServiceLocator.Get<WarriorView>().DeathAsync();
+            ServiceLocator.Get<BattleController>().Loose();
         }
     }
 }

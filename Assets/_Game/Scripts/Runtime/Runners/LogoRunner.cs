@@ -21,13 +21,13 @@ namespace Game.Runtime.Runners
 
         private void RegisterCamera()
         {
-            SL.Get<CameraService>().RegisterCamera(logoCamera);
+            ServiceLocator.Get<CameraService>().RegisterCamera(logoCamera);
         }
 
         private async UniTask ShowLogo()
         {
-            SL.Get<AudioService>().Play(CMs.Audio.AmbientTest);
-            SL.Get<AudioService>().Play(CMs.Audio.SFX.SFXTest);
+            ServiceLocator.Get<AudioService>().Play(CMs.Audio.AmbientTest);
+            ServiceLocator.Get<AudioService>().Play(CMs.Audio.SFX.SFXTest);
             await SceneManager.LoadSceneAsync(Const.ScenesConst.GameReleaseScene);
         }
     }

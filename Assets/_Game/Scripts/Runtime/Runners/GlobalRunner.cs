@@ -38,22 +38,22 @@ namespace Game.Runtime.Runners
             
             CM.Reload();
             RegisterServices();
-            SL.InitializeScope(_globalScope);
+            ServiceLocator.InitializeScope(_globalScope);
         }
 
         private void RegisterServices()
         {
-            SL.Register<SaveService>(new SaveService(), _globalScope);
-            SL.Register<AudioService>(new AudioService(), _globalScope);
-            SL.Register<TimerService>(new TimerService(), _globalScope);
-            SL.Register<UITextService>(new UITextService(), _globalScope);
-            SL.Register<UIFaderService>(new UIFaderService(), _globalScope);
-            SL.Register<CameraService>(new CameraService(), _globalScope);
-            SL.Register<InputService>(new InputService(), _globalScope);
-            SL.Register<GameStateHolder>(new GameStateHolder(), _globalScope);
-            SL.Register<ImplantsPoolService>(new ImplantsPoolService(), _globalScope);
-            SL.Register<DialogController>(CreateDialogController(), _globalScope);
-            SL.Register<Invoker>(new Invoker(), _globalScope);
+            ServiceLocator.Register<SaveService>(new SaveService(), _globalScope);
+            ServiceLocator.Register<AudioService>(new AudioService(), _globalScope);
+            ServiceLocator.Register<TimerService>(new TimerService(), _globalScope);
+            ServiceLocator.Register<UITextService>(new UITextService(), _globalScope);
+            ServiceLocator.Register<UIFaderService>(new UIFaderService(), _globalScope);
+            ServiceLocator.Register<CameraService>(new CameraService(), _globalScope);
+            ServiceLocator.Register<InputService>(new InputService(), _globalScope);
+            ServiceLocator.Register<GameStateHolder>(new GameStateHolder(), _globalScope);
+            ServiceLocator.Register<ImplantsPoolService>(new ImplantsPoolService(), _globalScope);
+            ServiceLocator.Register<DialogController>(CreateDialogController(), _globalScope);
+            ServiceLocator.Register<Invoker>(new Invoker(), _globalScope);
         }
 
         private DialogController CreateDialogController()
@@ -67,7 +67,7 @@ namespace Game.Runtime.Runners
 
         private void OnDestroy()
         {
-            SL.Clear();
+            ServiceLocator.Clear();
             _isRunning = false;
         }
     }

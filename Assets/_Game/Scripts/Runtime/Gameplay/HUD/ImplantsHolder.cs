@@ -20,13 +20,14 @@ namespace Game.Runtime.Gameplay.HUD
         public bool IsInsideHolder(Vector2 screenPosition)
         {
             return RectTransformUtility.RectangleContainsScreenPoint(parent, 
-                SL.Get<CameraService>().Camera.ScreenToViewportPoint(screenPosition));
+                ServiceLocator.Get<CameraService>().Camera.ScreenToViewportPoint(screenPosition));
         }
 
         public void SetItemPosition(ImplantBehaviour item, Vector2 position)
         {
             item.transform.SetParent(holderRoot);
             item.GetComponent<RectTransform>().anchoredPosition = position;
+            item.transform.localScale = Vector3.one * 0.7f;
         }
     }
 }

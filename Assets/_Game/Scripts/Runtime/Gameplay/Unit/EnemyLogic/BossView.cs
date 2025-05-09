@@ -17,14 +17,14 @@ namespace Game.Runtime.Gameplay.Enemy
 
         public void Configurate(float startHealth)
         {
-            SL.Get<HUDService>().Behaviour.EnemyUI.UpdateText(startHealth.ToString());
+            ServiceLocator.Get<HUDService>().EnemyUI.UpdateText(startHealth.ToString());
         }
 
         public async UniTask AttackAsync()
         {
             _animator.SetTrigger("Attack");
             if (_shootEffect != null)
-                SL.Get<AudioService>().Play(_shootEffect.EntityId);
+                ServiceLocator.Get<AudioService>().Play(_shootEffect.EntityId);
             await UniTask.WaitUntil(() => _reader.AttackPerformed == true);
 
             _reader.AttackPerformed = false;
@@ -32,7 +32,7 @@ namespace Game.Runtime.Gameplay.Enemy
 
         public async UniTask TakeDamageAsync(float currentHealth, float maxHealth, float damage)
         {
-            SL.Get<HUDService>().Behaviour.EnemyUI.UpdateHealthBar(currentHealth, maxHealth);
+            ServiceLocator.Get<HUDService>().EnemyUI.UpdateHealthBar(currentHealth, maxHealth);
 
             float startHp = currentHealth;
             float endHp = currentHealth - damage;
@@ -40,20 +40,20 @@ namespace Game.Runtime.Gameplay.Enemy
             if (endHp <= 0)
                 endHp = 0;
 
-            await SL.Get<HUDService>().Behaviour.EnemyUI.TakeDamageSequenceAsync(maxHealth, startHp, endHp);
+            await ServiceLocator.Get<HUDService>().EnemyUI.TakeDamageSequenceAsync(maxHealth, startHp, endHp);
         }
 
         public void PlayHitAnimation()
         {
             _animator.SetTrigger("Hit");
             if (_hitEffect != null)
-                SL.Get<AudioService>().Play(_hitEffect.EntityId);
+                ServiceLocator.Get<AudioService>().Play(_hitEffect.EntityId);
         }
         public void Death()
         {
             _animator.SetTrigger("Death");
             if (_deathEffect != null)
-                SL.Get<AudioService>().Play(_hitEffect.EntityId);
+                ServiceLocator.Get<AudioService>().Play(_hitEffect.EntityId);
         }
     }
 }

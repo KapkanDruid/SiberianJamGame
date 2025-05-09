@@ -8,7 +8,6 @@ using Game.Runtime.Gameplay.HUD;
 using Game.Runtime.Gameplay.Level;
 using Game.Runtime.Gameplay.Warrior;
 using Game.Runtime.Services;
-using Game.Runtime.Utils;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -16,223 +15,148 @@ namespace Game.Runtime.Gameplay.Implants
 {
     public class InventoryService : IService, IInitializable, IDisposable
     {
-        private readonly Dictionary<Vector2Int, InventorySlot> _slots = new();
-        private readonly Dictionary<Vector2Int, ImplantBehaviour> _occupiedSlots = new();
-        private readonly Dictionary<ImplantBehaviour, List<Vector2Int>> _itemPositions = new();
-        private readonly Dictionary<ImplantBehaviour.ImplantType, float> _statsMap = new()
-        {
-            { ImplantBehaviour.ImplantType.Health, 0 },
-            { ImplantBehaviour.ImplantType.Armor, 0 },
-            { ImplantBehaviour.ImplantType.Damage, 0 }
-        };
-        
+        public event Action OnImplantPlaced;
+
         private Vector2Int _gridSize;
         private int _cellSize;
-
         private InventoryView _inventoryView;
-        public event Action OnImplpantPlaced;
+        
+        public InventoryStats Stats { get; }
+        public InventoryHighlighter Highlighter { get; }
+        
+        public Dictionary<Vector2Int, InventorySlot> Slots { get; } = new();
+        public List<Vector2Int> SynergySlots { get; } = new();
+        public Dictionary<ImplantBehaviour, List<Vector2Int>> ItemPositions { get; } = new();
+        public Dictionary<Vector2Int, ImplantBehaviour> OccupiedSlots { get; } = new();
         public bool IsBlocked { get; private set; }
+
+        public InventoryService()
+        {
+            Stats = new InventoryStats(this);
+            Highlighter = new InventoryHighlighter(this);
+        }
 
         public void Initialize()
         {
-            _inventoryView = SL.Get<HUDService>().Behaviour.InventoryView;
-            SL.Get<BattleController>().OnTurnEnded += OnTurnEnded;
+            _inventoryView = ServiceLocator.Get<HUDService>().InventoryView;
+            ServiceLocator.Get<BattleController>().OnTurnEnded += OnTurnEnded;
 
             CreateGrid();
         }
+        
+        public bool HasItem(ImplantBehaviour item) => ItemPositions.GetValueOrDefault(item) != default;
+        public bool IsSlotExist(Vector2Int slotPosition) => Slots.ContainsKey(slotPosition);
+        public bool IsSlotOccupied(Vector2Int slot) => OccupiedSlots.ContainsKey(slot);
 
-        private void OnTurnEnded()
+        public bool TryHighlightSynergySlots(ImplantBehaviour implant, InventorySlot newSlot)
         {
-            foreach (var item in _itemPositions)
+            SynergySlots.Clear();
+
+            if (!CanPlaceItem(implant, newSlot.GridPosition, implant.CurrentRotation))
+                return false;
+
+            var synergySlots = Stats.FindSynergySlots(implant, newSlot.GridPosition);
+            if (synergySlots.Count == 0)
+                return false;
+
+            var synergyColors = CM.Get(CMs.Gameplay.ImplantSynergyColors)
+                .GetComponent<ImplantSynergyColorsComponent>().SynergyColors;
+            var targetColor = synergyColors.First(c => c.ImplantType == implant.GetImplantType()).Color;
+
+            foreach (var slotPosition in synergySlots)
             {
-                Object.Destroy(item.Key.gameObject);
+                if (Slots.TryGetValue(slotPosition, out var slot))
+                    Highlighter.HighlightSynergySlots(slot, targetColor);
             }
 
-            _occupiedSlots.Clear();
-            _itemPositions.Clear();
-
-            UpdateAllSlotVisual();
-            UpdateStatsMap();
-            IsBlocked = false;
+            return true;
         }
 
         public WarriorTurnData CalculateTurnData()
         {
             IsBlocked = true;
 
-            foreach (var itemPair in _itemPositions)
+            foreach (var itemPair in ItemPositions)
                 itemPair.Key.PlayParticle();
 
-            return new WarriorTurnData(_statsMap[ImplantBehaviour.ImplantType.Health], 
-                _statsMap[ImplantBehaviour.ImplantType.Damage], 
-                _statsMap[ImplantBehaviour.ImplantType.Armor]);
+            return new WarriorTurnData(Stats.StatsMap[ImplantType.Health],
+                Stats.StatsMap[ImplantType.Damage],
+                Stats.StatsMap[ImplantType.Armor]);
         }
-
-        private void UpdateStatsMap()
-        {
-            float health = 0f;
-            float damage = 0f;
-            float armor = 0f;
-
-            var checkedPairs = new HashSet<(ImplantBehaviour, ImplantBehaviour)>(new ImplantsPairComparer());
-            Vector2Int[] neighborOffsets = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
-
-            foreach (var itemPair in _itemPositions)
-            {
-                var item = itemPair.Key;
-                var implantType = item.GetImplantType();
-
-                if (item.Model.Is<HealthImplantComponent>(out var healthImplant))
-                    health += healthImplant.Health;
-                else if (item.Model.Is<DamageImplantComponent>(out var damageImplant))
-                    damage += damageImplant.Damage;
-                else if (item.Model.Is<ArmorImplantComponent>(out var armorImplant))
-                    armor += armorImplant.Armor;
-
-                foreach (var itemPosition in itemPair.Value)
-                {
-                    if (IsPositionBlocked(item, itemPosition))
-                        continue;
-
-                    foreach (var offset in neighborOffsets)
-                    {
-                        var neighborPos = itemPosition + offset;
-
-                        if (!_occupiedSlots.TryGetValue(neighborPos, out var neighborItem) || neighborItem.Equals(item))
-                            continue;
-
-                        if (IsPositionBlocked(neighborItem, neighborPos))
-                            continue;
-
-                        if (neighborItem.GetImplantType() == implantType &&
-                            checkedPairs.Add((item, neighborItem)))
-                        {
-                            switch (implantType)
-                            {
-                                case ImplantBehaviour.ImplantType.Health:
-                                    health += 10;
-                                    break;
-                                case ImplantBehaviour.ImplantType.Damage:
-                                    damage += 10;
-                                    break;
-                                case ImplantBehaviour.ImplantType.Armor:
-                                    armor += 10;
-                                    break;
-                            }
-                        }
-                    }
-                }
-            }
-
-            _statsMap[ImplantBehaviour.ImplantType.Health] = health;
-            _statsMap[ImplantBehaviour.ImplantType.Damage] = damage;
-            _statsMap[ImplantBehaviour.ImplantType.Armor] = armor;
-            
-            SL.Get<HUDService>().Behaviour.StatsPanel.UpdateStat(ImplantBehaviour.ImplantType.Health, _statsMap[ImplantBehaviour.ImplantType.Health]);
-            SL.Get<HUDService>().Behaviour.StatsPanel.UpdateStat(ImplantBehaviour.ImplantType.Damage, _statsMap[ImplantBehaviour.ImplantType.Damage]);
-            SL.Get<HUDService>().Behaviour.StatsPanel.UpdateStat(ImplantBehaviour.ImplantType.Armor, _statsMap[ImplantBehaviour.ImplantType.Armor]);
-        }
-
-        private bool IsPositionBlocked(ImplantBehaviour implant, Vector2Int position)
-        {
-            if (!implant.Model.Is<BrokenImplantCellsComponent>(out var blockComponent))
-                return false;
-
-            var rotatedCell = GetRotatedSlots(blockComponent.BrokenCells.ToList(), implant.CurrentRotation);
-            var globalBlockCell = rotatedCell.Select(x => x + implant.CenterSlotPosition);
-            
-            return globalBlockCell.Contains(position);
-        }
-
+        
         public bool TryPlaceItem(ImplantBehaviour item, Vector2Int gridPosition)
         {
-            if (SL.Get<BattleController>().IsTurnStarted) return false;
-            if (!CanPlaceItem(item, gridPosition)) return false;
+            if (ServiceLocator.Get<BattleController>().IsTurnStarted) return false;
+            if (!CanPlaceItem(item, gridPosition, item.CurrentRotation)) return false;
 
-            if (_itemPositions.TryGetValue(item, out var oldPositions))
+            if (ItemPositions.TryGetValue(item, out var oldPositions))
             {
                 foreach (var pos in oldPositions)
                 {
-                    _occupiedSlots.Remove(pos);
-                    UpdateSlotVisual(pos);
+                    OccupiedSlots.Remove(pos);
+                    Highlighter.UpdateSlotVisual(pos);
                 }
             }
 
-            var rotatedSlots = GetRotatedSlots(item.SlotPositions, item.CurrentRotation);
+            var rotatedSlots = InventoryHelper.GetRotatedSlots(item.SlotPositions, item.CurrentRotation);
             var newPositions = rotatedSlots.Select(slot => slot + gridPosition).ToList();
 
             foreach (var pos in newPositions)
             {
-                _occupiedSlots[pos] = item;
-                UpdateSlotVisual(pos);
+                OccupiedSlots[pos] = item;
+                Highlighter.UpdateSlotVisual(pos);
             }
 
-            _itemPositions[item] = newPositions;
+            ItemPositions[item] = newPositions;
             UpdateStatsMap();
-            OnImplpantPlaced?.Invoke();
+            OnImplantPlaced?.Invoke();
+            
+            return true;
+        }
+        
+        public bool CanPlaceItem(ImplantBehaviour item, Vector2Int gridPosition, int rotation)
+        {
+            var rotatedSlots = InventoryHelper.GetRotatedSlots(item.SlotPositions, rotation);
+            var targetSlots = rotatedSlots.Select(slot => slot + gridPosition).ToList();
+
+            foreach (var slot in targetSlots)
+            {
+                if (!IsSlotExist(slot) ||
+                    (OccupiedSlots.TryGetValue(slot, out var itemOccupied) && !itemOccupied.Equals(item)))
+                {
+                    return false;
+                }
+            }
+
             return true;
         }
 
-        public bool HasItem(ImplantBehaviour item)
-        {
-            return _itemPositions.GetValueOrDefault(item) != default;
-        }
-
-        private bool IsSlotOccupied(Vector2Int slot)
-        {
-            return _occupiedSlots.ContainsKey(slot);
-        }
-
-        public void SetItemPosition(InventorySlot slot, ImplantBehaviour item)
+        public void SetItemPosition(InventorySlot slot, ImplantBehaviour item, bool isShadow)
         {
             var itemCenterPosition = ImplantHelper.CalculateCenterPosition(slot, item);
-            _inventoryView.SetItemInInventory(item, itemCenterPosition);
+            _inventoryView.SetItemInInventory(item, itemCenterPosition, isShadow);
         }
 
         public void RemoveItem(ImplantBehaviour item)
         {
-            if (_itemPositions.TryGetValue(item, out var positions))
+            if (ItemPositions.TryGetValue(item, out var positions))
             {
                 foreach (var pos in positions)
                 {
-                    _occupiedSlots.Remove(pos);
-                    UpdateSlotVisual(pos);
+                    OccupiedSlots.Remove(pos);
+                    Highlighter.UpdateSlotVisual(pos);
                 }
 
-                _itemPositions.Remove(item);
+                ItemPositions.Remove(item);
                 UpdateStatsMap();
-            }
-        }
-
-        public void UpdateSlotHighlight(ImplantBehaviour item, Vector2Int gridPosition, Color color)
-        {
-            var rotatedSlots = GetRotatedSlots(item.SlotPositions, item.CurrentRotation);
-            var newPositions = rotatedSlots.Select(slot => slot + gridPosition).ToList();
-
-            foreach (var pos in newPositions)
-            {
-                if (_slots.TryGetValue(pos, out var slot))
-                {
-                    if (CanPlaceItem(item, gridPosition))
-                        slot.SetColor(color);
-                }
-            }
-        }
-
-        public void ResetSlotHighlight(ImplantBehaviour item)
-        {
-            foreach (var slot in _slots)
-            {
-                if (!slot.Value.Occupied ||
-                    _occupiedSlots.TryGetValue(slot.Key, out var itemOccupied) && itemOccupied.Equals(item))
-                    slot.Value.SetColor(Color.white);
             }
         }
 
         private void CreateGrid()
         {
             var defaultInventoryGrid = CM.Get(CMs.Gameplay.Inventory).GetComponent<InventoryComponent>();
-            var currentGrid = defaultInventoryGrid.Grids.Last(grid => grid.RequiredLevel <= SL.Get<GameStateHolder>().CurrentData.Level).Grid;
+            var currentGrid = defaultInventoryGrid.Grids
+                .Last(grid => grid.RequiredLevel <= ServiceLocator.Get<GameStateHolder>().CurrentData.Level).Grid;
             _gridSize = currentGrid.GridSize;
             _cellSize = defaultInventoryGrid.CellSize;
 
@@ -246,66 +170,42 @@ namespace Game.Runtime.Gameplay.Implants
                 _inventoryView.SetupInventorySlot(slotObj, slotPos, _cellSize);
 
                 slot.Initialize(slotPos);
-                _slots[slotPos] = slot;
+                Slots[slotPos] = slot;
             }
         }
-
-        public bool CanPlaceItem(ImplantBehaviour item, Vector2Int gridPosition)
+        
+        private void UpdateStatsMap()
         {
-            var rotatedSlots = GetRotatedSlots(item.SlotPositions, item.CurrentRotation);
-            var targetSlots = rotatedSlots.Select(slot => slot + gridPosition).ToList();
+            Stats.UpdateStatsMap();
 
-            foreach (var slot in targetSlots)
+            ServiceLocator.Get<HUDService>().StatsPanel
+                .UpdateStat(ImplantType.Health, Stats.StatsMap[ImplantType.Health]);
+            ServiceLocator.Get<HUDService>().StatsPanel
+                .UpdateStat(ImplantType.Damage, Stats.StatsMap[ImplantType.Damage]);
+            ServiceLocator.Get<HUDService>().StatsPanel
+                .UpdateStat(ImplantType.Armor, Stats.StatsMap[ImplantType.Armor]);
+        }
+
+        private void OnTurnEnded()
+        {
+            foreach (var item in ItemPositions)
             {
-                if (!IsSlotExist(slot) ||
-                    (_occupiedSlots.TryGetValue(slot, out var itemOccupied) && !itemOccupied.Equals(item)))
-                {
-                    return false;
-                }
+                Object.Destroy(item.Key.HighlightImplant.gameObject);
+                Object.Destroy(item.Key.gameObject);
             }
 
-            return true;
+            OccupiedSlots.Clear();
+            ItemPositions.Clear();
+            SynergySlots.Clear();
+            
+            Highlighter.UpdateAllSlotVisual();
+            UpdateStatsMap();
+            IsBlocked = false;
         }
-
-        private bool IsSlotExist(Vector2Int slotPosition)
-        {
-            return _slots.ContainsKey(slotPosition);
-        }
-
-        private void UpdateSlotVisual(Vector2Int slotPosition)
-        {
-            if (_slots.TryGetValue(slotPosition, out var slot))
-            {
-                slot.SetOccupied(IsSlotOccupied(slotPosition));
-            }
-        }
-
-        public void UpdateAllSlotVisual()
-        {
-            foreach (var slot in _slots)
-            {
-                slot.Value.SetOccupied(IsSlotOccupied(slot.Key));
-            }
-        }
-
-        private List<Vector2Int> GetRotatedSlots(List<Vector2Int> slots, int currentRotation)
-        {
-            for (int i = 0; i < currentRotation; i++)
-            {
-                slots = RotateSlotsClockwise(slots);
-            }
-
-            return slots;
-        }
-
-        private List<Vector2Int> RotateSlotsClockwise(List<Vector2Int> slots)
-        {
-            return slots.Select(slot => new Vector2Int(slot.y, -slot.x)).ToList();
-        }
-
+        
         public void Dispose()
         {
-            SL.Get<BattleController>().OnTurnEnded -= OnTurnEnded;
+            ServiceLocator.Get<BattleController>().OnTurnEnded -= OnTurnEnded;
         }
     }
 }

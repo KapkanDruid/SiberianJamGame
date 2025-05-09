@@ -33,15 +33,15 @@ namespace Game.Runtime.Gameplay.Enemy
             _damage = _config.Damage;
             _armor = _config.Armor;
 
-            SL.Get<HUDService>().Behaviour.EnemyUI.UpdateArmorIcon(_armor);
+            ServiceLocator.Get<HUDService>().EnemyUI.UpdateArmorIcon(_armor);
             _view = Object.Instantiate(_enemyModel.GetComponent<EnemyPrefabComponent>().EnemyView);
         }
 
         public void Initialize()
         {
             _view.Configurate(_config.MaxHealth);
-            SL.Get<HUDService>().Behaviour.EnemyUI.UpdateHealthBar(CurrentHealth, _config.MaxHealth);
-            _view.transform.position = SL.Get<BattleController>().EnemyPosition.position;
+            ServiceLocator.Get<HUDService>().EnemyUI.UpdateHealthBar(CurrentHealth, _config.MaxHealth);
+            _view.transform.position = ServiceLocator.Get<BattleController>().EnemyPosition.position;
         }
 
         public async UniTask TakeDamage(float damage)
@@ -49,13 +49,13 @@ namespace Game.Runtime.Gameplay.Enemy
             _view.PlayHitAnimation();
             if (_armor > damage)
             {
-                await SL.Get<HUDService>().Behaviour.EnemyUI.DecreaseArmorSequenceAsync(_armor, _armor - damage);
+                await ServiceLocator.Get<HUDService>().EnemyUI.DecreaseArmorSequenceAsync(_armor, _armor - damage);
                 _armor -= damage;
                 return;
             }
             else if (_armor <= damage && _armor > 0)
             {
-                await SL.Get<HUDService>().Behaviour.EnemyUI.BreakArmorSequenceAsync(_armor);
+                await ServiceLocator.Get<HUDService>().EnemyUI.BreakArmorSequenceAsync(_armor);
 
                 damage -= _armor;
                 _armor = 0;
@@ -73,17 +73,17 @@ namespace Game.Runtime.Gameplay.Enemy
 
         public async UniTask AttackAsync()
         {
-            if (SL.Get<BattleController>().IsBattleEnded)
+            if (ServiceLocator.Get<BattleController>().IsBattleEnded)
                 return;
 
             await _view.AttackAsync();
-            await SL.Get<WarriorController>().TakeDamage(_damage);
+            await ServiceLocator.Get<WarriorController>().TakeDamage(_damage);
         }
 
         private void Death()
         {
             _view.Death();
-            SL.Get<BattleController>().Win();
+            ServiceLocator.Get<BattleController>().Win();
         }
     }
 }
