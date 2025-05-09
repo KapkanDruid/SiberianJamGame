@@ -11,6 +11,7 @@ namespace Game.Runtime.Gameplay.Inventory
 {
     public class InventoryGrid
     {
+        private Vector2 gridOffset;
         private Vector2Int _gridSize;
         private int _cellSize;
         
@@ -21,23 +22,71 @@ namespace Game.Runtime.Gameplay.Inventory
             var inventoryView = ServiceLocator.Get<HUDService>().InventoryView;
             
             var defaultInventoryGrid = CM.Get(CMs.Gameplay.Inventory).GetComponent<InventoryComponent>();
-            var currentGrid = defaultInventoryGrid.Grids.Last(grid => grid.RequiredLevel <= ServiceLocator.Get<GameStateHolder>().CurrentData.Level).Grid;
+            var currentGrid = defaultInventoryGrid.Grids.Last(grid => grid.RequiredLevel <= ServiceLocator.Get<GameStateHolder>().CurrentData.Level);
             
-            _gridSize = currentGrid.GridSize;
+            var gridPattern = currentGrid.Grid.GridPattern;
+            _gridSize = CalculateGridSize(gridPattern);
             _cellSize = defaultInventoryGrid.CellSize;
+            gridOffset = new Vector2((currentGrid.Grid.GridSize.x - _gridSize.x) /2f, 
+                (currentGrid.Grid.GridSize.y - _gridSize.y) /2f);
+            
+            inventoryView.ResizeInventoryView(_gridSize, _cellSize, currentGrid.RectPosition);
 
-            inventoryView.ResizeInventoryView(_gridSize, _cellSize);
-
-            foreach (var slotPos in currentGrid.GridPattern)
+            foreach (var slotPos in gridPattern)
             {
                 var slotObj = new GameObject($"InventorySlot_{slotPos.x}_{slotPos.y}");
                 var slot = slotObj.AddComponent<InventorySlot>();
 
-                inventoryView.SetupInventorySlot(slotObj, slotPos, _cellSize);
-
+                inventoryView.SetupInventorySlot(gridOffset, slotObj, slotPos, _cellSize);
+                
                 slot.Initialize(slotPos);
                 Slots[slotPos] = slot;
             }
+        }
+        
+        private List<Vector2Int> NormalizeSlots(List<Vector2Int> slots)
+        {
+            if (slots == null || slots.Count == 0)
+                return new List<Vector2Int>();
+
+            int minX = slots[0].x;
+            int minY = slots[0].y;
+
+            foreach (var slot in slots)
+            {
+                if (slot.x < minX) minX = slot.x;
+                if (slot.y < minY) minY = slot.y;
+            }
+
+            List<Vector2Int> normalizedSlots = new List<Vector2Int>();
+            foreach (var slot in slots)
+                normalizedSlots.Add(new Vector2Int(slot.x - minX, slot.y - minY));
+
+            return normalizedSlots;
+        }
+        
+        private Vector2Int CalculateGridSize(List<Vector2Int> slots)
+        {
+            if (slots == null || slots.Count == 0)
+                return Vector2Int.zero;
+
+            int minX = slots[0].x;
+            int maxX = slots[0].x;
+            int minY = slots[0].y;
+            int maxY = slots[0].y;
+
+            foreach (var slot in slots)
+            {
+                if (slot.x < minX) minX = slot.x;
+                if (slot.x > maxX) maxX = slot.x;
+                if (slot.y < minY) minY = slot.y;
+                if (slot.y > maxY) maxY = slot.y;
+            }
+
+            int width = maxX - minX + 1;
+            int height = maxY - minY + 1;
+
+            return new Vector2Int(width, height);
         }
     }
 }

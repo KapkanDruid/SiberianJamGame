@@ -73,7 +73,7 @@ namespace Game.Runtime.Gameplay.Inventory
 
             float slotWidth = baseSlotRect.rect.width;
             float slotHeight = baseSlotRect.rect.height;
-            
+
             return baseSlotRect.anchoredPosition + ImplantHelper.ApplyRotationToOffset(new Vector2(pivotOffset.x * slotWidth, pivotOffset.y * slotHeight), item.CurrentRotation);
         }
         
@@ -82,7 +82,7 @@ namespace Game.Runtime.Gameplay.Inventory
             if (!implant.Model.Is<BrokenImplantCellsComponent>(out var blockComponent))
                 return false;
 
-            var rotatedCell = InventoryHelper.GetRotatedSlots(blockComponent.BrokenCells.ToList(), implant.CurrentRotation);
+            var rotatedCell = GetRotatedSlots(blockComponent.BrokenCells.ToList(), implant.CurrentRotation);
             var globalBlockCell = rotatedCell.Select(x => x + gridPosition);
             
             return globalBlockCell.Contains(position);

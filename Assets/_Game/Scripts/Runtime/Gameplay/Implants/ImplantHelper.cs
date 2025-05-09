@@ -1,12 +1,10 @@
-﻿using System.Linq;
-using Game.Runtime.Gameplay.Inventory;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.Runtime.Gameplay.Implants
 {
     public static class ImplantHelper
     {
-        public static float[] PresetAngles = { 0f, -90f, -180f, -270f };
+        public static readonly float[] PresetAngles = { 0f, -90f, -180f, -270f };
         
         public static Vector2 ApplyRotationToOffset(Vector2 offset, int rotation)
         {

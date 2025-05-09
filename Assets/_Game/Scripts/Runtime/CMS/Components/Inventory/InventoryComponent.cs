@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Runtime.Gameplay.Grid;
+using UnityEngine;
 
 namespace Game.Runtime.CMS.Components.Gameplay
 {
@@ -14,5 +15,6 @@ namespace Game.Runtime.CMS.Components.Gameplay
     {
         public int RequiredLevel;
         public GridConfig Grid;
+        public Vector2 RectPosition;
     }
 }

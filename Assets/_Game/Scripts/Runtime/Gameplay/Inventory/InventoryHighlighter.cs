@@ -28,7 +28,7 @@ namespace Game.Runtime.Gameplay.Inventory
             if (_synergySlots.Count == 0)
                 return false;
 
-            var synergyColors = CM.Get(CMs.Gameplay.ImplantSynergyColors)
+            var synergyColors = CM.Get(CMs.Gameplay.Inventory)
                 .GetComponent<ImplantSynergyColorsComponent>().SynergyColors;
             var targetColor = synergyColors.First(c => c.ImplantType == implant.GetImplantType()).Color;
 
