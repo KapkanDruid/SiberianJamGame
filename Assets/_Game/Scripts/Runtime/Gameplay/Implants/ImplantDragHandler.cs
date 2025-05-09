@@ -15,20 +15,23 @@ namespace Game.Runtime.Gameplay.Implants
     {
         private readonly ImplantBehaviour _implant;
         private readonly float[] _presetAngles = { 0f, -90f, -180f, -270f };
+        private readonly InventoryService _inventoryService;
+        
+        private Vector2Int _lastSelectedSlotPosition;
 
         public ImplantDragHandler(ImplantBehaviour implant)
         {
             _implant = implant;
+            _inventoryService = ServiceLocator.Get<InventoryService>();
         }
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            if (ServiceLocator.Get<InventoryService>().IsBlocked) return;
+            if (_inventoryService.IsBlocked) return;
             if (eventData.button != PointerEventData.InputButton.Left) return;
 
             _implant.CurrentTweenScale?.Kill();
             ServiceLocator.Get<InputService>().OnRotateItem += HandleRotation;
-            ServiceLocator.Get<InventoryService>().HighlightSynergySlots(_implant);
 
             _implant.StartDragging();
             UpdateImplantPosition();
@@ -83,19 +86,35 @@ namespace Game.Runtime.Gameplay.Implants
             }
         }
 
+
         private void UpdateSlotHighlight()
         {
             if (ServiceLocator.Get<BattleController>().IsTurnStarted) return;
             
             var newSlot = GetSlotUnderCursor();
-            if (newSlot != null)
+            if (newSlot == null)
             {
-                if (ServiceLocator.Get<InventoryService>().CanPlaceItem(_implant, newSlot.GridPosition, _implant.CurrentRotation)) 
-                    ServiceLocator.Get<InventoryService>().SetItemPosition(newSlot, _implant, true);
-                else HideHighlightImplant();
-
+                ClearHighlights();
+                HideHighlightImplant();
+                return;
             }
+
+            if (_lastSelectedSlotPosition != newSlot.GridPosition)
+                ClearHighlights();
+            
+            _lastSelectedSlotPosition = newSlot.GridPosition;
+            if (!_inventoryService.TryHighlightSynergySlots(_implant, newSlot))
+                ClearHighlights();
+
+            if (_inventoryService.CanPlaceItem(_implant, newSlot.GridPosition, _implant.CurrentRotation))
+                _inventoryService.SetItemPosition(newSlot, _implant, true);
             else HideHighlightImplant();
+        }
+
+        private void ClearHighlights()
+        {
+            _inventoryService.SynergySlots.Clear();
+            _inventoryService.Highlighter.ResetSlotHighlight(_implant);
         }
 
         private InventorySlot GetSlotUnderCursor()

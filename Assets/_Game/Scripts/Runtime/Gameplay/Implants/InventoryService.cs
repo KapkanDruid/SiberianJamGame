@@ -48,19 +48,28 @@ namespace Game.Runtime.Gameplay.Implants
         public bool IsSlotExist(Vector2Int slotPosition) => Slots.ContainsKey(slotPosition);
         public bool IsSlotOccupied(Vector2Int slot) => OccupiedSlots.ContainsKey(slot);
 
-        public void HighlightSynergySlots(ImplantBehaviour implantBehaviour)
+        public bool TryHighlightSynergySlots(ImplantBehaviour implant, InventorySlot newSlot)
         {
             SynergySlots.Clear();
-            SynergySlots.AddRange(Stats.FindSynergySlots(implantBehaviour));
 
-            var synergyColors = CM.Get(CMs.Gameplay.ImplantSynergyColors).GetComponent<ImplantSynergyColorsComponent>().SynergyColors;
-            var targetSynergyColor = synergyColors.First(synergy => synergy.ImplantType == implantBehaviour.GetImplantType()).Color;
+            if (!CanPlaceItem(implant, newSlot.GridPosition, implant.CurrentRotation))
+                return false;
 
-            foreach (var slotPosition in SynergySlots)
+            var synergySlots = Stats.FindSynergySlots(implant, newSlot.GridPosition);
+            if (synergySlots.Count == 0)
+                return false;
+
+            var synergyColors = CM.Get(CMs.Gameplay.ImplantSynergyColors)
+                .GetComponent<ImplantSynergyColorsComponent>().SynergyColors;
+            var targetColor = synergyColors.First(c => c.ImplantType == implant.GetImplantType()).Color;
+
+            foreach (var slotPosition in synergySlots)
             {
                 if (Slots.TryGetValue(slotPosition, out var slot))
-                    Highlighter.HighlightSynergySlots(slot, targetSynergyColor);
+                    Highlighter.HighlightSynergySlots(slot, targetColor);
             }
+
+            return true;
         }
 
         public WarriorTurnData CalculateTurnData()

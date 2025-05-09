@@ -29,6 +29,10 @@ namespace Game.Runtime.Gameplay.Implants
                 {
                     slot.Value.SetColor(slot.Value.DefaultColor);
                 }
+                else
+                {
+                    slot.Value.SetColor(slot.Value.OccupiedColor);
+                }
             }
         }
         

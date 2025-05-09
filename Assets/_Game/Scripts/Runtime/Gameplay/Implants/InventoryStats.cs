@@ -8,7 +8,7 @@ namespace Game.Runtime.Gameplay.Implants
     public class InventoryStats
     {
         private readonly InventoryService _inventoryService;
-        private readonly Vector2Int[] _neighborOffsets = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
+        private readonly Vector2Int[] _neighborOffsets = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right, Vector2Int.zero };
         private readonly HashSet<(ImplantBehaviour, ImplantBehaviour)> _implantBehaviours = new(new ImplantsPairComparer());
         private readonly List<Vector2Int> _synergySlots = new();
 
@@ -24,38 +24,49 @@ namespace Game.Runtime.Gameplay.Implants
             _inventoryService = inventoryService;
         }
         
-        public List<Vector2Int> FindSynergySlots(ImplantBehaviour implant)
+        public List<Vector2Int> FindSynergySlots(ImplantBehaviour implant, Vector2Int gridPosition)
         {
-            _synergySlots.Clear();
-            
-            foreach (var itemPair in _inventoryService.ItemPositions)
+            var synergySlots = new List<Vector2Int>();
+            var rotatedCells = InventoryHelper.GetRotatedSlots(implant.SlotPositions, implant.CurrentRotation);
+            var globalCells = rotatedCells.Select(x => x + gridPosition).ToList();
+            var hasSynergy = false;
+
+            foreach (var cell in globalCells)
             {
-                var item = itemPair.Key;
-                if (item.Equals(implant)) continue;
-                
-                var implantType = item.GetImplantType();
-                if (implantType != implant.GetImplantType()) 
+                if (IsPositionBlocked(implant, gridPosition, cell))
                     continue;
 
-                foreach (var itemPosition in itemPair.Value)
+                foreach (var offset in _neighborOffsets)
                 {
-                    if (IsPositionBlocked(item, itemPosition))
+                    var neighborPos = cell + offset;
+            
+                    if (!_inventoryService.OccupiedSlots.TryGetValue(neighborPos, out var neighborSlot) || 
+                        neighborSlot == implant)
                         continue;
 
-                    foreach (var offset in _neighborOffsets)
+                    if (neighborSlot.GetImplantType() != implant.GetImplantType())
+                        continue;
+
+                    if (IsPositionBlocked(neighborSlot, neighborSlot.CenterSlotPosition, neighborPos))
+                        continue;
+
+                    foreach (var neighborCell in _inventoryService.ItemPositions.GetValueOrDefault(neighborSlot))
                     {
-                        var neighborPos = itemPosition + offset;
-
-                        if (_inventoryService.OccupiedSlots.TryGetValue(neighborPos, out _))
-                            continue;
-
-                        if (_inventoryService.IsSlotExist(neighborPos))
-                            _synergySlots.Add(neighborPos);
+                        if (!IsPositionBlocked(neighborSlot, neighborSlot.CenterSlotPosition, neighborCell))
+                        {
+                            synergySlots.Add(neighborCell);
+                            hasSynergy = true;
+                        }
                     }
                 }
             }
 
-            return _synergySlots;
+            if (hasSynergy)
+            {
+                synergySlots.AddRange(globalCells.Where(cell => !IsPositionBlocked(implant, gridPosition, cell)));
+            }
+            
+            return synergySlots;
         }
 
         public void UpdateStatsMap()
@@ -80,7 +91,7 @@ namespace Game.Runtime.Gameplay.Implants
 
                 foreach (var itemPosition in itemPair.Value)
                 {
-                    if (IsPositionBlocked(item, itemPosition))
+                    if (IsPositionBlocked(item, item.CenterSlotPosition, itemPosition))
                         continue;
 
                     foreach (var offset in _neighborOffsets)
@@ -90,7 +101,7 @@ namespace Game.Runtime.Gameplay.Implants
                         if (!_inventoryService.OccupiedSlots.TryGetValue(neighborPos, out var neighborItem) || neighborItem.Equals(item))
                             continue;
 
-                        if (IsPositionBlocked(neighborItem, neighborPos))
+                        if (IsPositionBlocked(neighborItem, neighborItem.CenterSlotPosition, neighborPos))
                             continue;
 
                         if (neighborItem.GetImplantType() == implantType &&
@@ -118,13 +129,13 @@ namespace Game.Runtime.Gameplay.Implants
             StatsMap[ImplantType.Armor] = armor;
         }
         
-        private bool IsPositionBlocked(ImplantBehaviour implant, Vector2Int position)
+        private bool IsPositionBlocked(ImplantBehaviour implant, Vector2Int gridPosition, Vector2Int position)
         {
             if (!implant.Model.Is<BrokenImplantCellsComponent>(out var blockComponent))
                 return false;
 
             var rotatedCell = InventoryHelper.GetRotatedSlots(blockComponent.BrokenCells.ToList(), implant.CurrentRotation);
-            var globalBlockCell = rotatedCell.Select(x => x + implant.CenterSlotPosition);
+            var globalBlockCell = rotatedCell.Select(x => x + gridPosition);
             
             return globalBlockCell.Contains(position);
         }
