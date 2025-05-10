@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Gameplay;
 using Game.Runtime.CMS.Components.Implants;
 using Game.Runtime.Gameplay.Level;
 using Game.Runtime.Services;
-using Game.Runtime.Utils;
 using Game.Runtime.Utils.Extensions;
 
 namespace Game.Runtime.Gameplay.Implants.Services
@@ -26,14 +26,12 @@ namespace Game.Runtime.Gameplay.Implants.Services
                     _basicImplantModels.Add(implant);
             }
         }
-
+        
         public void CachePool()
         {
             _dynamicImplantPool.Clear();
             _dynamicImplantPool.AddRange(ServiceLocator.Get<GameStateHolder>().CurrentData.ImplantsPool);
             _dynamicImplantPool.Shuffle();
-            
-            LogUtil.Log(nameof(ImplantsPoolService), $"{_dynamicImplantPool.Count} implants in pool");
         }
 
         public List<CMSEntity> GetImplants()

@@ -50,6 +50,7 @@ namespace Game.Runtime.Runners
             ServiceLocator.Register<InventoryService>(new InventoryService(), _gameScope);
             ServiceLocator.Register<LootService>(new LootService(), _gameScope);
             ServiceLocator.Register<WarriorController>(new WarriorController(), _gameScope);
+            ServiceLocator.Register<ImplantsGameLoop>(new ImplantsGameLoop(), _gameScope);
             ServiceLocator.Register<BattleController>(_battleController, _gameScope);
             ServiceLocator.Register<Tutorial>(_tutorial, _gameScope);
 
@@ -63,7 +64,7 @@ namespace Game.Runtime.Runners
             ServiceLocator.Get<HUDService>().EndTurnButtonParent.SetActive(ServiceLocator.Get<GameStateHolder>().CurrentData.Level > 0);
             ServiceLocator.Get<HUDService>().InventoryView.SetActive(true);
             ServiceLocator.Get<DialogController>().Background.gameObject.SetActive(false);
-            ServiceLocator.Get<ImplantsHolderService>().SpawnImplants();
+            ServiceLocator.Get<ImplantsGameLoop>().StartLevel();
             ServiceLocator.Get<HUDService>().DisableUI.SetActive(false);
             await ServiceLocator.Get<UIFaderService>().FadeOut();
         }

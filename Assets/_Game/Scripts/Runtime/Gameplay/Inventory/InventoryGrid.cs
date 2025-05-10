@@ -44,27 +44,6 @@ namespace Game.Runtime.Gameplay.Inventory
             }
         }
         
-        private List<Vector2Int> NormalizeSlots(List<Vector2Int> slots)
-        {
-            if (slots == null || slots.Count == 0)
-                return new List<Vector2Int>();
-
-            int minX = slots[0].x;
-            int minY = slots[0].y;
-
-            foreach (var slot in slots)
-            {
-                if (slot.x < minX) minX = slot.x;
-                if (slot.y < minY) minY = slot.y;
-            }
-
-            List<Vector2Int> normalizedSlots = new List<Vector2Int>();
-            foreach (var slot in slots)
-                normalizedSlots.Add(new Vector2Int(slot.x - minX, slot.y - minY));
-
-            return normalizedSlots;
-        }
-        
         private Vector2Int CalculateGridSize(List<Vector2Int> slots)
         {
             if (slots == null || slots.Count == 0)

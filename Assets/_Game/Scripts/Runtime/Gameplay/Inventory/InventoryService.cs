@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using Game.Runtime.Gameplay.HUD;
 using Game.Runtime.Gameplay.Implants;
 using Game.Runtime.Gameplay.Level;
@@ -126,7 +127,7 @@ namespace Game.Runtime.Gameplay.Inventory
         private void OnTurnEnded()
         {
             foreach (var item in ItemPositions)
-                item.Key.ReleaseImplant();
+                item.Key.ReleaseImplant().Forget();
 
             OccupiedSlots.Clear();
             ItemPositions.Clear();

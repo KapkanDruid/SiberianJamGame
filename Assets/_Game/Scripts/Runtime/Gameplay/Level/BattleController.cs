@@ -45,14 +45,9 @@ namespace Game.Runtime.Gameplay.Level
         public void Initialize()
         {
             _levelConfig = LevelHelper.GetCurrentLevelModel().GetComponent<LevelComponent>();
-            ServiceLocator.Get<HUDService>().EndTurnButton.onClick.AddListener(() =>
-            {
-                TurnAsync().Forget();
-                ServiceLocator.Get<HUDService>().EndTurnButton.interactable = false;
-            });
         }
 
-        private async UniTask TurnAsync()
+        public async UniTask TurnAsync()
         {
             if (_isTurnStarted)
                 return;
@@ -71,7 +66,6 @@ namespace Game.Runtime.Gameplay.Level
                 await BossTurn();
 
             OnTurnEnded?.Invoke();
-            ServiceLocator.Get<HUDService>().EndTurnButton.interactable = true;
             _isTurnStarted = false;
         }
 

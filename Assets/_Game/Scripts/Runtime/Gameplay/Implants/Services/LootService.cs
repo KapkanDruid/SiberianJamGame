@@ -17,7 +17,8 @@ namespace Game.Runtime.Gameplay.Implants.Services
     {
         private readonly ImplantsPoolConfig _config;
         private readonly List<CMSEntity> _allImplants;
-
+        private readonly List<ImplantBehaviour> _lootImplants = new();
+        
         private int needChoice;
 
         public LootService()
@@ -46,16 +47,19 @@ namespace Game.Runtime.Gameplay.Implants.Services
             }
 
             availableImplants.Shuffle();
-
+            
             for (int i = 0; i < _config.BaseLootCount; i++)
             {
                 var implantPrefab = CM.Get(CMs.Gameplay.Implants.BaseImplantBehaviour).GetComponent<PrefabComponent>().Prefab;
                 var implantBehaviour = Object.Instantiate(implantPrefab).GetComponent<ImplantBehaviour>();
+                
                 implantBehaviour.SetupItem(availableImplants.GetRandom(), ServiceLocator.Get<HUDService>().GetComponent<RectTransform>());
-            
-                ServiceLocator.Get<HUDService>().LootHolder.SetItemPosition(implantBehaviour, Vector2.zero);
+                implantBehaviour.CanInteract = true;
+                
+                _lootImplants.Add(implantBehaviour);
             }
-
+            
+            ServiceLocator.Get<HUDService>().LootHolder.SetImplants(_lootImplants, true).Forget();
             needChoice = _config.BaseChoiceCount;
         }
 
@@ -64,12 +68,13 @@ namespace Game.Runtime.Gameplay.Implants.Services
             if (needChoice <= 0) return;
             
             ServiceLocator.Get<GameStateHolder>().CurrentData.ImplantsPool.Add(implantId);
+            
+            _lootImplants.RemoveAll(implant => implant.Model.EntityId == implantId);
+            ServiceLocator.Get<HUDService>().LootHolder.SetImplants(_lootImplants, true).Forget();
+
             needChoice--;
 
-            if (needChoice == 0)
-            {
-                ServiceLocator.Get<BattleController>().EndGameAsync().Forget();
-            }
+            if (needChoice == 0) ServiceLocator.Get<BattleController>().EndGameAsync().Forget();
         }
     }
 }
