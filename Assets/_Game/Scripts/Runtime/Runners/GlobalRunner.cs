@@ -1,6 +1,6 @@
 ﻿using Game.Runtime.CMS;
 using Game.Runtime.CMS.Components.Commons;
-using Game.Runtime.Gameplay.Implants;
+using Game.Runtime.Gameplay.Implants.Services;
 using Game.Runtime.Gameplay.Level;
 using Game.Runtime.Services;
 using Game.Runtime.Services.Audio;
@@ -59,10 +59,10 @@ namespace Game.Runtime.Runners
         private DialogController CreateDialogController()
         {
             var prefab = CM.Get(CMs.Configs.DialogReference).GetComponent<PrefabComponent>().Prefab;
-            var DialogyObject = Instantiate(prefab);
-            DontDestroyOnLoad(DialogyObject);
+            var dialogObject = Instantiate(prefab);
+            DontDestroyOnLoad(dialogObject);
             
-            return DialogyObject.GetComponentInChildren<DialogController>();
+            return dialogObject.GetComponentInChildren<DialogController>();
         }
 
         private void OnDestroy()

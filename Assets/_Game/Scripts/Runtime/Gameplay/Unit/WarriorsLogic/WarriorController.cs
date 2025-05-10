@@ -112,8 +112,8 @@ namespace Game.Runtime.Gameplay.Warrior
 
         private async UniTask Death()
         {
-            await ServiceLocator.Get<WarriorView>().DeathAsync();
             ServiceLocator.Get<BattleController>().Loose();
+            await ServiceLocator.Get<WarriorView>().DeathAsync();
         }
     }
 }

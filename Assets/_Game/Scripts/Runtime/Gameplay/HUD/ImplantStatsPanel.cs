@@ -1,6 +1,8 @@
 ﻿using System;
 using DG.Tweening;
 using Game.Runtime.Gameplay.Implants;
+using Game.Runtime.Gameplay.Inventory;
+using Game.Runtime.Services;
 using TMPro;
 using UnityEngine;
 
@@ -11,14 +13,19 @@ namespace Game.Runtime.Gameplay.HUD
     {
         [SerializeField] private ImplantStatPanel[] implantStatPanels;
 
-        public void UpdateStat(ImplantType implantType, float endValue)
+        public void UpdateStats()
         {
-            foreach (var statPanel in implantStatPanels)
+            var inventoryStatMap = ServiceLocator.Get<InventoryService>().Stats.StatsMap;
+
+            foreach (var statPair in inventoryStatMap)
             {
-                if (statPanel.ImplantType == implantType)
+                foreach (var statPanel in implantStatPanels)
                 {
-                    statPanel.UpdateValue(endValue);
-                    break;
+                    if (statPanel.ImplantType == statPair.Key)
+                    {
+                        statPanel.UpdateValue(statPair.Value);
+                        break;
+                    }
                 }
             }
         }

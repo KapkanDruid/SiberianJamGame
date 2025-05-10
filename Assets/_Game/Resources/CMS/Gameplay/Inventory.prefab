@@ -49,6 +49,7 @@ MonoBehaviour:
   - rid: 635145038440169585
   - rid: 635145038440169586
   - rid: 635145176261067211
+  - rid: 635145201379442780
   references:
     version: 2
     RefIds:
@@ -63,12 +64,25 @@ MonoBehaviour:
         Grids:
         - RequiredLevel: 0
           Grid: {fileID: 11400000, guid: 94fb4d6e1b48e6047886a834f2f26e5a, type: 2}
+          RectPosition: {x: 30, y: 25}
         - RequiredLevel: 4
           Grid: {fileID: 11400000, guid: 7e9a219abac7c2d43b9f07d33584feb8, type: 2}
+          RectPosition: {x: 20, y: 25}
         - RequiredLevel: 8
           Grid: {fileID: 11400000, guid: db17ba1b99f027e4084d0623ccffef65, type: 2}
+          RectPosition: {x: 20, y: 15}
     - rid: 635145176261067211
       type: {class: InventorySlotColorsComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
       data:
         DefaultColor: {r: 0.061276253, g: 0.254717, b: 0.20221165, a: 1}
         OccupiedColor: {r: 0.03675686, g: 0.13207549, b: 0.1055981, a: 1}
+    - rid: 635145201379442780
+      type: {class: ImplantSynergyColorsComponent, ns: Game.Runtime.CMS.Components.Implants, asm: Runtime}
+      data:
+        SynergyColors:
+        - ImplantType: 0
+          Color: {r: 0.68235296, g: 0.8666667, b: 0.56078434, a: 1}
+        - ImplantType: 1
+          Color: {r: 0.40784314, g: 0.6313726, b: 0.83137256, a: 1}
+        - ImplantType: 2
+          Color: {r: 0.654902, g: 0.18431373, b: 0.34117648, a: 1}

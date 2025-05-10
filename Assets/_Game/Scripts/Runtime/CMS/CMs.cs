@@ -314,7 +314,6 @@ namespace Game.Runtime.CMS
                 public const string Level_Boss = "CMS/Gameplay/Levels/Level_Boss";
             }
             public const string ImplantsPoolConfig = "CMS/Gameplay/ImplantsPoolConfig";
-            public const string ImplantSynergyColors = "CMS/Gameplay/ImplantSynergyColors";
             public const string Inventory = "CMS/Gameplay/Inventory";
         }
     }

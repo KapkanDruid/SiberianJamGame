@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Game.Runtime.Gameplay.Implants;
 
-namespace Game.Runtime.Gameplay.Implants
+namespace Game.Runtime.Gameplay.Inventory
 {
-    public class ImplantsPairComparer : IEqualityComparer<(ImplantBehaviour, ImplantBehaviour)>
+    public class InventoryItemPairComparer : IEqualityComparer<(ImplantBehaviour, ImplantBehaviour)>
     {
         public bool Equals((ImplantBehaviour, ImplantBehaviour) x, (ImplantBehaviour, ImplantBehaviour) y)
         {

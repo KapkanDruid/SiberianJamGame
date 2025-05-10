@@ -1,18 +1,16 @@
-﻿using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using Game.Runtime.CMS;
-using Game.Runtime.CMS.Components.Audio;
 using Game.Runtime.CMS.Components.Configs;
 using Game.Runtime.CMS.Components.Level;
 using Game.Runtime.Gameplay.Enemy;
 using Game.Runtime.Gameplay.HUD;
-using Game.Runtime.Gameplay.Implants;
+using Game.Runtime.Gameplay.Implants.Services;
+using Game.Runtime.Gameplay.Inventory;
 using Game.Runtime.Gameplay.Level;
 using Game.Runtime.Gameplay.Warrior;
 using Game.Runtime.Services;
 using Game.Runtime.Services.Audio;
 using Game.Runtime.Services.Camera;
-using Game.Runtime.Services.Save;
 using Game.Runtime.Services.UI;
 using Game.Runtime.Utils;
 using UnityEngine;
@@ -52,6 +50,7 @@ namespace Game.Runtime.Runners
             ServiceLocator.Register<InventoryService>(new InventoryService(), _gameScope);
             ServiceLocator.Register<LootService>(new LootService(), _gameScope);
             ServiceLocator.Register<WarriorController>(new WarriorController(), _gameScope);
+            ServiceLocator.Register<ImplantsGameLoop>(new ImplantsGameLoop(), _gameScope);
             ServiceLocator.Register<BattleController>(_battleController, _gameScope);
             ServiceLocator.Register<Tutorial>(_tutorial, _gameScope);
 
@@ -65,7 +64,7 @@ namespace Game.Runtime.Runners
             ServiceLocator.Get<HUDService>().EndTurnButtonParent.SetActive(ServiceLocator.Get<GameStateHolder>().CurrentData.Level > 0);
             ServiceLocator.Get<HUDService>().InventoryView.SetActive(true);
             ServiceLocator.Get<DialogController>().Background.gameObject.SetActive(false);
-            ServiceLocator.Get<ImplantsHolderService>().SpawnImplants();
+            ServiceLocator.Get<ImplantsGameLoop>().StartLevel();
             ServiceLocator.Get<HUDService>().DisableUI.SetActive(false);
             await ServiceLocator.Get<UIFaderService>().FadeOut();
         }
